@@ -8,6 +8,16 @@
     <title>Whoff Agents - AI Automation That Actually Works</title>
     <script type="module" crossorigin src="/assets/index---Cyxo_8.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BYFWuTih.css">
+    <script>
+      // GitHub Pages SPA redirect handling
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
