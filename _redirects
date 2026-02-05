@@ -1,0 +1,5 @@
+# Proxy Wingman to Vercel deployment
+/wingman/* https://wingman-psi.vercel.app/:splat 200
+
+# Fallback for SPA
+/* /index.html 200
