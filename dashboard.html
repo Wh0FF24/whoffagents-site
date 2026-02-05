@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas Revenue Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen">
+  
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-2">🧭 Atlas Revenue Dashboard</h1>
+      <p class="text-blue-200">Real-time tracking of income generation progress</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid md:grid-cols-4 gap-6 mb-8">
+      
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+        <div class="text-sm text-blue-200 mb-2">Total Revenue</div>
+        <div class="text-3xl font-bold text-green-400" id="totalRevenue">$0.00</div>
+        <div class="text-xs text-blue-300 mt-2">Goal: $1,000-2,500/mo</div>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+        <div class="text-sm text-blue-200 mb-2">Inquiries</div>
+        <div class="text-3xl font-bold" id="totalInquiries">0</div>
+        <div class="text-xs text-blue-300 mt-2">Potential leads</div>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+        <div class="text-sm text-blue-200 mb-2">Contracts</div>
+        <div class="text-3xl font-bold" id="totalContracts">0</div>
+        <div class="text-xs text-blue-300 mt-2">Active deals</div>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+        <div class="text-sm text-blue-200 mb-2">Conversion Rate</div>
+        <div class="text-3xl font-bold text-yellow-400" id="conversionRate">0%</div>
+        <div class="text-xs text-blue-300 mt-2">Inquiry → Contract</div>
+      </div>
+
+    </div>
+
+    <!-- Revenue Sources -->
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+        <h2 class="text-xl font-bold mb-4">💰 Revenue by Source</h2>
+        <canvas id="sourceChart"></canvas>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+        <h2 class="text-xl font-bold mb-4">📈 Revenue Over Time</h2>
+        <canvas id="timeChart"></canvas>
+      </div>
+
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 mb-8">
+      <h2 class="text-xl font-bold mb-4">⚡ Recent Activity</h2>
+      <div id="recentActivity" class="space-y-2">
+        <div class="text-blue-200">No activity yet - start tracking!</div>
+      </div>
+    </div>
+
+    <!-- Active Products -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+      <h2 class="text-xl font-bold mb-4">🚀 Active Revenue Streams</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        
+        <div class="bg-white/5 rounded-lg p-4">
+          <div class="font-semibold mb-1">The Wingman</div>
+          <div class="text-sm text-blue-200 mb-2">FREE first use, $1 for 5 more</div>
+          <a href="https://whoffagents.com/wingman" target="_blank" class="text-xs text-blue-400 hover:text-blue-300">whoffagents.com/wingman →</a>
+        </div>
+
+        <div class="bg-white/5 rounded-lg p-4">
+          <div class="font-semibold mb-1">AI Automation</div>
+          <div class="text-sm text-blue-200 mb-2">$500-5000+ per project</div>
+          <a href="http://www.fiverr.com/s/R7AkAjR" target="_blank" class="text-xs text-blue-400 hover:text-blue-300">Fiverr gig →</a>
+        </div>
+
+        <div class="bg-white/5 rounded-lg p-4">
+          <div class="font-semibold mb-1">Coming Soon</div>
+          <div class="text-sm text-blue-200 mb-2">Study Buddy AI, Resume Roaster</div>
+          <a href="https://whoffagents.com/products" target="_blank" class="text-xs text-blue-400 hover:text-blue-300">View all products →</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Load revenue data
+    async function loadData() {
+      try {
+        const response = await fetch('/revenue-data.json');
+        const data = await response.json();
+        updateDashboard(data);
+      } catch (error) {
+        console.error('Error loading revenue data:', error);
+        // Use empty data as fallback
+        updateDashboard({
+          stats: {
+            totalRevenue: 0,
+            totalInquiries: 0,
+            totalContracts: 0,
+            conversionRate: 0
+          },
+          inquiries: [],
+          payments: []
+        });
+      }
+    }
+
+    function updateDashboard(data) {
+      // Update stats
+      document.getElementById('totalRevenue').textContent = `$${data.stats.totalRevenue.toFixed(2)}`;
+      document.getElementById('totalInquiries').textContent = data.stats.totalInquiries;
+      document.getElementById('totalContracts').textContent = data.stats.totalContracts;
+      document.getElementById('conversionRate').textContent = `${data.stats.conversionRate}%`;
+
+      // Update recent activity
+      const activityDiv = document.getElementById('recentActivity');
+      if (data.payments.length === 0 && data.inquiries.length === 0) {
+        activityDiv.innerHTML = '<div class="text-blue-200">No activity yet - start tracking!</div>';
+      } else {
+        const recent = [
+          ...data.payments.map(p => ({ ...p, type: 'payment' })),
+          ...data.inquiries.map(i => ({ ...i, type: 'inquiry' }))
+        ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 10);
+
+        activityDiv.innerHTML = recent.map(item => {
+          if (item.type === 'payment') {
+            return `<div class="flex justify-between items-center bg-white/5 rounded p-3">
+              <div>
+                <span class="text-green-400 font-semibold">💰 Payment</span>
+                <span class="text-sm text-blue-200 ml-2">$${item.amount} via ${item.method}</span>
+              </div>
+              <div class="text-xs text-blue-300">${new Date(item.timestamp).toLocaleDateString()}</div>
+            </div>`;
+          } else {
+            return `<div class="flex justify-between items-center bg-white/5 rounded p-3">
+              <div>
+                <span class="text-yellow-400 font-semibold">📧 Inquiry</span>
+                <span class="text-sm text-blue-200 ml-2">${item.source} - ${item.status}</span>
+              </div>
+              <div class="text-xs text-blue-300">${new Date(item.timestamp).toLocaleDateString()}</div>
+            </div>`;
+          }
+        }).join('');
+      }
+
+      // Create charts
+      createCharts(data);
+    }
+
+    function createCharts(data) {
+      // Revenue by source
+      const sourceCtx = document.getElementById('sourceChart').getContext('2d');
+      const sources = {};
+      data.inquiries.forEach(inq => {
+        sources[inq.source] = (sources[inq.source] || 0) + (inq.estimatedValue || 0);
+      });
+
+      new Chart(sourceCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(sources).length > 0 ? Object.keys(sources) : ['No data yet'],
+          datasets: [{
+            data: Object.keys(sources).length > 0 ? Object.values(sources) : [1],
+            backgroundColor: ['#60a5fa', '#34d399', '#fbbf24', '#f87171'],
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { labels: { color: '#93c5fd' } }
+          }
+        }
+      });
+
+      // Revenue over time
+      const timeCtx = document.getElementById('timeChart').getContext('2d');
+      const timeData = {};
+      data.payments.forEach(pay => {
+        const date = new Date(pay.timestamp).toLocaleDateString();
+        timeData[date] = (timeData[date] || 0) + pay.amount;
+      });
+
+      new Chart(timeCtx, {
+        type: 'line',
+        data: {
+          labels: Object.keys(timeData).length > 0 ? Object.keys(timeData) : ['No data yet'],
+          datasets: [{
+            label: 'Revenue',
+            data: Object.keys(timeData).length > 0 ? Object.values(timeData) : [0],
+            borderColor: '#34d399',
+            backgroundColor: 'rgba(52, 211, 153, 0.1)',
+            tension: 0.4
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { labels: { color: '#93c5fd' } }
+          },
+          scales: {
+            y: { 
+              beginAtZero: true,
+              ticks: { color: '#93c5fd' }
+            },
+            x: { 
+              ticks: { color: '#93c5fd' }
+            }
+          }
+        }
+      });
+    }
+
+    // Load data on page load
+    loadData();
+
+    // Refresh every 30 seconds
+    setInterval(loadData, 30000);
+  </script>
+
+</body>
+</html>

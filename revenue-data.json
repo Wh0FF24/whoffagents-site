@@ -1,0 +1,13 @@
+{
+  "inquiries": [],
+  "consultations": [],
+  "contracts": [],
+  "payments": [],
+  "stats": {
+    "totalInquiries": 0,
+    "totalConsultations": 0,
+    "totalContracts": 0,
+    "totalRevenue": 0,
+    "conversionRate": 0
+  }
+}
