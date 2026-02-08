@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<script defer src="/_vercel/insights/script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - The Wingman</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .button:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>Payment Successful!</h1>
+        <p class="message">
+            You now have <strong>5 analyses</strong> ready to use.<br>
+            Let's help you craft the perfect message.
+        </p>
+        <button class="button" onclick="activateCredits()">Start Analyzing →</button>
+    </div>
+
+    <script>
+        // Check if coming from Stripe (has session_id parameter)
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id') || urlParams.get('payment_intent');
+        
+        if (!sessionId) {
+            // Direct access without payment - redirect to payment page
+            alert('Please complete payment first.');
+            window.location.href = 'payment.html';
+        }
+
+        function activateCredits() {
+            // Add 5 credits
+            localStorage.setItem('wingmanCredits', '5');
+            console.log('Credits activated: 5');
+            
+            // Redirect to home
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

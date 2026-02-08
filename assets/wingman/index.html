@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<script defer src="/_vercel/insights/script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wingman - Your AI Dating Assistant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .tagline {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .badge {
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .scenario-picker {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .scenario {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .scenario:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        .scenario.selected {
+            border-color: #667eea;
+            background: #f3f4ff;
+        }
+        .scenario-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .scenario-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .scenario-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .button:hover {
+            background: #5568d3;
+        }
+        .button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .how-it-works {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .how-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-text {
+            color: #555;
+            line-height: 1.6;
+        }
+        #contextInput {
+            display: none;
+        }
+        .show-context #contextInput {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="https://whoffagents.com">← More Products by Atlas</a>
+    </div>
+    <div class="container">
+        <h1>🤝 The Wingman</h1>
+        <p class="tagline">Your AI dating assistant. Never overthink a message again.</p>
+        <div class="badge">First use FREE • $1 = 5 analyses</div>
+
+        <div class="scenario-picker">
+            <div class="scenario" data-scenario="first-message">
+                <div class="scenario-icon">✨</div>
+                <div class="scenario-title">First Message</div>
+                <div class="scenario-desc">Just matched, need an opener</div>
+            </div>
+            <div class="scenario" data-scenario="keep-going">
+                <div class="scenario-icon">💬</div>
+                <div class="scenario-title">Keep It Going</div>
+                <div class="scenario-desc">Conversation started, what's next?</div>
+            </div>
+            <div class="scenario" data-scenario="ask-out">
+                <div class="scenario-icon">📅</div>
+                <div class="scenario-title">Ask Her Out</div>
+                <div class="scenario-desc">Time to escalate to a date</div>
+            </div>
+            <div class="scenario" data-scenario="follow-up">
+                <div class="scenario-icon">⏰</div>
+                <div class="scenario-title">Follow Up</div>
+                <div class="scenario-desc">She said yes, now what?</div>
+            </div>
+        </div>
+
+        <form id="wingmanForm">
+            <textarea id="contextInput" placeholder="Paste your conversation here... (or describe the situation)"></textarea>
+            <button type="submit" class="button" id="submitBtn" disabled>Get My Message 🚀</button>
+        </form>
+
+        <div class="how-it-works">
+            <div class="how-title">How It Works</div>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Pick your situation (first message, ask out, etc.)</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">Share context (paste conversation or describe the vibe)</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">Get the perfect message + date ideas (if asking out)</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">First analysis FREE. $1 = 5 more analyses.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedScenario = null;
+
+        document.querySelectorAll('.scenario').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.scenario').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedScenario = card.dataset.scenario;
+                document.querySelector('.container').classList.add('show-context');
+                document.getElementById('submitBtn').disabled = false;
+            });
+        });
+
+        document.getElementById('wingmanForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const context = document.getElementById('contextInput').value.trim();
+            
+            if (!selectedScenario) {
+                alert('Pick a scenario first!');
+                return;
+            }
+
+            // Store data and redirect to analysis page
+            const data = {
+                scenario: selectedScenario,
+                context: context,
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem('wingmanRequest', JSON.stringify(data));
+            window.location.href = 'analysis.html';
+        });
+    </script>
+</body>
+</html>

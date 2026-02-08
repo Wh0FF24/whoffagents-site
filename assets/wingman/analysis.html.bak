@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzing... - The Wingman</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .loading {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 18px;
+            color: #666;
+        }
+        .result {
+            display: none;
+        }
+        .result.show {
+            display: block;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .message-box {
+            background: #f9fafb;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .message-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .message-text {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .tips {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .tips-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+        .tips-text {
+            color: #78350f;
+            line-height: 1.6;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .button {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .button-primary {
+            background: #667eea;
+            color: white;
+        }
+        .button-primary:hover {
+            background: #5568d3;
+        }
+        .button-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .button-secondary:hover {
+            background: #f3f4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Crafting your perfect message...</div>
+        </div>
+
+        <div class="result" id="result">
+            <h2>Here's What to Send</h2>
+            <div class="message-box">
+                <div class="message-label">Your Message</div>
+                <div class="message-text" id="messageText"></div>
+            </div>
+
+            <div id="dateIdea" style="display:none;">
+                <div class="message-box">
+                    <div class="message-label">Date Idea</div>
+                    <div class="message-text" id="dateText"></div>
+                </div>
+            </div>
+
+            <div class="tips">
+                <div class="tips-title">💡 Pro Tips</div>
+                <div class="tips-text" id="tipsText"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="button button-secondary" onclick="window.location.href='index.html'">Analyze Another</button>
+                <button class="button button-primary" onclick="copyMessage()">Copy Message</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function analyze() {
+            const data = JSON.parse(localStorage.getItem('wingmanRequest'));
+            if (!data) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Check if this is first use (free)
+            const usageCount = parseInt(localStorage.getItem('wingmanUsageCount') || '0');
+            
+            if (usageCount > 0) {
+                // Redirect to payment (would integrate Stripe here)
+                alert('This feature requires payment ($1). Stripe integration coming soon!');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Simulate API call (would call actual backend)
+            setTimeout(() => {
+                const responses = generateResponse(data.scenario, data.context);
+                displayResult(responses);
+                
+                // Increment usage
+                localStorage.setItem('wingmanUsageCount', (usageCount + 1).toString());
+            }, 2000);
+        }
+
+        function generateResponse(scenario, context) {
+            // Placeholder - would call actual AI API
+            const responses = {
+                'first-message': {
+                    message: "Hey! I saw you're into hiking. Ever done the Y trail? It's a solid workout but the view's worth it 👟",
+                    tips: "Keep it light, reference something from her profile, end with something she can respond to. Don't overthink it - just be genuine."
+                },
+                'keep-going': {
+                    message: "Haha that's great! So what do you usually do on weekends when you're not [activity from convo]?",
+                    tips: "Ask open-ended questions that invite storytelling. Avoid yes/no questions. Show genuine interest in her answers."
+                },
+                'ask-out': {
+                    message: "I'm really enjoying talking with you! Want to grab froyo at Yogurtland this week? I'm free Thursday or Friday evening.",
+                    date: "Yogurtland (casual, public, easy conversation). Thursday or Friday 7pm. Backup: Coffee at Rockwell Ice Cream if she prefers.",
+                    tips: "Be direct and confident. Suggest a specific activity and give 2 time options. Low-pressure first date (dessert, coffee) works best."
+                },
+                'follow-up': {
+                    message: "Looking forward to Thursday! I'll pick you up at 7. What's your favorite froyo flavor? I'm guessing... mint chip? 😄",
+                    tips: "Confirm the details confidently. Add a light playful question to keep conversation going before the date."
+                }
+            };
+
+            return responses[scenario] || responses['first-message'];
+        }
+
+        function displayResult(responses) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('result').classList.add('show');
+            document.getElementById('messageText').textContent = responses.message;
+            document.getElementById('tipsText').textContent = responses.tips;
+
+            if (responses.date) {
+                document.getElementById('dateIdea').style.display = 'block';
+                document.getElementById('dateText').textContent = responses.date;
+            }
+        }
+
+        function copyMessage() {
+            const messageText = document.getElementById('messageText').textContent;
+            navigator.clipboard.writeText(messageText).then(() => {
+                alert('Message copied! Go get that date 🚀');
+            });
+        }
+
+        // Run analysis on load
+        analyze();
+    </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<script defer src="/_vercel/insights/script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzing... - The Wingman</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .loading {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 18px;
+            color: #666;
+        }
+        .result {
+            display: none;
+        }
+        .result.show {
+            display: block;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: #333;
+        }
+        .message-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .message-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+        .message-text {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .section-box {
+            background: #f9fafb;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .section-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        .button {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .button-primary {
+            background: #667eea;
+            color: white;
+        }
+        .button-primary:hover {
+            background: #5568d3;
+        }
+        .button-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .button-secondary:hover {
+            background: #f3f4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Crafting your perfect message...</div>
+        </div>
+
+        <div class="result" id="result">
+            <h2>Here's Your Game Plan</h2>
+            
+            <div class="message-box">
+                <div class="message-label">📱 Send This</div>
+                <div class="message-text" id="messageText"></div>
+            </div>
+
+            <div id="sections"></div>
+
+            <div class="button-group">
+                <button class="button button-secondary" onclick="window.location.href='index.html'">Analyze Another</button>
+                <button class="button button-primary" onclick="copyMessage()">Copy Message</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function analyze() {
+            const data = JSON.parse(localStorage.getItem('wingmanRequest'));
+            if (!data) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Check usage and credits
+            const usageCount = parseInt(localStorage.getItem('wingmanUsageCount') || '0');
+            const credits = parseInt(localStorage.getItem('wingmanCredits') || '0');
+            
+            // First use is free
+            if (usageCount === 0) {
+                console.log('First free use');
+            } else {
+                // Not first use - need credits
+                if (credits <= 0) {
+                    window.location.href = 'payment.html';
+                    return;
+                } else {
+                    localStorage.setItem('wingmanCredits', (credits - 1).toString());
+                    console.log(`Used 1 credit. ${credits - 1} remaining.`);
+                }
+            }
+
+            // Increment usage count
+            localStorage.setItem('wingmanUsageCount', (usageCount + 1).toString());
+
+            // Call actual API
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayResult(result.advice);
+                } else {
+                    alert('Analysis failed: ' + (result.error || 'Please try again'));
+                    window.location.href = 'index.html';
+                }
+            } catch (error) {
+                console.error('API error:', error);
+                alert('Connection error. Please try again.');
+                window.location.href = 'index.html';
+            }
+        }
+
+        function displayResult(advice) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('result').classList.add('show');
+            
+            // Parse sections (format: LABEL:\nContent)
+            const lines = advice.split('\n');
+            let currentSection = '';
+            let currentContent = '';
+            let message = '';
+            const sections = [];
+            
+            lines.forEach(line => {
+                if (line.match(/^[A-Z][A-Z\s]+:$/)) {
+                    // Save previous section
+                    if (currentSection && currentContent) {
+                        if (currentSection === 'MESSAGE') {
+                            message = currentContent.trim();
+                        } else {
+                            sections.push({
+                                label: currentSection,
+                                content: currentContent.trim()
+                            });
+                        }
+                    }
+                    // Start new section
+                    currentSection = line.replace(':', '').trim();
+                    currentContent = '';
+                } else if (line.trim()) {
+                    currentContent += line + '\n';
+                }
+            });
+            
+            // Save last section
+            if (currentSection && currentContent) {
+                if (currentSection === 'MESSAGE') {
+                    message = currentContent.trim();
+                } else {
+                    sections.push({
+                        label: currentSection,
+                        content: currentContent.trim()
+                    });
+                }
+            }
+            
+            // Display message
+            document.getElementById('messageText').textContent = message || advice;
+            
+            // Display other sections
+            const sectionsContainer = document.getElementById('sections');
+            sectionsContainer.innerHTML = '';
+            sections.forEach(section => {
+                const box = document.createElement('div');
+                box.className = 'section-box';
+                box.innerHTML = `
+                    <div class="section-label">${section.label}</div>
+                    <div class="section-text">${section.content}</div>
+                `;
+                sectionsContainer.appendChild(box);
+            });
+        }
+
+        function copyMessage() {
+            const message = document.getElementById('messageText').textContent;
+            navigator.clipboard.writeText(message).then(() => {
+                alert('✅ Message copied to clipboard!');
+            });
+        }
+
+        // Run analysis on page load
+        window.onload = analyze;
+    </script>
+</body>
+</html>
