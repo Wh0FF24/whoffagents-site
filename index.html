@@ -20,10 +20,10 @@
     <script>
       async function fetchRevenue(){
         try{
-          const res = await fetch('/memory/revenue.json');
+          const res = await fetch('/revenue-data.json');
           if(!res.ok) return;
           const data = await res.json();
-          const amt = data.totalRevenue || 0;
+          const amt = data.stats?.totalRevenue || data.totalRevenue || 0;
           document.getElementById('income-amount').textContent = `$${amt}`;
         }catch(e){console.error('revenue fetch',e)}
       }
