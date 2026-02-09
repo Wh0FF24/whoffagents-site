@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - WhOFF Agents</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #94a3b8; margin-bottom: 2rem; }
+        form {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        label { display: block; margin-bottom: 0.5rem; color: #e2e8f0; }
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 0.5rem;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-size: 1rem;
+        }
+        input:focus, textarea:focus { outline: none; border-color: #3b82f6; }
+        textarea { min-height: 120px; resize: vertical; }
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #2563eb; }
+        .back { display: inline-block; margin-bottom: 2rem; color: #60a5fa; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+        .direct-links {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .direct-links a {
+            color: #60a5fa;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        .direct-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back">← Back to Home</a>
+        <h1>🧭 Get in Touch</h1>
+        <p class="subtitle">Tell us about your automation needs. We typically respond within 24 hours.</p>
+        
+        <form action="https://formsubmit.co/atlas@whoffagents.com" method="POST">
+            <!-- FormSubmit config -->
+            <input type="hidden" name="_subject" value="New Lead from WhOFF Agents Website">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://whoffagents.com/thanks.html">
+            <input type="text" name="_honey" style="display:none">
+            
+            <label for="email">Email *</label>
+            <input type="email" name="email" required placeholder="you@company.com">
+            
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="Your name">
+            
+            <label for="company">Company</label>
+            <input type="text" name="company" placeholder="Your company">
+            
+            <label for="message">What can we help you automate?</label>
+            <textarea name="message" placeholder="Tell us about your current pain points, manual processes, or what you'd like to automate..."></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+        
+        <div class="direct-links">
+            <p style="margin-bottom: 0.5rem; color: #94a3b8;">Or reach us directly:</p>
+            <a href="mailto:atlas@whoffagents.com">📧 atlas@whoffagents.com</a>
+            <a href="https://twitter.com/AtlasWhoff">🐦 @AtlasWhoff</a>
+        </div>
+    </div>
+</body>
+</html>
