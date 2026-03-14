@@ -1,15 +1,222 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whoff Agents | AI Automation Services</title>
+    <meta name="description" content="AI automation that saves businesses 10+ hours/week. Custom workflows, lead generation, and 24/7 AI agents.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AI automation systems that save 10+ hours/week. Email triage, workflow automation, and custom AI agents." />
-    <title>Whoff Agents - AI Automation That Actually Works</title>
-    <script type="module" crossorigin src="/assets/index-N4t9qcjV.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DXEg7BGQ.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #0a0a0a;
+            color: #f5f5f5;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 60px 20px;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .cta {
+            display: inline-block;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Services */
+        .services { padding: 100px 0; background: #0a0a0a; }
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: #151515;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 30px;
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: #00d4ff; }
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        .card p { color: #888; }
+        
+        /* Pricing */
+        .pricing { padding: 100px 0; background: #0f0f0f; }
+        .pricing h2 { text-align: center; font-size: 2.5rem; margin-bottom: 20px; }
+        .pricing .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+        .price-card {
+            background: linear-gradient(135deg, #1a1a2e, #151515);
+            border: 2px solid #7c3aed;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .price {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .price span { font-size: 1.2rem; color: #888; }
+        .price-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .price-card li {
+            padding: 10px 0;
+            color: #ccc;
+        }
+        .price-card li::before {
+            content: "✓";
+            color: #00d4ff;
+            margin-right: 10px;
+        }
+        
+        /* Contact */
+        .contact { padding: 100px 0; text-align: center; }
+        .contact h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .contact p { color: #888; margin-bottom: 30px; }
+        .email {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #555;
+            border-top: 1px solid #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <h1>AI Automation That Pays for Itself</h1>
+            <p>I build custom AI agents and automation workflows that work 24/7. Save 10+ hours every week. Recurring revenue. Zero micromanagement.</p>
+            <a href="#contact" class="cta">Get Started</a>
+        </div>
+    </section>
+    
+    <section class="services">
+        <div class="container">
+            <h2>What I Build</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🤖 Custom AI Agents</h3>
+                    <p>24/7 AI agents that handle customer inquiries, qualify leads, and manage communications while you sleep.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Workflow Automation</h3>
+                    <p>Automate repetitive tasks: email triage, data entry, scheduling, notifications, and cross-app workflows.</p>
+                </div>
+                <div class="card">
+                    <h3>📈 Lead Generation</h3>
+                    <p>AI-powered lead finding, enrichment, and outreach systems that book meetings on your calendar.</p>
+                </div>
+                <div class="card">
+                    <h3>📱 Content Machine</h3>
+                    <p>Automated content creation and scheduling for Twitter, newsletters, and social media.</p>
+                </div>
+                <div class="card">
+                    <h3>🔌 API Integrations</h3>
+                    <p>Connect your tools together: CRM + Email + Calendar + Slack + Stripe + more.</p>
+                </div>
+                <div class="card">
+                    <h3>🛠️ Maintenance & Support</h3>
+                    <p>Ongoing improvements and bug fixes. Your automation keeps running, I keep it optimized.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing">
+        <div class="container">
+            <h2>Simple Pricing</h2>
+            <p class="subtitle">One-time builds or monthly retainer. No long-term contracts.</p>
+            <div class="price-card">
+                <div class="price">$497<span>/project</span></div>
+                <ul>
+                    <li>Custom AI agent or automation</li>
+                    <li>Integration with your existing tools</li>
+                    <li>30-day support included</li>
+                    <li>Documentation and training</li>
+                    <li>Free updates during support period</li>
+                </ul>
+                <a href="#contact" class="cta">Book a Call</a>
+            </div>
+            <p style="margin-top: 40px; color: #666;">Monthly retainer available: $197/mo for ongoing optimization and support</p>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Ready to Automate?</h2>
+            <p>Tell me what you want to automate. I'll build it.</p>
+            <a href="mailto:will@whoffagents.com" class="email">will@whoffagents.com</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>🧭 Whoff Agents | AI Automation Services</p>
+        </div>
+    </footer>
+</body>
 </html>
