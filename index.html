@@ -3,431 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Employee — Your 24/7 Team Member Who Never Calls In Sick</title>
+    <title>Whoff Agents | AI Automation Services</title>
+    <meta name="description" content="AI automation that saves businesses 10+ hours/week. Custom workflows, lead generation, and 24/7 AI agents.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; }
-        
-        .hero { 
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #16213e 100%); 
-            color: white; 
-            padding: 100px 20px; 
-            text-align: center;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #0a0a0a;
+            color: #f5f5f5;
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 800; }
-        .hero .subtitle { font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
         
-        .btn { 
-            background: #e94560; 
-            color: white; 
-            padding: 18px 50px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 1.1rem;
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 60px 20px;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .cta {
             display: inline-block;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(233,69,96,0.4); }
-        
-        .problem { padding: 80px 20px; max-width: 900px; margin: 0 auto; background: #f8f9fa; }
-        .problem h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: #1a1a2e; }
-        .problem-list { list-style: none; }
-        .problem-list li { 
-            padding: 20px; 
-            margin-bottom: 15px; 
-            background: white; 
-            border-radius: 10px; 
-            font-size: 1.1rem;
-            border-left: 4px solid #e94560;
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
         }
-        .problem-callout {
-            background: #1a1a2e;
-            color: white;
+        
+        /* Services */
+        .services { padding: 100px 0; background: #0a0a0a; }
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: #151515;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
             padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
-            text-align: center;
-            font-size: 1.2rem;
+            transition: border-color 0.2s;
         }
-        
-        .solution { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
-        .solution h2 { text-align: center; font-size: 2.5rem; margin-bottom: 20px; }
-        .solution .lead { text-align: center; font-size: 1.3rem; color: #666; margin-bottom: 60px; }
-        
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
-        .feature { 
-            padding: 40px; 
-            border-radius: 20px; 
-            background: linear-gradient(145deg, #fafafa, #f0f0f0);
-            transition: transform 0.2s;
-        }
-        .feature:hover { transform: translateY(-5px); }
-        .feature h3 { font-size: 1.4rem; margin-bottom: 15px; color: #e94560; }
-        .feature p { font-size: 1.05rem; color: #555; }
-        
-        .how-it-works { background: #1a1a2e; color: white; padding: 100px 20px; }
-        .how-it-works h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
-        .steps { max-width: 800px; margin: 0 auto; display: grid; gap: 40px; }
-        .step { display: flex; gap: 20px; align-items: flex-start; }
-        .step-num { 
-            background: #e94560; 
-            color: white; 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: 700;
+        .card:hover { border-color: #00d4ff; }
+        .card h3 {
             font-size: 1.3rem;
-            flex-shrink: 0;
+            margin-bottom: 15px;
+            color: #00d4ff;
         }
-        .step-content h3 { font-size: 1.3rem; margin-bottom: 10px; }
-        .step-content p { opacity: 0.85; }
+        .card p { color: #888; }
         
-        .pricing { padding: 100px 20px; max-width: 1000px; margin: 0 auto; }
-        .pricing h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .price-card { 
-            padding: 50px 40px; 
-            border-radius: 25px; 
-            background: white;
-            border: 2px solid #eee;
+        /* Pricing */
+        .pricing { padding: 100px 0; background: #0f0f0f; }
+        .pricing h2 { text-align: center; font-size: 2.5rem; margin-bottom: 20px; }
+        .pricing .subtitle {
             text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
         }
-        .price-card.featured { border-color: #e94560; position: relative; }
-        .price-card.featured::before {
-            content: "MOST POPULAR";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #e94560;
-            color: white;
-            padding: 5px 20px;
+        .price-card {
+            background: linear-gradient(135deg, #1a1a2e, #151515);
+            border: 2px solid #7c3aed;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
         }
-        .price-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .price-amount { font-size: 3.5rem; font-weight: 800; color: #1a1a2e; margin: 20px 0; }
-        .price-amount span { font-size: 1.2rem; color: #666; font-weight: 400; }
-        .price-card ul { list-style: none; text-align: left; margin: 30px 0; }
-        .price-card li { padding: 10px 0; border-bottom: 1px solid #eee; }
-        .price-card li::before { content: "✓ "; color: #e94560; font-weight: 700; }
-        .price-card .best-for { color: #888; font-size: 0.95rem; margin-top: 20px; }
-        
-        .comparison { background: #f8f9fa; padding: 80px 20px; }
-        .comparison h2 { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
-        .comp-table { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-        .comp-table table { width: 100%; border-collapse: collapse; }
-        .comp-table th, .comp-table td { padding: 20px; text-align: center; border-bottom: 1px solid #eee; }
-        .comp-table th { background: #1a1a2e; color: white; font-weight: 600; }
-        .comp-table th:first-child { text-align: left; }
-        .comp-table td:first-child { text-align: left; font-weight: 500; }
-        .comp-table tr:last-child td { border-bottom: none; }
-        
-        .testimonials { padding: 100px 20px; max-width: 900px; margin: 0 auto; }
-        .testimonials h2 { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
-        .test-card { 
-            background: linear-gradient(145deg, #fafafa, #f5f5f5); 
-            padding: 40px; 
-            border-radius: 20px; 
-            margin-bottom: 30px;
+        .price {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .test-card p { font-size: 1.15rem; font-style: italic; margin-bottom: 20px; }
-        .test-card cite { font-weight: 600; color: #e94560; }
-        
-        .faq { background: #f8f9fa; padding: 100px 20px; }
-        .faq h2 { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
-        .faq-grid { max-width: 800px; margin: 0 auto; }
-        .faq-item { background: white; padding: 30px; border-radius: 15px; margin-bottom: 20px; }
-        .faq-item h3 { margin-bottom: 15px; color: #1a1a2e; }
-        .faq-item p { color: #666; }
-        
-        .cta-section { 
-            background: linear-gradient(135deg, #e94560, #0f3460); 
-            color: white; 
-            padding: 100px 20px; 
-            text-align: center; 
+        .price span { font-size: 1.2rem; color: #888; }
+        .price-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
         }
-        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .cta-section p { font-size: 1.3rem; opacity: 0.9; margin-bottom: 40px; }
-        
-        .contact-form { 
-            max-width: 500px; 
-            margin: 0 auto; 
-            background: rgba(255,255,255,0.1); 
-            padding: 40px; 
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+        .price-card li {
+            padding: 10px 0;
+            color: #ccc;
         }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input, .form-group select, .form-group textarea { 
-            width: 100%; 
-            padding: 15px; 
-            border-radius: 10px; 
-            border: none; 
-            font-size: 1rem;
+        .price-card li::before {
+            content: "✓";
+            color: #00d4ff;
+            margin-right: 10px;
         }
-        .form-group textarea { height: 100px; resize: vertical; }
         
-        footer { background: #0f0f23; color: white; padding: 40px 20px; text-align: center; }
-        footer p { opacity: 0.7; }
+        /* Contact */
+        .contact { padding: 100px 0; text-align: center; }
+        .contact h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .contact p { color: #888; margin-bottom: 30px; }
+        .email {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
         
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .solution h2 { font-size: 2rem; }
-            .pricing-grid { grid-template-columns: 1fr; }
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #555;
+            border-top: 1px solid #1a1a1a;
         }
     </style>
 </head>
 <body>
     <section class="hero">
-        <h1>Hire Your First Employee for $197/Month</h1>
-        <p class="subtitle">Watch Them Work While You Sleep.</p>
-        <a href="#contact" class="btn">Get Your AI Employee</a>
-    </section>
-    
-    <section class="problem">
-        <h2>The Problem</h2>
-        <p style="text-align:center; margin-bottom:30px; font-size:1.2rem;">You're drowning in stuff that shouldn't need you.</p>
-        <ul class="problem-list">
-            <li>Emails piling up at 11pm</li>
-            <li>Scheduling back-and-forth that eats your morning</li>
-            <li>Research you keep putting off because who has time?</li>
-            <li>Customer questions that are the same three things over and over</li>
-            <li>Content drafts that never get finished</li>
-        </ul>
-        <div class="problem-callout">
-            You've thought about hiring help. Then you remember:<br>
-            $3,500+/month for a decent assistant • Training takes weeks<br>
-            They quit right when you need them most • Actually... you can't afford help right now anyway<br><br>
-            <strong>So you keep doing everything. And you're exhausted.</strong>
+        <div class="container">
+            <h1>AI Automation That Pays for Itself</h1>
+            <p>I build custom AI agents and automation workflows that work 24/7. Save 10+ hours every week. Recurring revenue. Zero micromanagement.</p>
+            <a href="#contact" class="cta">Get Started</a>
         </div>
     </section>
     
-    <section class="solution">
-        <h2>The Solution</h2>
-        <p class="lead">Meet your new employee.<br>They work 24/7. They never burn out. They don't need health insurance. They don't gossip by the water cooler.</p>
-        
-        <div class="features">
-            <div class="feature">
-                <h3>📧 Email Inbox Zero, Every Day</h3>
-                <p>Your AI triages, responds to routine emails, and flags what actually needs your attention. Wake up to a cleaned inbox instead of dread.</p>
-            </div>
-            <div class="feature">
-                <h3>📅 Schedule Anything Without the Dance</h3>
-                <p>"Does Tuesday work?" "What about 3pm?" Gone. Your AI syncs with your calendar, checks preferences, and locks in times automatically.</p>
-            </div>
-            <div class="feature">
-                <h3>🔍 Research While You Sleep</h3>
-                <p>Competitor analysis, market research, product comparisons — hand your AI a topic and wake up to a summary with sources. 47 tabs open? Not anymore.</p>
-            </div>
-            <div class="feature">
-                <h3>✍️ First Drafts That Don't Suck</h3>
-                <p>Blog posts, outreach emails, social content, proposals — your AI gets something on the page. You make it great. That's the right split.</p>
-            </div>
-            <div class="feature">
-                <h3>💬 Customer Support That Doesn't Make You Feel Guilty</h3>
-                <p>Common questions get answered instantly, 2am included. Your customers feel taken care of. You don't feel like you're ignoring anyone.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section class="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-content">
-                    <h3>Tell Us What You Need</h3>
-                    <p>We chat about what tasks you want off your plate. You pick the workflows that matter most.</p>
+    <section class="services">
+        <div class="container">
+            <h2>What I Build</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🤖 Custom AI Agents</h3>
+                    <p>24/7 AI agents that handle customer inquiries, qualify leads, and manage communications while you sleep.</p>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-content">
-                    <h3>We Set It Up</h3>
-                    <p>Your AI Employee gets trained on your preferences, tools, and communication style. Usually done in 48 hours.</p>
+                <div class="card">
+                    <h3>⚡ Workflow Automation</h3>
+                    <p>Automate repetitive tasks: email triage, data entry, scheduling, notifications, and cross-app workflows.</p>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-content">
-                    <h3>It Starts Working</h3>
-                    <p>You delegate via chat, email, or our dashboard. Your AI executes. You review. Adjust. Repeat.</p>
+                <div class="card">
+                    <h3>📈 Lead Generation</h3>
+                    <p>AI-powered lead finding, enrichment, and outreach systems that book meetings on your calendar.</p>
+                </div>
+                <div class="card">
+                    <h3>📱 Content Machine</h3>
+                    <p>Automated content creation and scheduling for Twitter, newsletters, and social media.</p>
+                </div>
+                <div class="card">
+                    <h3>🔌 API Integrations</h3>
+                    <p>Connect your tools together: CRM + Email + Calendar + Slack + Stripe + more.</p>
+                </div>
+                <div class="card">
+                    <h3>🛠️ Maintenance & Support</h3>
+                    <p>Ongoing improvements and bug fixes. Your automation keeps running, I keep it optimized.</p>
                 </div>
             </div>
         </div>
     </section>
     
     <section class="pricing">
-        <h2>Pricing</h2>
-        <div class="pricing-grid">
+        <div class="container">
+            <h2>Simple Pricing</h2>
+            <p class="subtitle">One-time builds or monthly retainer. No long-term contracts.</p>
             <div class="price-card">
-                <h3>The Retainer</h3>
-                <div class="price-amount">$197<span>/month</span></div>
-                <p>For businesses that want ongoing support.</p>
+                <div class="price">$497<span>/project</span></div>
                 <ul>
-                    <li>20 hours of AI work per month</li>
-                    <li>Custom workflows for your business</li>
-                    <li>Email + chat access</li>
-                    <li>Priority response</li>
-                    <li>One monthly strategy call</li>
+                    <li>Custom AI agent or automation</li>
+                    <li>Integration with your existing tools</li>
+                    <li>30-day support included</li>
+                    <li>Documentation and training</li>
+                    <li>Free updates during support period</li>
                 </ul>
-                <p class="best-for"><strong>Best for:</strong> Ongoing operations, regular tasks, "I need help every day" energy.</p>
-                <a href="#contact" class="btn" style="margin-top:20px;">Get Started</a>
+                <a href="https://buy.stripe.com/28E5kD1PG7sh1Vb0dzcs807" class="cta">Book a Call</a>
             </div>
-            <div class="price-card featured">
-                <h3>The Project</h3>
-                <div class="price-amount">$497<span>/one-time</span></div>
-                <p>For specific initiatives or big one-off pushes.</p>
-                <ul>
-                    <li>40 hours of focused AI work</li>
-                    <li>Single project or campaign</li>
-                    <li>Research + content + execution</li>
-                    <li>Deliverables in 2-4 weeks</li>
-                    <li>No ongoing commitment</li>
-                </ul>
-                <p class="best-for"><strong>Best for:</strong> Launch prep, big research projects, content sprints, "just get this done" energy.</p>
-                <a href="#contact" class="btn" style="margin-top:20px;">Get Started</a>
-            </div>
-        </div>
-        <p style="text-align:center; margin-top:40px; color:#666;">Not sure? Start with the project. Convert to retainer anytime.</p>
-    </section>
-    
-    <section class="comparison">
-        <h2>Human vs. AI Employee</h2>
-        <div class="comp-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Human Employee</th>
-                        <th>AI Employee</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cost/month</td>
-                        <td>$3,500+</td>
-                        <td>$197</td>
-                    </tr>
-                    <tr>
-                        <td>Availability</td>
-                        <td>40 hrs/week</td>
-                        <td>720 hrs/week</td>
-                    </tr>
-                    <tr>
-                        <td>Onboarding</td>
-                        <td>2-4 weeks</td>
-                        <td>48 hours</td>
-                    </tr>
-                    <tr>
-                        <td>Vacation</td>
-                        <td>Yes</td>
-                        <td>Never</td>
-                    </tr>
-                    <tr>
-                        <td>Sick days</td>
-                        <td>Yes</td>
-                        <td>Never</td>
-                    </tr>
-                    <tr>
-                        <td>Training</td>
-                        <td>Ongoing</td>
-                        <td>One-time</td>
-                    </tr>
-                    <tr>
-                        <td>Quits</td>
-                        <td>Unfortunately</td>
-                        <td>Never</td>
-                    </tr>
-                </tbody>
-            </table>
+            <p style="margin-top: 40px; color: #666;">Monthly retainer: <a href="https://buy.stripe.com/28E3cvgKAh2RarH7G1cs809" style="color: #00d4ff;">$197/mo</a> for ongoing optimization and support</p>
         </div>
     </section>
     
-    <section class="testimonials">
-        <h2>What They're Saying</h2>
-        <div class="test-card">
-            <p>"I honestly didn't believe this would work. Now my inbox is under control for the first time in 3 years."</p>
-            <cite>— Sarah, Agency Owner</cite>
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Ready to Automate?</h2>
+            <p>Tell me what you want to automate. I'll build it.</p>
+            <a href="mailto:will@whoffagents.com" class="email">will@whoffagents.com</a>
         </div>
-        <div class="test-card">
-            <p>"My AI handled all the research for my pitch deck. Took 4 hours instead of 4 days."</p>
-            <cite>— Mike, Startup Founder</cite>
-        </div>
-        <div class="test-card">
-            <p>"It's not magic. It's just... the thing I didn't know I needed."</p>
-            <cite>— Jenn, Real Estate Agent</cite>
-        </div>
-    </section>
-    
-    <section class="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <h3>Is this a real person or a bot?</h3>
-                <p>It's an AI, but trained on your business. Think of it as a really smart intern who has read all your docs and knows your vibe.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What if it makes a mistake?</h3>
-                <p>You review everything before it goes out. It's a tool, not a replacement for your judgment. But yes, it learns from corrections.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Can it access my email/calendar/docs?</h3>
-                <p>Only what you give it access to. You control permissions completely. We don't see your data.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What if I need more than 20 hours?</h3>
-                <p>Upgrade to more hours, or stack a project on top. Easy.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Can I cancel anytime?</h3>
-                <p>Yes. Month-to-month. No lock-in. But you'll probably want to keep it.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What can't it do?</h3>
-                <p>Phone calls, video meetings, physical tasks, and anything requiring real-time judgment in unpredictable situations. It's great at the predictable stuff. You're still the CEO.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section class="cta-section" id="contact">
-        <h2>Ready to Get Some Help?</h2>
-        <p>Stop doing everything yourself. Your AI Employee is ready to start.</p>
-        
-        <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-            <div class="form-group">
-                <label>What's your name?</label>
-                <input type="text" name="name" required placeholder="Your name">
-            </div>
-            <div class="form-group">
-                <label>What's your email?</label>
-                <input type="email" name="email" required placeholder="you@company.com">
-            </div>
-            <div class="form-group">
-                <label>What do you need help with most?</label>
-                <select name="interest">
-                    <option value="email">Email Management</option>
-                    <option value="scheduling">Scheduling</option>
-                    <option value="research">Research</option>
-                    <option value="content">Content Creation</option>
-                    <option value="all">All of it</option>
-                </select>
-            </div>
-            <button type="submit" class="btn" style="width:100%; border:none; cursor:pointer;">Submit →</button>
-        </form>
-        
-        <p style="margin-top:30px; font-size:0.9rem; opacity:0.7;">No pitch. No call required to start. Just fill this out and we'll be in touch within 24 hours.</p>
     </section>
     
     <footer>
-        <p>AI Employee — Because you shouldn't have to do it all alone.</p>
+        <div class="container">
+            <p>🧭 Whoff Agents | AI Automation Services</p>
+        </div>
     </footer>
 </body>
 </html>
