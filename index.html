@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whoff Agents | AI Automation Services</title>
-    <meta name="description" content="AI automation that saves businesses 10+ hours/week. Custom workflows, lead generation, and 24/7 AI agents.">
+    <title>Whoff Agents | AI Automation Services for Small Business</title>
+    <meta name="description" content="Custom AI agents and automation workflows that save small businesses 10+ hours/week. Automate email triage, lead gen, and customer service. $497/project. Built by Will Hoff.">
+    <meta name="keywords" content="AI automation, custom AI agents, workflow automation, small business automation, lead generation automation, AI consultant">
+    <meta property="og:title" content="Whoff Agents | AI Automation for Small Business">
+    <meta property="og:description" content="Custom AI agents that work 24/7. Save 10+ hours/week. $497/project, $197/mo retainer.">
+    <meta property="og:url" content="https://whoffagents.com">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://whoffagents.com">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -126,6 +132,74 @@
             margin-right: 10px;
         }
         
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(10px);
+            padding: 16px 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        nav .logo { font-weight: 700; color: #00d4ff; font-size: 1.1rem; text-decoration: none; }
+        nav .nav-links { display: flex; gap: 24px; list-style: none; }
+        nav .nav-links a { color: #888; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        nav .nav-links a:hover { color: #fff; }
+        .hero { padding-top: 120px; }
+
+        /* Digital Products */
+        .products { padding: 100px 0; background: #0a0a0a; border-top: 1px solid #1a1a1a; }
+        .products h2 { text-align: center; font-size: 2.5rem; margin-bottom: 15px; }
+        .products .subtitle { text-align: center; color: #888; margin-bottom: 50px; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .product-card {
+            background: #151515;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { border-color: #7c3aed; }
+        .product-card .product-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00d4ff;
+            margin: 16px 0 8px;
+        }
+        .product-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .product-card p { color: #888; font-size: 0.95rem; flex-grow: 1; margin-bottom: 20px; }
+        .product-card .btn-buy {
+            display: inline-block;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        .product-tag {
+            display: inline-block;
+            background: #7c3aed22;
+            color: #7c3aed;
+            border: 1px solid #7c3aed55;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+        }
+
         /* Contact */
         .contact { padding: 100px 0; text-align: center; }
         .contact h2 { font-size: 2.5rem; margin-bottom: 20px; }
@@ -146,6 +220,16 @@
     </style>
 </head>
 <body>
+    <nav>
+        <a href="/" class="logo">🧭 Whoff Agents</a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <section class="hero">
         <div class="container">
             <h1>AI Automation That Pays for Itself</h1>
@@ -154,7 +238,7 @@
         </div>
     </section>
     
-    <section class="services">
+    <section class="services" id="services">
         <div class="container">
             <h2>What I Build</h2>
             <div class="grid">
@@ -186,7 +270,7 @@
         </div>
     </section>
     
-    <section class="pricing">
+    <section class="pricing" id="pricing">
         <div class="container">
             <h2>Simple Pricing</h2>
             <p class="subtitle">One-time builds or monthly retainer. No long-term contracts.</p>
@@ -205,6 +289,36 @@
         </div>
     </section>
     
+    <section class="products" id="products">
+        <div class="container">
+            <h2>Digital Products</h2>
+            <p class="subtitle">Download-and-use resources to start automating today — no custom project needed.</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="product-tag">Instant Download</span>
+                    <h3>🤖 AI Automation Prompts Pack</h3>
+                    <p>50+ production-ready AI prompts for email triage, customer service replies, lead qualification, content drafting, and more. Drop into any AI tool and start saving time today.</p>
+                    <div class="product-price">$29</div>
+                    <a href="https://buy.stripe.com/4gM3cv9i813T43je4pcs80a" class="btn-buy">Buy Now →</a>
+                </div>
+                <div class="product-card">
+                    <span class="product-tag">PDF Guide</span>
+                    <h3>📖 Automation-First Business Guide</h3>
+                    <p>Step-by-step playbook for building a business that runs on AI automation. Real examples, implementation templates, and decision frameworks. Stop trading time for money.</p>
+                    <div class="product-price">$49</div>
+                    <a href="https://buy.stripe.com/9B6aEX0LCeUJ9nD8K5cs80b" class="btn-buy">Buy Now →</a>
+                </div>
+                <div class="product-card">
+                    <span class="product-tag">New</span>
+                    <h3>💬 The Wingman — AI Dating Assistant</h3>
+                    <p>Stuck on what to text back? Upload a screenshot, get 3 AI-crafted response options in your voice — Confident, Playful, or Thoughtful. $5 per analysis.</p>
+                    <div class="product-price">$5</div>
+                    <a href="https://wingman.whoffagents.com" class="btn-buy">Try It Now →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="contact" id="contact">
         <div class="container">
             <h2>Ready to Automate?</h2>
