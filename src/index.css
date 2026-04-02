@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-cyan: #00d4ff;
+  --color-brand-purple: #7c3aed;
+  --color-brand-dark: #0a0a0a;
+  --color-brand-card: #111111;
+  --color-brand-border: #1e1e1e;
+  --color-brand-glow-cyan: rgba(0, 212, 255, 0.15);
+  --color-brand-glow-purple: rgba(124, 58, 237, 0.15);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+::selection {
+  background: rgba(0, 212, 255, 0.3);
+  color: white;
+}

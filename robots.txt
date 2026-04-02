@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://whoffagents.com/sitemap.xml
