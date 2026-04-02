@@ -36,7 +36,7 @@ const fadeUp = {
 
 export default function WhatWeShip() {
   return (
-    <section className="py-24 px-6">
+    <section className="py-28 px-6 bg-white/[0.02]">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -70,7 +70,7 @@ export default function WhatWeShip() {
                 <card.icon className={`w-8 h-8 ${card.iconColor}`} strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">{card.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{card.description}</p>
+              <p className="text-gray-400 text-sm leading-relaxed">{card.description}</p>
             </motion.div>
           ))}
         </div>

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 export default function Newsletter() {
   return (
-    <section id="newsletter" className="py-24 px-6 border-t border-brand-border relative overflow-hidden">
+    <section id="newsletter" className="py-28 px-6 relative overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -20,13 +20,13 @@ export default function Newsletter() {
         transition={{ duration: 0.5 }}
       >
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">The Whoff Agents Newsletter</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Get early access to every tool we ship</h2>
           <p className="text-gray-400 mb-8">
-            Weekly deep dives on AI developer tools, MCP server launches, and what we&apos;re learning
-            building an AI-run business. Free.
+            Join developers getting weekly MCP server launches, Claude Code tips, and exclusive pre-release access. Free.
           </p>
 
           <div className="max-w-md mx-auto">
+            <p className="text-brand-gold text-sm font-medium mb-6">Next drop: Crypto Data MCP — subscribers get it first.</p>
             <form
               className="flex flex-col sm:flex-row gap-3"
               action="https://whoffagents.beehiiv.com/subscribe"
@@ -45,10 +45,10 @@ export default function Newsletter() {
                 type="submit"
                 className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200 whitespace-nowrap cursor-pointer"
               >
-                Subscribe
+                Get Early Access
               </button>
             </form>
-            <p className="text-xs text-gray-600 mt-3">No spam. Unsubscribe anytime.</p>
+            <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
           </div>
         </div>
       </motion.div>

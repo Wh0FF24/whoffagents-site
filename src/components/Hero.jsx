@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import AnimatedBackground from './AnimatedBackground'
 
@@ -21,29 +21,13 @@ const phrases = ['MCP servers', 'Claude Code skills', 'starter kits', 'workflow 
 export default function Hero() {
   const location = useLocation()
   const [phraseIndex, setPhraseIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
-    const current = phrases[phraseIndex]
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (charIndex < current.length) {
-          setCharIndex(c => c + 1)
-        } else {
-          setTimeout(() => setIsDeleting(true), 1500)
-        }
-      } else {
-        if (charIndex > 0) {
-          setCharIndex(c => c - 1)
-        } else {
-          setIsDeleting(false)
-          setPhraseIndex(i => (i + 1) % phrases.length)
-        }
-      }
-    }, isDeleting ? 40 : 80)
-    return () => clearTimeout(timeout)
-  }, [charIndex, isDeleting, phraseIndex])
+    const interval = setInterval(() => {
+      setPhraseIndex(i => (i + 1) % phrases.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleNewsletterClick = (e) => {
     if (location.pathname === '/') {
@@ -75,12 +59,20 @@ export default function Hero() {
         </motion.h1>
 
         {/* Typed text animation */}
-        <motion.div variants={fadeUp} className="text-xl md:text-2xl text-gray-500 mb-4 h-8">
-          Building{' '}
-          <span className="text-brand-red font-semibold">
-            {phrases[phraseIndex].substring(0, charIndex)}
-          </span>
-          <span className="animate-pulse text-brand-silver">|</span>
+        <motion.div variants={fadeUp} className="text-xl md:text-2xl text-gray-500 mb-4 h-8 flex items-center justify-center gap-2">
+          <span>Building</span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={phraseIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-brand-red font-semibold"
+            >
+              {phrases[phraseIndex]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
 
         {/* Subtitle */}
@@ -88,29 +80,39 @@ export default function Hero() {
           variants={fadeUp}
           className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed"
         >
-          Premium MCP servers and developer tools that plug into your workflow.
-          Ship faster. Automate more. Built and maintained by Atlas, an autonomous AI agent.
+          MCP servers and Claude Code skills built end-to-end by an AI agent. New tools ship weekly. Subscribe for early access.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           variants={fadeUp}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Link
-            to="/products"
-            className="text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer bg-brand-red"
-          >
-            Browse Tools
-          </Link>
           <Link
             to="/#newsletter"
             onClick={handleNewsletterClick}
-            className="border border-brand-blue/50 text-brand-silver font-medium px-8 py-3.5 rounded-lg hover:border-brand-blue-light hover:text-white transition-colors duration-200 text-center cursor-pointer"
+            className="text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer bg-brand-red"
           >
-            Get the Newsletter
+            Get Early Access
+          </Link>
+          <Link
+            to="/products"
+            className="text-gray-400 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white font-medium px-8 py-3.5 text-center cursor-pointer transition-all duration-200"
+          >
+            Browse Tools
           </Link>
         </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 8, 0] }}
+        transition={{ opacity: { delay: 2, duration: 1 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
+      >
+        <div className="w-5 h-8 border-2 border-gray-600 rounded-full flex justify-center pt-1.5">
+          <div className="w-1 h-2 bg-gray-400 rounded-full" />
+        </div>
       </motion.div>
     </section>
   )

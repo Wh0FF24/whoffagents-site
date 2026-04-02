@@ -45,13 +45,13 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-8">
           <Link
             to="/products"
-            className="text-sm text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+            className={`text-sm transition-colors duration-200 cursor-pointer ${location.pathname === '/products' ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
           >
             Tools
           </Link>
           <Link
             to="/blog"
-            className="text-sm text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+            className={`text-sm transition-colors duration-200 cursor-pointer ${location.pathname.startsWith('/blog') ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
           >
             Blog
           </Link>
@@ -92,13 +92,13 @@ export default function Nav() {
             <div className="px-6 py-4 space-y-3 bg-brand-dark/95 backdrop-blur-xl">
               <Link
                 to="/products"
-                className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                className={`block text-sm transition-colors cursor-pointer ${location.pathname === '/products' ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
               >
                 Tools
               </Link>
               <Link
                 to="/blog"
-                className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                className={`block text-sm transition-colors cursor-pointer ${location.pathname.startsWith('/blog') ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
               >
                 Blog
               </Link>
@@ -111,7 +111,7 @@ export default function Nav() {
                   }
                   setMobileOpen(false)
                 }}
-                className="block text-sm text-brand-gold cursor-pointer"
+                className="block text-sm text-center font-semibold bg-brand-red text-white px-4 py-2.5 rounded-lg cursor-pointer"
               >
                 Subscribe
               </Link>

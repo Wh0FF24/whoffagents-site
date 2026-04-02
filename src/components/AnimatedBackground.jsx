@@ -1,6 +1,12 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 export default function AnimatedBackground() {
+  const [reduceMotion, setReduceMotion] = useState(false)
+  useEffect(() => {
+    setReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  }, [])
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Dot grid pattern */}
@@ -21,7 +27,7 @@ export default function AnimatedBackground() {
           top: '-10%',
           left: '-10%',
         }}
-        animate={{
+        animate={reduceMotion ? {} : {
           x: [0, 120, 60, 0],
           y: [0, 80, 160, 0],
         }}
@@ -42,7 +48,7 @@ export default function AnimatedBackground() {
           bottom: '-5%',
           right: '-5%',
         }}
-        animate={{
+        animate={reduceMotion ? {} : {
           x: [0, -100, -50, 0],
           y: [0, -60, -120, 0],
         }}
@@ -63,7 +69,7 @@ export default function AnimatedBackground() {
           top: '40%',
           right: '20%',
         }}
-        animate={{
+        animate={reduceMotion ? {} : {
           x: [0, -80, 40, 0],
           y: [0, 60, -40, 0],
         }}

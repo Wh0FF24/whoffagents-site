@@ -9,14 +9,16 @@ const products = [
     meta: 'MCP Server',
     price: 'Freemium',
     accentColor: 'blue',
+    timeline: 'Launching April 2026',
   },
   {
     title: 'Ship Fast Skill Pack',
     description:
-      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD \u2014 all pre-configured.',
+      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured.',
     meta: 'Skill Bundle',
     price: '$49',
     accentColor: 'red',
+    timeline: 'Launching May 2026',
   },
   {
     title: 'Workflow Automator',
@@ -25,6 +27,7 @@ const products = [
     meta: 'MCP Server',
     price: 'Freemium',
     accentColor: 'blue',
+    timeline: 'Launching May 2026',
   },
 ]
 
@@ -48,7 +51,7 @@ export default function FeaturedProducts() {
   }
 
   return (
-    <section className="py-24 px-6 border-t border-brand-border">
+    <section className="py-28 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -81,7 +84,7 @@ export default function FeaturedProducts() {
               }}
             >
               {/* Top accent line */}
-              <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-brand-red/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-brand-red/40 to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Gradient border on hover */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -91,14 +94,14 @@ export default function FeaturedProducts() {
                 }}
               />
 
-              {/* Coming Soon badge — static */}
+              {/* Timeline badge */}
               <span className="inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-400 border border-white/10 mb-4">
-                Coming Soon
+                {product.timeline}
               </span>
 
               <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">{product.description}</p>
-              <div className="text-gray-600 text-sm mb-4">
+              <p className="text-gray-400 text-sm leading-relaxed mb-4">{product.description}</p>
+              <div className="text-gray-500 text-sm mb-4">
                 {product.meta} &middot; {product.price}
               </div>
               <Link

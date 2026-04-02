@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { Server, Code2, Package, Layers } from 'lucide-react'
+import Newsletter from '../components/Newsletter'
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
@@ -19,15 +20,17 @@ const products = [
     category: 'mcp',
     price: 'Free / Pro $19/mo',
     accent: 'blue',
+    timeline: 'Launching April 2026',
   },
   {
     id: 2,
     title: 'Ship Fast Skill Pack',
     description:
-      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD \u2014 all pre-configured.',
+      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured.',
     category: 'skill',
     price: '$49',
     accent: 'red',
+    timeline: 'Launching May 2026',
   },
   {
     id: 3,
@@ -37,6 +40,7 @@ const products = [
     category: 'mcp',
     price: 'Free / Pro $15/mo',
     accent: 'blue',
+    timeline: 'Launching May 2026',
   },
   {
     id: 4,
@@ -46,6 +50,7 @@ const products = [
     category: 'skill',
     price: '$19',
     accent: 'red',
+    timeline: 'Launching June 2026',
   },
   {
     id: 5,
@@ -55,6 +60,7 @@ const products = [
     category: 'kit',
     price: '$99',
     accent: 'gold',
+    timeline: 'Launching June 2026',
   },
   {
     id: 6,
@@ -64,6 +70,7 @@ const products = [
     category: 'mcp',
     price: '$29/mo',
     accent: 'blue',
+    timeline: 'Launching July 2026',
   },
 ]
 
@@ -114,7 +121,7 @@ export default function Products() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
                 filter === cat.id
                   ? 'bg-white/10 text-white border border-brand-red/30'
-                  : 'text-gray-500 hover:text-gray-300 border border-transparent hover:border-white/5'
+                  : 'text-gray-400 hover:text-gray-300 border border-transparent hover:border-white/5'
               }`}
             >
               <cat.icon className="w-4 h-4" />
@@ -124,55 +131,64 @@ export default function Products() {
         </div>
 
         {/* Product grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((product, i) => (
-              <motion.div
-                key={product.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0, transition: { delay: i * 0.08 } }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35 }}
-                className="relative group bg-brand-card border border-brand-border rounded-xl p-8 transition-all duration-300 hover:-translate-y-0.5"
-              >
-                {/* Gradient border on hover */}
-                <div
-                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    border: '1px solid transparent',
-                    borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(0,98,184,0.3)) 1',
-                  }}
-                />
-
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-                    product.accent === 'blue'
-                      ? 'bg-brand-blue/20 text-white border border-brand-blue/30'
-                      : product.accent === 'red'
-                      ? 'bg-brand-red/10 text-brand-red border border-brand-red/20'
-                      : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
-                  }`}
+        <section>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((product, i) => (
+                <motion.div
+                  key={product.id}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0, transition: { delay: i * 0.08 } }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35 }}
+                  className="relative group bg-brand-card border border-brand-border rounded-xl p-8 transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  {categoryLabels[product.category]}
-                </span>
+                  {/* Gradient border on hover */}
+                  <div
+                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      border: '1px solid transparent',
+                      borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(0,98,184,0.3)) 1',
+                    }}
+                  />
 
-                <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{product.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 text-sm">{product.price}</span>
-                  <a
-                    href="/#newsletter"
-                    onClick={handleWaitlistClick}
-                    className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
-                  >
-                    Join Waitlist &rarr;
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                        product.accent === 'blue'
+                          ? 'bg-brand-blue/20 text-white border border-brand-blue/30'
+                          : product.accent === 'red'
+                          ? 'bg-brand-red/10 text-brand-red border border-brand-red/20'
+                          : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
+                      }`}
+                    >
+                      {categoryLabels[product.category]}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-400 border border-white/10">
+                      {product.timeline}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{product.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500 text-sm">{product.price}</span>
+                    <a
+                      href="/#newsletter"
+                      onClick={handleWaitlistClick}
+                      className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                    >
+                      Join Waitlist &rarr;
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </section>
+
+        <Newsletter />
       </div>
     </div>
   )

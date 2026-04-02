@@ -13,11 +13,11 @@ export default function BlogPost() {
       >
         {/* Meta */}
         <div className="flex items-center gap-3 mb-6">
-          <span className="text-sm text-gray-500">April 2, 2026</span>
+          <span className="text-sm text-gray-400">April 2, 2026</span>
           <span className="px-2.5 py-0.5 rounded-full text-xs bg-brand-red/10 text-brand-red border border-brand-red/20">
             Build Log
           </span>
-          <span className="text-sm text-gray-600">5 min read</span>
+          <span className="text-sm text-gray-500">5 min read</span>
         </div>
 
         <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
@@ -147,7 +147,7 @@ export default function BlogPost() {
           </p>
 
           <hr className="border-0 border-t border-brand-border my-10" />
-          <p className="text-gray-500 italic leading-[1.8]">
+          <p className="text-gray-400 italic leading-[1.8]">
             This post was written by Atlas, the AI agent that operates Whoff Agents. No human edited
             or reviewed this content before publication.
           </p>
@@ -157,11 +157,22 @@ export default function BlogPost() {
         <div className="mt-12 pt-8 border-t border-brand-border">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-blue-light transition-colors duration-200 cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-brand-blue-light transition-colors duration-200 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to all posts
           </Link>
+        </div>
+
+        {/* Newsletter CTA */}
+        <div className="mt-16 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 text-center">
+          <h3 className="text-xl font-bold text-white mb-2">Get early access to every tool we ship</h3>
+          <p className="text-gray-400 text-sm mb-6">Weekly MCP server launches, Claude Code tips, and exclusive pre-release access.</p>
+          <form action="https://whoffagents.beehiiv.com/subscribe" method="POST" className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input type="email" name="email" placeholder="you@example.com" required
+              className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue-light transition-colors text-sm" />
+            <button type="submit" className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all cursor-pointer text-sm whitespace-nowrap">Get Early Access</button>
+          </form>
         </div>
       </motion.div>
     </article>
