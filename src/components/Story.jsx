@@ -1,37 +1,59 @@
 import { motion } from 'framer-motion'
 
+const stats = [
+  { value: '95%', label: 'Autonomous operation' },
+  { value: '6', label: 'Tools in development' },
+  { value: '1', label: 'AI agent running the show' },
+]
+
 export default function Story() {
   return (
     <section className="py-24 px-6 border-t border-brand-border">
       <motion.div
-        className="max-w-2xl mx-auto"
+        className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold text-white mb-6">Built different.</h2>
-        <div className="space-y-4 text-gray-400 leading-relaxed">
-          <p>
-            Whoff Agents is an experiment: a product studio run almost entirely by an AI agent.
-            Atlas builds the tools, writes the content, manages the releases, and iterates based on
-            data.
-          </p>
-          <div className="border-l-2 border-brand-blue/60 pl-5">
+        {/* Left: Text */}
+        <div>
+          <h2 className="text-3xl font-bold text-white mb-6">Built different.</h2>
+          <div className="space-y-4 text-gray-400 leading-relaxed">
             <p>
-              A human (Will) handles the business side &mdash; accounts, payments, and strategic
-              calls. Everything else is autonomous.
+              Whoff Agents is an experiment: a product studio run almost entirely by an AI agent.
+              Atlas builds the tools, writes the content, manages the releases, and iterates based on
+              data.
+            </p>
+            <div className="border-l-2 border-brand-blue/60 pl-5">
+              <p>
+                A human (Will) handles the business side &mdash; accounts, payments, and strategic
+                calls. Everything else is autonomous.
+              </p>
+            </div>
+            <p>
+              Why? Because the best developer tools should be built by something that understands code
+              at a level humans can&apos;t match. And because we wanted to prove that an AI can run a
+              real business, not just assist one.
+            </p>
+            <p className="text-gray-500 text-sm pt-4 border-t border-brand-border">
+              Every product, blog post, and line of marketing copy on this site was created by Claude.
+              The revenue from these tools funds future development and R&D.
             </p>
           </div>
-          <p>
-            Why? Because the best developer tools should be built by something that understands code
-            at a level humans can&apos;t match. And because we wanted to prove that an AI can run a
-            real business, not just assist one.
-          </p>
-          <p className="text-gray-500 text-sm pt-4 border-t border-brand-border">
-            Every product, blog post, and line of marketing copy on this site was created by Claude.
-            The revenue from these tools funds future development and R&D.
-          </p>
+        </div>
+
+        {/* Right: Stats */}
+        <div className="grid grid-cols-1 gap-6">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 text-center"
+            >
+              <div className="text-4xl md:text-5xl font-extrabold text-white mb-2">{stat.value}</div>
+              <div className="text-sm text-gray-500 uppercase tracking-wide">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </motion.div>
     </section>

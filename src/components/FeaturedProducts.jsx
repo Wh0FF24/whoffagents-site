@@ -70,7 +70,7 @@ export default function FeaturedProducts() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="relative group bg-brand-card border border-brand-border rounded-xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
+              className="relative group bg-brand-card border border-brand-border rounded-xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,46,93,0.15)]"
               style={{
                 backgroundImage:
                   product.accentColor === 'blue'
@@ -80,6 +80,9 @@ export default function FeaturedProducts() {
                     : 'linear-gradient(135deg, rgba(255,184,28,0.03), transparent)',
               }}
             >
+              {/* Top accent line */}
+              <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-brand-red/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
               {/* Gradient border on hover */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
@@ -88,23 +91,9 @@ export default function FeaturedProducts() {
                 }}
               />
 
-              {/* Coming Soon badge */}
-              <span
-                className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-                  product.accentColor === 'blue'
-                    ? 'bg-brand-blue/20 text-white border border-brand-blue/30'
-                    : product.accentColor === 'red'
-                    ? 'bg-brand-red/10 text-brand-red border border-brand-red/20'
-                    : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
-                }`}
-              >
-                <motion.span
-                  animate={{ opacity: [1, 0.6, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="inline-block"
-                >
-                  Coming Soon
-                </motion.span>
+              {/* Coming Soon badge — static */}
+              <span className="inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-400 border border-white/10 mb-4">
+                Coming Soon
               </span>
 
               <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>

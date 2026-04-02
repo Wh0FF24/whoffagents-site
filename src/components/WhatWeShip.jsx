@@ -5,7 +5,6 @@ const cards = [
   {
     icon: ArrowRight,
     iconColor: 'text-brand-red',
-    hoverBorder: 'hover:border-brand-blue-light/40',
     title: 'MCP Servers',
     description:
       'Hosted Model Context Protocol servers that connect your AI tools to data sources, APIs, and workflows. Plug in and go.',
@@ -13,7 +12,6 @@ const cards = [
   {
     icon: Code2,
     iconColor: 'text-brand-blue-light',
-    hoverBorder: 'hover:border-brand-blue-light/40',
     title: 'Claude Code Skills',
     description:
       'Drop-in skill files that give Claude Code new capabilities. Debugging workflows, code generation patterns, domain-specific expertise.',
@@ -21,7 +19,6 @@ const cards = [
   {
     icon: Cpu,
     iconColor: 'text-brand-silver',
-    hoverBorder: 'hover:border-brand-blue-light/40',
     title: 'Starter Kits',
     description:
       'Production-ready boilerplates and templates for building AI-powered apps. Skip the scaffolding, start shipping.',
@@ -64,8 +61,11 @@ export default function WhatWeShip() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className={`bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-8 transition-all duration-300 ${card.hoverBorder} hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(0,98,184,0.06)] group`}
+              className="relative overflow-hidden group bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-8 transition-all duration-300 hover:border-brand-blue-light/40 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,46,93,0.15)]"
             >
+              {/* Top accent line */}
+              <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-brand-red/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
               <div className="mb-4">
                 <card.icon className={`w-8 h-8 ${card.iconColor}`} strokeWidth={1.5} />
               </div>

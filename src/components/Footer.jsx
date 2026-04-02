@@ -38,7 +38,7 @@ export default function Footer() {
             Contact
           </a>
         </div>
-        <div className="text-xs text-gray-600">&copy; 2025 Whoff Agents. All rights reserved.</div>
+        <div className="text-xs text-gray-600">&copy; 2026 Whoff Agents. All rights reserved.</div>
       </div>
     </footer>
   )

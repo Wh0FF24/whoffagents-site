@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import AnimatedBackground from './AnimatedBackground'
@@ -15,8 +16,34 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
+const phrases = ['MCP servers', 'Claude Code skills', 'starter kits', 'workflow tools']
+
 export default function Hero() {
   const location = useLocation()
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [charIndex, setCharIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const current = phrases[phraseIndex]
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (charIndex < current.length) {
+          setCharIndex(c => c + 1)
+        } else {
+          setTimeout(() => setIsDeleting(true), 1500)
+        }
+      } else {
+        if (charIndex > 0) {
+          setCharIndex(c => c - 1)
+        } else {
+          setIsDeleting(false)
+          setPhraseIndex(i => (i + 1) % phrases.length)
+        }
+      }
+    }, isDeleting ? 40 : 80)
+    return () => clearTimeout(timeout)
+  }, [charIndex, isDeleting, phraseIndex])
 
   const handleNewsletterClick = (e) => {
     if (location.pathname === '/') {
@@ -35,24 +62,26 @@ export default function Hero() {
         initial="hidden"
         animate="show"
       >
-        {/* Pill badge */}
-        <motion.div variants={fadeUp}>
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-border text-xs text-gray-400 mb-8 tracking-wide bg-white/[0.02] shadow-[0_0_20px_rgba(255,184,28,0.05)]">
-            MCP Servers &middot; Skills &middot; Dev Tools
-          </span>
-        </motion.div>
-
         {/* Heading */}
         <motion.h1
           variants={fadeUp}
           className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6"
         >
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C0C0C0, #C8102E, #002E5D)' }}>
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C0C0C0 0%, #C8102E 100%)' }}>
             Developer tools
           </span>
           <br />
           <span className="text-white">built by AI.</span>
         </motion.h1>
+
+        {/* Typed text animation */}
+        <motion.div variants={fadeUp} className="text-xl md:text-2xl text-gray-500 mb-4 h-8">
+          Building{' '}
+          <span className="text-brand-red font-semibold">
+            {phrases[phraseIndex].substring(0, charIndex)}
+          </span>
+          <span className="animate-pulse text-brand-silver">|</span>
+        </motion.div>
 
         {/* Subtitle */}
         <motion.p
