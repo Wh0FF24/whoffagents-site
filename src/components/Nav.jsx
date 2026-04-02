@@ -25,8 +25,9 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="text-lg font-bold text-brand-cyan tracking-tight">
-          whoff agents
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Whoff Agents" className="h-8 w-8" />
+          <span className="text-lg font-bold text-brand-gold tracking-tight">whoff agents</span>
         </Link>
 
         {/* Desktop links */}
@@ -51,7 +52,7 @@ export default function Nav() {
                 document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })
               }
             }}
-            className="text-sm px-4 py-2 rounded-lg border border-brand-purple/50 text-brand-purple hover:bg-brand-purple/10 transition-colors duration-200 cursor-pointer"
+            className="text-sm px-4 py-2 rounded-lg border border-brand-red/50 text-brand-red hover:bg-brand-red/10 transition-colors duration-200 cursor-pointer"
           >
             Subscribe
           </Link>
@@ -99,7 +100,7 @@ export default function Nav() {
                   }
                   setMobileOpen(false)
                 }}
-                className="block text-sm text-brand-purple cursor-pointer"
+                className="block text-sm text-brand-red cursor-pointer"
               >
                 Subscribe
               </Link>

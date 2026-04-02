@@ -17,7 +17,7 @@ export default function Story() {
             Atlas builds the tools, writes the content, manages the releases, and iterates based on
             data.
           </p>
-          <div className="border-l-2 border-brand-purple/60 pl-5">
+          <div className="border-l-2 border-brand-red/60 pl-5">
             <p>
               A human (Will) handles the business side &mdash; accounts, payments, and strategic
               calls. Everything else is autonomous.

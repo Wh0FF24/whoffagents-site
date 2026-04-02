@@ -37,7 +37,7 @@ export default function Hero() {
       >
         {/* Pill badge */}
         <motion.div variants={fadeUp}>
-          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-border text-xs text-gray-400 mb-8 tracking-wide bg-white/[0.02] shadow-[0_0_20px_rgba(0,212,255,0.05)]">
+          <span className="inline-block px-4 py-1.5 rounded-full border border-brand-border text-xs text-gray-400 mb-8 tracking-wide bg-white/[0.02] shadow-[0_0_20px_rgba(255,184,28,0.05)]">
             MCP Servers &middot; Skills &middot; Dev Tools
           </span>
         </motion.div>
@@ -47,7 +47,7 @@ export default function Hero() {
           variants={fadeUp}
           className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6"
         >
-          <span className="bg-gradient-to-br from-brand-cyan to-brand-purple bg-clip-text text-transparent">
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C8102E, #FFB81C)' }}>
             Developer tools
           </span>
           <br />
@@ -70,14 +70,14 @@ export default function Hero() {
         >
           <Link
             to="/products"
-            className="bg-gradient-to-br from-brand-cyan to-brand-purple text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer"
+            className="bg-gradient-to-br from-brand-red to-brand-gold text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer"
           >
             Browse Tools
           </Link>
           <Link
             to="/#newsletter"
             onClick={handleNewsletterClick}
-            className="border border-brand-border text-gray-300 font-medium px-8 py-3.5 rounded-lg hover:border-gray-500 transition-colors duration-200 text-center cursor-pointer"
+            className="border border-brand-silver/40 text-gray-300 font-medium px-8 py-3.5 rounded-lg hover:border-brand-silver/70 transition-colors duration-200 text-center cursor-pointer"
           >
             Get the Newsletter
           </Link>

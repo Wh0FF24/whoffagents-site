@@ -18,7 +18,7 @@ const products = [
       'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
     category: 'mcp',
     price: 'Free / Pro $19/mo',
-    accent: 'cyan',
+    accent: 'blue',
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const products = [
       '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD \u2014 all pre-configured.',
     category: 'skill',
     price: '$49',
-    accent: 'purple',
+    accent: 'red',
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const products = [
       'MCP server that connects to Make.com, Zapier, and n8n. Trigger automations from Claude Code conversations.',
     category: 'mcp',
     price: 'Free / Pro $15/mo',
-    accent: 'cyan',
+    accent: 'blue',
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const products = [
       'Claude Code skill that generates SEO-optimized blog posts, meta descriptions, and content briefs from a single topic.',
     category: 'skill',
     price: '$19',
-    accent: 'purple',
+    accent: 'red',
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const products = [
       'Full-stack Next.js + Stripe + Auth boilerplate for AI-powered SaaS apps. Database, billing, and dashboard pre-built.',
     category: 'kit',
     price: '$99',
-    accent: 'cyan',
+    accent: 'gold',
   },
   {
     id: 6,
@@ -63,7 +63,7 @@ const products = [
       'MCP server delivering real-time trading signals, technical analysis, and market sentiment data to your AI coding environment.',
     category: 'mcp',
     price: '$29/mo',
-    accent: 'purple',
+    accent: 'blue',
   },
 ]
 
@@ -113,7 +113,7 @@ export default function Products() {
               onClick={() => setFilter(cat.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
                 filter === cat.id
-                  ? 'bg-white/10 text-white border border-white/10'
+                  ? 'bg-white/10 text-brand-gold border border-brand-gold/30'
                   : 'text-gray-500 hover:text-gray-300 border border-transparent hover:border-white/5'
               }`}
             >
@@ -141,18 +141,17 @@ export default function Products() {
                   className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   style={{
                     border: '1px solid transparent',
-                    borderImage:
-                      product.accent === 'cyan'
-                        ? 'linear-gradient(135deg, rgba(0,212,255,0.4), rgba(124,58,237,0.2)) 1'
-                        : 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(0,212,255,0.2)) 1',
+                    borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(255,184,28,0.3)) 1',
                   }}
                 />
 
                 <span
                   className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-                    product.accent === 'cyan'
-                      ? 'bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20'
-                      : 'bg-brand-purple/10 text-brand-purple border border-brand-purple/20'
+                    product.accent === 'blue'
+                      ? 'bg-brand-blue/20 text-white border border-brand-blue/30'
+                      : product.accent === 'red'
+                      ? 'bg-brand-red/10 text-brand-red border border-brand-red/20'
+                      : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
                   }`}
                 >
                   {categoryLabels[product.category]}
@@ -165,7 +164,7 @@ export default function Products() {
                   <a
                     href="/#newsletter"
                     onClick={handleWaitlistClick}
-                    className="text-sm text-brand-cyan hover:text-white transition-colors duration-200 cursor-pointer"
+                    className="text-sm text-brand-gold hover:text-white transition-colors duration-200 cursor-pointer"
                   >
                     Join Waitlist &rarr;
                   </a>

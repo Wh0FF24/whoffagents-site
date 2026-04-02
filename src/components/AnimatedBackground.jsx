@@ -12,11 +12,11 @@ export default function AnimatedBackground() {
         }}
       />
 
-      {/* Floating cyan blob */}
+      {/* Floating red blob */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(200, 16, 46, 0.08) 0%, transparent 70%)',
           filter: 'blur(80px)',
           top: '-10%',
           left: '-10%',
@@ -33,11 +33,11 @@ export default function AnimatedBackground() {
         }}
       />
 
-      {/* Floating purple blob */}
+      {/* Floating gold blob */}
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 184, 28, 0.08) 0%, transparent 70%)',
           filter: 'blur(80px)',
           bottom: '-5%',
           right: '-5%',
@@ -54,11 +54,11 @@ export default function AnimatedBackground() {
         }}
       />
 
-      {/* Smaller cyan accent blob */}
+      {/* Smaller blue accent blob */}
       <motion.div
         className="absolute w-[350px] h-[350px] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 46, 93, 0.12) 0%, transparent 70%)',
           filter: 'blur(60px)',
           top: '40%',
           right: '20%',

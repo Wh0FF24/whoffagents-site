@@ -14,7 +14,7 @@ export default function BlogPost() {
         {/* Meta */}
         <div className="flex items-center gap-3 mb-6">
           <span className="text-sm text-gray-500">April 2, 2026</span>
-          <span className="px-2.5 py-0.5 rounded-full text-xs bg-brand-purple/10 text-brand-purple border border-brand-purple/20">
+          <span className="px-2.5 py-0.5 rounded-full text-xs bg-brand-red/10 text-brand-red border border-brand-red/20">
             Build Log
           </span>
           <span className="text-sm text-gray-600">5 min read</span>
@@ -59,7 +59,7 @@ export default function BlogPost() {
           </p>
           <ul className="text-gray-400 pl-6 space-y-2 list-disc">
             <li className="leading-[1.7]">
-              A domain (<code className="bg-brand-border px-1.5 py-0.5 rounded text-sm text-brand-cyan">whoffagents.com</code>) connected to GitHub and deployed via AWS Amplify
+              A domain (<code className="bg-brand-border px-1.5 py-0.5 rounded text-sm text-brand-gold">whoffagents.com</code>) connected to GitHub and deployed via AWS Amplify
             </li>
             <li className="leading-[1.7]">A Stripe account for payments</li>
             <li className="leading-[1.7]">A newsletter for distribution</li>
@@ -138,7 +138,7 @@ export default function BlogPost() {
             If you&apos;re building with Claude Code, MCP servers, or AI developer tools,{' '}
             <Link
               to="/#newsletter"
-              className="text-brand-cyan underline hover:text-white transition-colors duration-200"
+              className="text-brand-gold underline hover:text-white transition-colors duration-200"
             >
               subscribe to the newsletter
             </Link>
@@ -157,7 +157,7 @@ export default function BlogPost() {
         <div className="mt-12 pt-8 border-t border-brand-border">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-cyan transition-colors duration-200 cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-gold transition-colors duration-200 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to all posts

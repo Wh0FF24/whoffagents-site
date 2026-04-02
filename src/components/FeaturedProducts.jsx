@@ -8,7 +8,7 @@ const products = [
       'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
     meta: 'MCP Server',
     price: 'Freemium',
-    accentColor: 'cyan',
+    accentColor: 'blue',
   },
   {
     title: 'Ship Fast Skill Pack',
@@ -16,7 +16,7 @@ const products = [
       '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD \u2014 all pre-configured.',
     meta: 'Skill Bundle',
     price: '$49',
-    accentColor: 'purple',
+    accentColor: 'red',
   },
   {
     title: 'Workflow Automator',
@@ -24,7 +24,7 @@ const products = [
       'MCP server that connects to Make.com, Zapier, and n8n. Trigger automations from Claude Code conversations.',
     meta: 'MCP Server',
     price: 'Freemium',
-    accentColor: 'cyan',
+    accentColor: 'blue',
   },
 ]
 
@@ -73,28 +73,29 @@ export default function FeaturedProducts() {
               className="relative group bg-brand-card border border-brand-border rounded-xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 backgroundImage:
-                  product.accentColor === 'cyan'
-                    ? 'linear-gradient(135deg, rgba(0,212,255,0.02), transparent)'
-                    : 'linear-gradient(135deg, rgba(124,58,237,0.02), transparent)',
+                  product.accentColor === 'blue'
+                    ? 'linear-gradient(135deg, rgba(0,46,93,0.04), transparent)'
+                    : product.accentColor === 'red'
+                    ? 'linear-gradient(135deg, rgba(200,16,46,0.03), transparent)'
+                    : 'linear-gradient(135deg, rgba(255,184,28,0.03), transparent)',
               }}
             >
               {/* Gradient border on hover */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
                   border: '1px solid transparent',
-                  borderImage:
-                    product.accentColor === 'cyan'
-                      ? 'linear-gradient(135deg, rgba(0,212,255,0.4), rgba(124,58,237,0.2)) 1'
-                      : 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(0,212,255,0.2)) 1',
+                  borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(255,184,28,0.3)) 1',
                 }}
               />
 
               {/* Coming Soon badge */}
               <span
                 className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-                  product.accentColor === 'cyan'
-                    ? 'bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20'
-                    : 'bg-brand-purple/10 text-brand-purple border border-brand-purple/20'
+                  product.accentColor === 'blue'
+                    ? 'bg-brand-blue/20 text-white border border-brand-blue/30'
+                    : product.accentColor === 'red'
+                    ? 'bg-brand-red/10 text-brand-red border border-brand-red/20'
+                    : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
                 }`}
               >
                 <motion.span
@@ -114,7 +115,7 @@ export default function FeaturedProducts() {
               <Link
                 to="/#newsletter"
                 onClick={handleWaitlistClick}
-                className="text-sm text-brand-cyan hover:text-white transition-colors duration-200 cursor-pointer"
+                className="text-sm text-brand-gold hover:text-white transition-colors duration-200 cursor-pointer"
               >
                 Join Waitlist &rarr;
               </Link>
@@ -125,7 +126,7 @@ export default function FeaturedProducts() {
         <div className="text-center mt-10">
           <Link
             to="/products"
-            className="text-sm text-gray-400 hover:text-brand-cyan transition-colors duration-200 cursor-pointer"
+            className="text-sm text-gray-400 hover:text-brand-gold transition-colors duration-200 cursor-pointer"
           >
             View all tools &rarr;
           </Link>
