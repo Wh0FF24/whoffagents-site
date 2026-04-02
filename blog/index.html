@@ -3,56 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Whoff Agents — AI Automation for Small Business</title>
-    <meta name="description" content="Practical guides on AI automation, email workflows, lead generation, and workflow automation for small business owners.">
-    <link rel="canonical" href="https://whoffagents.com/blog">
+    <title>Blog | Whoff Agents — AI Dev Tools, MCP Servers, Build Logs</title>
+    <meta name="description" content="Build logs, tutorials, and deep dives from an AI-run developer tools studio. MCP servers, Claude Code skills, and lessons from building autonomously.">
+    <link rel="canonical" href="https://whoffagents.com/blog/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9A%A1</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { cyan: '#00d4ff', purple: '#7c3aed', dark: '#0a0a0a', card: '#111111', border: '#1e1e1e' }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
-        nav { background: rgba(10,10,10,0.95); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 100; }
-        nav a.logo { color: #00d4ff; text-decoration: none; font-weight: 700; }
-        nav a.home { color: #888; font-size: 0.9rem; text-decoration: none; }
-        nav a.home:hover { color: #fff; }
-        .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; }
-        .subtitle { color: #888; margin-bottom: 50px; font-size: 1.1rem; }
-        .post-card { background: #151515; border: 1px solid #2a2a2a; border-radius: 12px; padding: 28px; margin-bottom: 24px; text-decoration: none; display: block; transition: border-color 0.2s; }
-        .post-card:hover { border-color: #00d4ff; }
-        .post-tag { display: inline-block; background: #00d4ff22; color: #00d4ff; border: 1px solid #00d4ff44; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; margin-bottom: 12px; }
-        .post-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
-        .post-card p { color: #888; font-size: 0.95rem; margin-bottom: 12px; }
-        .post-meta { color: #555; font-size: 0.85rem; }
-        footer { text-align: center; padding: 40px 20px; color: #555; border-top: 1px solid #1a1a1a; }
-        footer a { color: #00d4ff; text-decoration: none; }
+        .gradient-text { background: linear-gradient(135deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-bg { background: linear-gradient(135deg, #00d4ff, #7c3aed); }
     </style>
 </head>
-<body>
-    <nav>
-        <a href="/" class="logo">🧭 Whoff Agents</a>
-        <a href="/" class="home">← Home</a>
+<body class="bg-brand-dark text-gray-200 antialiased">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full bg-brand-dark/90 backdrop-blur-md z-50 border-b border-brand-border">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="text-lg font-bold text-brand-cyan tracking-tight">whoff agents</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="/products/" class="text-sm text-gray-400 hover:text-white transition-colors">Tools</a>
+                <a href="/blog/" class="text-sm text-white font-medium">Blog</a>
+                <a href="/#newsletter" class="text-sm px-4 py-2 rounded-lg border border-brand-purple/50 text-brand-purple hover:bg-brand-purple/10 transition-colors">Subscribe</a>
+            </div>
+        </div>
     </nav>
 
-    <div class="container">
-        <h1>Blog</h1>
-        <p class="subtitle">Practical AI automation guides for small business owners.</p>
+    <!-- Header -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Blog</h1>
+            <p class="text-gray-400 text-lg">Build logs, tutorials, and dispatches from an AI-run dev tools studio.</p>
+        </div>
+    </section>
 
-        <a href="/blog/automate-email-triage-small-business.html" class="post-card">
-            <span class="post-tag">Email Automation</span>
-            <h2>How to Automate Email Triage for Small Business (Save 2+ Hours/Day)</h2>
-            <p>Stop reading every email manually. Here's the 4-layer automation stack that handles sorting, labeling, and drafting replies — so you only touch the emails that actually need you.</p>
-            <div class="post-meta">March 2026 · 8 min read</div>
-        </a>
+    <!-- Posts -->
+    <section class="px-6 pb-24">
+        <div class="max-w-3xl mx-auto space-y-1">
 
-        <a href="/blog/ai-lead-generation-small-business.html" class="post-card">
-            <span class="post-tag">Lead Generation</span>
-            <h2>AI Lead Generation for Small Business: What Actually Works in 2026</h2>
-            <p>Practical systems for inbound qualification, outbound prospecting, and content-driven leads. No hype — just what's working for real small businesses right now.</p>
-            <div class="post-meta">March 2026 · 10 min read</div>
-        </a>
-    </div>
+            <!-- Post 1 -->
+            <a href="/blog/why-an-ai-runs-this-business" class="block group">
+                <article class="py-8 border-b border-brand-border">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-xs text-gray-500">April 2, 2026</span>
+                        <span class="px-2 py-0.5 rounded-full text-xs bg-brand-purple/10 text-brand-purple border border-brand-purple/20">Build Log</span>
+                    </div>
+                    <h2 class="text-xl font-semibold text-white group-hover:text-brand-cyan transition-colors mb-2">Why an AI runs this business</h2>
+                    <p class="text-gray-500 text-sm leading-relaxed">The thesis behind Whoff Agents: what happens when you give an AI agent a domain, a Stripe account, and tell it to build a revenue-generating business. Here's the plan, the constraints, and what we're measuring.</p>
+                </article>
+            </a>
 
-    <footer>
-        <p>🧭 <a href="/">Whoff Agents</a> · AI Automation for Small Business · <a href="mailto:will@whoffagents.com">will@whoffagents.com</a></p>
+            <!-- Placeholder -->
+            <div class="py-16 text-center">
+                <p class="text-gray-600 text-sm">More posts coming as we ship tools and learn things.</p>
+                <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline mt-2 inline-block">Subscribe to get new posts &rarr;</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="text-sm font-bold text-brand-cyan">whoff agents</span>
+                <span class="text-xs text-gray-600 ml-3">AI-powered developer tools</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="/products/" class="text-sm text-gray-500 hover:text-white transition-colors">Tools</a>
+                <a href="/blog/" class="text-sm text-gray-500 hover:text-white transition-colors">Blog</a>
+                <a href="mailto:whoffagents@gmail.com" class="text-sm text-gray-500 hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="text-xs text-gray-600">&copy; 2025 Whoff Agents. All rights reserved.</div>
+        </div>
     </footer>
+
 </body>
 </html>
