@@ -84,7 +84,7 @@ export default function FeaturedProducts() {
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
                   border: '1px solid transparent',
-                  borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(255,184,28,0.3)) 1',
+                  borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(0,98,184,0.3)) 1',
                 }}
               />
 
@@ -115,7 +115,7 @@ export default function FeaturedProducts() {
               <Link
                 to="/#newsletter"
                 onClick={handleWaitlistClick}
-                className="text-sm text-brand-gold hover:text-white transition-colors duration-200 cursor-pointer"
+                className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
               >
                 Join Waitlist &rarr;
               </Link>
@@ -126,7 +126,7 @@ export default function FeaturedProducts() {
         <div className="text-center mt-10">
           <Link
             to="/products"
-            className="text-sm text-gray-400 hover:text-brand-gold transition-colors duration-200 cursor-pointer"
+            className="text-sm text-gray-400 hover:text-brand-blue-light transition-colors duration-200 cursor-pointer"
           >
             View all tools &rarr;
           </Link>

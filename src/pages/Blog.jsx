@@ -51,11 +51,11 @@ export default function Blog() {
                   </span>
                   <span className="text-sm text-gray-600">{post.readTime}</span>
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2 group-hover:text-brand-gold transition-colors duration-200">
+                <h2 className="text-xl font-bold text-white mb-2 group-hover:text-brand-blue-light transition-colors duration-200">
                   {post.title}
                 </h2>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">{post.description}</p>
-                <span className="inline-flex items-center gap-1.5 text-sm text-brand-gold group-hover:gap-2.5 transition-all duration-200">
+                <span className="inline-flex items-center gap-1.5 text-sm text-brand-blue-light group-hover:gap-2.5 transition-all duration-200">
                   Read more <ArrowRight className="w-4 h-4" />
                 </span>
               </Link>

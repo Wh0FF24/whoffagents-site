@@ -47,7 +47,7 @@ export default function Hero() {
           variants={fadeUp}
           className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6"
         >
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C8102E, #FFB81C)' }}>
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C0C0C0, #C8102E, #002E5D)' }}>
             Developer tools
           </span>
           <br />
@@ -70,14 +70,14 @@ export default function Hero() {
         >
           <Link
             to="/products"
-            className="bg-gradient-to-br from-brand-red to-brand-gold text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer"
+            className="text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer bg-brand-red"
           >
             Browse Tools
           </Link>
           <Link
             to="/#newsletter"
             onClick={handleNewsletterClick}
-            className="border border-brand-silver/40 text-gray-300 font-medium px-8 py-3.5 rounded-lg hover:border-brand-silver/70 transition-colors duration-200 text-center cursor-pointer"
+            className="border border-brand-blue/50 text-brand-silver font-medium px-8 py-3.5 rounded-lg hover:border-brand-blue-light hover:text-white transition-colors duration-200 text-center cursor-pointer"
           >
             Get the Newsletter
           </Link>

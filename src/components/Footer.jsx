@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t border-brand-border py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
-          <Link to="/" className="text-sm font-bold text-brand-gold">
+          <Link to="/" className="text-sm font-bold text-white">
             whoff agents
           </Link>
           <span className="text-xs text-gray-600 ml-3">AI-powered developer tools</span>

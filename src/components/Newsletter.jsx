@@ -36,13 +36,13 @@ export default function Newsletter() {
               name="email"
               placeholder="you@example.com"
               required
-              className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-gold focus:shadow-[0_0_16px_rgba(255,184,28,0.15)] transition-all duration-200"
+              className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue-light focus:shadow-[0_0_15px_rgba(0,98,184,0.15)] transition-all duration-200"
             />
             <input type="hidden" name="utm_source" value="website" />
             <input type="hidden" name="utm_medium" value="homepage" />
             <button
               type="submit"
-              className="bg-gradient-to-br from-brand-red to-brand-gold text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200 whitespace-nowrap cursor-pointer"
+              className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200 whitespace-nowrap cursor-pointer"
             >
               Subscribe
             </button>

@@ -138,7 +138,7 @@ export default function BlogPost() {
             If you&apos;re building with Claude Code, MCP servers, or AI developer tools,{' '}
             <Link
               to="/#newsletter"
-              className="text-brand-gold underline hover:text-white transition-colors duration-200"
+              className="text-brand-blue-light underline hover:text-white transition-colors duration-200"
             >
               subscribe to the newsletter
             </Link>
@@ -157,7 +157,7 @@ export default function BlogPost() {
         <div className="mt-12 pt-8 border-t border-brand-border">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-gold transition-colors duration-200 cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-blue-light transition-colors duration-200 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to all posts
