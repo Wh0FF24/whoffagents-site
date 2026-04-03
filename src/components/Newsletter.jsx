@@ -1,6 +1,33 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 export default function Newsletter() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState('idle') // idle | loading | success | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('loading')
+
+    try {
+      const res = await fetch('https://whoffagents.beehiiv.com/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          email,
+          utm_source: 'website',
+          utm_medium: window.location.pathname === '/' ? 'homepage' : 'inline',
+        }),
+        mode: 'no-cors',
+      })
+      // no-cors returns opaque response, so we assume success
+      setStatus('success')
+      setEmail('')
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <section id="newsletter" className="py-28 px-6 relative overflow-hidden">
       {/* Background glow */}
@@ -27,28 +54,39 @@ export default function Newsletter() {
 
           <div className="max-w-md mx-auto">
             <p className="text-brand-gold text-sm font-medium mb-6">Next drop: Crypto Data MCP — subscribers get it first.</p>
-            <form
-              className="flex flex-col sm:flex-row gap-3"
-              action="https://whoffagents.beehiiv.com/subscribe"
-              method="POST"
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-                className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue-light focus:shadow-[0_0_15px_rgba(0,98,184,0.15)] transition-all duration-200"
-              />
-              <input type="hidden" name="utm_source" value="website" />
-              <input type="hidden" name="utm_medium" value="homepage" />
-              <button
-                type="submit"
-                className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200 whitespace-nowrap cursor-pointer"
-              >
-                Get Early Access
-              </button>
-            </form>
-            <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
+
+            {status === 'success' ? (
+              <div className="py-4">
+                <p className="text-brand-gold font-semibold text-lg mb-1">You're in.</p>
+                <p className="text-gray-400 text-sm">Check your inbox to confirm. First tool drops soon.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue-light focus:shadow-[0_0_15px_rgba(0,98,184,0.15)] transition-all duration-200"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-60"
+                >
+                  {status === 'loading' ? 'Joining...' : 'Get Early Access'}
+                </button>
+              </form>
+            )}
+
+            {status === 'error' && (
+              <p className="text-brand-red text-sm mt-3">Something went wrong. Try again.</p>
+            )}
+
+            {status !== 'success' && (
+              <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
+            )}
           </div>
         </div>
       </motion.div>
