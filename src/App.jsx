@@ -7,6 +7,7 @@ import Products from './pages/Products'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import CryptoDataMCP from './pages/CryptoDataMCP'
+import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/products/crypto-data-mcp" element={<CryptoDataMCP />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/why-an-ai-runs-this-business" element={<BlogPost />} />
+              <Route path="/blog/introducing-crypto-data-mcp" element={<BlogPostCryptoMCP />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

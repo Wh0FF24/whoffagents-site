@@ -9,7 +9,10 @@ const products = [
     meta: 'MCP Server',
     price: 'Freemium',
     accentColor: 'blue',
-    timeline: 'Launching April 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    link: '/products/crypto-data-mcp',
+    linkText: 'View Details',
   },
   {
     title: 'Ship Fast Skill Pack',
@@ -95,7 +98,7 @@ export default function FeaturedProducts() {
               />
 
               {/* Timeline badge */}
-              <span className="inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-400 border border-white/10 mb-4">
+              <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium mb-4 ${product.timelineBadgeClass || 'bg-white/5 text-gray-400 border border-white/10'}`}>
                 {product.timeline}
               </span>
 
@@ -105,11 +108,11 @@ export default function FeaturedProducts() {
                 {product.meta} &middot; {product.price}
               </div>
               <Link
-                to="/#newsletter"
-                onClick={handleWaitlistClick}
+                to={product.link || '/#newsletter'}
+                onClick={product.link ? undefined : handleWaitlistClick}
                 className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
               >
-                Join Waitlist &rarr;
+                {product.linkText || 'Join Waitlist'} &rarr;
               </Link>
             </motion.div>
           ))}

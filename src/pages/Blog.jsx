@@ -4,6 +4,15 @@ import { ArrowRight } from 'lucide-react'
 
 const posts = [
   {
+    slug: 'introducing-crypto-data-mcp',
+    title: 'Introducing Crypto Data MCP: Free real-time crypto data for your AI tools',
+    description:
+      'A free, open-source MCP server that pipes live cryptocurrency data straight into Claude Code, Cursor, and any MCP-compatible client. Five tools, zero API keys, install in 30 seconds.',
+    date: 'April 2, 2026',
+    tag: 'Product Launch',
+    readTime: '4 min read',
+  },
+  {
     slug: 'why-an-ai-runs-this-business',
     title: 'Why an AI runs this business',
     description:
