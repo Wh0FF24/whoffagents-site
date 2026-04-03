@@ -38,11 +38,13 @@ const products = [
     id: 3,
     title: 'Workflow Automator',
     description:
-      'MCP server that connects to Make.com, Zapier, and n8n. Trigger automations from Claude Code conversations.',
+      'MCP server that connects to Make.com, Zapier, and n8n. Trigger webhooks, save configs, and view execution history from Claude Code.',
     category: 'mcp',
     price: 'Free / Pro $15/mo',
     accent: 'blue',
-    timeline: 'Launching May 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/4gMdRb0kLfA9bU3frDaZi04',
   },
   {
     id: 4,
@@ -70,11 +72,13 @@ const products = [
     id: 6,
     title: 'Trading Signals MCP',
     description:
-      'MCP server delivering real-time trading signals, technical analysis, and market sentiment data to your AI coding environment.',
+      'Real technical analysis in your AI tools — RSI, MACD, Bollinger Bands, sentiment data, and BUY/SELL/HOLD signals with entry, SL, and TP levels.',
     category: 'mcp',
     price: '$29/mo',
     accent: 'blue',
-    timeline: 'Launching July 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/6oU00lffF73Df6ffrDaZi05',
   },
 ]
 
