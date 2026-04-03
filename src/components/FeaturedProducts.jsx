@@ -21,7 +21,12 @@ const products = [
     meta: 'Skill Bundle',
     price: '$49',
     accentColor: 'red',
-    timeline: 'Launching May 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    link: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
+    linkText: 'Buy Now — $49',
+    secondaryLink: 'https://github.com/Wh0FF24/ship-fast-skill-pack',
+    secondaryLinkText: 'View on GitHub',
   },
   {
     title: 'Workflow Automator',
@@ -107,13 +112,36 @@ export default function FeaturedProducts() {
               <div className="text-gray-500 text-sm mb-4">
                 {product.meta} &middot; {product.price}
               </div>
-              <Link
-                to={product.link || '/#newsletter'}
-                onClick={product.link ? undefined : handleWaitlistClick}
-                className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
-              >
-                {product.linkText || 'Join Waitlist'} &rarr;
-              </Link>
+              <div className="flex flex-col gap-1.5">
+                {product.link?.startsWith('http') ? (
+                  <a
+                    href={product.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    {product.linkText || 'Join Waitlist'} &rarr;
+                  </a>
+                ) : (
+                  <Link
+                    to={product.link || '/#newsletter'}
+                    onClick={product.link ? undefined : handleWaitlistClick}
+                    className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    {product.linkText || 'Join Waitlist'} &rarr;
+                  </Link>
+                )}
+                {product.secondaryLink && (
+                  <a
+                    href={product.secondaryLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+                  >
+                    {product.secondaryLinkText} &rarr;
+                  </a>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>

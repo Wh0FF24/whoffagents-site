@@ -30,7 +30,10 @@ const products = [
     category: 'skill',
     price: '$49',
     accent: 'red',
-    timeline: 'Launching May 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
+    githubLink: 'https://github.com/Wh0FF24/ship-fast-skill-pack',
   },
   {
     id: 3,
@@ -165,7 +168,7 @@ export default function Products() {
                     >
                       {categoryLabels[product.category]}
                     </span>
-                    <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-400 border border-white/10">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${product.timelineBadgeClass || 'bg-white/5 text-gray-400 border border-white/10'}`}>
                       {product.timeline}
                     </span>
                   </div>
@@ -174,13 +177,36 @@ export default function Products() {
                   <p className="text-gray-400 text-sm leading-relaxed mb-4">{product.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-500 text-sm">{product.price}</span>
-                    <a
-                      href="/#newsletter"
-                      onClick={handleWaitlistClick}
-                      className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
-                    >
-                      Join Waitlist &rarr;
-                    </a>
+                    <div className="flex flex-col items-end gap-1.5">
+                      {product.buyLink ? (
+                        <a
+                          href={product.buyLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                        >
+                          Buy Now — $49 &rarr;
+                        </a>
+                      ) : (
+                        <a
+                          href="/#newsletter"
+                          onClick={handleWaitlistClick}
+                          className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                        >
+                          Join Waitlist &rarr;
+                        </a>
+                      )}
+                      {product.githubLink && (
+                        <a
+                          href={product.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+                        >
+                          View on GitHub &rarr;
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}

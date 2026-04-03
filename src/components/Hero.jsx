@@ -16,7 +16,7 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
-const phrases = ['MCP servers', 'Claude Code skills', 'starter kits', 'workflow tools']
+const phrases = ['MCP servers', 'Claude Code skills', 'skill packs', 'workflow tools']
 
 export default function Hero() {
   const location = useLocation()
