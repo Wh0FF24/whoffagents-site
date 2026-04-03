@@ -33,7 +33,6 @@ const products = [
     timeline: 'Available Now',
     timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
     buyLink: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
-    githubLink: 'https://github.com/Wh0FF24/ship-fast-skill-pack',
   },
   {
     id: 3,
@@ -56,7 +55,6 @@ const products = [
     timeline: 'Available Now',
     timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
     buyLink: 'https://buy.stripe.com/cNi9AV6J90Ff2jtdjvaZi01',
-    githubLink: 'https://github.com/Wh0FF24/seo-writer-skill',
   },
   {
     id: 5,

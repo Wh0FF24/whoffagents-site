@@ -25,8 +25,8 @@ const products = [
     timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
     link: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
     linkText: 'Buy Now — $49',
-    secondaryLink: 'https://github.com/Wh0FF24/ship-fast-skill-pack',
-    secondaryLinkText: 'View on GitHub',
+    secondaryLink: null,
+    secondaryLinkText: null,
   },
   {
     title: 'Workflow Automator',
