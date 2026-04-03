@@ -49,11 +49,14 @@ const products = [
     id: 4,
     title: 'SEO Writer Skill',
     description:
-      'Claude Code skill that generates SEO-optimized blog posts, meta descriptions, and content briefs from a single topic.',
+      'Claude Code skill that researches keywords, analyzes SERP competition, and writes fully optimized blog posts with meta tags and internal linking.',
     category: 'skill',
     price: '$19',
     accent: 'red',
-    timeline: 'Launching June 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/cNi9AV6J90Ff2jtdjvaZi01',
+    githubLink: 'https://github.com/Wh0FF24/seo-writer-skill',
   },
   {
     id: 5,
