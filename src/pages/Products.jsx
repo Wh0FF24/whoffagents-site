@@ -62,11 +62,13 @@ const products = [
     id: 5,
     title: 'AI SaaS Starter',
     description:
-      'Full-stack Next.js + Stripe + Auth boilerplate for AI-powered SaaS apps. Database, billing, and dashboard pre-built.',
+      '53-file Next.js 14 boilerplate. Landing page, dashboard, AI chat, Stripe billing, NextAuth, Prisma, shadcn/ui, dark mode — all pre-configured.',
     category: 'kit',
     price: '$99',
     accent: 'gold',
-    timeline: 'Launching June 2026',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/4gM8wR9Vlds10bla7jaZi02',
   },
   {
     id: 6,
