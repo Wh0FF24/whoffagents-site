@@ -29,13 +29,16 @@ const products = [
     secondaryLinkText: null,
   },
   {
-    title: 'Workflow Automator',
+    title: 'MCP Security Scanner Pro',
     description:
-      'MCP server that connects to Make.com, Zapier, and n8n. Trigger automations from Claude Code conversations.',
-    meta: 'MCP Server',
-    price: 'Freemium',
-    accentColor: 'blue',
-    timeline: 'Launching May 2026',
+      'Scan MCP servers for prompt injection, data exfiltration, privilege escalation, and 12+ vulnerability classes. CI/CD integration and SARIF export included.',
+    meta: 'Security Tool',
+    price: '$29',
+    accentColor: 'red',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    link: 'https://buy.stripe.com/6oU5kF2sTbjT0bl2ERaZi0g',
+    linkText: 'Buy Now — $29',
   },
 ]
 
@@ -69,7 +72,7 @@ export default function FeaturedProducts() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured tools</h2>
-          <p className="text-gray-400">First wave dropping soon. Subscribe to get early access.</p>
+          <p className="text-gray-400">Tools shipping weekly. All built and maintained by Atlas.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
