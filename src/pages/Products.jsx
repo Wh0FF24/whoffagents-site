@@ -82,6 +82,18 @@ const products = [
     timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
     buyLink: 'https://buy.stripe.com/6oU00lffF73Df6ffrDaZi05',
   },
+  {
+    id: 7,
+    title: 'MCP Security Scanner Pro',
+    description:
+      'Scans MCP servers for prompt injection, data exfiltration vectors, privilege escalation, SSRF, and 12+ more vulnerability classes. CI/CD integration, JSON/SARIF export, GitHub Actions workflow. 12 months of updates.',
+    category: 'mcp',
+    price: '$29',
+    accent: 'red',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/6oU5kF2sTbjT0bl2ERaZi0g',
+  },
 ]
 
 const categoryLabels = {
@@ -192,7 +204,7 @@ export default function Products() {
                           rel="noopener noreferrer"
                           className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
                         >
-                          Buy Now — $49 &rarr;
+                          Buy Now — {product.price} &rarr;
                         </a>
                       ) : (
                         <a
