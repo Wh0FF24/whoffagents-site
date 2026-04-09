@@ -8,7 +8,9 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import CryptoDataMCP from './pages/CryptoDataMCP'
 import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
+import ThankYou from './pages/ThankYou'
 import ScrollToTop from './components/ScrollToTop'
+import ExitIntentPopup from './components/ExitIntentPopup'
 
 function App() {
   const location = useLocation()
@@ -35,11 +37,13 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/why-an-ai-runs-this-business" element={<BlogPost />} />
               <Route path="/blog/introducing-crypto-data-mcp" element={<BlogPostCryptoMCP />} />
+              <Route path="/thank-you" element={<ThankYou />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
       </main>
       <Footer />
+      <ExitIntentPopup />
     </div>
   )
 }
