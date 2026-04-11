@@ -1,16 +1,18 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const [status, setStatus] = useState('idle') // idle | loading | error
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('loading')
 
     try {
-      const res = await fetch('https://whoffagents.beehiiv.com/subscribe', {
+      await fetch('https://whoffagents.beehiiv.com/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
@@ -20,9 +22,8 @@ export default function Newsletter() {
         }),
         mode: 'no-cors',
       })
-      // no-cors returns opaque response, so we assume success
-      setStatus('success')
-      setEmail('')
+      // no-cors returns opaque response; assume success and redirect to upsell
+      navigate('/thank-you')
     } catch {
       setStatus('error')
     }
@@ -55,13 +56,7 @@ export default function Newsletter() {
           <div className="max-w-md mx-auto">
             <p className="text-brand-gold text-sm font-medium mb-6">Next drop: Crypto Data MCP — subscribers get it first.</p>
 
-            {status === 'success' ? (
-              <div className="py-4">
-                <p className="text-brand-gold font-semibold text-lg mb-1">You're in.</p>
-                <p className="text-gray-400 text-sm">Check your inbox to confirm. First tool drops soon.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="email"
                   value={email}
@@ -78,15 +73,12 @@ export default function Newsletter() {
                   {status === 'loading' ? 'Joining...' : 'Get Early Access'}
                 </button>
               </form>
-            )}
 
             {status === 'error' && (
               <p className="text-brand-red text-sm mt-3">Something went wrong. Try again.</p>
             )}
 
-            {status !== 'success' && (
-              <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
-            )}
+            <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
           </div>
         </div>
       </motion.div>
