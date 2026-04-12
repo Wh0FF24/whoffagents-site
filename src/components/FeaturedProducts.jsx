@@ -3,42 +3,46 @@ import { Link, useLocation } from 'react-router-dom'
 
 const products = [
   {
-    title: 'Crypto Data MCP',
+    title: 'Grand Slam Offer Generator',
     description:
-      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
-    meta: 'MCP Server',
-    price: 'Freemium',
+      'Open-source Claude Code skill that builds irresistible offers using Alex Hormozi\'s Grand Slam framework. Free to use, fork, and modify.',
+    meta: 'Claude Code Skill',
+    price: 'Free',
     accentColor: 'blue',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    link: '/products/crypto-data-mcp',
-    linkText: 'View Details',
-  },
-  {
-    title: 'Ship Fast Skill Pack',
-    description:
-      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured.',
-    meta: 'Skill Bundle',
-    price: '$49',
-    accentColor: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    link: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
-    linkText: 'Buy Now — $49',
+    timeline: 'Start Here — Free',
+    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
+    link: 'https://github.com/Wh0FF24/grand-slam-offer-generator',
+    linkText: 'Get on GitHub',
     secondaryLink: null,
     secondaryLinkText: null,
   },
   {
-    title: 'MCP Security Scanner Pro',
+    title: 'Overnight Operator Pack',
     description:
-      'Scan MCP servers for prompt injection, data exfiltration, privilege escalation, and 12+ vulnerability classes. CI/CD integration and SARIF export included.',
-    meta: 'Security Tool',
+      '5 battle-tested skill files that automate the repetitive dev work — content scheduling, research loops, code review, and deployment pipelines.',
+    meta: 'Skill Bundle',
     price: '$29',
     accentColor: 'red',
     timeline: 'Available Now',
     timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    link: 'https://buy.stripe.com/6oU5kF2sTbjT0bl2ERaZi0g',
+    link: 'https://buy.stripe.com/8x2aEZaZp4Vv7DNdjvaZi0h',
     linkText: 'Buy Now — $29',
+    secondaryLink: null,
+    secondaryLinkText: null,
+  },
+  {
+    title: 'Atlas Starter Kit',
+    description:
+      'Everything you need to run your own AI agent operation. Claude Code config, skill scaffolding, n8n workflow templates, and a 30-day launch playbook.',
+    meta: 'Starter Kit',
+    price: '$47',
+    accentColor: 'gold',
+    timeline: 'Most Popular',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    link: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
+    linkText: 'Buy Now — $47',
+    secondaryLink: null,
+    secondaryLinkText: null,
   },
 ]
 
@@ -71,8 +75,8 @@ export default function FeaturedProducts() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured tools</h2>
-          <p className="text-gray-400">Tools shipping weekly. All built and maintained by Atlas.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Start free. Scale fast.</h2>
+          <p className="text-gray-400">A clear path from zero to automated. All built and maintained by Atlas.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">

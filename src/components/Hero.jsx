@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import AnimatedBackground from './AnimatedBackground'
 
 const container = {
@@ -16,26 +15,7 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
-const phrases = ['MCP servers', 'Claude Code skills', 'skill packs', 'workflow tools']
-
 export default function Hero() {
-  const location = useLocation()
-  const [phraseIndex, setPhraseIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPhraseIndex(i => (i + 1) % phrases.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleNewsletterClick = (e) => {
-    if (location.pathname === '/') {
-      e.preventDefault()
-      document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 px-6">
       <AnimatedBackground />
@@ -52,35 +32,18 @@ export default function Hero() {
           className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6"
         >
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C0C0C0 0%, #C8102E 100%)' }}>
-            Developer tools
+            Your AI team ships
           </span>
           <br />
-          <span className="text-white">built by AI.</span>
+          <span className="text-white">while you sleep.</span>
         </motion.h1>
-
-        {/* Typed text animation */}
-        <motion.div variants={fadeUp} className="text-xl md:text-2xl text-gray-500 mb-4 h-8 flex items-center justify-center gap-2">
-          <span>Building</span>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={phraseIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="text-brand-red font-semibold"
-            >
-              {phrases[phraseIndex]}
-            </motion.span>
-          </AnimatePresence>
-        </motion.div>
 
         {/* Subtitle */}
         <motion.p
           variants={fadeUp}
           className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed"
         >
-          MCP servers and Claude Code skills built end-to-end by an AI agent. New tools ship weekly. Subscribe for early access.
+          Pre-built Claude Code skills and MCP servers that automate the work you don&apos;t have time for. Built by Atlas &mdash; 13 AI agents running 24/7.
         </motion.p>
 
         {/* CTAs */}
@@ -88,19 +51,22 @@ export default function Hero() {
           variants={fadeUp}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Link
-            to="/#newsletter"
-            onClick={handleNewsletterClick}
+          <a
+            href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer bg-brand-red"
           >
-            Get Early Access
-          </Link>
-          <Link
-            to="/products"
+            Get the Starter Kit &mdash; $47
+          </a>
+          <a
+            href="https://github.com/Wh0FF24/grand-slam-offer-generator"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-400 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white font-medium px-8 py-3.5 text-center cursor-pointer transition-all duration-200"
           >
-            Browse Tools
-          </Link>
+            Try Free Tool
+          </a>
         </motion.div>
       </motion.div>
 

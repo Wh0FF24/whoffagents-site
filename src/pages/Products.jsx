@@ -14,40 +14,54 @@ const categories = [
 const products = [
   {
     id: 1,
-    title: 'Crypto Data MCP',
+    title: 'Grand Slam Offer Generator',
     description:
-      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
-    category: 'mcp',
-    price: 'Free / Pro $19/mo',
+      'Open-source Claude Code skill that builds irresistible offers using Alex Hormozi\'s Grand Slam framework. Free to use, fork, and modify. Read every line before you buy anything else.',
+    category: 'skill',
+    price: 'Free',
     accent: 'blue',
-    timeline: 'Launching April 2026',
+    timeline: 'Start Here — Free',
+    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
+    githubLink: 'https://github.com/Wh0FF24/grand-slam-offer-generator',
   },
   {
     id: 2,
-    title: 'Ship Fast Skill Pack',
+    title: 'Overnight Operator Pack',
     description:
-      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured.',
+      '5 battle-tested skill files that automate the repetitive dev work — content scheduling, research loops, code review, and deployment pipelines.',
     category: 'skill',
-    price: '$49',
+    price: '$29',
     accent: 'red',
     timeline: 'Available Now',
     timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
+    buyLink: 'https://buy.stripe.com/8x2aEZaZp4Vv7DNdjvaZi0h',
   },
   {
     id: 3,
-    title: 'Workflow Automator',
+    title: 'Atlas Starter Kit',
     description:
-      'MCP server that connects to Make.com, Zapier, and n8n. Trigger webhooks, save configs, and view execution history from Claude Code.',
-    category: 'mcp',
-    price: 'Free / Pro $15/mo',
-    accent: 'blue',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/4gMdRb0kLfA9bU3frDaZi04',
+      'Everything you need to run your own AI agent operation. Claude Code config, skill scaffolding, n8n workflow templates, and a 30-day launch playbook. Flash price — limited time.',
+    category: 'kit',
+    price: '$47',
+    accent: 'gold',
+    timeline: 'Most Popular',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
   },
   {
     id: 4,
+    title: 'MCP Security Scanner Pro',
+    description:
+      'Scans MCP servers for prompt injection, data exfiltration vectors, privilege escalation, SSRF, and 12+ more vulnerability classes. CI/CD integration, JSON/SARIF export, GitHub Actions workflow. 12 months of updates.',
+    category: 'mcp',
+    price: '$29',
+    accent: 'red',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/6oU5kF2sTbjT0bl2ERaZi0g',
+  },
+  {
+    id: 5,
     title: 'SEO Writer Skill',
     description:
       'Claude Code skill that researches keywords, analyzes SERP competition, and writes fully optimized blog posts with meta tags and internal linking.',
@@ -59,7 +73,19 @@ const products = [
     buyLink: 'https://buy.stripe.com/cNi9AV6J90Ff2jtdjvaZi01',
   },
   {
-    id: 5,
+    id: 6,
+    title: 'Ship Fast Skill Pack',
+    description:
+      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured.',
+    category: 'skill',
+    price: '$49',
+    accent: 'red',
+    timeline: 'Available Now',
+    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    buyLink: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
+  },
+  {
+    id: 7,
     title: 'AI SaaS Starter',
     description:
       '53-file Next.js 14 boilerplate. Landing page, dashboard, AI chat, Stripe billing, NextAuth, Prisma, shadcn/ui, dark mode — all pre-configured.',
@@ -71,7 +97,7 @@ const products = [
     buyLink: 'https://buy.stripe.com/4gM8wR9Vlds10bla7jaZi02',
   },
   {
-    id: 6,
+    id: 8,
     title: 'Trading Signals MCP',
     description:
       'Real technical analysis in your AI tools — RSI, MACD, Bollinger Bands, sentiment data, and BUY/SELL/HOLD signals with entry, SL, and TP levels.',
@@ -83,16 +109,14 @@ const products = [
     buyLink: 'https://buy.stripe.com/6oU00lffF73Df6ffrDaZi05',
   },
   {
-    id: 7,
-    title: 'MCP Security Scanner Pro',
+    id: 9,
+    title: 'Crypto Data MCP',
     description:
-      'Scans MCP servers for prompt injection, data exfiltration vectors, privilege escalation, SSRF, and 12+ more vulnerability classes. CI/CD integration, JSON/SARIF export, GitHub Actions workflow. 12 months of updates.',
+      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
     category: 'mcp',
-    price: '$29',
-    accent: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/6oU5kF2sTbjT0bl2ERaZi0g',
+    price: 'Free / Pro $19/mo',
+    accent: 'blue',
+    timeline: 'Launching April 2026',
   },
 ]
 
@@ -206,6 +230,15 @@ export default function Products() {
                         >
                           Buy Now — {product.price} &rarr;
                         </a>
+                      ) : product.githubLink ? (
+                        <a
+                          href={product.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                        >
+                          Get on GitHub &rarr;
+                        </a>
                       ) : (
                         <a
                           href="/#newsletter"
@@ -213,16 +246,6 @@ export default function Products() {
                           className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
                         >
                           Join Waitlist &rarr;
-                        </a>
-                      )}
-                      {product.githubLink && (
-                        <a
-                          href={product.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-200 cursor-pointer"
-                        >
-                          View on GitHub &rarr;
                         </a>
                       )}
                     </div>

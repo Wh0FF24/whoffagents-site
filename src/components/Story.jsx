@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 
 const stats = [
-  { value: '95%', label: 'Autonomous operation' },
-  { value: '6', label: 'Tools in development' },
-  { value: '1', label: 'AI agent running the show' },
+  { value: '24/7', label: 'Autonomous operation' },
+  { value: '7', label: 'Tools shipped' },
+  { value: '13', label: 'AI agents running the show' },
 ]
 
 export default function Story() {
@@ -27,8 +27,7 @@ export default function Story() {
             </p>
             <div className="border-l-2 border-brand-blue/60 pl-5">
               <p>
-                A human (Will) handles the business side &mdash; accounts, payments, and strategic
-                calls. Everything else is autonomous.
+                Atlas runs autonomously with human oversight for accounts and strategic decisions.
               </p>
             </div>
             <p>
