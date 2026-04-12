@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools | Whoff Agents — MCP Servers & Claude Code Skills</title>
+    <meta name="description" content="Browse premium MCP servers, Claude Code skills, and AI developer tools. Freemium and paid options. Built by AI, for developers.">
+    <link rel="canonical" href="https://whoffagents.com/products/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9A%A1</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { cyan: '#00d4ff', purple: '#7c3aed', dark: '#0a0a0a', card: '#111111', border: '#1e1e1e' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text { background: linear-gradient(135deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-bg { background: linear-gradient(135deg, #00d4ff, #7c3aed); }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-200 antialiased">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full bg-brand-dark/90 backdrop-blur-md z-50 border-b border-brand-border">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="text-lg font-bold text-brand-cyan tracking-tight">whoff agents</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="/products/" class="text-sm text-white font-medium">Tools</a>
+                <a href="/blog/" class="text-sm text-gray-400 hover:text-white transition-colors">Blog</a>
+                <a href="/#newsletter" class="text-sm px-4 py-2 rounded-lg border border-brand-purple/50 text-brand-purple hover:bg-brand-purple/10 transition-colors">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Tools</h1>
+            <p class="text-gray-400 text-lg max-w-xl">MCP servers, Claude Code skills, and starter kits. Everything ships with documentation and ongoing updates.</p>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="px-6 pb-8">
+        <div class="max-w-6xl mx-auto flex gap-3 flex-wrap">
+            <button class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium bg-brand-card border border-brand-cyan/50 text-brand-cyan" data-filter="all">All</button>
+            <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-brand-card border border-brand-border text-gray-400 hover:border-gray-500 transition-colors" data-filter="mcp">MCP Servers</button>
+            <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-brand-card border border-brand-border text-gray-400 hover:border-gray-500 transition-colors" data-filter="skill">Skills</button>
+            <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-brand-card border border-brand-border text-gray-400 hover:border-gray-500 transition-colors" data-filter="kit">Starter Kits</button>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="px-6 pb-24">
+        <div class="max-w-6xl mx-auto">
+            <div id="products-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Product Card: Crypto Data MCP -->
+                <div class="product-card bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col hover:border-brand-cyan/30 transition-colors" data-category="mcp">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20">MCP Server</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Crypto Data MCP</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">Real-time on-chain data, price feeds, and DeFi analytics piped directly into your AI tools. Query any chain, any token, any protocol.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-brand-border">
+                        <div>
+                            <span class="text-sm text-gray-400">Free</span>
+                            <span class="text-xs text-gray-600 ml-1">/ Pro $19/mo</span>
+                        </div>
+                        <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline">Join Waitlist</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Ship Fast Skill Pack -->
+                <div class="product-card bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col hover:border-brand-purple/30 transition-colors" data-category="skill">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-brand-purple/10 text-brand-purple border border-brand-purple/20">Skill Bundle</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Ship Fast Skill Pack</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">10 drop-in skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured and battle-tested.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-brand-border">
+                        <span class="text-sm font-semibold text-brand-cyan">$49</span>
+                        <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline">Join Waitlist</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Workflow Automator -->
+                <div class="product-card bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col hover:border-brand-cyan/30 transition-colors" data-category="mcp">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20">MCP Server</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Workflow Automator</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">Connect your AI tools to Make.com, Zapier, and n8n. Trigger complex automations from natural language conversations.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-brand-border">
+                        <div>
+                            <span class="text-sm text-gray-400">Free</span>
+                            <span class="text-xs text-gray-600 ml-1">/ Pro $15/mo</span>
+                        </div>
+                        <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline">Join Waitlist</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: SEO Writer Skill -->
+                <div class="product-card bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col hover:border-brand-purple/30 transition-colors" data-category="skill">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-brand-purple/10 text-brand-purple border border-brand-purple/20">Skill</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">SEO Writer Skill</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">AI skill that researches keywords, analyzes SERP competition, and writes SEO-optimized blog posts with proper structure and internal linking.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-brand-border">
+                        <span class="text-sm font-semibold text-brand-cyan">$19</span>
+                        <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline">Join Waitlist</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: AI SaaS Starter -->
+                <div class="product-card bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col hover:border-brand-cyan/30 transition-colors" data-category="kit">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Starter Kit</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">AI SaaS Starter</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">Next.js + Tailwind + Stripe + Auth boilerplate with AI features baked in. Landing page, dashboard, billing, and API routes — ready to customize.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-brand-border">
+                        <span class="text-sm font-semibold text-brand-cyan">$99</span>
+                        <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline">Join Waitlist</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Trading Signals MCP -->
+                <div class="product-card bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col hover:border-brand-cyan/30 transition-colors" data-category="mcp">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20">MCP Server</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Coming Soon</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Trading Signals MCP</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">Technical analysis, sentiment data, and trading signals from prediction markets. Backtest strategies and monitor positions from your AI tools.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-brand-border">
+                        <span class="text-sm font-semibold text-brand-cyan">$29/mo</span>
+                        <a href="/#newsletter" class="text-sm text-brand-cyan hover:underline">Join Waitlist</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-6 border-t border-brand-border">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl font-bold text-white mb-3">Want early access?</h2>
+            <p class="text-gray-400 mb-6">Subscribe to the newsletter. First subscribers get launch-day discounts on every tool.</p>
+            <a href="/#newsletter" class="gradient-bg text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity inline-block">Subscribe Free</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="text-sm font-bold text-brand-cyan">whoff agents</span>
+                <span class="text-xs text-gray-600 ml-3">AI-powered developer tools</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="/products/" class="text-sm text-gray-500 hover:text-white transition-colors">Tools</a>
+                <a href="/blog/" class="text-sm text-gray-500 hover:text-white transition-colors">Blog</a>
+                <a href="https://x.com/AtlasWhoff" class="text-sm text-gray-500 hover:text-white transition-colors" target="_blank">X / Twitter</a>
+                <a href="mailto:whoffagents@gmail.com" class="text-sm text-gray-500 hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="text-xs text-gray-600">&copy; 2025 Whoff Agents. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'border-brand-cyan/50', 'text-brand-cyan');
+                    b.classList.add('border-brand-border', 'text-gray-400');
+                });
+                btn.classList.add('active', 'border-brand-cyan/50', 'text-brand-cyan');
+                btn.classList.remove('border-brand-border', 'text-gray-400');
+
+                document.querySelectorAll('.product-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
