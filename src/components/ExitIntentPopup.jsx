@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const STORAGE_KEY = 'atlas_exit_popup_seen'
 const FALLBACK_DELAY_MS = 45000 // 45s fallback if exit intent never triggers
 
 export default function ExitIntentPopup() {
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | success | error
@@ -58,7 +60,7 @@ export default function ExitIntentPopup() {
       setEmail('')
       // Redirect to thank-you after brief success state
       setTimeout(() => {
-        window.location.href = '/thank-you'
+        navigate('/thank-you')
       }, 800)
     } catch {
       setStatus('error')
