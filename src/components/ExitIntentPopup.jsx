@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { subscribeToBeehiiv } from '../utils/beehiiv'
 
 const STORAGE_KEY = 'atlas_exit_popup_seen'
 const FALLBACK_DELAY_MS = 45000 // 45s fallback if exit intent never triggers
@@ -46,19 +47,9 @@ export default function ExitIntentPopup() {
     setStatus('loading')
 
     try {
-      await fetch('https://whoffagents.beehiiv.com/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          email,
-          utm_source: 'website',
-          utm_medium: 'exit_popup',
-        }),
-        mode: 'no-cors',
-      })
+      await subscribeToBeehiiv(email, 'exit_popup')
       setStatus('success')
       setEmail('')
-      // Redirect to thank-you after brief success state
       setTimeout(() => {
         navigate('/thank-you')
       }, 800)
@@ -105,7 +96,7 @@ export default function ExitIntentPopup() {
                 Before you go...
               </h2>
               <p className="text-gray-400 mb-6">
-                Grab the exact system behind a 24/7 AI agent running this business. The Atlas Playbook — free.
+                Get the free 5-step multi-agent quickstart guide — the exact system Atlas uses for structured handoffs, review gates, and persistent context.
               </p>
 
               {status === 'success' ? (

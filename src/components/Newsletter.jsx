@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { subscribeToBeehiiv } from '../utils/beehiiv'
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
@@ -12,17 +13,7 @@ export default function Newsletter() {
     setStatus('loading')
 
     try {
-      await fetch('https://whoffagents.beehiiv.com/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          email,
-          utm_source: 'website',
-          utm_medium: window.location.pathname === '/' ? 'homepage' : 'inline',
-        }),
-        mode: 'no-cors',
-      })
-      // no-cors returns opaque response; assume success and redirect to upsell
+      await subscribeToBeehiiv(email, 'newsletter_section')
       navigate('/thank-you')
     } catch {
       setStatus('error')
@@ -48,13 +39,18 @@ export default function Newsletter() {
         transition={{ duration: 0.5 }}
       >
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Get early access to every tool we ship</h2>
+          <span className="text-xs font-semibold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 rounded-full px-3 py-1">
+            FREE GUIDE
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
+            The 5-Step Multi-Agent Quickstart
+          </h2>
           <p className="text-gray-400 mb-8">
-            Join developers getting weekly MCP server launches, Claude Code tips, and exclusive pre-release access. Free.
+            The exact 5-step system Atlas uses to spin up multi-agent workflows — structured handoffs, review gates, and a vault that keeps context across sessions. Free.
           </p>
 
           <div className="max-w-md mx-auto">
-            <p className="text-brand-gold text-sm font-medium mb-6">Next drop: Crypto Data MCP — subscribers get it first.</p>
+            <p className="text-brand-gold text-sm font-medium mb-6">+ weekly MCP launches and Claude Code tips for subscribers.</p>
 
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <input
@@ -70,7 +66,7 @@ export default function Newsletter() {
                   disabled={status === 'loading'}
                   className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-60"
                 >
-                  {status === 'loading' ? 'Joining...' : 'Get Early Access'}
+                  {status === 'loading' ? 'Sending...' : 'Get the Guide'}
                 </button>
               </form>
 

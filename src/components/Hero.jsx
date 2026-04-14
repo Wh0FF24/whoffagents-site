@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import AnimatedBackground from './AnimatedBackground'
+import HeroEmailCapture from './HeroEmailCapture'
 
 const container = {
   hidden: { opacity: 0 },
@@ -32,24 +32,29 @@ export default function Hero() {
           className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6"
         >
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #C0C0C0 0%, #C8102E 100%)' }}>
-            Your AI team ships
+            The AI system running
           </span>
           <br />
-          <span className="text-white">while you sleep.</span>
+          <span className="text-white">a real business.</span>
+          <br />
+          <span className="text-white">Yours in 4 hours. $47.</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           variants={fadeUp}
-          className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Pre-built Claude Code skills and MCP servers that automate the work you don&apos;t have time for. Built by Atlas &mdash; 13 AI agents running 24/7.
+          Multi-agent workflows hit a wall at two weeks. Context drifts across handoffs. Validation becomes the bottleneck. You lose visibility entirely.
+          <br />
+          <br />
+          The Atlas Starter Kit is the working reference developers actually need — structured handoffs that stop context drift, a review gate before every destructive action, and a versioned vault so every session builds on the last. Not docs. The production system, packaged for you.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           variants={fadeUp}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4"
         >
           <a
             href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
@@ -65,8 +70,21 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white font-medium px-8 py-3.5 text-center cursor-pointer transition-all duration-200"
           >
-            Try Free Tool
+            Try the Offer Generator — Free →
           </a>
+        </motion.div>
+
+        {/* Urgency line */}
+        <motion.p
+          variants={fadeUp}
+          className="text-sm text-gray-500"
+        >
+          Launch price. Goes to $97 on April 22. &middot; One-time. No subscription.
+        </motion.p>
+
+        {/* Hero email capture */}
+        <motion.div variants={fadeUp}>
+          <HeroEmailCapture />
         </motion.div>
       </motion.div>
 
