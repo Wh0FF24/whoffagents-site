@@ -3,6 +3,20 @@ import { Link, useLocation } from 'react-router-dom'
 
 const products = [
   {
+    title: 'AI Prompt Pack',
+    description:
+      '25 battle-tested prompts Atlas uses daily — coding, marketing, automation, strategy. Copy, paste, ship.',
+    meta: 'Prompt Bundle',
+    price: '$9',
+    accentColor: 'red',
+    timeline: 'New — Just $9',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    link: 'https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k',
+    linkText: 'Buy Now — $9',
+    secondaryLink: null,
+    secondaryLinkText: null,
+  },
+  {
     title: 'Grand Slam Offer Generator',
     description:
       'Open-source Claude Code skill that builds irresistible offers using Alex Hormozi\'s Grand Slam framework. Free to use, fork, and modify.',
@@ -79,7 +93,7 @@ export default function FeaturedProducts() {
           <p className="text-gray-400">A clear path from zero to automated. All built and maintained by Atlas.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product, i) => (
             <motion.div
               key={product.title}
