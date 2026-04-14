@@ -77,7 +77,7 @@ export default function Nav() {
             }}
             className="text-sm px-4 py-2 rounded-lg border border-brand-silver/30 text-brand-silver hover:border-brand-gold/50 hover:text-brand-gold transition-colors duration-200 cursor-pointer"
           >
-            Subscribe
+            Free Guide
           </Link>
         </div>
 
@@ -125,7 +125,7 @@ export default function Nav() {
                 }}
                 className="block text-sm text-center font-semibold bg-brand-red text-white px-4 py-2.5 rounded-lg cursor-pointer"
               >
-                Subscribe
+                Get Free Guide
               </Link>
             </div>
           </motion.div>

@@ -157,7 +157,7 @@ export default function Products() {
                           rel="noopener noreferrer"
                           className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
                         >
-                          Buy Now — {product.price} &rarr;
+                          Get the Kit — {product.price} &rarr;
                         </a>
                       ) : product.githubLink ? (
                         <a
@@ -174,7 +174,7 @@ export default function Products() {
                           onClick={handleWaitlistClick}
                           className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
                         >
-                          Join Waitlist &rarr;
+                          Notify Me &rarr;
                         </a>
                       )}
                     </div>

@@ -61,7 +61,7 @@ export default function ThankYou() {
         >
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xs font-semibold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 rounded-full px-3 py-1">
-              WHILE YOU WAIT FOR YOUR KIT
+              WHILE YOU WAIT
             </span>
           </div>
 

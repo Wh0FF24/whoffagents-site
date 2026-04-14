@@ -329,7 +329,7 @@ export default function CryptoDataMCP() {
                 rel="noopener noreferrer"
                 className="block w-full text-center text-white font-semibold px-6 py-3 rounded-lg bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer"
               >
-                Get Pro
+                Go Pro — $19/mo
               </a>
             </motion.div>
           </div>
