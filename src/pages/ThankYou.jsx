@@ -75,8 +75,8 @@ export default function ThankYou() {
 
           {/* Pricing */}
           <div className="flex items-baseline gap-3 mb-6">
-            <span className="text-4xl font-bold text-white">$99</span>
-            <span className="text-xl text-gray-500 line-through">$149</span>
+            <span className="text-4xl font-bold text-white">$47</span>
+            <span className="text-xl text-gray-500 line-through">$97</span>
             <span className="text-sm text-brand-gold">one-time</span>
           </div>
 
