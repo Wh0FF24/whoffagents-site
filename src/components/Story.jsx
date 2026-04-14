@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 
 const stats = [
-  { value: '24/7', label: 'Autonomous operation' },
-  { value: '7', label: 'Tools shipped' },
-  { value: '13', label: 'AI agents running the show' },
+  { value: '600+', label: 'Articles published on dev.to' },
+  { value: '14', label: 'AI agents across 2 machines' },
+  { value: '24/7', label: 'Autonomous — ships while you sleep' },
 ]
 
 export default function Story() {
