@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { subscribeToBeehiiv } from '../utils/beehiiv'
+import { track } from '../utils/analytics'
 
 export default function HeroEmailCapture() {
   const [email, setEmail] = useState('')
@@ -14,6 +15,7 @@ export default function HeroEmailCapture() {
     setStatus('loading')
     try {
       await subscribeToBeehiiv(email, 'hero_inline')
+      track('Email-Capture', { source: 'hero_inline' })
       setStatus('success')
       setTimeout(() => navigate('/thank-you'), 800)
     } catch {
@@ -39,7 +41,7 @@ export default function HeroEmailCapture() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
+          placeholder="your@email.com"
           required
           className="flex-1 px-4 py-2.5 rounded-lg text-sm bg-white/[0.05] border border-white/[0.1] text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-all"
         />
@@ -48,7 +50,7 @@ export default function HeroEmailCapture() {
           disabled={status === 'loading'}
           className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white border border-brand-gold/50 hover:border-brand-gold hover:bg-brand-gold/10 transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-50"
         >
-          {status === 'loading' ? '...' : '5-Step Guide — Free'}
+          {status === 'loading' ? 'Sending...' : '5-Step Guide — Free'}
         </button>
       </form>
       {status === 'error' && (

@@ -26,6 +26,9 @@ export default function EmailCaptureBanner() {
       }
 
       setStatus("success");
+      if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
+        (window as any).plausible('Email-Capture', { props: { source: 'sticky-banner' } });
+      }
       setTimeout(() => {
         window.location.href = "/thank-you";
       }, 1000);
@@ -73,7 +76,7 @@ export default function EmailCaptureBanner() {
             className="px-4 py-2 rounded-lg font-bold text-white text-sm whitespace-nowrap cursor-pointer disabled:opacity-50"
             style={{ background: "linear-gradient(135deg, var(--red) 0%, #E02040 100%)" }}
           >
-            {status === "loading" ? "..." : "Get It Free"}
+            {status === "loading" ? "Sending..." : "Get It Free"}
           </button>
         </div>
         {status === "error" && (

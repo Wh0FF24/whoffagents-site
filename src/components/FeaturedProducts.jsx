@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { buildStripeURL } from '../utils/utm'
+import { track } from '../utils/analytics'
 
 const products = [
   {
@@ -112,6 +113,7 @@ export default function FeaturedProducts() {
                     href={product.link?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.link) : product.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => product.link?.startsWith('https://buy.stripe.com') && track('Checkout-Start', { location: 'products-grid', product: product.title })}
                     className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
                   >
                     {product.linkText || 'Join Waitlist'} &rarr;

@@ -67,6 +67,9 @@ export default function EmailCapturePopup() {
       }
 
       setStatus("success");
+      if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
+        (window as any).plausible('Email-Capture', { props: { source: 'exit-popup' } });
+      }
 
       // Redirect to thank-you after brief delay
       setTimeout(() => {
@@ -93,7 +96,7 @@ export default function EmailCapturePopup() {
           style={{ background: "var(--bg-card-alt)", color: "var(--text-muted)" }}
           aria-label="Close"
         >
-          X
+          ✕
         </button>
 
         <div className="p-8">
@@ -166,7 +169,7 @@ export default function EmailCapturePopup() {
                 </p>
               )}
               <p className="text-xs text-center" style={{ color: "var(--text-muted)" }}>
-                No spam. Unsubscribe anytime. We respect your inbox.
+                No spam. Unsubscribe anytime.
               </p>
             </form>
           )}

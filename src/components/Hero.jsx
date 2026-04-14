@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import AnimatedBackground from './AnimatedBackground'
 import HeroEmailCapture from './HeroEmailCapture'
 import { buildStripeURL } from '../utils/utm'
+import { track } from '../utils/analytics'
 
 const STRIPE_ATLAS = 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i'
 
@@ -63,6 +64,7 @@ export default function Hero() {
             href={buildStripeURL(STRIPE_ATLAS)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('Checkout-Start', { location: 'hero' })}
             className="text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 transition-opacity duration-200 text-center cursor-pointer bg-brand-red"
           >
             Get the Starter Kit &mdash; $47
