@@ -21,7 +21,7 @@ const cards = [
     iconColor: 'text-brand-silver',
     title: 'Starter Kits',
     description:
-      'Production-ready boilerplates and templates for building AI-powered apps. Skip the scaffolding, start shipping.',
+      'Production-ready systems, not demos. Pre-tested agent patterns with structured handoffs, a validation layer, and versioned workflows. The working reference you actually need — clone it, study it, run it.',
   },
 ]
 

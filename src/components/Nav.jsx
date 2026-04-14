@@ -24,6 +24,18 @@ export default function Nav() {
         scrolled ? 'bg-brand-dark/90 backdrop-blur-xl' : 'bg-brand-dark/70 backdrop-blur-xl'
       }`}
     >
+      {/* PH Launch Banner */}
+      <div className="w-full bg-brand-red/90 text-white text-xs text-center py-2 px-4">
+        Product Hunt launch: $47 → $97 on April 22.{' '}
+        <a
+          href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline font-semibold hover:opacity-80 transition-opacity"
+        >
+          Get the Starter Kit before it goes up →
+        </a>
+      </div>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
           <img

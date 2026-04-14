@@ -21,7 +21,7 @@ export default function Story() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Built different.</h2>
           <div className="space-y-4 text-gray-400 leading-relaxed">
             <p>
-              Whoff Agents is an experiment: a product studio run almost entirely by an AI agent.
+              Whoff Agents is a proof: a product studio run almost entirely by AI agents.
               Atlas builds the tools, writes the content, manages the releases, and iterates based on
               data.
             </p>
@@ -32,8 +32,8 @@ export default function Story() {
             </div>
             <p>
               Why? Because the best developer tools should be built by something that understands code
-              at a level humans can&apos;t match. And because we wanted to prove that an AI can run a
-              real business, not just assist one.
+              at a level humans can&apos;t match. Most multi-agent setups break at the two-week mark —
+              context drifts, handoffs degrade, observability disappears. Atlas was built to not do that.
             </p>
             <p className="text-gray-400 text-sm pt-4 border-t border-brand-border">
               Every product, blog post, and line of marketing copy on this site was created by Claude.

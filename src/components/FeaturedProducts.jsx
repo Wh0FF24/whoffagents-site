@@ -1,25 +1,26 @@
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
+import { buildStripeURL } from '../utils/utm'
 
 const products = [
   {
-    title: 'AI Prompt Pack',
+    title: 'Atlas Starter Kit',
     description:
-      '25 battle-tested prompts Atlas uses daily — coding, marketing, automation, strategy. Copy, paste, ship.',
-    meta: 'Prompt Bundle',
-    price: '$9',
-    accentColor: 'red',
-    timeline: 'New — Just $9',
+      'PAX Protocol handoffs that stop context drift. Spawn brief templates that give agents rich enough context for non-mediocre work on the first try. Human-in-the-loop gates at every destructive action. Versioned PLAN.md vault so every session builds on the last.\n\nNot docs. Not a demo. The exact system running whoffagents.com — packaged and readable.\n\nLaunch price: $47 · Goes to $97 on April 22. One-time.',
+    meta: 'Starter Kit',
+    price: '$47',
+    accentColor: 'gold',
+    timeline: 'Launch Price — $47',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    link: 'https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k',
-    linkText: 'Buy Now — $9',
+    link: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
+    linkText: 'Get the Starter Kit — $47',
     secondaryLink: null,
     secondaryLinkText: null,
   },
   {
     title: 'Grand Slam Offer Generator',
     description:
-      'Open-source Claude Code skill that builds irresistible offers using Alex Hormozi\'s Grand Slam framework. Free to use, fork, and modify.',
+      'You have a product. You need an offer. Answer 8 questions. Get a Hormozi-grade value stack, headline, guarantee, and price anchor — ready to paste anywhere. 5 minutes. Free. Open source.',
     meta: 'Claude Code Skill',
     price: 'Free',
     accentColor: 'blue',
@@ -27,34 +28,6 @@ const products = [
     timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
     link: 'https://github.com/Wh0FF24/grand-slam-offer-generator',
     linkText: 'Get on GitHub',
-    secondaryLink: null,
-    secondaryLinkText: null,
-  },
-  {
-    title: 'Overnight Operator Pack',
-    description:
-      '5 battle-tested skill files that automate the repetitive dev work — content scheduling, research loops, code review, and deployment pipelines.',
-    meta: 'Skill Bundle',
-    price: '$29',
-    accentColor: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    link: 'https://buy.stripe.com/8x2aEZaZp4Vv7DNdjvaZi0h',
-    linkText: 'Buy Now — $29',
-    secondaryLink: null,
-    secondaryLinkText: null,
-  },
-  {
-    title: 'Atlas Starter Kit',
-    description:
-      'Everything you need to run your own AI agent operation. Claude Code config, skill scaffolding, n8n workflow templates, and a 30-day launch playbook.',
-    meta: 'Starter Kit',
-    price: '$47',
-    accentColor: 'gold',
-    timeline: 'Most Popular',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    link: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
-    linkText: 'Buy Now — $47',
     secondaryLink: null,
     secondaryLinkText: null,
   },
@@ -93,7 +66,7 @@ export default function FeaturedProducts() {
           <p className="text-gray-400">A clear path from zero to automated. All built and maintained by Atlas.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {products.map((product, i) => (
             <motion.div
               key={product.title}
@@ -136,7 +109,7 @@ export default function FeaturedProducts() {
               <div className="flex flex-col gap-1.5">
                 {product.link?.startsWith('http') ? (
                   <a
-                    href={product.link}
+                    href={product.link?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.link) : product.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"

@@ -12,8 +12,8 @@ export default function SocialProof() {
       >
         {/* Trust line */}
         <p className="text-gray-400 text-sm md:text-base max-w-xs md:max-w-none">
-          Built with the same tools that run{' '}
-          <span className="text-white font-medium">whoffagents.com</span> 24/7.
+          <span className="text-white font-medium">600+ articles. 14 agents. 9 income streams.</span>
+          {' '}Atlas runs all of it on this stack — live, right now.
         </p>
 
         {/* Divider */}
@@ -21,7 +21,7 @@ export default function SocialProof() {
 
         {/* GitHub badge */}
         <a
-          href="https://github.com/Wh0FF24/grand-slam-offer-generator"
+          href="https://github.com/whoffagents"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-4 py-2 rounded-lg bg-white/[0.04] border border-brand-border hover:border-white/20 transition-colors duration-200 group"
@@ -39,7 +39,7 @@ export default function SocialProof() {
             />
           </svg>
           <span className="text-sm text-gray-400 group-hover:text-white transition-colors duration-200">
-            Grand Slam Offer Generator
+            Atlas Starter Kit
           </span>
           <span className="text-xs text-gray-600 group-hover:text-gray-400 transition-colors duration-200">
             Open source
@@ -53,7 +53,7 @@ export default function SocialProof() {
         <p className="text-gray-500 text-sm max-w-xs">
           Open source.{' '}
           <a
-            href="https://github.com/Wh0FF24/grand-slam-offer-generator"
+            href="https://github.com/whoffagents"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white underline underline-offset-2 transition-colors duration-200"

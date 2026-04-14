@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { Server, Code2, Package, Layers } from 'lucide-react'
 import Newsletter from '../components/Newsletter'
+import { buildStripeURL } from '../utils/utm'
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
@@ -14,9 +15,21 @@ const categories = [
 const products = [
   {
     id: 1,
+    title: 'Atlas Starter Kit',
+    description:
+      'PAX Protocol handoffs that stop context drift. Spawn brief templates that give agents rich enough context for non-mediocre work on the first try. Human-in-the-loop gates at every destructive action. Versioned PLAN.md vault so every session builds on the last. The exact system running whoffagents.com — packaged and readable. Launch price: $47. Goes to $97 on April 22.',
+    category: 'kit',
+    price: '$47',
+    accent: 'gold',
+    timeline: 'Launch Price — $47',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
+  },
+  {
+    id: 2,
     title: 'Grand Slam Offer Generator',
     description:
-      'Open-source Claude Code skill that builds irresistible offers using Alex Hormozi\'s Grand Slam framework. Free to use, fork, and modify. Read every line before you buy anything else.',
+      'You have a product. You need an offer. Answer 8 questions. Get a Hormozi-grade value stack, headline, guarantee, and price anchor — ready to paste anywhere. 5 minutes. Free. Open source.',
     category: 'skill',
     price: 'Free',
     accent: 'blue',
@@ -25,91 +38,7 @@ const products = [
     githubLink: 'https://github.com/Wh0FF24/grand-slam-offer-generator',
   },
   {
-    id: 2,
-    title: 'Overnight Operator Pack',
-    description:
-      '5 battle-tested skill files that automate the repetitive dev work — content scheduling, research loops, code review, and deployment pipelines.',
-    category: 'skill',
-    price: '$29',
-    accent: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/8x2aEZaZp4Vv7DNdjvaZi0h',
-  },
-  {
     id: 3,
-    title: 'Atlas Starter Kit',
-    description:
-      'Everything you need to run your own AI agent operation. Claude Code config, skill scaffolding, n8n workflow templates, and a 30-day launch playbook. Flash price — limited time.',
-    category: 'kit',
-    price: '$47',
-    accent: 'gold',
-    timeline: 'Most Popular',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
-  },
-  {
-    id: 4,
-    title: 'MCP Security Scanner Pro',
-    description:
-      'Scans MCP servers for prompt injection, data exfiltration vectors, privilege escalation, SSRF, and 12+ more vulnerability classes. CI/CD integration, JSON/SARIF export, GitHub Actions workflow. 12 months of updates.',
-    category: 'mcp',
-    price: '$29',
-    accent: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/6oU5kF2sTbjT0bl2ERaZi0g',
-  },
-  {
-    id: 5,
-    title: 'SEO Writer Skill',
-    description:
-      'Claude Code skill that researches keywords, analyzes SERP competition, and writes fully optimized blog posts with meta tags and internal linking.',
-    category: 'skill',
-    price: '$19',
-    accent: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/cNi9AV6J90Ff2jtdjvaZi01',
-  },
-  {
-    id: 6,
-    title: 'Ship Fast Skill Pack',
-    description:
-      '10 Claude Code skills for rapid app development. Auth, payments, deployment, testing, CI/CD — all pre-configured.',
-    category: 'skill',
-    price: '$49',
-    accent: 'red',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/28EeVf0kL1JjbU36V7aZi00',
-  },
-  {
-    id: 7,
-    title: 'AI SaaS Starter',
-    description:
-      '53-file Next.js 14 boilerplate. Landing page, dashboard, AI chat, Stripe billing, NextAuth, Prisma, shadcn/ui, dark mode — all pre-configured.',
-    category: 'kit',
-    price: '$99',
-    accent: 'gold',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/4gM8wR9Vlds10bla7jaZi02',
-  },
-  {
-    id: 8,
-    title: 'Trading Signals MCP',
-    description:
-      'Real technical analysis in your AI tools — RSI, MACD, Bollinger Bands, sentiment data, and BUY/SELL/HOLD signals with entry, SL, and TP levels.',
-    category: 'mcp',
-    price: '$29/mo',
-    accent: 'blue',
-    timeline: 'Available Now',
-    timelineBadgeClass: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    buyLink: 'https://buy.stripe.com/6oU00lffF73Df6ffrDaZi05',
-  },
-  {
-    id: 9,
     title: 'Crypto Data MCP',
     description:
       'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
@@ -223,7 +152,7 @@ export default function Products() {
                     <div className="flex flex-col items-end gap-1.5">
                       {product.buyLink ? (
                         <a
-                          href={product.buyLink}
+                          href={product.buyLink?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.buyLink) : product.buyLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
