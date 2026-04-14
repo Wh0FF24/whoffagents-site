@@ -10,6 +10,7 @@ import CryptoDataMCP from './pages/CryptoDataMCP'
 import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
 import ThankYou from './pages/ThankYou'
 import LearnMore from './pages/LearnMore'
+import About from './pages/About'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
 
@@ -40,6 +41,7 @@ function App() {
               <Route path="/blog/introducing-crypto-data-mcp" element={<BlogPostCryptoMCP />} />
               <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/learn-more" element={<LearnMore />} />
+              <Route path="/about" element={<About />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
