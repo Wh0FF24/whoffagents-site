@@ -68,6 +68,18 @@ export default function Nav() {
             Blog
           </Link>
           <Link
+            to="/#faq"
+            onClick={(e) => {
+              if (location.pathname === '/') {
+                e.preventDefault()
+                document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="text-sm text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+          >
+            FAQ
+          </Link>
+          <Link
             to="/#newsletter"
             onClick={(e) => {
               if (location.pathname === '/') {
@@ -113,6 +125,19 @@ export default function Nav() {
                 className={`block text-sm transition-colors cursor-pointer ${location.pathname.startsWith('/blog') ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
               >
                 Blog
+              </Link>
+              <Link
+                to="/#faq"
+                onClick={(e) => {
+                  if (location.pathname === '/') {
+                    e.preventDefault()
+                    document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                  setMobileOpen(false)
+                }}
+                className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                FAQ
               </Link>
               <Link
                 to="/#newsletter"
