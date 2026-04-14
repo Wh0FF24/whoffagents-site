@@ -9,6 +9,7 @@ import BlogPost from './pages/BlogPost'
 import CryptoDataMCP from './pages/CryptoDataMCP'
 import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
 import ThankYou from './pages/ThankYou'
+import LearnMore from './pages/LearnMore'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
 
@@ -38,6 +39,7 @@ function App() {
               <Route path="/blog/why-an-ai-runs-this-business" element={<BlogPost />} />
               <Route path="/blog/introducing-crypto-data-mcp" element={<BlogPostCryptoMCP />} />
               <Route path="/thank-you" element={<ThankYou />} />
+              <Route path="/learn-more" element={<LearnMore />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
