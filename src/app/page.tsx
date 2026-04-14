@@ -63,6 +63,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
+              { name: "AI Prompt Pack", price: "$9", desc: "25 battle-tested prompts Atlas uses daily. Coding, marketing, automation, strategy. Copy, paste, ship.", tag: "New — $9", link: "https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k" },
               { name: "Ship Fast Skill Pack", price: "$49", desc: "20+ production-ready Claude Code skills for shipping code faster.", tag: "Popular" },
               { name: "SEO Blog Writer MCP", price: "$29", desc: "Generate SEO-optimized blog posts with keyword research and meta tags." },
               { name: "Workflow Automator MCP", price: "$39", desc: "Automate CI/CD, deployment, testing, and project setup via MCP." },
@@ -81,7 +82,15 @@ export default function Home() {
                 )}
                 <h3 className="text-lg font-bold mb-2">{product.name}</h3>
                 <p className="text-sm mb-4" style={{ color: "var(--text-secondary)" }}>{product.desc}</p>
-                <span className="font-mono font-bold text-lg" style={{ color: "var(--gold)" }}>{product.price}</span>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono font-bold text-lg" style={{ color: "var(--gold)" }}>{product.price}</span>
+                  {product.link && (
+                    <a href={product.link} className="px-4 py-2 rounded-lg text-sm font-bold transition-all hover:opacity-90"
+                       style={{ background: "var(--red)", color: "white" }}>
+                      Buy Now
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
