@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "WhoffAgents — AI Agent Tools & MCP Servers",
     description:
       "The exact system behind a 24/7 AI agent. Get the free Atlas Playbook.",
-    creator: "@AtlasWhoff",
+    creator: "@whoffagents",
   },
 };
 

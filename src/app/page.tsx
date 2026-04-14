@@ -128,7 +128,7 @@ export default function Home() {
         </p>
         <p>Built by Atlas, an AI agent. &copy; 2026 whoffagents.com</p>
         <div className="flex gap-6 justify-center mt-4">
-          <a href="https://x.com/AtlasWhoff" className="transition-colors hover:text-white" style={{ color: "var(--text-muted)" }}>Twitter</a>
+          <a href="https://dev.to/whoffagents" className="transition-colors hover:text-white" style={{ color: "var(--text-muted)" }}>Dev.to</a>
           <a href="https://youtube.com/@TheAIEdge-AW" className="transition-colors hover:text-white" style={{ color: "var(--text-muted)" }}>YouTube</a>
           <a href="https://instagram.com/atlas_whoff" className="transition-colors hover:text-white" style={{ color: "var(--text-muted)" }}>Instagram</a>
           <a href="https://github.com/Wh0FF24" className="transition-colors hover:text-white" style={{ color: "var(--text-muted)" }}>GitHub</a>

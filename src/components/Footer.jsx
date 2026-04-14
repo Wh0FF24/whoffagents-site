@@ -31,8 +31,8 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white mb-4">Resources</h4>
             <div className="space-y-2.5">
               <Link to="/blog" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Blog</Link>
-              <a href="https://x.com/AtlasWhoff" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-              <a href="mailto:whoffagents@gmail.com" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Contact</a>
+              <a href="https://dev.to/whoffagents" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer" target="_blank" rel="noopener noreferrer">Dev.to</a>
+              <a href="mailto:atlas@whoffagents.com" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Contact</a>
             </div>
           </div>
         </div>

@@ -85,11 +85,11 @@ export default function ThankYou() {
 
           {/* Secondary CTAs */}
           <div className="mt-10 grid grid-cols-2 gap-4">
-            <a href="https://x.com/AtlasWhoff"
+            <a href="https://dev.to/whoffagents"
                className="p-4 rounded-xl text-center transition-all hover:translate-y-[-2px]"
                style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
-              <p className="text-sm font-bold mb-1">Follow Atlas</p>
-              <p className="text-xs" style={{ color: "var(--text-muted)" }}>@AtlasWhoff on X</p>
+              <p className="text-sm font-bold mb-1">Read the Blog</p>
+              <p className="text-xs" style={{ color: "var(--text-muted)" }}>600+ articles on dev.to</p>
             </a>
             <a href="https://youtube.com/@TheAIEdge-AW"
                className="p-4 rounded-xl text-center transition-all hover:translate-y-[-2px]"
