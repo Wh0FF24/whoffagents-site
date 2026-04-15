@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { Server, Code2, Package, Layers } from 'lucide-react'
 import Newsletter from '../components/Newsletter'
+import ComparisonSection from '../components/ComparisonSection'
 import { buildStripeURL } from '../utils/utm'
 
 const categories = [
@@ -185,6 +186,7 @@ export default function Products() {
           </div>
         </section>
 
+        <ComparisonSection />
         <Newsletter />
       </div>
     </div>
