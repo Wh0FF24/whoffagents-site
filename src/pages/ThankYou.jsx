@@ -1,10 +1,7 @@
 import { motion } from 'framer-motion'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function ThankYou() {
-  const [searchParams] = useSearchParams()
-  const isPurchase = searchParams.get('source') === 'purchase'
-
   return (
     <section className="py-28 px-6 relative overflow-hidden min-h-[80vh]">
       {/* Background glow */}
@@ -17,108 +14,199 @@ export default function ThankYou() {
       />
 
       <motion.div
-        className="relative z-10 max-w-2xl mx-auto text-center"
+        className="relative z-10 max-w-2xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Checkmark badge */}
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/10 border border-brand-gold/30 mb-6">
-          <svg className="w-8 h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-          </svg>
+        {/* Hero */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/10 border border-brand-gold/30 mb-6">
+            <svg className="w-8 h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            You&apos;re in.
+          </h1>
+          <p className="text-xl text-gray-300 mb-2">
+            Your PAX Protocol Starter Kit is on its way to your inbox.
+          </p>
+          <p className="text-sm text-gray-500">
+            Check spam if you don&apos;t see it in 5 minutes — subject line: &ldquo;Your Whoff Agents Kit&rdquo;
+          </p>
         </div>
 
-        {isPurchase ? (
-          <>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              You&apos;ve got the kit.
-            </h1>
-            <p className="text-xl text-gray-400 mb-4">
-              Check your inbox — your Atlas Starter Kit download link is on its way.
-            </p>
-            <p className="text-sm text-gray-500 mb-12">
-              Didn&apos;t get it within 5 minutes? Check spam or reply to your receipt and we&apos;ll sort it.
-            </p>
-          </>
-        ) : (
-          <>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              You&apos;re in.
-            </h1>
-            <p className="text-xl text-gray-400 mb-12">
-              Check your inbox. The Atlas Playbook is on its way.
-            </p>
-          </>
-        )}
-
-        {/* Follow-on card */}
+        {/* Confirmation */}
         <motion.div
-          className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-10 backdrop-blur-sm text-left"
+          className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">Order Confirmed</p>
+          <p className="text-gray-300">
+            You just did what most devs only talk about. You bought the system. Now you run it.
+          </p>
+        </motion.div>
+
+        {/* Next Steps */}
+        <motion.div
+          className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-4">Your Next Steps</p>
+          <h2 className="text-2xl font-bold text-white mb-6">Get up and running in 3 steps</h2>
+
+          <div className="space-y-6">
+            <div className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm">1</span>
+              <div>
+                <p className="text-white font-semibold mb-1">Download your kit</p>
+                <p className="text-gray-400 text-sm">Check your inbox for the download link from Gumroad.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm">2</span>
+              <div>
+                <p className="text-white font-semibold mb-2">Run the init script</p>
+                <pre className="bg-black/40 border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-green-400 font-mono overflow-x-auto">
+{`cd pax-starter-kit
+chmod +x init.sh
+./init.sh`}
+                </pre>
+                <p className="text-gray-400 text-sm mt-2">Atlas spins up. Orchestrating in under 5 minutes.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm">3</span>
+              <div>
+                <p className="text-white font-semibold mb-1">Open QUICKSTART.md</p>
+                <p className="text-gray-400 text-sm">Everything you need is in there. First agent pipeline runs in one terminal window.</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Upsell: Setup Session */}
+        <motion.div
+          className="rounded-2xl p-8 mb-6"
+          style={{ background: 'var(--bg-card, rgba(255,255,255,0.03))', border: '1px solid rgba(220,38,38,0.3)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-xs font-semibold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 rounded-full px-3 py-1">
-              WHILE YOU WAIT
-            </span>
-          </div>
-
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            Know a builder who&apos;s drowning in context drift?
+          <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">Limited — 3 Slots / Week</p>
+          <h2 className="text-2xl font-bold text-white mb-3">
+            Want Atlas running in your stack today — guaranteed?
           </h2>
-          <p className="text-gray-400 mb-6">
-            Forward them this page. The $47 launch price closes April 22. After that it&apos;s $97 — and that&apos;s the last price drop. If they&apos;re running multi-agent systems, this is the fastest way to stop the bleed.
-          </p>
+          <p className="text-gray-400 mb-5">Book a 1-on-1 Setup Session with Will.</p>
 
-          <ul className="space-y-2 mb-8">
+          <ul className="space-y-2 mb-6">
             {[
-              'PAX Protocol — structured handoffs that agents actually follow',
-              'Spawn brief templates — first-try quality, no back-and-forth',
-              'Human-in-the-loop gates — nothing destructive runs unreviewed',
-              'Versioned PLAN.md vault — every session builds on the last',
-            ].map((feature) => (
-              <li key={feature} className="flex items-center gap-3 text-gray-300">
-                <svg className="w-5 h-5 text-brand-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              '60 minutes, live screen share',
+              'We plug PAX into your codebase, your workflows',
+              'You leave with a working multi-agent pipeline',
+              'Recorded — keep it forever',
+            ].map((item) => (
+              <li key={item} className="flex items-center gap-3 text-gray-300 text-sm">
+                <svg className="w-4 h-4 text-brand-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>{feature}</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <p className="text-white font-semibold mb-4">Most people are shipping in the first session.</p>
+
+          <a
+            href="#"
+            className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
+          >
+            Book a Setup Session — $200 →
+          </a>
+          <p className="text-xs text-center text-gray-500 mt-3">Only 3 slots per week. First-come.</p>
+        </motion.div>
+
+        {/* Discord */}
+        <motion.div
+          className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">Community</p>
+          <h2 className="text-2xl font-bold text-white mb-3">You&apos;re not doing this alone.</h2>
+          <p className="text-gray-400 mb-5">
+            Join the Whoff Agents Discord — where builders share pipelines, debug live, and ship fast.
+          </p>
+
+          <ul className="space-y-2 mb-6 text-sm">
+            {[
+              { channel: '#show-your-agents', desc: 'post what you build' },
+              { channel: '#pax-protocol', desc: 'community support' },
+              { channel: '#atlas-ops', desc: 'orchestration patterns from real deployments' },
+            ].map(({ channel, desc }) => (
+              <li key={channel} className="flex items-center gap-3 text-gray-300">
+                <span className="text-brand-gold font-mono">{channel}</span>
+                <span className="text-gray-500">—</span>
+                <span>{desc}</span>
               </li>
             ))}
           </ul>
 
           <a
-            href="https://twitter.com/intent/tweet?text=Just+grabbed+the+Atlas+Starter+Kit+%E2%80%94+the+exact+multi-agent+system+running+whoffagents.com.+%2447+until+April+22+then+%2497.+whoffagents.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full text-center bg-brand-red text-white font-semibold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
+            href="#"
+            className="block w-full text-center border border-brand-gold text-brand-gold font-bold px-6 py-3 rounded-lg hover:bg-brand-gold/10 transition-all duration-200"
           >
-            Share on X →
+            Join the Discord →
           </a>
-          <p className="text-xs text-center text-gray-500 mt-3">
-            Builders help builders. One share = one less agent that hallucinates its handoff.
-          </p>
+          <p className="text-xs text-center text-gray-500 mt-3">Free for all kit owners. Always will be.</p>
         </motion.div>
 
-        {/* Secondary CTAs */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm">
-          <Link to="/products" className="text-gray-400 hover:text-white transition">
-            Browse all products
-          </Link>
-          <span className="text-gray-700">·</span>
-          <Link to="/blog" className="text-gray-400 hover:text-white transition">
-            Read the blog
-          </Link>
-          <span className="text-gray-700">·</span>
+        {/* Share Request */}
+        <motion.div
+          className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">One Ask</p>
+          <p className="text-gray-400 mb-5">If you found this valuable, tell one person. Here&apos;s a ready tweet:</p>
+
+          <blockquote className="bg-black/30 border border-white/[0.08] rounded-lg p-5 mb-5 text-gray-300 text-sm leading-relaxed italic">
+            Just set up a multi-agent AI system in under 5 minutes using the PAX Protocol Starter Kit from @whoffagents
+            <br /><br />
+            Atlas orchestrates. I just review output.
+            <br /><br />
+            This is what solo dev looks like in 2026.
+            <br /><br />
+            → whoffagents.com
+          </blockquote>
+
           <a
-            href="https://instagram.com/atlas_whoff"
+            href="https://twitter.com/intent/tweet?text=Just+set+up+a+multi-agent+AI+system+in+under+5+minutes+using+the+PAX+Protocol+Starter+Kit+from+%40whoffagents%0A%0AAtlas+orchestrates.+I+just+review+output.%0A%0AThis+is+what+solo+dev+looks+like+in+2026.%0A%0A%E2%86%92+whoffagents.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition"
+            className="block w-full text-center bg-[#1d9bf0] text-white font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200"
           >
-            Follow @atlas_whoff
+            Tweet This →
           </a>
+        </motion.div>
+
+        {/* Footer */}
+        <div className="text-center text-sm text-gray-500">
+          <p className="mb-2">Questions? Reply to your confirmation email or ping us in Discord.</p>
+          <p className="mb-6 italic">Built by Atlas. Shipped by Will. — Whoff Agents</p>
+          <Link to="/" className="text-gray-400 hover:text-white transition">
+            ← Back to whoffagents.com
+          </Link>
         </div>
       </motion.div>
     </section>
