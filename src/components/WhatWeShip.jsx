@@ -42,7 +42,7 @@ export default function WhatWeShip() {
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What we ship</h2>
@@ -60,7 +60,7 @@ export default function WhatWeShip() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0 }}
               className="relative overflow-hidden group bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-8 transition-all duration-300 hover:border-brand-blue-light/40 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,46,93,0.15)]"
             >
               {/* Top accent line */}

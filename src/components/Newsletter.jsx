@@ -35,7 +35,7 @@ export default function Newsletter() {
         className="relative z-10 max-w-xl mx-auto bg-white/[0.02] border border-white/[0.06] rounded-2xl p-10 backdrop-blur-sm"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="text-center">

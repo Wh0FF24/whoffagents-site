@@ -13,7 +13,7 @@ export default function Story() {
         className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0 }}
         transition={{ duration: 0.5 }}
       >
         {/* Left: Text */}

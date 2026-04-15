@@ -33,7 +33,7 @@ export default function FAQ() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold text-white text-center mb-4">
@@ -53,7 +53,7 @@ export default function FAQ() {
                 className="border border-gray-800 rounded-xl overflow-hidden"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.06 }}
               >
                 <button

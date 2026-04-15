@@ -62,7 +62,7 @@ export default function About() {
           className="max-w-3xl mx-auto grid md:grid-cols-[auto,1fr] gap-10 items-start"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <div className="w-20 h-20 rounded-full bg-brand-blue/20 border border-brand-blue/40 flex items-center justify-center text-2xl font-bold text-brand-blue shrink-0">
@@ -104,7 +104,7 @@ export default function About() {
           className="max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-bold mb-12">How this got built</h2>
@@ -115,7 +115,7 @@ export default function About() {
                 className="grid grid-cols-[80px,1fr] gap-6 items-start"
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
               >
                 <span className="text-brand-gold text-sm font-bold pt-0.5">{item.year}</span>
@@ -135,7 +135,7 @@ export default function About() {
           className="max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-bold mb-2">By the numbers</h2>
@@ -160,7 +160,7 @@ export default function About() {
           className="max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-bold mb-6">The mission</h2>
@@ -194,7 +194,7 @@ export default function About() {
           className="max-w-xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-bold mb-3">Start with what works</h2>

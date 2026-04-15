@@ -7,7 +7,7 @@ export default function Guarantee() {
         className="max-w-2xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="border border-yellow-400/30 rounded-2xl p-10 bg-yellow-400/[0.03] text-center">
