@@ -1,194 +1,181 @@
+import { motion } from 'framer-motion'
+import { buildStripeURL } from '../utils/utm'
+import { track } from '../utils/analytics'
+
+const STRIPE_ATLAS = 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i'
+
+const Check = () => (
+  <svg className="w-4 h-4 text-green-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+  </svg>
+)
+
+const Cross = () => (
+  <svg className="w-4 h-4 text-gray-700 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+)
+
+const rows = [
+  {
+    label: 'Price',
+    diy: 'Engineer hours + API',
+    crew: '$99 / month',
+    atlas: <><span className="text-white font-extrabold text-lg">$47</span><br /><span className="text-brand-gold text-xs font-semibold">one-time · no subscription</span></>,
+  },
+  {
+    label: 'Time to first agent',
+    diy: '4 – 12 weeks',
+    crew: 'Days (Python required)',
+    atlas: <span className="text-green-400 font-semibold">Under 1 day</span>,
+  },
+  {
+    label: 'Coding required',
+    diy: 'Yes — build everything',
+    crew: 'Yes — Python framework',
+    atlas: <><span className="text-white text-sm">No</span><br /><span className="text-gray-500 text-xs">Claude Code config files</span></>,
+  },
+  {
+    label: 'Coordination protocol',
+    diy: 'You design it',
+    crew: 'Python class defs',
+    atlas: <><span className="text-white text-sm font-semibold">PAX Protocol</span><br /><span className="text-brand-gold text-xs">~70% token savings vs prose</span></>,
+  },
+  {
+    label: 'Crash recovery',
+    diy: <Cross />,
+    crew: <Cross />,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">watchdog · tested Apr 14</span></>,
+  },
+  {
+    label: 'Session persistence',
+    diy: <Cross />,
+    crew: <Cross />,
+    atlas: <Check />,
+  },
+  {
+    label: 'Scales to 13+ agents',
+    diy: 'Needs architect',
+    crew: 'Possible, complex',
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">Pantheon hierarchy included</span></>,
+  },
+  {
+    label: 'Production tested',
+    diy: <Cross />,
+    crew: <Cross />,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">runs whoffagents.com daily</span></>,
+  },
+  {
+    label: 'Named failures + fixes',
+    diy: <Cross />,
+    crew: <Cross />,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">what broke, when, how we fixed it</span></>,
+  },
+]
+
 export default function ComparisonSection() {
-  const tdBase = { padding: '18px 20px', color: '#CBD5E1', fontSize: '14px', fontWeight: 600 }
-  const tdGray = { padding: '18px 20px', textAlign: 'center', color: '#64748B', fontSize: '14px' }
-  const tdHighlight = { padding: '18px 20px', textAlign: 'center', background: 'rgba(220,38,38,0.04)' }
-  const rowBorder = { borderBottom: '1px solid #1E293B' }
-
   return (
-    <section
-      id="compare"
-      style={{
-        background: '#0F172A',
-        padding: '80px 24px',
-        fontFamily: "'Inter',system-ui,sans-serif",
-        marginTop: '64px',
-        borderRadius: '16px',
-      }}
-    >
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+    <section id="compare" className="py-28 px-6">
+      <div className="max-w-5xl mx-auto">
 
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <p style={{ color: '#F59E0B', fontSize: '13px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 12px' }}>
-            What you&apos;re actually buying instead of
+        <motion.div
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">
+            Pricing
           </p>
-          <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(28px,4vw,42px)', fontWeight: 800, margin: '0 0 16px', lineHeight: 1.15 }}>
-            Three paths to running AI agents.<br />One price that ends.
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+            Three paths to running AI agents.<br className="hidden md:block" /> One price that ends.
           </h2>
-          <p style={{ color: '#94A3B8', fontSize: '17px', maxWidth: '560px', margin: '0 auto', lineHeight: 1.6 }}>
+          <p className="text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
             CrewAI charges $99/month to use a framework you still have to build.
-            Hiring a team costs $8k–$20k/month and takes weeks to start.
-            The Atlas Starter Kit is $97. Once.
+            Hiring a team costs $8k–$20k/month. The Atlas Starter Kit is $47. Once.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Table */}
-        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="overflow-x-auto rounded-xl border border-brand-border"
+        >
+          <table className="w-full min-w-[580px] border-collapse">
             <thead>
-              <tr>
-                <th style={{ padding: '16px 20px', textAlign: 'left', color: '#475569', fontSize: '13px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', borderBottom: '1px solid #1E293B', width: '28%' }} />
-                <th style={{ padding: '16px 20px', textAlign: 'center', color: '#64748B', fontSize: '14px', fontWeight: 700, borderBottom: '1px solid #1E293B', width: '24%' }}>
+              <tr className="border-b border-brand-border">
+                <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider w-[28%]" />
+                <th className="px-5 py-4 text-center text-sm font-semibold text-gray-500 w-[24%]">
                   Build It Yourself
                 </th>
-                <th style={{ padding: '16px 20px', textAlign: 'center', color: '#64748B', fontSize: '14px', fontWeight: 700, borderBottom: '1px solid #1E293B', width: '24%' }}>
-                  CrewAI<br />
-                  <span style={{ fontSize: '12px', fontWeight: 400, color: '#475569' }}>Python framework</span>
+                <th className="px-5 py-4 text-center w-[24%]">
+                  <span className="text-sm font-semibold text-gray-500">CrewAI</span>
+                  <br />
+                  <span className="text-xs font-normal text-gray-700">Python framework</span>
                 </th>
-                <th style={{ padding: '16px 20px', textAlign: 'center', fontSize: '14px', fontWeight: 800, borderBottom: '2px solid #DC2626', width: '24%', background: 'rgba(220,38,38,0.06)', borderRadius: '12px 12px 0 0' }}>
-                  <span style={{ color: '#F59E0B' }}>★</span>
-                  <span style={{ color: '#FFFFFF' }}> Atlas Starter Kit</span><br />
-                  <span style={{ fontSize: '12px', fontWeight: 500, color: '#DC2626' }}>$97 one-time</span>
+                <th className="px-5 py-4 text-center w-[24%] bg-brand-red/5 border-x border-brand-red/20">
+                  <span className="text-brand-gold text-sm">★</span>{' '}
+                  <span className="text-white text-sm font-bold">Atlas Starter Kit</span>
+                  <br />
+                  <span className="text-brand-red text-xs font-semibold">$47 one-time</span>
                 </th>
               </tr>
             </thead>
             <tbody>
-
-              {/* Price */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Price</td>
-                <td style={tdGray}>Engineer time<br /><span style={{ color: '#475569', fontSize: '12px' }}>+ ongoing API costs</span></td>
-                <td style={tdGray}>$99 / month<br /><span style={{ color: '#475569', fontSize: '12px' }}>billed forever</span></td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#FFFFFF', fontSize: '18px', fontWeight: 800 }}>$97</span><br />
-                  <span style={{ color: '#F59E0B', fontSize: '12px', fontWeight: 600 }}>one-time · no subscription</span>
-                </td>
-              </tr>
-
-              {/* Setup time */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Time to first agent running</td>
-                <td style={tdGray}>4–12 weeks</td>
-                <td style={tdGray}>Days to weeks<br /><span style={{ color: '#475569', fontSize: '12px' }}>Python required</span></td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#4ADE80', fontSize: '15px', fontWeight: 700 }}>&lt; 1 day</span>
-                </td>
-              </tr>
-
-              {/* Coding required */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Coding required</td>
-                <td style={tdGray}>Yes — you build everything</td>
-                <td style={tdGray}>Yes — Python<br /><span style={{ color: '#475569', fontSize: '12px' }}>framework expertise needed</span></td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#FFFFFF', fontSize: '14px' }}>No</span><br />
-                  <span style={{ color: '#94A3B8', fontSize: '12px' }}>Claude Code config files</span>
-                </td>
-              </tr>
-
-              {/* What you get */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>What you get</td>
-                <td style={tdGray}>A blank repo and a problem</td>
-                <td style={tdGray}>A framework.<br /><span style={{ color: '#475569', fontSize: '12px' }}>You design the system.</span></td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#FFFFFF', fontSize: '13px', fontWeight: 600, lineHeight: 1.7 }}>
-                    Complete working architecture<br />
-                    <span style={{ color: '#94A3B8', fontWeight: 400 }}>CLAUDE.md · coordination.md<br />spawn briefs · PAX Protocol<br />bootstrap docs · PLAN.md</span>
-                  </span>
-                </td>
-              </tr>
-
-              {/* Coordination protocol */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Agent coordination protocol</td>
-                <td style={tdGray}>You design it<br /><span style={{ color: '#475569', fontSize: '12px' }}>(context drift is your problem)</span></td>
-                <td style={tdGray}>Python class definitions</td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#FFFFFF', fontSize: '13px', fontWeight: 600 }}>PAX Protocol included</span><br />
-                  <span style={{ color: '#F59E0B', fontSize: '12px' }}>~70% token savings vs prose</span>
-                </td>
-              </tr>
-
-              {/* Crash recovery */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Crash recovery</td>
-                <td style={tdGray}>You build it</td>
-                <td style={tdGray}>Not included</td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#4ADE80', fontSize: '13px', fontWeight: 600 }}>Watchdog pattern included</span><br />
-                  <span style={{ color: '#94A3B8', fontSize: '12px' }}>auto-restart &lt;60s. tested Apr 14.</span>
-                </td>
-              </tr>
-
-              {/* Scale */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Scale to 13+ agents</td>
-                <td style={tdGray}>Needs architect</td>
-                <td style={tdGray}>Possible, complex</td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#FFFFFF', fontSize: '13px', fontWeight: 600 }}>Documented. Running.</span><br />
-                  <span style={{ color: '#94A3B8', fontSize: '12px' }}>Pantheon god/hero hierarchy included</span>
-                </td>
-              </tr>
-
-              {/* Production tested */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Production tested</td>
-                <td style={{ ...tdGray, textAlign: 'center' }}><span style={{ color: '#EF4444', fontSize: '18px' }}>✕</span></td>
-                <td style={{ textAlign: 'center', padding: '18px 20px' }}>
-                  <span style={{ color: '#EF4444', fontSize: '18px' }}>✕</span><br />
-                  <span style={{ color: '#475569', fontSize: '12px' }}>framework, not a running system</span>
-                </td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#4ADE80', fontSize: '18px' }}>✓</span><br />
-                  <span style={{ color: '#94A3B8', fontSize: '12px' }}>Atlas runs whoffagents.com on this kit daily</span>
-                </td>
-              </tr>
-
-              {/* Failure docs */}
-              <tr style={rowBorder}>
-                <td style={tdBase}>Named failures + fixes included</td>
-                <td style={{ textAlign: 'center', padding: '18px 20px' }}><span style={{ color: '#EF4444', fontSize: '18px' }}>✕</span></td>
-                <td style={{ textAlign: 'center', padding: '18px 20px' }}><span style={{ color: '#EF4444', fontSize: '18px' }}>✕</span></td>
-                <td style={tdHighlight}>
-                  <span style={{ color: '#4ADE80', fontSize: '18px' }}>✓</span><br />
-                  <span style={{ color: '#94A3B8', fontSize: '12px' }}>what broke, when, how we fixed it</span>
-                </td>
-              </tr>
-
-              {/* Outcome framing */}
-              <tr>
-                <td style={tdBase}>Business outcome framing</td>
-                <td style={tdGray}>None — you figure it out</td>
-                <td style={tdGray}>None — developer tool</td>
-                <td style={{ ...tdHighlight, borderRadius: '0 0 12px 0' }}>
-                  <span style={{ color: '#FFFFFF', fontSize: '13px', fontWeight: 600 }}>How to run a business</span><br />
-                  <span style={{ color: '#94A3B8', fontSize: '12px' }}>not just how to run an agent</span>
-                </td>
-              </tr>
-
+              {rows.map((row, i) => (
+                <tr
+                  key={row.label}
+                  className={`border-b border-brand-border last:border-b-0 ${i % 2 === 0 ? 'bg-transparent' : 'bg-white/[0.01]'}`}
+                >
+                  <td className="px-5 py-4 text-sm font-medium text-gray-300">{row.label}</td>
+                  <td className="px-5 py-4 text-center text-sm text-gray-600">
+                    {typeof row.diy === 'string' ? row.diy : row.diy}
+                  </td>
+                  <td className="px-5 py-4 text-center text-sm text-gray-600">
+                    {typeof row.crew === 'string' ? row.crew : row.crew}
+                  </td>
+                  <td className="px-5 py-4 text-center text-sm bg-brand-red/[0.03] border-x border-brand-red/10">
+                    {typeof row.atlas === 'string' ? <span className="text-white">{row.atlas}</span> : row.atlas}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-        </div>
+        </motion.div>
 
-        {/* CTA */}
-        <div style={{ textAlign: 'center', marginTop: '56px' }}>
-          <p style={{ color: '#94A3B8', fontSize: '15px', margin: '0 0 8px' }}>
-            CrewAI = <strong style={{ color: '#64748B' }}>$99/mo</strong> &nbsp;·&nbsp;
-            DIY = <strong style={{ color: '#64748B' }}>weeks + engineer salary</strong> &nbsp;·&nbsp;
-            Atlas Starter Kit = <strong style={{ color: '#F59E0B' }}>$97, once</strong>
+        {/* CTA block */}
+        <motion.div
+          className="mt-10 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <p className="text-gray-500 text-sm mb-2">
+            CrewAI = <span className="text-gray-400 font-semibold">$99/mo</span>
+            {' '}·{' '}
+            DIY = <span className="text-gray-400 font-semibold">weeks + engineer time</span>
+            {' '}·{' '}
+            Atlas Starter Kit = <span className="text-brand-gold font-semibold">$47, once</span>
           </p>
-          <p style={{ color: '#475569', fontSize: '13px', margin: '0 0 32px' }}>After 1 month of CrewAI you&apos;ve already spent more.</p>
+          <p className="text-gray-700 text-xs mb-8">After 1 month of CrewAI you've already spent more than twice as much.</p>
           <a
-            href="/products"
-            style={{ display: 'inline-block', background: '#DC2626', color: '#FFFFFF', fontSize: '16px', fontWeight: 700, padding: '16px 40px', borderRadius: '8px', textDecoration: 'none', letterSpacing: '0.02em' }}
+            href={buildStripeURL(STRIPE_ATLAS)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('Checkout-Start', { location: 'comparison' })}
+            className="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-red/90 text-white font-semibold px-8 py-3.5 rounded-lg text-sm transition-all duration-200 hover:shadow-[0_0_24px_rgba(200,16,46,0.35)]"
           >
-            Get the Atlas Starter Kit — $97
+            Get the Atlas Starter Kit — $47
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
-          <p style={{ color: '#475569', fontSize: '12px', margin: '16px 0 0' }}>One-time payment. Instant download. No subscription.</p>
-        </div>
-
+          <p className="text-gray-700 text-xs mt-3">One-time payment · Instant download · No subscription</p>
+        </motion.div>
       </div>
     </section>
   )
