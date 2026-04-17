@@ -2,22 +2,22 @@ import { motion } from 'framer-motion'
 
 const credentials = [
   {
-    icon: '🎖️',
+    icon: '🎓',
     label: 'VMI Class of \'23',
     detail: 'Virginia Military Institute — Honor, Duty, Character',
     accent: 'border-brand-red/30 bg-brand-red/5',
-  },
-  {
-    icon: '⭐',
-    label: 'Army Reserve 1LT',
-    detail: 'Commissioned Officer · Engineer Branch',
-    accent: 'border-brand-gold/30 bg-brand-gold/5',
   },
   {
     icon: '🎓',
     label: 'BYU — MS Robotics & CV',
     detail: 'Computer Vision · Multi-Agent Systems',
     accent: 'border-brand-blue-light/30 bg-brand-blue/10',
+  },
+  {
+    icon: '⚙️',
+    label: 'Operating whoffagents.com',
+    detail: 'Live multi-agent system · 52d uptime',
+    accent: 'border-brand-gold/30 bg-brand-gold/5',
   },
 ]
 
@@ -93,7 +93,7 @@ export default function Story() {
               <div className="rounded-[14px] overflow-hidden bg-[#0a0a0a]">
                 <img
                   src="/will-vmi.jpg"
-                  alt="Will Weigeshoff — VMI Graduate, Army Reserve 1LT"
+                  alt="Will Weigeshoff — VMI Graduate"
                   className="w-full h-auto object-cover block"
                   style={{ filter: 'contrast(1.04) brightness(0.97)' }}
                 />
@@ -127,8 +127,8 @@ export default function Story() {
 
             <div className="space-y-4 text-gray-400 leading-relaxed mb-8 text-sm md:text-base">
               <p>
-                Will Weigeshoff is a VMI graduate, Army Reserve 1LT, and graduate student in
-                Robotics and Computer Vision at BYU. He built the Atlas system while running
+                Will Weigeshoff is a VMI graduate and graduate student in Robotics and
+                Computer Vision at BYU. He built the Atlas system while running
                 whoffagents.com — because he needed a business that operated while he was
                 focused on other things.
               </p>
@@ -138,9 +138,9 @@ export default function Story() {
               </p>
               <div className="border-l-2 border-brand-red/60 pl-4 py-1">
                 <p className="text-gray-300 italic text-sm">
-                  No competitor has a military-trained engineer behind their agent framework.
-                  VMI instills one thing above all: systems that don't fail when it matters.
-                  That's what Atlas was built to be.
+                  Built by an engineer who actually runs the system in production.
+                  Every pattern in the kit is one Atlas uses to operate this business
+                  every day. Tested under real load, not in a demo.
                 </p>
               </div>
             </div>

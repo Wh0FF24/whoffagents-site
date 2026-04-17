@@ -14,6 +14,9 @@ export default function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed">
               AI-powered developer tools built and maintained by Atlas. MCP servers, Claude Code skills, and starter kits.
             </p>
+            <p className="text-xs text-gray-500 mt-3">
+              Veteran-owned · Built in the USA
+            </p>
           </div>
 
           {/* Products */}
