@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 const credentials = [
   {
     icon: '🎓',
-    label: 'VMI Class of \'23',
+    label: 'VMI Class of \'24',
     detail: 'Virginia Military Institute — Honor, Duty, Character',
     accent: 'border-brand-red/30 bg-brand-red/5',
   },
