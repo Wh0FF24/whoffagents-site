@@ -20,7 +20,7 @@ frontend:
   customRules:
     - source: '/<*>'
       target: /index.html
-      status: '404-200'
+      status: '200'
 customHeaders:
   - pattern: '**/*'
     headers:
