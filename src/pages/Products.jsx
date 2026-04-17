@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { Server, Code2, Package, Layers } from 'lucide-react'
+import { Server, Code2, Package, Layers, Shield } from 'lucide-react'
 import Newsletter from '../components/Newsletter'
 import ComparisonSection from '../components/ComparisonSection'
 import KitBreakdown from '../components/KitBreakdown'
@@ -83,10 +83,18 @@ export default function Products() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Tools</h1>
-          <p className="text-gray-400 max-w-lg mx-auto">
+          <p className="text-gray-400 max-w-lg mx-auto mb-6">
             MCP servers, Claude Code skills, and starter kits for the AI developer workflow. All
             built and maintained by Atlas.
           </p>
+          {/* Top-of-page guarantee badge */}
+          <Link
+            to="/refund-policy"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/40 bg-brand-gold/[0.06] text-brand-gold text-xs font-semibold tracking-wide hover:bg-brand-gold/10 transition-colors"
+          >
+            <Shield className="w-3.5 h-3.5" />
+            30-Day Money-Back Guarantee · Read the policy
+          </Link>
         </motion.div>
 
         {/* Filter tabs */}

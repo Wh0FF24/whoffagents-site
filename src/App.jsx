@@ -11,6 +11,7 @@ import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
 import ThankYou from './pages/ThankYou'
 import LearnMore from './pages/LearnMore'
 import About from './pages/About'
+import RefundPolicy from './pages/RefundPolicy'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
 
@@ -42,6 +43,7 @@ function App() {
               <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/learn-more" element={<LearnMore />} />
               <Route path="/about" element={<About />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

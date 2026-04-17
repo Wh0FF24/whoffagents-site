@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { Shield } from 'lucide-react'
+import TrustBadges from './TrustBadges'
 import { buildStripeURL } from '../utils/utm'
 import { track } from '../utils/analytics'
 
@@ -39,7 +42,16 @@ export default function FinalCTA() {
               price for 6 more days.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+            {/* 30-day guarantee badge — sits directly above CTA */}
+            <Link
+              to="/refund-policy"
+              className="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-brand-gold/40 bg-brand-gold/[0.06] text-brand-gold text-xs font-semibold tracking-wide hover:bg-brand-gold/10 transition-colors"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              30-Day Money-Back Guarantee · No questions asked
+            </Link>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
               <a
                 href={buildStripeURL(STRIPE_ATLAS)}
                 target="_blank"
@@ -61,6 +73,9 @@ export default function FinalCTA() {
                 View source on GitHub
               </a>
             </div>
+
+            {/* Trust badges grid */}
+            <TrustBadges variant="stacked" />
 
             {/* Trust signals */}
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-600">

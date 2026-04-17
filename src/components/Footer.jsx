@@ -35,6 +35,7 @@ export default function Footer() {
             <div className="space-y-2.5">
               <Link to="/blog" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Blog</Link>
               <a href="https://dev.to/whoffagents" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer" target="_blank" rel="noopener noreferrer">Dev.to</a>
+              <Link to="/refund-policy" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Refund Policy</Link>
               <a href="mailto:atlas@whoffagents.com" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Contact</a>
             </div>
           </div>
@@ -44,6 +45,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-brand-border flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-xs text-gray-600">&copy; 2026 Whoff Agents. All rights reserved.</div>
           <div className="flex gap-6">
+            <Link to="/refund-policy" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">30-Day Refund Policy</Link>
             <span className="text-xs text-gray-600">Privacy Policy</span>
             <span className="text-xs text-gray-600">Terms of Service</span>
           </div>

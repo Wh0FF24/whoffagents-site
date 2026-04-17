@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import AnimatedBackground from './AnimatedBackground'
+import TrustBadges from './TrustBadges'
 import { buildStripeURL } from '../utils/utm'
 import { track } from '../utils/analytics'
 
@@ -249,8 +250,13 @@ export default function Hero() {
             </a>
           </motion.div>
 
+          {/* Trust signals — directly under CTA */}
+          <motion.div variants={fadeUp}>
+            <TrustBadges variant="compact" />
+          </motion.div>
+
           {/* Urgency line */}
-          <motion.div variants={fadeUp} className="flex items-center gap-3 text-xs text-gray-600">
+          <motion.div variants={fadeUp} className="mt-4 flex items-center gap-3 text-xs text-gray-600">
             <span className="text-brand-red font-semibold">↑ $47 → $97 on April 22</span>
             <span>·</span>
             <span>One-time · No subscription</span>
