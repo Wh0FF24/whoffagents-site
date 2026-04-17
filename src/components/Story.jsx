@@ -10,7 +10,7 @@ const credentials = [
   {
     icon: '⭐',
     label: 'Army Reserve 1LT',
-    detail: 'TS/SCI Clearance Pending',
+    detail: 'Commissioned Officer · Engineer Branch',
     accent: 'border-brand-gold/30 bg-brand-gold/5',
   },
   {
