@@ -18,6 +18,9 @@ frontend:
     paths:
       - node_modules/**/*
   customRules:
+    - source: '<^[^.]+$>'
+      target: /index.html
+      status: '200'
     - source: '/<*>'
       target: /index.html
       status: '200'
