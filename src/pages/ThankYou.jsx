@@ -66,7 +66,7 @@ export default function ThankYou() {
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm">1</span>
               <div>
                 <p className="text-white font-semibold mb-1">Download your kit</p>
-                <p className="text-gray-400 text-sm">Check your inbox for the download link from Gumroad.</p>
+                <p className="text-gray-400 text-sm">Check your inbox — files are on their way from atlas@whoffagents.com.</p>
               </div>
             </div>
 
@@ -126,7 +126,7 @@ chmod +x init.sh
           <p className="text-white font-semibold mb-4">Most people are shipping in the first session.</p>
 
           <a
-            href="#"
+            href="mailto:atlas@whoffagents.com?subject=Setup%20Session%20Request"
             className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
           >
             Book a Setup Session — $200 →
@@ -162,12 +162,12 @@ chmod +x init.sh
           </ul>
 
           <a
-            href="#"
+            href="mailto:atlas@whoffagents.com?subject=Discord%20Access%20Request"
             className="block w-full text-center border border-brand-gold text-brand-gold font-bold px-6 py-3 rounded-lg hover:bg-brand-gold/10 transition-all duration-200"
           >
-            Join the Discord →
+            Request Discord Access →
           </a>
-          <p className="text-xs text-center text-gray-500 mt-3">Free for all kit owners. Always will be.</p>
+          <p className="text-xs text-center text-gray-500 mt-3">Email us — we'll send the invite within 24 hours.</p>
         </motion.div>
 
         {/* Share Request */}
@@ -181,7 +181,7 @@ chmod +x init.sh
           <p className="text-gray-400 mb-5">If you found this valuable, tell one person. Here&apos;s a ready tweet:</p>
 
           <blockquote className="bg-black/30 border border-white/[0.08] rounded-lg p-5 mb-5 text-gray-300 text-sm leading-relaxed italic">
-            Just set up a multi-agent AI system in under 5 minutes using the PAX Protocol Starter Kit from @whoffagents
+            Just set up a multi-agent AI system in under 5 minutes using the PAX Protocol Starter Kit from Whoff Agents.
             <br /><br />
             Atlas orchestrates. I just review output.
             <br /><br />
@@ -191,18 +191,18 @@ chmod +x init.sh
           </blockquote>
 
           <a
-            href="https://twitter.com/intent/tweet?text=Just+set+up+a+multi-agent+AI+system+in+under+5+minutes+using+the+PAX+Protocol+Starter+Kit+from+%40whoffagents%0A%0AAtlas+orchestrates.+I+just+review+output.%0A%0AThis+is+what+solo+dev+looks+like+in+2026.%0A%0A%E2%86%92+whoffagents.com"
+            href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwhoffagents.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full text-center bg-[#1d9bf0] text-white font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200"
+            className="block w-full text-center bg-[#0a66c2] text-white font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200"
           >
-            Tweet This →
+            Share on LinkedIn →
           </a>
         </motion.div>
 
         {/* Footer */}
         <div className="text-center text-sm text-gray-500">
-          <p className="mb-2">Questions? Reply to your confirmation email or ping us in Discord.</p>
+          <p className="mb-2">Questions? Reply to your confirmation email or email atlas@whoffagents.com.</p>
           <p className="mb-6 italic">Built by Atlas. Shipped by Will. — Whoff Agents</p>
           <Link to="/" className="text-gray-400 hover:text-white transition">
             ← Back to whoffagents.com
