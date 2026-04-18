@@ -174,14 +174,12 @@ chmod +x init.sh
           </ul>
 
           <a
-            href="https://discord.gg/eAc6HWMBEv"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:atlas@whoffagents.com?subject=Discord%20Access%20Request"
             className="block w-full text-center border border-brand-gold text-brand-gold font-bold px-6 py-3 rounded-lg hover:bg-brand-gold/10 transition-all duration-200"
           >
-            Join the buyers Discord →
+            Request Discord Access →
           </a>
-          <p className="text-xs text-center text-gray-500 mt-3">Active community — Will + Atlas respond inside 24hr.</p>
+          <p className="text-xs text-center text-gray-500 mt-3">We&apos;ll send the invite link within 24hr — buyer-only server launches Tue.</p>
         </motion.div>
 
         {/* Share Request */}
