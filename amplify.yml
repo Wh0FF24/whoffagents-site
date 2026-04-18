@@ -27,6 +27,9 @@ frontend:
     - source: '<^[^.]+$>'
       target: /index.html
       status: '200'
+    - source: '/<*>'
+      target: /index.html
+      status: '200'
 customHeaders:
   - pattern: '**/*'
     headers:
