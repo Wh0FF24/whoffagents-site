@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { subscribeToBeehiiv } from '../utils/beehiiv.js';
 
 export default function InlineEmailFormClient() {
   const [email, setEmail] = useState("");
@@ -14,22 +15,8 @@ export default function InlineEmailFormClient() {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name, source: "inline-playbook" }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
-      }
-
+      await subscribeToBeehiiv(email, 'inline-playbook');
       setStatus("success");
-      setTimeout(() => {
-        window.location.href = "/thank-you";
-      }, 1500);
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong");

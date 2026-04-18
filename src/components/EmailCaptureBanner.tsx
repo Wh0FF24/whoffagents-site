@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { subscribeToBeehiiv } from '../utils/beehiiv.js';
 
 export default function EmailCaptureBanner() {
   const [email, setEmail] = useState("");
@@ -13,25 +14,11 @@ export default function EmailCaptureBanner() {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "sticky-banner" }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
-      }
-
+      await subscribeToBeehiiv(email, 'sticky-banner');
       setStatus("success");
       if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
         (window as any).plausible('Email-Capture', { props: { source: 'sticky-banner' } });
       }
-      setTimeout(() => {
-        window.location.href = "/thank-you";
-      }, 1000);
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong");

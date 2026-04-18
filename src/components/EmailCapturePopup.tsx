@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { subscribeToBeehiiv } from '../utils/beehiiv.js';
 
 export default function EmailCapturePopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,27 +55,11 @@ export default function EmailCapturePopup() {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name, source: "exit-popup" }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
-      }
-
+      await subscribeToBeehiiv(email, 'exit-popup');
       setStatus("success");
       if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
         (window as any).plausible('Email-Capture', { props: { source: 'exit-popup' } });
       }
-
-      // Redirect to thank-you after brief delay
-      setTimeout(() => {
-        window.location.href = "/thank-you";
-      }, 1500);
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong");
