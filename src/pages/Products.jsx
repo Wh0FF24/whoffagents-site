@@ -29,6 +29,114 @@ const products = [
   },
   {
     id: 2,
+    title: 'Ship Fast Skill Pack',
+    description:
+      '10 Claude Code skills for the unfun layer of shipping a SaaS: auth-patterns, stripe-payments, testing-suite, api-routes, deploy-config, db-migrations, env-config, monitoring, seo-meta, error-handling. Each activates on keyword match. Drop into .claude/skills/ and go.',
+    category: 'skill',
+    price: '$49',
+    accent: 'gold',
+    timeline: '10 skills — $49',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
+  },
+  {
+    id: 3,
+    title: 'AI Prompt Pack',
+    description:
+      '25 battle-tested Claude Code prompts packaged as slash commands. Drop into .claude/commands/ and use immediately. Includes prompts for architecture review, debugging, code review, test generation, refactoring, and SEO content.',
+    category: 'skill',
+    price: '$9',
+    accent: 'blue',
+    timeline: '25 prompts — $9',
+    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
+    buyLink: 'https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k',
+  },
+  {
+    id: 4,
+    title: 'SEO Writer Skill',
+    description:
+      'One Claude Code skill that rewrites any draft for search intent, keyword density, and linkable structure. Activates on "write SEO content" or "optimize for search." Ships with proven patterns from 100+ published dev.to articles.',
+    category: 'skill',
+    price: '$19',
+    accent: 'blue',
+    timeline: 'Single Skill — $19',
+    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
+    buyLink: 'https://buy.stripe.com/3cI00lgjJ1Jj8HR5R3aZi0b',
+  },
+  {
+    id: 5,
+    title: 'Workflow Automator MCP Server',
+    description:
+      'Run multi-step workflows as Claude Code tool calls — trigger webhooks, chain API actions, branch on conditions. Perfect for replacing ad-hoc Zapier recipes with something your agent can reason about.',
+    category: 'mcp',
+    price: '$15',
+    accent: 'red',
+    timeline: 'MCP Server — $15',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/14AaEZc3t87H4rBgvHaZi0f',
+  },
+  {
+    id: 6,
+    title: 'Crypto Data MCP Server',
+    description:
+      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token, via MCP tool calls. Powers the trading dashboards running on whoffagents infra.',
+    category: 'mcp',
+    price: '$19',
+    accent: 'red',
+    timeline: 'MCP Server — $19',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/8x26oJ6J9gEd7DN4MZaZi03',
+  },
+  {
+    id: 7,
+    title: 'AI Content Repurposer',
+    description:
+      'Feed long-form content in, get Twitter thread, LinkedIn post, and blog variants out. The exact tool used to repurpose the articles on dev.to. CLI-based, swap your LLM key in.',
+    category: 'skill',
+    price: '$19',
+    accent: 'blue',
+    timeline: 'CLI Tool — $19',
+    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
+    buyLink: 'https://buy.stripe.com/6oUeVfd7x0Ff4rB5R3aZi0c',
+  },
+  {
+    id: 8,
+    title: 'Trading Signals MCP Server',
+    description:
+      'Volatility classification, news-triggered signal detection, and price-history pulls piped into Claude Code. Backtested on Polymarket — the core research engine used for agent-driven paper trading.',
+    category: 'mcp',
+    price: '$29',
+    accent: 'red',
+    timeline: 'MCP Server — $29',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/28EcN75F5afPcY7bbnaZi0e',
+  },
+  {
+    id: 9,
+    title: 'MCP Security Scanner',
+    description:
+      'Scan any MCP server for unsafe patterns, insecure defaults, and common misconfigurations. One-command scan, JSON output. Free tier covers the basics; Pro adds the advanced ruleset.',
+    category: 'mcp',
+    price: '$49',
+    accent: 'red',
+    timeline: 'Scanner — $49',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/00w00ld7x3Rr3nx4MZaZi0d',
+  },
+  {
+    id: 10,
+    title: 'MCP Security Scanner Pro',
+    description:
+      'The Pro tier of MCP Security Scanner — full ruleset, priority signatures, and integration-ready reports. Same install, richer findings. For teams scanning at scale.',
+    category: 'mcp',
+    price: '$149',
+    accent: 'gold',
+    timeline: 'Pro Tier — $149',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: 'https://buy.stripe.com/3cIaEZ7Nd9bL1fpfrDaZi07',
+  },
+  {
+    id: 11,
     title: 'Grand Slam Offer Generator',
     description:
       'You have a product. You need an offer. Answer 8 questions. Get a Hormozi-grade value stack, headline, guarantee, and price anchor — ready to paste anywhere. 5 minutes. Free. Open source.',
@@ -38,16 +146,6 @@ const products = [
     timeline: 'Start Here — Free',
     timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
     githubLink: 'https://github.com/Wh0FF24/grand-slam-offer-generator',
-  },
-  {
-    id: 3,
-    title: 'Crypto Data MCP',
-    description:
-      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token.',
-    category: 'mcp',
-    price: 'Free / Pro $19/mo',
-    accent: 'blue',
-    timeline: 'Launching April 2026',
   },
 ]
 
