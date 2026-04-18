@@ -238,7 +238,7 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="https://github.com/whoffagents"
+              href="https://github.com/Wh0FF24"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 text-gray-400 hover:text-white border border-brand-border hover:border-white/20 font-medium px-7 py-3.5 rounded-lg text-sm transition-all duration-200"

@@ -84,7 +84,7 @@ export default function RefundPolicy() {
             </p>
             <p className="text-gray-400 leading-relaxed mb-4">
               The Atlas Starter Kit is open source. You can read every line on{' '}
-              <a href="https://github.com/whoffagents" target="_blank" rel="noopener noreferrer" className="text-brand-blue-light hover:text-white">
+              <a href="https://github.com/Wh0FF24" target="_blank" rel="noopener noreferrer" className="text-brand-blue-light hover:text-white">
                 GitHub
               </a>{' '}
               before you ever hit checkout. The $47 buys the packaged distribution, the QUICKSTART
