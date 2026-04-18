@@ -18,16 +18,7 @@ frontend:
     paths:
       - node_modules/**/*
   customRules:
-    - source: '/robots.txt'
-      target: /robots.txt
-      status: '200'
-    - source: '/sitemap.xml'
-      target: /sitemap.xml
-      status: '200'
     - source: '<^[^.]+$>'
-      target: /index.html
-      status: '200'
-    - source: '/<*>'
       target: /index.html
       status: '200'
 customHeaders:
