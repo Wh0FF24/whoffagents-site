@@ -18,7 +18,7 @@ frontend:
     paths:
       - node_modules/**/*
   customRules:
-    - source: '<^[^.]+$>'
+    - source: </^[^.]+$|\.(?!js|css|json|png|jpg|jpeg|svg|ico|webp|gif|woff|woff2|ttf|eot|txt|xml|pdf|map)$/>
       target: /index.html
       status: '200'
 customHeaders:
