@@ -18,6 +18,12 @@ frontend:
     paths:
       - node_modules/**/*
   customRules:
+    - source: '/robots.txt'
+      target: /robots.txt
+      status: '200'
+    - source: '/sitemap.xml'
+      target: /sitemap.xml
+      status: '200'
     - source: '<^[^.]+$>'
       target: /index.html
       status: '200'
@@ -27,6 +33,8 @@ frontend:
 customHeaders:
   - pattern: '**/*'
     headers:
+      - key: 'Strict-Transport-Security'
+        value: 'max-age=31536000; includeSubDomains'
       - key: 'X-Frame-Options'
         value: 'SAMEORIGIN'
       - key: 'X-Content-Type-Options'
