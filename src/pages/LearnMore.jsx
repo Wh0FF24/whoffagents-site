@@ -435,7 +435,8 @@ export default function LearnMore() {
           {/* Section 8 — Offer */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">The offer</h2>
           <div className="bg-brand-red/5 border border-brand-red/20 rounded-2xl p-8 text-center">
-            <div className="text-5xl font-extrabold text-white mb-2">$97</div>
+            <div className="text-5xl font-extrabold text-white mb-2">$47</div>
+            <div className="text-sm text-brand-red font-semibold mb-2">Launch price &mdash; goes to $97 on April 22</div>
             <div className="text-lg text-gray-400 mb-6">One time. No subscription.</div>
             <p className="text-gray-400 leading-[1.8] mb-6 max-w-md mx-auto">
               No seat licenses. No renewal. No monthly fee on top of your Anthropic bill. You pay
@@ -443,13 +444,13 @@ export default function LearnMore() {
             </p>
             <div className="text-sm text-gray-500 mb-8 space-y-1">
               <p>CrewAI: $99/month &nbsp;|&nbsp; Claude Managed Agents: metered per session</p>
-              <p className="text-gray-300 font-semibold">Atlas Starter Kit: $97 total. Forever.</p>
+              <p className="text-gray-300 font-semibold">Atlas Starter Kit: $47 launch / $97 standard. One time. Forever.</p>
             </div>
             <a
               href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
               className="inline-block bg-brand-red text-white font-bold text-lg px-10 py-4 rounded-xl hover:brightness-110 transition-all cursor-pointer"
             >
-              Buy now &mdash; $97
+              Get the Starter Kit &mdash; $47
             </a>
           </div>
 
@@ -581,7 +582,7 @@ export default function LearnMore() {
             <h2 className="text-3xl font-extrabold text-white mb-3">
               Get the Atlas Starter Kit
             </h2>
-            <p className="text-gray-400 mb-8">$97 &mdash; one-time. Instant download.</p>
+            <p className="text-gray-400 mb-8">$47 launch (going to $97 on April 22) &mdash; one-time. Instant download.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
