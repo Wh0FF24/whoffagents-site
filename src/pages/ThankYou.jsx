@@ -31,10 +31,22 @@ export default function ThankYou() {
             You&apos;re in.
           </h1>
           <p className="text-xl text-gray-300 mb-2">
-            Your PAX Protocol Starter Kit is on its way to your inbox.
+            Grab the PAX Protocol Starter Kit right here — also emailed to your inbox.
           </p>
-          <p className="text-sm text-gray-500">
-            Check spam if you don&apos;t see it in 5 minutes — subject line: &ldquo;Your Whoff Agents Kit&rdquo;
+
+          <a
+            href="/pax-protocol-starter.pdf"
+            download="PAX-Protocol-Starter-Kit.pdf"
+            className="inline-flex items-center gap-2 mt-4 mb-2 bg-brand-red text-white font-bold px-6 py-3 rounded-xl hover:brightness-110 transition-all cursor-pointer"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download the PDF (281 KB)
+          </a>
+
+          <p className="text-sm text-gray-500 mt-2">
+            If the email doesn&apos;t land in 5 minutes, check spam — subject &ldquo;Your Whoff Agents Kit&rdquo;
           </p>
         </div>
 
