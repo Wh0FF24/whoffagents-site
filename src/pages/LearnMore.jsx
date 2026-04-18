@@ -590,7 +590,7 @@ export default function LearnMore() {
                 Buy now &mdash; $97
               </a>
               <a
-                href="https://github.com/whoffagents"
+                href="https://github.com/Wh0FF24"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block border border-brand-border text-gray-300 font-semibold text-lg px-10 py-4 rounded-xl hover:border-white/30 hover:text-white transition-all cursor-pointer"
