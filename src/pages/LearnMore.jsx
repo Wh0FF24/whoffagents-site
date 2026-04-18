@@ -446,7 +446,7 @@ export default function LearnMore() {
               <p className="text-gray-300 font-semibold">Atlas Starter Kit: $97 total. Forever.</p>
             </div>
             <a
-              href="https://whoffagents.com/checkout"
+              href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
               className="inline-block bg-brand-red text-white font-bold text-lg px-10 py-4 rounded-xl hover:brightness-110 transition-all cursor-pointer"
             >
               Buy now &mdash; $97
@@ -584,7 +584,7 @@ export default function LearnMore() {
             <p className="text-gray-400 mb-8">$97 &mdash; one-time. Instant download.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://whoffagents.com/checkout"
+                href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
                 className="inline-block bg-brand-red text-white font-bold text-lg px-10 py-4 rounded-xl hover:brightness-110 transition-all cursor-pointer"
               >
                 Buy now &mdash; $97
