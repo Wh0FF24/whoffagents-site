@@ -138,7 +138,9 @@ chmod +x init.sh
           <p className="text-white font-semibold mb-4">Most people are shipping in the first session.</p>
 
           <a
-            href="mailto:atlas@whoffagents.com?subject=Setup%20Session%20Request"
+            href="https://cal.com/atlas-whoffagents/setup-session"
+            target="_blank"
+            rel="noopener noreferrer"
             className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
           >
             Book a Setup Session — $200 →
