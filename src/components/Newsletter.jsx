@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { subscribeToBeehiiv } from '../utils/beehiiv'
+import { track } from '../utils/analytics'
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
@@ -14,6 +15,7 @@ export default function Newsletter() {
 
     try {
       await subscribeToBeehiiv(email, 'newsletter_section')
+      track('Email-Capture', { source: 'newsletter_section' })
       navigate('/thank-you')
     } catch {
       setStatus('error')
