@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import posthog from 'posthog-js'
 
 /**
  * Product Hunt launch-day banner.
@@ -75,9 +76,7 @@ export default function PHLaunchBanner() {
             className="flex-shrink-0 bg-white text-brand-red font-bold text-sm px-4 py-2 rounded-lg hover:brightness-110 transition-all whitespace-nowrap"
             onClick={() => {
               // Track click in PostHog
-              if (typeof window !== 'undefined' && window.posthog) {
-                window.posthog.capture('ph-banner-click', { url: PH_URL })
-              }
+              posthog.capture('ph_banner_click', { url: PH_URL })
             }}
           >
             Hunt Us →

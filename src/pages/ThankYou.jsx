@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { track } from '../utils/analytics'
 
 export default function ThankYou() {
   return (
@@ -37,6 +38,7 @@ export default function ThankYou() {
           <a
             href="/pax-protocol-starter.pdf"
             download="PAX-Protocol-Starter-Kit.pdf"
+            onClick={() => track('pdf_download_click', { source: 'thank_you_page' })}
             className="inline-flex items-center gap-2 mt-4 mb-2 bg-brand-red text-white font-bold px-6 py-3 rounded-xl hover:brightness-110 transition-all cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

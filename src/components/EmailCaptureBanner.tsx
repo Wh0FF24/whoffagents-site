@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { subscribeToBeehiiv } from '../utils/beehiiv.js';
+import { track } from '../utils/analytics';
 
 export default function EmailCaptureBanner() {
   const [email, setEmail] = useState("");
@@ -16,9 +17,7 @@ export default function EmailCaptureBanner() {
     try {
       await subscribeToBeehiiv(email, 'sticky-banner');
       setStatus("success");
-      if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
-        (window as any).plausible('Email-Capture', { props: { source: 'sticky-banner' } });
-      }
+      track('Email-Capture', { source: 'sticky-banner' })
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong");

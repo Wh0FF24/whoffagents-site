@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { subscribeToBeehiiv } from '../utils/beehiiv.js';
+import { track } from '../utils/analytics';
 
 export default function EmailCapturePopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -57,9 +58,7 @@ export default function EmailCapturePopup() {
     try {
       await subscribeToBeehiiv(email, 'exit-popup');
       setStatus("success");
-      if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
-        (window as any).plausible('Email-Capture', { props: { source: 'exit-popup' } });
-      }
+      track('Email-Capture', { source: 'exit-popup' })
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong");
