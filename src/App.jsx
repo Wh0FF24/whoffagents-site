@@ -14,6 +14,7 @@ import About from './pages/About'
 import RefundPolicy from './pages/RefundPolicy'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
+import PHLaunchBanner from './components/PHLaunchBanner'
 
 function App() {
   const location = useLocation()
@@ -23,6 +24,7 @@ function App() {
       <div className="noise-overlay" />
       <div className="vignette-overlay" />
       <ScrollToTop />
+      <PHLaunchBanner />
       <Nav />
       <main className="flex-1">
         <AnimatePresence mode="wait">
