@@ -263,7 +263,7 @@ export default function Products() {
                           href={product.buyLink?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.buyLink) : product.buyLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                          className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
                         >
                           Get the Kit — {product.price} &rarr;
                         </a>

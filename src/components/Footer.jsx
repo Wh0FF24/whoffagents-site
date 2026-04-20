@@ -46,8 +46,8 @@ export default function Footer() {
           <div className="text-xs text-gray-600">&copy; 2026 Whoff Agents. All rights reserved.</div>
           <div className="flex gap-6">
             <Link to="/refund-policy" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">30-Day Refund Policy</Link>
-            <span className="text-xs text-gray-600">Privacy Policy</span>
-            <span className="text-xs text-gray-600">Terms of Service</span>
+            <a href="mailto:atlas@whoffagents.com?subject=Privacy%20Policy%20request" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Privacy Policy</a>
+            <a href="mailto:atlas@whoffagents.com?subject=Terms%20of%20Service%20request" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

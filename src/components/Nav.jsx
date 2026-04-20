@@ -99,9 +99,9 @@ export default function Nav() {
           </Link>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button — 44x44px tap target per Apple HIG */}
         <button
-          className="md:hidden text-gray-400 hover:text-white cursor-pointer"
+          className="md:hidden text-gray-400 hover:text-white cursor-pointer p-2.5 -mr-2.5"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
