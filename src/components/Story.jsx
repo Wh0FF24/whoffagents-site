@@ -93,7 +93,7 @@ export default function Story() {
               <div className="rounded-[14px] overflow-hidden bg-[#0a0a0a]">
                 <img
                   src="/will-vmi.jpg"
-                  alt="Will Weigeshoff — VMI Graduate"
+                  alt="Will — VMI Graduate"
                   className="w-full h-auto object-cover block"
                   style={{ filter: 'contrast(1.04) brightness(0.97)' }}
                 />
@@ -127,7 +127,7 @@ export default function Story() {
 
             <div className="space-y-4 text-gray-400 leading-relaxed mb-8 text-sm md:text-base">
               <p>
-                Will Weigeshoff is a VMI graduate and graduate student in Robotics and
+                Will is a VMI graduate and graduate student in Robotics and
                 Computer Vision at BYU. He built the Atlas system while running
                 whoffagents.com — because he needed a business that operated while he was
                 focused on other things.

@@ -12,9 +12,11 @@ import posthog from 'posthog-js'
  * import from Home.jsx. To swap PH URL: update PH_URL constant when listing goes live.
  */
 
-// Bake-in timing — adjust if launch date moves
-const ACTIVE_START = new Date('2026-04-21T00:00:00-07:00') // Tue Apr 21 12:01am PT
-const ACTIVE_END = new Date('2026-04-23T00:00:00-07:00')   // Thu Apr 23 12:01am PT — 48hr launch window
+// Bake-in timing — adjust if launch date moves.
+// NOTE 2026-04-20: PH relaunch for Apr 21 was never scheduled; Apr 9 launch is "the" launch.
+// Banner disabled by setting ACTIVE_START after ACTIVE_END so auto-activate never fires.
+const ACTIVE_START = new Date('2099-01-01T00:00:00Z') // disabled — no launch event
+const ACTIVE_END = new Date('2099-01-02T00:00:00Z')
 const PH_URL = 'https://www.producthunt.com/posts/whoff-agents'
 
 export default function PHLaunchBanner() {

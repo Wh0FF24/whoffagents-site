@@ -26,7 +26,7 @@ export default function Nav() {
     >
       {/* PH Launch Banner */}
       <div className="w-full bg-brand-red/90 text-white text-xs text-center py-2 px-4">
-        Product Hunt launch: $47 → $97 on April 22.{' '}
+        Launch Week: $47 → $97 on Apr 22.{' '}
         <a
           href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
           target="_blank"

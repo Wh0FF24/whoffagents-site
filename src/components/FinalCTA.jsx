@@ -29,7 +29,7 @@ export default function FinalCTA() {
           <div className="relative z-10">
             <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-brand-red mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-              Product Hunt Launch · April 21
+              Launch Week · $47 through Apr 22
             </span>
 
             <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">

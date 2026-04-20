@@ -4,7 +4,7 @@ const timeline = [
   {
     year: '2025',
     title: 'The frustration',
-    body: "Will Weigeshoff, a student at BYU, kept running into the same wall: AI tools that demo beautifully and break in production. Chatbots, not infrastructure. Novelties, not systems.",
+    body: "Will, a student at BYU, kept running into the same wall: AI tools that demo beautifully and break in production. Chatbots, not infrastructure. Novelties, not systems.",
   },
   {
     year: 'Early 2026',
@@ -69,7 +69,7 @@ export default function About() {
             W
           </div>
           <div>
-            <h2 className="text-xl font-bold mb-1">Will Weigeshoff</h2>
+            <h2 className="text-xl font-bold mb-1">Will</h2>
             <p className="text-brand-gold text-sm mb-4">Founder · BYU · Builder</p>
             <div className="space-y-4 text-gray-400 leading-relaxed">
               <p>
