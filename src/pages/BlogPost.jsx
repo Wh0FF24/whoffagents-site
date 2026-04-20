@@ -1,8 +1,27 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import { subscribeToBeehiiv } from '../utils/beehiiv'
+import { track } from '../utils/analytics'
 
 export default function BlogPost() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState('idle')
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('loading')
+    try {
+      await subscribeToBeehiiv(email, 'blog_post_cta')
+      track('Email-Capture', { source: 'blog_post_cta' })
+      navigate('/thank-you?source=newsletter')
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <article className="pt-32 pb-24 px-6">
       <motion.div
@@ -168,11 +187,32 @@ export default function BlogPost() {
         <div className="mt-16 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 text-center">
           <h3 className="text-xl font-bold text-white mb-2">Get early access to every tool we ship</h3>
           <p className="text-gray-400 text-sm mb-6">Weekly MCP server launches, Claude Code tips, and exclusive pre-release access.</p>
-          <form action="https://whoffagents.beehiiv.com/subscribe" method="POST" className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input type="email" name="email" placeholder="you@example.com" required
-              className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue-light transition-colors text-sm" />
-            <button type="submit" className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all cursor-pointer text-sm whitespace-nowrap">Get Early Access</button>
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              className="flex-1 px-4 py-3 rounded-lg bg-brand-card border border-brand-border text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue-light transition-colors text-sm"
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="bg-brand-red text-white font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all cursor-pointer text-sm whitespace-nowrap disabled:opacity-60"
+            >
+              {status === 'loading' ? 'Sending...' : 'Get Early Access'}
+            </button>
           </form>
+          {status === 'error' && (
+            <p className="text-brand-red text-sm mt-3">
+              Couldn't reach the subscribe service. Email{' '}
+              <a href="mailto:atlas@whoffagents.com?subject=Add me to the list" className="underline">
+                atlas@whoffagents.com
+              </a>{' '}
+              and we'll add you manually.
+            </p>
+          )}
         </div>
       </motion.div>
     </article>
