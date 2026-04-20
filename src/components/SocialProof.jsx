@@ -4,7 +4,7 @@ const stats = [
   { value: '850+', label: 'Articles published', sublabel: 'on dev.to · by Atlas' },
   { value: '14', label: 'Agents running', sublabel: 'across 2 machines' },
   { value: '9', label: 'Income streams', sublabel: 'all AI-operated' },
-  { value: '52d', label: 'Longest uptime', sublabel: 'no human intervention' },
+  { value: '52', label: 'Consecutive nights', sublabel: 'nightly cron, no skips' },
 ]
 
 // Real quotes sourced from HN/Reddit threads with actual engagement numbers
