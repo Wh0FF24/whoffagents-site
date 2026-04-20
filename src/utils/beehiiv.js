@@ -1,5 +1,5 @@
 export async function subscribeToBeehiiv(email, utmMedium = 'website') {
-  const res = await fetch('/api/beehiiv-subscribe', {
+  const res = await fetch('https://ndqjaaz5y6ddawmk6e642i4muu0eezuk.lambda-url.us-east-1.on.aws/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, utmMedium }),
