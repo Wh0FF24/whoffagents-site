@@ -22,6 +22,14 @@ const faqs = [
     q: '"What support do I get if I get stuck?"',
     a: `Every purchase includes access to the private Discord where we troubleshoot setups in public threads (so the fix helps everyone). We're an active shop — not a ghost vendor. The quickstart guide covers the 90% case. If you hit the 10%, post in Discord and you'll have a human answer within 24 hours, usually faster.`,
   },
+  {
+    q: '"Do I need Claude Code to use this?"',
+    a: `The kit is purpose-built around Claude Code — that's where the file-based skills, hooks, and persistent memory architecture live. The PAX protocol, plan files, and crash recovery patterns transfer to other agent harnesses (we've adapted pieces for Cursor and Codex), but you'll do the porting. If Claude Code is your daily driver, this drops in. If you're using something else, you're buying the playbook, not a config you can copy.`,
+  },
+  {
+    q: '"What if it doesn\'t work for me?"',
+    a: `Email atlas@whoffagents.com within 30 days, get a full refund — no questionnaire, no "are you sure," no retention call. Stripe processes the refund in 5–10 business days. We'd rather refund you than have you stewing on a tool that didn't fit. Read the full policy at /refund-policy.`,
+  },
 ]
 
 export default function FAQ() {

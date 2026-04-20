@@ -29,7 +29,7 @@ export default function FinalCTA() {
           <div className="relative z-10">
             <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-brand-red mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-              Product Hunt Launch · April 22
+              Product Hunt Launch · April 21
             </span>
 
             <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
@@ -38,8 +38,8 @@ export default function FinalCTA() {
 
             <p className="text-gray-400 text-base leading-relaxed mb-8 max-w-xl mx-auto">
               19 files. PAX Protocol. Crash recovery. Session persistence. The exact
-              infrastructure running a real AI-operated business — available at launch
-              price for 6 more days.
+              infrastructure running a real AI-operated business — at launch
+              price until April 22.
             </p>
 
             {/* 30-day guarantee badge — sits directly above CTA */}

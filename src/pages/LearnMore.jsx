@@ -602,10 +602,10 @@ export default function LearnMore() {
             <p className="text-sm text-gray-500 mt-6">
               Questions before you buy?{' '}
               <a
-                href="mailto:will@whoffagents.com"
+                href="mailto:atlas@whoffagents.com"
                 className="text-brand-blue-light hover:text-white transition-colors"
               >
-                Email will@whoffagents.com
+                Email atlas@whoffagents.com
               </a>
               . Real responses, usually same day.
             </p>

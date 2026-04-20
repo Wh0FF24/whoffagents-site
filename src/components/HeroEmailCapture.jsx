@@ -17,7 +17,7 @@ export default function HeroEmailCapture() {
       await subscribeToBeehiiv(email, 'hero_inline')
       track('Email-Capture', { source: 'hero_inline' })
       setStatus('success')
-      setTimeout(() => navigate('/thank-you'), 800)
+      setTimeout(() => navigate('/thank-you?source=newsletter'), 800)
     } catch {
       setStatus('error')
     }

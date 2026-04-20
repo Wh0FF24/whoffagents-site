@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { track } from '../utils/analytics'
 
 export default function ThankYou() {
+  const [params] = useSearchParams()
+  const isNewsletter = params.get('source') === 'newsletter'
+
   return (
     <section className="py-28 px-6 relative overflow-hidden min-h-[80vh]">
       {/* Background glow */}
@@ -52,20 +55,23 @@ export default function ThankYou() {
           </p>
         </div>
 
-        {/* Confirmation */}
-        <motion.div
-          className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">Order Confirmed</p>
-          <p className="text-gray-300">
-            You just did what most devs only talk about. You bought the system. Now you run it.
-          </p>
-        </motion.div>
+        {/* Confirmation — purchase only */}
+        {!isNewsletter && (
+          <motion.div
+            className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">Order Confirmed</p>
+            <p className="text-gray-300">
+              You just did what most devs only talk about. You bought the system. Now you run it.
+            </p>
+          </motion.div>
+        )}
 
-        {/* Next Steps */}
+        {/* Next Steps — purchase only */}
+        {!isNewsletter && (
         <motion.div
           className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6"
           initial={{ opacity: 0, y: 20 }}
@@ -106,8 +112,41 @@ chmod +x init.sh
             </div>
           </div>
         </motion.div>
+        )}
 
-        {/* Upsell: Setup Session */}
+        {/* Newsletter cross-sell: kit promo */}
+        {isNewsletter && (
+          <motion.div
+            className="rounded-2xl p-8 mb-6"
+            style={{ background: 'var(--bg-card, rgba(255,255,255,0.03))', border: '1px solid rgba(220,38,38,0.3)' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">Launch Price · $47</p>
+            <h2 className="text-2xl font-bold text-white mb-3">
+              Want the full system the PDF describes?
+            </h2>
+            <p className="text-gray-400 mb-5">
+              The Atlas Starter Kit is the working code behind the PAX Protocol — 19 files, crash recovery,
+              session persistence, the exact orchestration running whoffagents.com. Launch price stands until
+              April 22, then it's $97.
+            </p>
+            <a
+              href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('Checkout-Start', { location: 'thank-you-newsletter-crosssell' })}
+              className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
+            >
+              Get the Atlas Starter Kit — $47 →
+            </a>
+            <p className="text-xs text-center text-gray-500 mt-3">One-time. 30-day refund. Works with Claude Code.</p>
+          </motion.div>
+        )}
+
+        {/* Upsell: Setup Session — purchase only */}
+        {!isNewsletter && (
         <motion.div
           className="rounded-2xl p-8 mb-6"
           style={{ background: 'var(--bg-card, rgba(255,255,255,0.03))', border: '1px solid rgba(220,38,38,0.3)' }}
@@ -149,6 +188,7 @@ chmod +x init.sh
           </a>
           <p className="text-xs text-center text-gray-500 mt-3">Only 3 slots per week. First-come.</p>
         </motion.div>
+        )}
 
         {/* Discord */}
         <motion.div

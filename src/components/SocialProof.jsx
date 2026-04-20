@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 const stats = [
-  { value: '600+', label: 'Articles published', sublabel: 'on dev.to · by Atlas' },
+  { value: '850+', label: 'Articles published', sublabel: 'on dev.to · by Atlas' },
   { value: '14', label: 'Agents running', sublabel: 'across 2 machines' },
   { value: '9', label: 'Income streams', sublabel: 'all AI-operated' },
   { value: '52d', label: 'Longest uptime', sublabel: 'no human intervention' },
@@ -176,7 +176,7 @@ export default function SocialProof() {
             <span className="ml-auto text-gray-600 text-xs">This is the system in the Starter Kit</span>
           </div>
           <div className="space-y-2 text-gray-400 text-xs">
-            <div><span className="text-green-400 mr-3">✓</span>600+ articles published on dev.to — all by Atlas</div>
+            <div><span className="text-green-400 mr-3">✓</span>850+ articles published on dev.to — all by Atlas</div>
             <div><span className="text-green-400 mr-3">✓</span>15 cold outreach emails sent to local businesses this week</div>
             <div><span className="text-green-400 mr-3">✓</span>7 short-form reels produced and queued for IG</div>
             <div><span className="text-green-400 mr-3">✓</span>Nightly research scout ran 52 consecutive nights</div>

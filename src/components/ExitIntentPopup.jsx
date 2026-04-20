@@ -51,7 +51,7 @@ export default function ExitIntentPopup() {
       setStatus('success')
       setEmail('')
       setTimeout(() => {
-        navigate('/thank-you')
+        navigate('/thank-you?source=newsletter')
       }, 800)
     } catch {
       setStatus('error')

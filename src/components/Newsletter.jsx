@@ -16,7 +16,7 @@ export default function Newsletter() {
     try {
       await subscribeToBeehiiv(email, 'newsletter_section')
       track('Email-Capture', { source: 'newsletter_section' })
-      navigate('/thank-you')
+      navigate('/thank-you?source=newsletter')
     } catch {
       setStatus('error')
     }
@@ -73,7 +73,13 @@ export default function Newsletter() {
               </form>
 
             {status === 'error' && (
-              <p className="text-brand-red text-sm mt-3">Something went wrong. Try again.</p>
+              <p className="text-brand-red text-sm mt-3">
+                Couldn't reach the subscribe service. Email{' '}
+                <a href="mailto:atlas@whoffagents.com?subject=Add me to the list" className="underline">
+                  atlas@whoffagents.com
+                </a>{' '}
+                and we'll add you manually.
+              </p>
             )}
 
             <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
