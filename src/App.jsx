@@ -12,6 +12,7 @@ import ThankYou from './pages/ThankYou'
 import LearnMore from './pages/LearnMore'
 import About from './pages/About'
 import RefundPolicy from './pages/RefundPolicy'
+import AtlasOps from './pages/AtlasOps'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
 import PHLaunchBanner from './components/PHLaunchBanner'
@@ -46,6 +47,7 @@ function App() {
               <Route path="/learn-more" element={<LearnMore />} />
               <Route path="/about" element={<About />} />
               <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/atlas/ops" element={<AtlasOps />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
