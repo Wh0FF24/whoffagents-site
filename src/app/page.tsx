@@ -63,13 +63,15 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
+              { name: "AI SaaS Starter Kit", price: "$99", desc: "Production-ready Next.js + Claude + Stripe + Auth boilerplate. Deploy in an afternoon, not a week.", tag: "Best Value", link: "https://buy.stripe.com/14A7sNaZpcnXgaj3IVaZi09" },
+              { name: "Ship Fast Skill Pack", price: "$49", desc: "20+ production-ready Claude Code skills for shipping features faster. Auth, payments, DB, deploy — all covered.", tag: "Popular", link: "https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a" },
+              { name: "MCP Security Scanner", price: "$49/mo", desc: "Automated security scanning for MCP servers — 22 checks, CVE detection, CI/CD ready.", link: "https://buy.stripe.com/00w00ld7x3Rr3nx4MZaZi0d" },
+              { name: "Trading Signals MCP", price: "$29/mo", desc: "Real-time crypto/stock technical analysis — RSI, MACD, Bollinger Bands — directly in Claude Code.", link: "https://buy.stripe.com/28EcN75F5afPcY7bbnaZi0e" },
+              { name: "Workflow Automator MCP", price: "$15/mo", desc: "Automate CI/CD, deployment, testing, and project setup via 50+ MCP tool integrations.", link: "https://buy.stripe.com/14AaEZc3t87H4rBgvHaZi0f" },
+              { name: "AI Content Repurposer", price: "$19/mo", desc: "Turn any article into LinkedIn posts, Twitter threads, and newsletter content automatically.", link: "https://buy.stripe.com/6oUeVfd7x0Ff4rB5R3aZi0c" },
+              { name: "SEO Writer Skill", price: "$19", desc: "Claude Code skill for SEO-optimized blog posts with keyword research and meta tags built in.", link: "https://buy.stripe.com/3cI00lgjJ1Jj8HR5R3aZi0b" },
               { name: "AI Prompt Pack", price: "$9", desc: "25 battle-tested prompts Atlas uses daily. Coding, marketing, automation, strategy. Copy, paste, ship.", tag: "New — $9", link: "https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k" },
-              { name: "Ship Fast Skill Pack", price: "$49", desc: "20+ production-ready Claude Code skills for shipping code faster.", tag: "Popular" },
-              { name: "SEO Blog Writer MCP", price: "$29", desc: "Generate SEO-optimized blog posts with keyword research and meta tags." },
-              { name: "Workflow Automator MCP", price: "$39", desc: "Automate CI/CD, deployment, testing, and project setup via MCP." },
-              { name: "AI Trading Signals MCP", price: "$59", desc: "Real-time crypto/stock technical analysis — RSI, MACD, Bollinger Bands." },
-              { name: "Crypto Data MCP", price: "FREE", desc: "Open-source MCP server for live cryptocurrency data and on-chain metrics.", tag: "Open Source" },
-              { name: "ChatterBox MCP", price: "$9/mo", desc: "Voice synthesis MCP server — generate speech directly in Claude Code." },
+              { name: "Crypto Data MCP", price: "FREE", desc: "Open-source MCP server for live cryptocurrency data and on-chain metrics.", tag: "Open Source", link: "https://github.com/Wh0FF24/crypto-data-mcp" },
             ].map((product) => (
               <div key={product.name}
                    className="relative p-6 rounded-xl transition-all hover:translate-y-[-2px]"
