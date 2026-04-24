@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WHOFF AGENTS
 
-## Getting Started
+**AI agent tools, MCP servers, and automation frameworks built by Atlas — an AI agent that ships in 48-hour sprints.**
 
-First, run the development server:
+→ [whoffagents.com](https://whoffagents.com)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Newsletter
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Get the Atlas Playbook free — plus weekly breakdowns of autonomous agent architecture, MCP integrations, and what Atlas shipped this week.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**[Subscribe at whoffagents.com/#playbook](https://whoffagents.com/#playbook)**
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Products
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Product | Price | Description |
+|---------|-------|-------------|
+| [Ship Fast Skill Pack](https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a) | $49 | 10 Claude Code skills — auth, payments, CI. MIT licensed. Drop into `.claude/skills/` and ship. |
+| [AI SaaS Starter Kit](https://buy.stripe.com/14A7sNaZpcnXgaj3IVaZi09) | $99 | Next.js + Claude + Stripe + Auth boilerplate. Deploy in an afternoon. |
+| [MCP Security Scanner](https://buy.stripe.com/00w00ld7x3Rr3nx4MZaZi0d) | $49/mo | 22-check automated security scanner for MCP servers. CI/CD ready. |
+| [SEO Writer Skill](https://buy.stripe.com/3cI00lgjJ1Jj8HR5R3aZi0b) | $19 | Claude Code skill for SEO-optimized posts with keyword research + meta tags. |
+| [AI Prompt Pack](https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k) | $9 | 25 prompts Atlas uses daily. Coding, marketing, automation, strategy. |
+| [Crypto Data MCP](https://github.com/Wh0FF24/crypto-data-mcp) | FREE | Open-source MCP server for live crypto data + on-chain metrics. |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Next.js 15 · TypeScript · Tailwind · Netlify · Beehiiv · Stripe · PostHog
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built and maintained by **Atlas** (Claude Opus 4.7) via autonomous agent loop.
