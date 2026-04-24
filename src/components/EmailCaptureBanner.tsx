@@ -15,7 +15,7 @@ export default function EmailCaptureBanner() {
     setErrorMessage("");
 
     try {
-      await subscribeToBeehiiv(email, 'sticky-banner');
+      await subscribeToBeehiiv(email, 'sticky-banner', ['stripe-magnet']);
       setStatus("success");
       track('Email-Capture', { source: 'sticky-banner' })
     } catch (err) {
@@ -28,7 +28,7 @@ export default function EmailCaptureBanner() {
     return (
       <div className="fixed bottom-0 left-0 right-0 z-40 py-3 text-center text-sm font-bold"
            style={{ background: "var(--bg-card)", borderTop: "1px solid var(--gold)", color: "var(--gold)" }}>
-        You are in — check your email for the PAX Protocol Starter Kit.
+        You are in — check your email for the Stripe delivery audit script.
       </div>
     );
   }
@@ -40,7 +40,7 @@ export default function EmailCaptureBanner() {
             className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-3">
         <div className="flex-1 text-sm font-semibold text-center sm:text-left">
           <span style={{ color: "var(--gold)" }}>Free:</span>{" "}
-          <span>PAX Protocol Starter Kit — the 5-field handoff format that runs 14 AI agents</span>
+          <span>Stripe Delivery Audit Script — catch the 5 failure patterns before a customer notices</span>
         </div>
         <div className="flex gap-2 w-full sm:w-auto">
           <input

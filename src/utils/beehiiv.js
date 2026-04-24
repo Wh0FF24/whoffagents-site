@@ -1,8 +1,8 @@
-export async function subscribeToBeehiiv(email, utmMedium = 'website') {
-  const res = await fetch('https://ndqjaaz5y6ddawmk6e642i4muu0eezuk.lambda-url.us-east-1.on.aws/', {
+export async function subscribeToBeehiiv(email, utmMedium = 'website', tags = []) {
+  const res = await fetch('/api/beehiiv-subscribe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, utmMedium }),
+    body: JSON.stringify({ email, utmMedium, ...(tags.length > 0 && { tags }) }),
   })
 
   const ct = res.headers.get('content-type') || ''

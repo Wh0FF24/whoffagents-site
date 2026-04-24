@@ -23,12 +23,23 @@ export default async (req, context) => {
     })
   }
 
-  const { email, utmMedium = 'website' } = body
+  const { email, utmMedium = 'website', tags = [] } = body
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return new Response(JSON.stringify({ error: 'Invalid email' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     })
+  }
+
+  const payload = {
+    email,
+    reactivate_existing: false,
+    send_welcome_email: true,
+    utm_source: 'whoffagents_site',
+    utm_medium: utmMedium,
+  }
+  if (Array.isArray(tags) && tags.length > 0) {
+    payload.tags = tags
   }
 
   const res = await fetch(
@@ -39,13 +50,7 @@ export default async (req, context) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${API_KEY}`,
       },
-      body: JSON.stringify({
-        email,
-        reactivate_existing: false,
-        send_welcome_email: true,
-        utm_source: 'whoffagents_site',
-        utm_medium: utmMedium,
-      }),
+      body: JSON.stringify(payload),
     }
   )
 
