@@ -14,7 +14,7 @@ export default function HeroEmailCapture() {
     e.preventDefault()
     setStatus('loading')
     try {
-      await subscribeToBeehiiv(email, 'hero_inline')
+      await subscribeToBeehiiv(email, 'hero_inline', ['stripe-magnet'])
       track('Email-Capture', { source: 'hero_inline' })
       setStatus('success')
       setTimeout(() => navigate('/thank-you?source=newsletter'), 800)
