@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import Newsletter from '../components/Newsletter'
 
 export default function LearnMore() {
   return (
@@ -617,6 +618,8 @@ export default function LearnMore() {
             kit is running in production today.
           </p>
         </div>
+
+        <Newsletter />
 
         {/* Back link */}
         <div className="mt-12 pt-8 border-t border-brand-border">

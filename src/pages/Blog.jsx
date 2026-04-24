@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ExternalLink } from 'lucide-react'
+import Newsletter from '../components/Newsletter'
 
 // Internal posts (full custom HTML pages at /blog/<slug>)
 const INTERNAL_POSTS = [
@@ -143,6 +144,7 @@ export default function Blog() {
           )}
         </div>
       </div>
+      <Newsletter />
     </div>
   )
 }

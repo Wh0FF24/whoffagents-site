@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Code2, CheckCircle2, Shield, Zap, Package, ArrowRight } from 'lucide-react'
 import { buildStripeURL } from '../utils/utm'
+import Newsletter from '../components/Newsletter'
 
 const BUY_LINK = 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a'
 
@@ -242,6 +243,8 @@ export default function ShipFast() {
             One-time · MIT license · 30-day refund guarantee
           </p>
         </motion.div>
+
+        <Newsletter />
 
       </div>
     </div>
