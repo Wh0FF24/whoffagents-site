@@ -213,14 +213,16 @@ export default function Hero() {
           {/* CTAs */}
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-5">
             <a
-              href="/products"
+              href="https://cal.com/atlas-whoffagents/setup-session"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => track('Checkout-Start', { location: 'hero' })}
               className="inline-flex items-center justify-center gap-2 bg-brand-red text-white font-semibold px-7 py-3.5 rounded-lg text-sm transition-all duration-200"
               style={{ boxShadow: '0 0 0 0 rgba(200,16,46,0)' }}
               onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(200,16,46,0.45)' }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 0 0 rgba(200,16,46,0)' }}
             >
-              Hire the Agent — $99/mo
+              Book Demo — $99/mo
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

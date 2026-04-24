@@ -27,13 +27,15 @@ const products = [
     id: 0,
     title: 'Lead Qualification Agent',
     description:
-      'Your 24/7 AI employee answers every inbound call, qualifies the job type and budget, and books the appointment directly into your calendar. Built for HVAC, plumbing, electrical, and pest control. If it doesn\'t save you 10 hours in week 1, we refund you. Add-on: CRM sync + follow-up drip — $159/mo.',
+      'Your 24/7 AI employee answers every inbound call, qualifies the job type and budget, and books the appointment directly into your calendar. Built for HVAC, plumbing, electrical, and pest control. If it doesn\'t save you 10 hours in week 1, we refund you.',
     category: 'agent',
     price: '$99/mo',
     accent: 'red',
     timeline: 'Hire Now — $99/mo',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    buyLink: '/products',
+    buyLink: 'https://cal.com/atlas-whoffagents/setup-session',
+    buttonLabel: 'Book Demo',
+    addOn: { label: 'CRM Sync + Follow-up Drip', price: '+$159/mo' },
     featured: true,
   },
   {
@@ -309,6 +311,12 @@ export default function Products() {
 
                   <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed mb-4">{product.description}</p>
+                  {product.addOn && (
+                    <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04]">
+                      <span className="text-xs font-semibold text-brand-gold">{product.addOn.price}</span>
+                      <span className="text-xs text-gray-400">{product.addOn.label}</span>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between">
                     <span className="text-gray-500 text-sm">{product.price}</span>
                     <div className="flex flex-col items-end gap-1.5">
@@ -319,7 +327,7 @@ export default function Products() {
                           rel="noopener noreferrer"
                           className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
                         >
-                          Get the Kit — {product.price} &rarr;
+                          {product.buttonLabel ? `${product.buttonLabel} →` : `Get the Kit — ${product.price} →`}
                         </a>
                       ) : product.githubLink ? (
                         <a
