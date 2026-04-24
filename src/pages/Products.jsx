@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { Server, Code2, Package, Layers, Shield, Bot } from 'lucide-react'
+import { Server, Code2, Package, Layers, Shield, Bot, ChevronRight } from 'lucide-react'
 import Newsletter from '../components/Newsletter'
 import ComparisonSection from '../components/ComparisonSection'
 import KitBreakdown from '../components/KitBreakdown'
@@ -61,6 +61,7 @@ const products = [
     timeline: '10 skills — $49',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
+    learnMoreLink: '/products/ship-fast-skill-pack',
   },
   {
     id: 3,
@@ -320,6 +321,14 @@ export default function Products() {
                   <div className="flex items-center justify-between">
                     <span className="text-gray-500 text-sm">{product.price}</span>
                     <div className="flex flex-col items-end gap-1.5">
+                      {product.learnMoreLink && (
+                        <Link
+                          to={product.learnMoreLink}
+                          className="flex items-center gap-1 text-xs text-brand-gold hover:text-white transition-colors duration-200"
+                        >
+                          See details <ChevronRight className="w-3 h-3" />
+                        </Link>
+                      )}
                       {product.buyLink ? (
                         <a
                           href={product.buyLink?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.buyLink) : product.buyLink}
