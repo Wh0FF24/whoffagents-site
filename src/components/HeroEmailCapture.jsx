@@ -34,7 +34,7 @@ export default function HeroEmailCapture() {
   return (
     <div className="mt-10 flex flex-col items-center gap-2">
       <p className="text-xs font-semibold tracking-widest uppercase text-gray-500">
-        or get the free guide first
+        Free: 5 Stripe delivery failure patterns + the detection script
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 w-full max-w-sm">
         <input
@@ -50,7 +50,7 @@ export default function HeroEmailCapture() {
           disabled={status === 'loading'}
           className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white border border-brand-gold/50 hover:border-brand-gold hover:bg-brand-gold/10 transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-50"
         >
-          {status === 'loading' ? 'Sending...' : '5-Step Guide — Free'}
+          {status === 'loading' ? 'Sending...' : 'Get the Script — Free'}
         </button>
       </form>
       {status === 'error' && (
