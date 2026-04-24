@@ -80,29 +80,29 @@ function TerminalVisual() {
 
           {/* Content */}
           <div className="p-5 space-y-1.5">
-            <div className="text-gray-600 mb-3"># Atlas Task Queue — live</div>
+            <div className="text-gray-600 mb-3"># New lead — live</div>
 
             {linesVisible > 0 && (
-              <TerminalLine prefix="●" prefixColor="text-brand-gold">TASK-051 [active]</TerminalLine>
+              <TerminalLine prefix="●" prefixColor="text-brand-gold">Inbound: Mike's Plumbing (385-555-0198)</TerminalLine>
             )}
             {linesVisible > 1 && (
               <div className="pl-4 space-y-1">
                 <TerminalLine prefix="├─" prefixColor="text-gray-600">
                   <span className="text-green-400">✓</span>{' '}
-                  <span className="text-brand-silver">researcher</span>
-                  <span className="text-gray-500">  research-051.md</span>
+                  <span className="text-brand-silver">agent</span>
+                  <span className="text-gray-500">    answered in 0.4s</span>
                 </TerminalLine>
                 {linesVisible > 2 && (
                   <TerminalLine prefix="├─" prefixColor="text-gray-600">
                     <span className="text-brand-blue-light">{spinner}</span>{' '}
-                    <span className="text-brand-silver">writer</span>
-                    <span className="text-gray-500">     processing handoff...</span>
+                    <span className="text-brand-silver">agent</span>
+                    <span className="text-gray-500">    qualifying job...</span>
                   </TerminalLine>
                 )}
                 {linesVisible > 3 && (
                   <TerminalLine prefix="└─" prefixColor="text-gray-600">
                     <span className="text-gray-600">·</span>{' '}
-                    <span className="text-gray-500">publisher   queued</span>
+                    <span className="text-gray-500">booking   queued</span>
                   </TerminalLine>
                 )}
               </div>
@@ -111,33 +111,24 @@ function TerminalVisual() {
             {linesVisible > 4 && (
               <div className="pt-2 border-t border-white/[0.05] mt-3 space-y-1.5">
                 <div>
-                  <span className="text-brand-gold">PAX</span>
-                  <span className="text-gray-600"> › </span>
-                  <span className="text-gray-400">{'{'}</span>
-                  <span className="text-brand-silver">T</span>
-                  <span className="text-gray-500">:051 </span>
-                  <span className="text-brand-silver">S</span>
-                  <span className="text-gray-500">:DONE </span>
-                  <span className="text-brand-silver">R</span>
-                  <span className="text-gray-500">:writer </span>
-                  <span className="text-brand-silver">H</span>
-                  <span className="text-gray-500">:research-051.md</span>
-                  <span className="text-gray-400">{'}'}</span>
+                  <span className="text-brand-gold">job</span>
+                  <span className="text-gray-600">     </span>
+                  <span className="text-gray-400">burst pipe · $800–1,200 est.</span>
                 </div>
 
                 <div className="flex gap-6 pt-1">
                   <div>
-                    <span className="text-gray-600">drift  </span>
-                    <span className="text-green-400">0.0 ✓</span>
+                    <span className="text-gray-600">booked </span>
+                    <span className="text-green-400">Fri 8am ✓</span>
                   </div>
                   <div>
-                    <span className="text-gray-600">tokens </span>
-                    <span className="text-gray-400">9,102 / 200k</span>
+                    <span className="text-gray-600">confirm </span>
+                    <span className="text-gray-400">sent</span>
                   </div>
                 </div>
                 <div>
-                  <span className="text-gray-600">uptime </span>
-                  <span className="text-brand-silver">52d 07h 14m</span>
+                  <span className="text-gray-600">status </span>
+                  <span className="text-brand-silver">warm lead → you</span>
                 </div>
               </div>
             )}
@@ -145,7 +136,7 @@ function TerminalVisual() {
             {linesVisible > 5 && (
               <div className="pt-3 border-t border-white/[0.05] mt-2 flex items-center gap-2">
                 <span className="text-green-400 text-[11px]">●</span>
-                <span className="text-gray-500 text-[11px]">14 agents · 9 income streams · $0 infra cost</span>
+                <span className="text-gray-500 text-[11px]">24/7 · 0 missed leads · refund if not 10h saved</span>
               </div>
             )}
           </div>
@@ -187,7 +178,7 @@ export default function Hero() {
           <motion.div variants={fadeUp} className="mb-6">
             <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/5 text-brand-gold">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
-              Atlas Starter Kit · Launch price $47
+              Lead Qualification Agent · Trades · $99/mo
             </span>
           </motion.div>
 
@@ -203,10 +194,10 @@ export default function Hero() {
                 backgroundSize: '200% auto',
               }}
             >
-              Stop cascading
+              Your AI employee
             </span>
             <br />
-            <span className="text-white">context drift.</span>
+            <span className="text-white">answers every lead.</span>
           </motion.h1>
 
           {/* Subhead */}
@@ -214,39 +205,34 @@ export default function Hero() {
             variants={fadeUp}
             className="text-base md:text-lg text-gray-400 leading-relaxed mb-8 max-w-lg"
           >
-            Your agents degrade because spawn prompts are sparse, handoffs are lossy, and you
-            can't see what's happening. The Atlas Starter Kit is the coordination system extracted
-            from a real AI-operated business — PAX Protocol, crash recovery, session persistence.
-            Runs 14 agents. Ships daily.
+            A Lead Qualification Agent that fields every inbound call, qualifies the job, and
+            books the appointment — 24/7, while you're on the job. Built for HVAC, plumbing,
+            electrical, and pest control. If it doesn't save you 10 hours in week 1, we refund you.
           </motion.p>
 
           {/* CTAs */}
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-5">
             <a
-              href={buildStripeURL(STRIPE_ATLAS)}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/products"
               onClick={() => track('Checkout-Start', { location: 'hero' })}
               className="inline-flex items-center justify-center gap-2 bg-brand-red text-white font-semibold px-7 py-3.5 rounded-lg text-sm transition-all duration-200"
               style={{ boxShadow: '0 0 0 0 rgba(200,16,46,0)' }}
               onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(200,16,46,0.45)' }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 0 0 rgba(200,16,46,0)' }}
             >
-              Get the Starter Kit — $47
+              Hire the Agent — $99/mo
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
             <a
-              href="https://github.com/Wh0FF24"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/products"
               className="inline-flex items-center justify-center gap-2 text-gray-400 hover:text-white border border-brand-border hover:border-white/20 font-medium px-7 py-3.5 rounded-lg text-sm transition-all duration-200"
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              See how it works
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-              Preview on GitHub
             </a>
           </motion.div>
 
@@ -255,11 +241,11 @@ export default function Hero() {
             <TrustBadges variant="compact" />
           </motion.div>
 
-          {/* Urgency line */}
+          {/* Guarantee line */}
           <motion.div variants={fadeUp} className="mt-4 flex items-center gap-3 text-xs text-gray-600">
-            <span className="text-brand-red font-semibold">↑ $47 → $97 on April 22</span>
+            <span className="text-brand-gold font-semibold">✓ First-month refund guarantee</span>
             <span>·</span>
-            <span>One-time · No subscription</span>
+            <span>No setup fee · Cancel anytime</span>
           </motion.div>
         </motion.div>
 

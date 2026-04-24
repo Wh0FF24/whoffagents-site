@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { Server, Code2, Package, Layers, Shield } from 'lucide-react'
+import { Server, Code2, Package, Layers, Shield, Bot } from 'lucide-react'
 import Newsletter from '../components/Newsletter'
 import ComparisonSection from '../components/ComparisonSection'
 import KitBreakdown from '../components/KitBreakdown'
@@ -9,12 +9,33 @@ import { buildStripeURL } from '../utils/utm'
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
+  { id: 'agent', label: 'AI Employees', icon: Bot },
   { id: 'mcp', label: 'MCP Servers', icon: Server },
   { id: 'skill', label: 'Skills', icon: Code2 },
   { id: 'kit', label: 'Starter Kits', icon: Package },
 ]
 
+const verticalTiers = [
+  { vertical: 'Home Services', sub: 'HVAC · Plumbing · Electrical · Pest Control', price: '$99–299/mo', status: 'active' },
+  { vertical: 'Real Estate', sub: 'Agents · Property Mgmt', price: '$149–499/mo', status: 'soon' },
+  { vertical: 'Financial Services', sub: 'Advisors · Mortgage', price: '$299–999/mo', status: 'soon' },
+  { vertical: 'Legal', sub: 'Law Firms · Solo Practitioners', price: '$500–2K/mo', status: 'soon' },
+]
+
 const products = [
+  {
+    id: 0,
+    title: 'Lead Qualification Agent',
+    description:
+      'Your 24/7 AI employee answers every inbound call, qualifies the job type and budget, and books the appointment directly into your calendar. Built for HVAC, plumbing, electrical, and pest control. If it doesn\'t save you 10 hours in week 1, we refund you. Add-on: CRM sync + follow-up drip — $159/mo.',
+    category: 'agent',
+    price: '$99/mo',
+    accent: 'red',
+    timeline: 'Hire Now — $99/mo',
+    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+    buyLink: '/products',
+    featured: true,
+  },
   {
     id: 1,
     title: 'Atlas Starter Kit',
@@ -150,6 +171,7 @@ const products = [
 ]
 
 const categoryLabels = {
+  agent: 'AI Employee',
   mcp: 'MCP Server',
   skill: 'Skill',
   kit: 'Starter Kit',
@@ -180,19 +202,51 @@ export default function Products() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Tools</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">AI Employees for Your Business</h1>
           <p className="text-gray-400 max-w-lg mx-auto mb-6">
-            MCP servers, Claude Code skills, and starter kits for the AI developer workflow. All
-            built and maintained by Atlas.
+            Hire an AI employee that works 24/7 — answers leads, qualifies jobs, books appointments.
+            Built and operated by Atlas.
           </p>
-          {/* Top-of-page guarantee badge */}
+          {/* Guarantee badge */}
           <Link
             to="/refund-policy"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/40 bg-brand-gold/[0.06] text-brand-gold text-xs font-semibold tracking-wide hover:bg-brand-gold/10 transition-colors"
           >
             <Shield className="w-3.5 h-3.5" />
-            30-Day Money-Back Guarantee · Read the policy
+            First-Month Refund Guarantee · If not 10h saved in week 1, you pay nothing
           </Link>
+        </motion.div>
+
+        {/* Vertical pricing tiers */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <p className="text-center text-xs font-semibold tracking-widest uppercase text-gray-500 mb-6">What industry are you in?</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {verticalTiers.map((tier) => (
+              <div
+                key={tier.vertical}
+                className={`relative rounded-xl border p-5 transition-all duration-200 ${
+                  tier.status === 'active'
+                    ? 'border-brand-red/40 bg-brand-red/[0.05] hover:border-brand-red/60'
+                    : 'border-white/[0.06] bg-white/[0.02] opacity-60'
+                }`}
+              >
+                {tier.status === 'active' && (
+                  <span className="absolute top-3 right-3 text-[10px] font-bold tracking-widest uppercase text-brand-red bg-brand-red/10 px-2 py-0.5 rounded-full">Active</span>
+                )}
+                {tier.status === 'soon' && (
+                  <span className="absolute top-3 right-3 text-[10px] font-bold tracking-widest uppercase text-gray-500 bg-white/[0.04] px-2 py-0.5 rounded-full">Coming Soon</span>
+                )}
+                <p className="text-sm font-bold text-white mb-1">{tier.vertical}</p>
+                <p className="text-xs text-gray-500 mb-3">{tier.sub}</p>
+                <p className={`text-sm font-semibold ${tier.status === 'active' ? 'text-brand-red' : 'text-gray-600'}`}>{tier.price}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Filter tabs */}

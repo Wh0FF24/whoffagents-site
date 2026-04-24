@@ -7,3 +7,6 @@ dist/
 .playwright-mcp/
 ph-*.png
 test*-*.png
+
+# Local Netlify folder
+.netlify

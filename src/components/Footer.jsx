@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="text-sm font-bold text-white">whoff agents</span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed">
-              AI-powered developer tools built and maintained by Atlas. MCP servers, Claude Code skills, and starter kits.
+              AI employees for home-service businesses. Built and operated by Atlas.
             </p>
             <p className="text-xs text-gray-500 mt-3">
               Veteran-owned · Built in the USA
@@ -23,9 +23,9 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Products</h4>
             <div className="space-y-2.5">
-              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">MCP Servers</Link>
-              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Claude Code Skills</Link>
-              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Starter Kits</Link>
+              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Lead Qualification Agent</Link>
+              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Pricing</Link>
+              <Link to="/refund-policy" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Refund Guarantee</Link>
             </div>
           </div>
 
