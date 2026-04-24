@@ -2,6 +2,7 @@ import Hero from '../components/Hero'
 import TechStrip from '../components/TechStrip'
 import PainPoints from '../components/PainPoints'
 import WhatWeShip from '../components/WhatWeShip'
+import FeaturedProducts from '../components/FeaturedProducts'
 import KitBreakdown from '../components/KitBreakdown'
 import Story from '../components/Story'
 import SocialProof from '../components/SocialProof'
@@ -17,6 +18,7 @@ export default function Home() {
       <TechStrip />
       <PainPoints />
       <WhatWeShip />
+      <FeaturedProducts />
       <KitBreakdown />
       <Story />
       <SocialProof />

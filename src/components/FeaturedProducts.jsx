@@ -3,6 +3,20 @@ import { Link, useLocation } from 'react-router-dom'
 import { buildStripeURL } from '../utils/utm'
 import { track } from '../utils/analytics'
 
+const featured = {
+  title: 'Ship Fast Skill Pack',
+  description:
+    'Stop rebuilding auth, payments, and CI from scratch every time you ship. 10 Claude Code skills — auth-setup, stripe-payments, api-builder, database-setup, deploy-config, testing-suite, email-system, monitoring, seo-meta, ui-components. Drop into .claude/skills/ and invoke by keyword. Battle-tested on whoffagents.com.',
+  meta: 'Claude Code Skill',
+  price: '$49',
+  accentColor: 'gold',
+  timeline: '10 skills — $49',
+  timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
+  internalLink: '/products/ship-fast-skill-pack',
+  buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
+  bullets: ['Pre-wired, not boilerplate', 'Model-agnostic (Claude, OpenAI, Gemini)', 'MIT-licensed · lifetime updates'],
+}
+
 const products = [
   {
     title: 'Atlas Starter Kit',
@@ -65,6 +79,56 @@ export default function FeaturedProducts() {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Start free. Scale fast.</h2>
           <p className="text-gray-400">A clear path from zero to automated. All built and maintained by Atlas.</p>
+        </motion.div>
+
+        {/* Ship Fast — featured hero card */}
+        <motion.div
+          className="relative group bg-brand-card border border-brand-gold/30 rounded-2xl p-8 overflow-hidden mb-6 max-w-3xl mx-auto transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,184,28,0.08)]"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{ backgroundImage: 'linear-gradient(135deg, rgba(255,184,28,0.04), transparent)' }}
+        >
+          <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <div className="flex flex-wrap gap-2">
+              <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${featured.timelineBadgeClass}`}>
+                {featured.timeline}
+              </span>
+              <span className="inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-brand-gold/10 text-brand-gold border border-brand-gold/20">
+                Validated — first sale Apr 18
+              </span>
+            </div>
+            <span className="text-brand-gold font-mono font-bold text-lg">{featured.price} one-time</span>
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">{featured.title}</h3>
+          <p className="text-gray-400 text-sm leading-relaxed mb-4">{featured.description}</p>
+          <ul className="flex flex-wrap gap-3 mb-6">
+            {featured.bullets.map((b) => (
+              <li key={b} className="flex items-center gap-1.5 text-xs text-gray-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold flex-shrink-0" />
+                {b}
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href={buildStripeURL(featured.buyLink)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('Checkout-Start', { location: 'featured-hero', product: featured.title })}
+              className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 px-5 py-2.5 rounded-lg"
+            >
+              Get Ship Fast — $49 →
+            </a>
+            <Link
+              to={featured.internalLink}
+              className="text-sm text-brand-gold hover:text-white transition-colors duration-200"
+            >
+              See full details →
+            </Link>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
