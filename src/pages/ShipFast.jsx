@@ -17,6 +17,7 @@ const skills = [
   { name: 'monitoring', desc: 'Sentry/PostHog wiring and structured JSON logging' },
   { name: 'seo-meta', desc: 'Meta tags, OG images, and sitemap in one pass' },
   { name: 'ui-components', desc: 'Design-system tokens + accessible component stubs' },
+  { name: 'context-anchor', desc: 'Drops a working reference to prevent cascading context drift — run before task switches, handoffs, or after a break' },
 ]
 
 const features = [
@@ -66,7 +67,7 @@ export default function ShipFast() {
               Skill
             </span>
             <span className="px-3 py-1 rounded-full text-xs font-medium bg-brand-red/10 text-brand-red border border-brand-red/20">
-              10 skills — $49
+              11 skills — $49
             </span>
             <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-300 border border-white/10">
               MIT Licensed

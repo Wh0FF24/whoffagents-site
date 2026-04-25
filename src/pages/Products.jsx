@@ -54,11 +54,11 @@ const products = [
     id: 2,
     title: 'Ship Fast Skill Pack',
     description:
-      '10 Claude Code skills for the unfun layer of shipping a SaaS: auth-patterns, stripe-payments, testing-suite, api-routes, deploy-config, db-migrations, env-config, monitoring, seo-meta, error-handling. Each activates on keyword match. Drop into .claude/skills/ and go.',
+      '11 Claude Code skills for the unfun layer of shipping a SaaS: auth-patterns, stripe-payments, testing-suite, api-routes, deploy-config, db-migrations, env-config, monitoring, seo-meta, error-handling — plus context-anchor to prevent context drift mid-build. Drop into .claude/skills/ and go.',
     category: 'skill',
     price: '$49',
     accent: 'gold',
-    timeline: '10 skills — $49',
+    timeline: '11 skills — $49',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
     learnMoreLink: '/products/ship-fast-skill-pack',
