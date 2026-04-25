@@ -17,6 +17,17 @@ export default function Footer() {
             <p className="text-xs text-gray-500 mt-3">
               Veteran-owned · Built in the USA
             </p>
+            <div className="mt-3">
+              <iframe
+                src="https://ghbtns.com/github-btn.html?user=Wh0FF24&repo=whoff-agents&type=star&count=true"
+                frameBorder="0"
+                scrolling="0"
+                width="90"
+                height="20"
+                title="GitHub Stars"
+                style={{ display: 'block' }}
+              />
+            </div>
           </div>
 
           {/* Products */}

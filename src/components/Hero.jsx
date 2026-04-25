@@ -238,6 +238,18 @@ export default function Hero() {
             </a>
           </motion.div>
 
+          {/* GitHub star button */}
+          <motion.div variants={fadeUp} className="mb-1">
+            <iframe
+              src="https://ghbtns.com/github-btn.html?user=Wh0FF24&repo=whoff-agents&type=star&count=true&size=large"
+              frameBorder="0"
+              scrolling="0"
+              width="170"
+              height="30"
+              title="GitHub Stars"
+            />
+          </motion.div>
+
           {/* Trust signals — directly under CTA */}
           <motion.div variants={fadeUp}>
             <TrustBadges variant="compact" />
