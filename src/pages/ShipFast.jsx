@@ -89,7 +89,7 @@ export default function ShipFast() {
 
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold mb-5 bg-orange-500/10 text-orange-400 border border-orange-500/30">
             <span>⚡</span>
-            <span>48-hour early access: $49 <span className="line-through text-gray-500 font-normal">$99</span></span>
+            <span>Founding price: $49 — will raise as features are added</span>
           </div>
 
           <div className="flex flex-wrap gap-4">
@@ -270,7 +270,7 @@ export default function ShipFast() {
           </p>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold mb-5 bg-orange-500/10 text-orange-400 border border-orange-500/30">
             <span>⚡</span>
-            <span>48-hour early access: $49 <span className="line-through text-gray-500 font-normal">$99</span></span>
+            <span>Founding price: $49 — will raise as features are added</span>
           </div>
           <div>
             <a
