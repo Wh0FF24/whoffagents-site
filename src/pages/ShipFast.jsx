@@ -78,8 +78,8 @@ export default function ShipFast() {
             Stop rebuilding auth, payments, and CI from scratch every time you ship.
           </h1>
 
-          <p className="text-gray-400 text-lg leading-relaxed mb-5 max-w-2xl">
-            10 Claude Code skills for the unfun layer of shipping a SaaS. Drop into{' '}
+          <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-2xl">
+            11 Claude Code skills for the unfun layer of shipping a SaaS. Drop into{' '}
             <code className="text-brand-gold bg-white/5 px-1.5 py-0.5 rounded text-sm">.claude/skills/</code>{' '}
             and invoke by keyword. Each skill handles one whole system — auth, payments, deploys, tests — in a single run.
           </p>
@@ -133,7 +133,7 @@ export default function ShipFast() {
           </div>
           <div className="flex gap-6 text-center ml-auto">
             {[
-              { n: '10', label: 'skills' },
+              { n: '11', label: 'skills' },
               { n: '~40h', label: 'saved / project' },
               { n: '$49', label: 'one-time' },
             ].map(({ n, label }) => (
