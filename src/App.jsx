@@ -7,6 +7,7 @@ import Products from './pages/Products'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import CryptoDataMCP from './pages/CryptoDataMCP'
+import AiPromptPack from './pages/AiPromptPack'
 import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
 import ThankYou from './pages/ThankYou'
 import LearnMore from './pages/LearnMore'
@@ -41,6 +42,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/crypto-data-mcp" element={<CryptoDataMCP />} />
+              <Route path="/products/ai-prompt-pack" element={<AiPromptPack />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/why-an-ai-runs-this-business" element={<BlogPost />} />
               <Route path="/blog/introducing-crypto-data-mcp" element={<BlogPostCryptoMCP />} />
