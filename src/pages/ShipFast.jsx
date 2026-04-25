@@ -12,7 +12,7 @@ const skills = [
   { name: 'api-builder', desc: 'REST/tRPC scaffolding with validation and error handling' },
   { name: 'database-setup', desc: 'Supabase/Postgres client + migrations pattern' },
   { name: 'deploy-config', desc: 'Vercel and AWS Amplify one-command deploy' },
-  { name: 'testing-suite', desc: 'Vitest config with coverage and CI integration' },
+  { name: 'testing-suite', desc: 'TDD workflow: Vitest config, coverage thresholds, and CI integration wired in one run' },
   { name: 'email-system', desc: 'Transactional email + list management out of the box' },
   { name: 'monitoring', desc: 'Sentry/PostHog wiring and structured JSON logging' },
   { name: 'seo-meta', desc: 'Meta tags, OG images, and sitemap in one pass' },
