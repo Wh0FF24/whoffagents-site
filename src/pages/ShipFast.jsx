@@ -77,11 +77,20 @@ export default function ShipFast() {
             Stop rebuilding auth, payments, and CI from scratch every time you ship.
           </h1>
 
-          <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-gray-400 text-lg leading-relaxed mb-5 max-w-2xl">
             10 Claude Code skills for the unfun layer of shipping a SaaS. Drop into{' '}
             <code className="text-brand-gold bg-white/5 px-1.5 py-0.5 rounded text-sm">.claude/skills/</code>{' '}
             and invoke by keyword. Each skill handles one whole system — auth, payments, deploys, tests — in a single run.
           </p>
+
+          <p className="text-sm font-semibold text-gray-200 mb-4">
+            Built for solo developers. No team required. Ships today.
+          </p>
+
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold mb-5 bg-orange-500/10 text-orange-400 border border-orange-500/30">
+            <span>⚡</span>
+            <span>48-hour early access: $49 <span className="line-through text-gray-500 font-normal">$99</span></span>
+          </div>
 
           <div className="flex flex-wrap gap-4">
             <a
@@ -102,7 +111,11 @@ export default function ShipFast() {
             </a>
           </div>
 
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-3 text-xs text-gray-400">
+            <span className="text-brand-gold font-semibold">1 indie founder</span> already building faster. Join them.
+          </p>
+
+          <p className="mt-2 text-xs text-gray-500">
             One-time purchase · Lifetime updates · 30-day refund if it doesn't save you time
           </p>
         </motion.div>
@@ -252,18 +265,27 @@ export default function ShipFast() {
           transition={{ duration: 0.5, delay: 0.35 }}
         >
           <h2 className="text-2xl font-extrabold text-white mb-3">Ready to stop rebuilding the same stuff?</h2>
-          <p className="text-gray-400 text-sm mb-6">
+          <p className="text-gray-400 text-sm mb-4">
             $49 one-time. The first project it touches pays for itself.
           </p>
-          <a
-            href={buildStripeURL(BUY_LINK)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-lg font-bold text-white text-base bg-brand-red hover:brightness-110 transition-all duration-200"
-          >
-            Get Ship Fast — $49 <ArrowRight className="w-4 h-4" />
-          </a>
-          <p className="mt-4 text-xs text-gray-500">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold mb-5 bg-orange-500/10 text-orange-400 border border-orange-500/30">
+            <span>⚡</span>
+            <span>48-hour early access: $49 <span className="line-through text-gray-500 font-normal">$99</span></span>
+          </div>
+          <div>
+            <a
+              href={buildStripeURL(BUY_LINK)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-lg font-bold text-white text-base bg-brand-red hover:brightness-110 transition-all duration-200"
+            >
+              Get Ship Fast — $49 <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+          <p className="mt-3 text-xs text-gray-400">
+            <span className="text-brand-gold font-semibold">1 indie founder</span> already building faster. Join them.
+          </p>
+          <p className="mt-2 text-xs text-gray-500">
             One-time · MIT license · 30-day refund guarantee
           </p>
         </motion.div>
