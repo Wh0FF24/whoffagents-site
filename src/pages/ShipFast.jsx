@@ -131,6 +131,30 @@ export default function ShipFast() {
           </div>
         </motion.div>
 
+        {/* Product images */}
+        <motion.section
+          className="mb-16 space-y-6"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          {[
+            { src: '/images/ship-fast-01-hero.png', alt: 'Before: 847 lines from scratch. After: 10 skills installed in seconds.' },
+            { src: '/images/ship-fast-02-in-action.png', alt: 'Type /auth setup — auth is wired in under 1 second.' },
+            { src: '/images/ship-fast-03-diff-stat.png', alt: '847 lines of auth boilerplate vs 41 lines with Ship Fast. 95% less code.' },
+          ].map(({ src, alt }, i) => (
+            <motion.div
+              key={src}
+              className="rounded-xl overflow-hidden border border-white/[0.06]"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.15 + i * 0.08 }}
+            >
+              <img src={src} alt={alt} className="w-full block" loading="lazy" />
+            </motion.div>
+          ))}
+        </motion.section>
+
         {/* Skills grid */}
         <motion.section
           className="mb-16"
