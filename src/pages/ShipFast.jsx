@@ -41,6 +41,10 @@ const objections = [
     q: '"What if a skill breaks after an update?"',
     a: 'The repo is open on GitHub under MIT. I fix reported issues personally within 48 hours. You can also patch your local copy — it\'s just a Markdown file.',
   },
+  {
+    q: '"What do I actually get and when?"',
+    a: "The moment Stripe confirms your payment, a GitHub repo invite lands at your checkout email. Accept it, clone the repo, copy the skills folder into your project — you're running /auth-setup in under 2 minutes. No license servers, no SaaS dashboards, no waiting. It's files.",
+  },
 ]
 
 export default function ShipFast() {
