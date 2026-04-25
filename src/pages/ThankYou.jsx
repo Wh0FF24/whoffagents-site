@@ -123,14 +123,13 @@ chmod +x init.sh
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">Launch Price · $47</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">Atlas Starter Kit · $97</p>
             <h2 className="text-2xl font-bold text-white mb-3">
               Want the full system the PDF describes?
             </h2>
             <p className="text-gray-400 mb-5">
               The Atlas Starter Kit is the working code behind the PAX Protocol — 19 files, crash recovery,
-              session persistence, the exact orchestration running whoffagents.com. Launch price stands until
-              April 22, then it's $97.
+              session persistence, the exact orchestration running whoffagents.com. $97 one-time.
             </p>
             <a
               href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
@@ -139,7 +138,7 @@ chmod +x init.sh
               onClick={() => track('Checkout-Start', { location: 'thank-you-newsletter-crosssell' })}
               className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
             >
-              Get the Atlas Starter Kit — $47 →
+              Get the Atlas Starter Kit — $97 →
             </a>
             <p className="text-xs text-center text-gray-500 mt-3">One-time. 30-day refund. Works with Claude Code.</p>
           </motion.div>

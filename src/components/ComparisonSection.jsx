@@ -21,7 +21,7 @@ const rows = [
     label: 'Price',
     diy: 'Engineer hours + API',
     crew: '$99 / month',
-    atlas: <><span className="text-white font-extrabold text-lg">$47</span><br /><span className="text-brand-gold text-xs font-semibold">one-time · no subscription</span></>,
+    atlas: <><span className="text-white font-extrabold text-lg">$97</span><br /><span className="text-brand-gold text-xs font-semibold">one-time · no subscription</span></>,
   },
   {
     label: 'Time to first agent',
@@ -93,7 +93,7 @@ export default function ComparisonSection() {
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
             CrewAI charges $99/month to use a framework you still have to build.
-            Hiring a team costs $8k–$20k/month. The Atlas Starter Kit is $47. Once.
+            Hiring a team costs $8k–$20k/month. The Atlas Starter Kit is $97. Once.
           </p>
         </motion.div>
 
@@ -120,7 +120,7 @@ export default function ComparisonSection() {
                   <span className="text-brand-gold text-sm">★</span>{' '}
                   <span className="text-white text-sm font-bold">Atlas Starter Kit</span>
                   <br />
-                  <span className="text-brand-red text-xs font-semibold">$47 one-time</span>
+                  <span className="text-brand-red text-xs font-semibold">$97 one-time</span>
                 </th>
               </tr>
             </thead>
@@ -159,7 +159,7 @@ export default function ComparisonSection() {
             {' '}·{' '}
             DIY = <span className="text-gray-400 font-semibold">weeks + engineer time</span>
             {' '}·{' '}
-            Atlas Starter Kit = <span className="text-brand-gold font-semibold">$47, once</span>
+            Atlas Starter Kit = <span className="text-brand-gold font-semibold">$97, once</span>
           </p>
           <p className="text-gray-700 text-xs mb-8">After 1 month of CrewAI you've already spent more than twice as much.</p>
           <a
@@ -169,7 +169,7 @@ export default function ComparisonSection() {
             onClick={() => track('Checkout-Start', { location: 'comparison' })}
             className="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-red/90 text-white font-semibold px-8 py-3.5 rounded-lg text-sm transition-all duration-200 hover:shadow-[0_0_24px_rgba(200,16,46,0.35)]"
           >
-            Get the Atlas Starter Kit — $47
+            Get the Atlas Starter Kit — $97
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

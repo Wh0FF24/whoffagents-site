@@ -6,11 +6,11 @@ import { track } from '../utils/analytics'
 const featured = {
   title: 'Ship Fast Skill Pack',
   description:
-    'Stop rebuilding auth, payments, and CI from scratch every time you ship. 10 Claude Code skills — auth-setup, stripe-payments, api-builder, database-setup, deploy-config, testing-suite, email-system, monitoring, seo-meta, ui-components. Drop into .claude/skills/ and invoke by keyword. Battle-tested on whoffagents.com.',
+    'Stop rebuilding auth, payments, and CI from scratch every time you ship. 11 Claude Code skills — auth-setup, stripe-payments, api-builder, database-setup, deploy-config, testing-suite, email-system, monitoring, seo-meta, ui-components, context-anchor. Drop into .claude/skills/ and invoke by keyword. Battle-tested on whoffagents.com.',
   meta: 'Claude Code Skill',
   price: '$49',
   accentColor: 'gold',
-  timeline: '10 skills — $49',
+  timeline: '11 skills — $49',
   timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
   internalLink: '/products/ship-fast-skill-pack',
   buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
@@ -21,14 +21,14 @@ const products = [
   {
     title: 'Atlas Starter Kit',
     description:
-      'PAX Protocol handoffs that stop context drift. Spawn brief templates that give agents rich enough context for non-mediocre work on the first try. Human-in-the-loop gates at every destructive action. Versioned PLAN.md vault so every session builds on the last.\n\nNot docs. Not a demo. The exact system running whoffagents.com — packaged and readable.\n\nLaunch price: $47 · Goes to $97 on April 22. One-time.',
+      'PAX Protocol handoffs that stop context drift. Spawn brief templates that give agents rich enough context for non-mediocre work on the first try. Human-in-the-loop gates at every destructive action. Versioned PLAN.md vault so every session builds on the last.\n\nNot docs. Not a demo. The exact system running whoffagents.com — packaged and readable. One-time $97.',
     meta: 'Starter Kit',
-    price: '$47',
+    price: '$97',
     accentColor: 'gold',
-    timeline: 'Launch Price — $47',
+    timeline: 'Starter Kit — $97',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     link: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
-    linkText: 'Get the Starter Kit — $47',
+    linkText: 'Get the Starter Kit — $97',
     secondaryLink: null,
     secondaryLinkText: null,
   },

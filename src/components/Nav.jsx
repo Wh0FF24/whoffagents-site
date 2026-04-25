@@ -26,14 +26,14 @@ export default function Nav() {
     >
       {/* PH Launch Banner */}
       <div className="w-full bg-brand-red/90 text-white text-xs text-center py-2 px-4">
-        Launch Week: $47 → $97 on Apr 22.{' '}
+        Atlas Starter Kit — $97 one-time. PAX Protocol, 19 files, the exact system running whoffagents.com.{' '}
         <a
           href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
           target="_blank"
           rel="noopener noreferrer"
           className="underline font-semibold hover:opacity-80 transition-opacity"
         >
-          Get the Starter Kit before it goes up →
+          Get the Starter Kit →
         </a>
       </div>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
