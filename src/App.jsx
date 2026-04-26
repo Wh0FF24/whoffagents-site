@@ -15,6 +15,7 @@ import About from './pages/About'
 import RefundPolicy from './pages/RefundPolicy'
 import AtlasOps from './pages/AtlasOps'
 import ShipFast from './pages/ShipFast'
+import FreeSkill from './pages/FreeSkill'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
 import PHLaunchBanner from './components/PHLaunchBanner'
@@ -52,6 +53,7 @@ function App() {
               <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route path="/atlas/ops" element={<AtlasOps />} />
               <Route path="/products/ship-fast-skill-pack" element={<ShipFast />} />
+              <Route path="/free-skill" element={<FreeSkill />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
