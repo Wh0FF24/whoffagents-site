@@ -1,4 +1,5 @@
 import Hero from '../components/Hero'
+import AtlasPilotBeta from '../components/AtlasPilotBeta'
 import TechStrip from '../components/TechStrip'
 import PainPoints from '../components/PainPoints'
 import WhatWeShip from '../components/WhatWeShip'
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <AtlasPilotBeta />
       <TechStrip />
       <PainPoints />
       <WhatWeShip />
