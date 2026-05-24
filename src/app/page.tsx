@@ -127,7 +127,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { name: "AI SaaS Starter Kit", price: "$99", desc: "Production-ready Next.js + Claude + Stripe + Auth boilerplate. Deploy in an afternoon, not a week.", tag: "Best Value", link: "https://buy.stripe.com/14A7sNaZpcnXgaj3IVaZi09" },
+              { name: "AI SaaS Starter Kit", price: "$47", desc: "Production-ready Next.js + Claude + Stripe + Auth boilerplate. Deploy in an afternoon, not a week.", tag: "Best Value", link: "https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i" },
               { name: "Ship Fast Skill Pack", price: "$49", desc: "Stop rebuilding auth, payments, and CI from scratch on every project. 11 Claude Code skills — battle-tested on whoffagents.com, model-agnostic, MIT-licensed. Drop into .claude/skills/ and ship today. One-time $49.", tag: "Popular", link: "https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a" },
               { name: "MCP Security Scanner", price: "$49/mo", desc: "Automated security scanning for MCP servers — 22 checks, CVE detection, CI/CD ready.", link: "https://buy.stripe.com/00w00ld7x3Rr3nx4MZaZi0d" },
               { name: "Trading Signals MCP", price: "$29/mo", desc: "Real-time crypto/stock technical analysis — RSI, MACD, Bollinger Bands — directly in Claude Code.", link: "https://buy.stripe.com/28EcN75F5afPcY7bbnaZi0e" },
