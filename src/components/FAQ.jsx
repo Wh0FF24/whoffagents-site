@@ -4,19 +4,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 const faqs = [
   {
     q: '"Why not just build this myself?"',
-    a: `You can. Most people who buy this tried first. The problem isn't writing the code — it's the 6 weeks of agents silently overwriting each other's work before you figure out what's actually wrong. We've already hit those walls. The Atlas Starter Kit is the system we rebuilt after the failures, not the first attempt. You're buying the tuning, not the scaffolding.`,
+    a: `You can. Most people who buy this tried first. The problem isn't writing the code — it's the 6 weeks of wiring auth, billing, and AI limits together before you figure out what's actually wrong. We've already hit those walls. The AI SaaS Starter Kit is the system we rebuilt after the failures, not the first attempt. You're buying the working stack, not the scaffolding.`,
   },
   {
     q: '"What if Anthropic just releases official patterns?"',
-    a: `They might. Anthropic is great at building models. They're not a company that ships opinionated ops tooling for indie developers who need agents running overnight with no babysitting. The gap this fills — persistent context, crash recovery, token-efficient handoffs, watchdog coordination — is operational, not theoretical. Official docs won't tell you how to keep six agents aligned on a Tuesday at 2am when one crashes.`,
+    a: `They might. Anthropic is great at building models. They're not a company that ships opinionated Next.js boilerplate with Stripe billing and per-plan Claude limits pre-wired. The gap this fills — auth, billing, streaming AI, plan enforcement, all integrated — is production work, not documentation. Official docs won't assemble it for you.`,
   },
   {
     q: '"Is this just a bunch of config files?"',
-    a: `Config files are the smallest part. What you're actually getting: the orchestration protocol that keeps agents from talking past each other (PAX), the memory architecture that survives context resets, the crash recovery watchdog, and the exact system prompt structure that took months to pressure-test on real production workloads. Yes, some of that lives in files. So does every useful piece of software.`,
+    a: `Boilerplate is the delivery format. What you're actually getting: NextAuth wired to both OAuth providers, Stripe subscriptions with a working webhook handler, a streaming Claude chat UI that enforces per-plan limits, and Prisma models connecting it all — tested together, not just described. Yes, some of that is files. So is every useful piece of software.`,
   },
   {
     q: '"Is this a one-time purchase or a subscription?"',
-    a: `One-time purchase. You pay once, you own it. No monthly fees, no seat licenses, no renewal emails. Future updates to the starter kit are included as long as we're shipping them. You already pay Anthropic for API usage — we're not adding another line item to that bill.`,
+    a: `One-time purchase. You pay $47 once, you own it. No monthly fees, no seat licenses, no renewal emails. Future updates to the starter kit are included as long as we're shipping them. You already pay for your stack — we're not adding another line item.`,
   },
   {
     q: '"What support do I get if I get stuck?"',
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: '"Do I need Claude Code to use this?"',
-    a: `The kit is purpose-built around Claude Code — that's where the file-based skills, hooks, and persistent memory architecture live. The PAX protocol, plan files, and crash recovery patterns transfer to other agent harnesses (we've adapted pieces for Cursor and Codex), but you'll do the porting. If Claude Code is your daily driver, this drops in. If you're using something else, you're buying the playbook, not a config you can copy.`,
+    a: `No. The kit is a Next.js project — you need Node.js 18+, a Stripe account, an Anthropic API key, and a GitHub or Google OAuth app (5-minute setup). No proprietary tooling, no platform lock-in. It runs anywhere Next.js runs.`,
   },
   {
     q: '"What if it doesn\'t work for me?"',

@@ -30,7 +30,7 @@ export default function RefundPolicy() {
               <div>
                 <h2 className="text-xl font-bold text-white mb-3">The Promise</h2>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  If the Atlas Starter Kit doesn't work for you — for any reason — email{' '}
+                  If the AI SaaS Starter Kit doesn't work for you — for any reason — email{' '}
                   <a href="mailto:atlas@whoffagents.com" className="text-brand-gold hover:underline">
                     atlas@whoffagents.com
                   </a>{' '}
@@ -83,7 +83,7 @@ export default function RefundPolicy() {
               the money, the product isn't ready.
             </p>
             <p className="text-gray-400 leading-relaxed mb-4">
-              The Atlas Starter Kit is open source. You can read every line on{' '}
+              The AI SaaS Starter Kit ships with readable source code. You can review the structure on{' '}
               <a href="https://github.com/Wh0FF24" target="_blank" rel="noopener noreferrer" className="text-brand-blue-light hover:text-white">
                 GitHub
               </a>{' '}

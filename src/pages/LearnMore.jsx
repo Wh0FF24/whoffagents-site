@@ -15,11 +15,11 @@ export default function LearnMore() {
         {/* Hero */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
-            Stop Cascading Context Drift.
+            Launch Your AI SaaS This Week.
           </h1>
           <p className="text-xl text-gray-400 leading-relaxed">
-            The production multi-agent system Claude Code developers need &mdash; not documentation,
-            not demos. The architecture that actually runs a business.
+            Production-ready Next.js boilerplate with auth, Stripe billing, and streaming Claude chat
+            pre-wired &mdash; not documentation, not demos. The stack that actually ships.
           </p>
         </div>
 
@@ -27,64 +27,52 @@ export default function LearnMore() {
 
           {/* Section 1 */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">
-            You already know what happens at agent 3.
+            You already know what happens at week three.
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            You start the session strong. Agent 1 does exactly what you asked. Agent 2 is mostly
-            right. By agent 3, something has drifted &mdash; a misunderstood constraint, a missing
-            assumption, a scope that quietly expanded. By the time you get to the test agent,
-            it&apos;s validating the wrong thing entirely.
+            You start a new SaaS project with momentum. The Next.js scaffold is up in minutes.
+            Then you need auth. Then billing. Then you want to add an AI chat feature — but
+            it has to respect subscription tiers. Three weeks later you&apos;re still wiring
+            Stripe webhooks and haven&apos;t touched your actual product idea.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            That&apos;s not a model problem. That&apos;s a handoff problem.
+            That&apos;s not a skills problem. That&apos;s a boilerplate problem.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            And here&apos;s the expensive part: you don&apos;t find out until the work is done.
+            And here&apos;s the expensive part: every project starts over from scratch.
           </p>
 
           {/* Section 2 */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">
-            The two-week cliff nobody talks about
+            The infrastructure tax nobody talks about
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            Most Claude Code developers hit the same wall about two weeks in.
+            Most developers building AI SaaS hit the same wall early.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            Solo use: works great. The model is fast, capable, surprisingly good at the edge cases.
-            You ship things faster than you have in years.
+            Standalone: works great. Next.js is fast, Claude is capable, Stripe&apos;s API is
+            well-documented. You ship small things faster than ever.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            Then you try to scale it. You add a second agent to parallelize the work. Then a third.
-            You read the docs, you watch the talks, you build the PLAN.md file they recommend. For a
-            day or two it holds.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">
-            Then the sessions start drifting. Agents misunderstand each other. One overwrites work
-            the other just did &mdash; silently, with no error. You can&apos;t see what six agents
-            are doing at once. You rebuild from scratch and the same thing happens again.
+            Then you try to build a real product. You need users to log in. You need them on
+            plans. You need the AI feature to know which plan they&apos;re on and enforce a limit.
+            You read the docs for each piece — NextAuth, Stripe, the Anthropic SDK — and they all
+            work individually. Getting them to talk to each other, consistently, with proper
+            webhook handling and database models, takes weeks.
           </p>
           <blockquote className="border-l-2 border-brand-red/40 pl-6 my-6">
             <p className="text-gray-400 italic leading-[1.8]">
-              &ldquo;Cascading context drift, where each agent in the chain slightly misunderstands
-              the task and by the time you get to the test agent it&apos;s validating the wrong
-              thing entirely.&rdquo;
+              &ldquo;I spent three weeks on auth and Stripe before I wrote a single line of
+              product code. Next time I&apos;m starting from a template that has this stuff done.&rdquo;
             </p>
             <cite className="text-sm text-gray-500 not-italic mt-2 block">
-              &mdash; Developer commenting on HN, Feb 2026
-            </cite>
-          </blockquote>
-          <blockquote className="border-l-2 border-brand-red/40 pl-6 my-6">
-            <p className="text-gray-400 italic leading-[1.8]">
-              &ldquo;There&apos;s absolute zero framework out there that&apos;s good enough for
-              serious work.&rdquo;
-            </p>
-            <cite className="text-sm text-gray-500 not-italic mt-2 block">
-              &mdash; HN developer, April 2026
+              &mdash; Developer on r/nextjs, Jan 2026
             </cite>
           </blockquote>
           <p className="text-gray-400 leading-[1.8]">
-            This isn&apos;t a gap in your skills. It&apos;s a gap in the available tooling. The
-            documentation describes the capability. Nobody ships you the working system.
+            This isn&apos;t a gap in your skills. It&apos;s a gap in the available starting points.
+            The documentation describes each piece. Nobody ships you the working system with all
+            the pieces integrated.
           </p>
           <p className="text-gray-400 leading-[1.8]">
             Until now.
@@ -95,94 +83,58 @@ export default function LearnMore() {
             What actually goes wrong (so you know we&apos;ve been there)
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            Six weeks of production failures taught us the specific ways multi-agent Claude Code
-            breaks down. Not theory. Real sessions, real output, real cost.
+            Building the infrastructure for whoffagents.com taught us the specific ways these
+            integrations break. Not theory. Real production failures, real debugging hours.
           </p>
 
           <h3 className="text-lg font-semibold text-white mt-8 mb-3">
-            Problem 1: Context starvation at spawn.
+            Problem 1: Stripe webhooks arrive out of order.
           </h3>
           <p className="text-gray-400 leading-[1.8]">
-            Agents given vague spawn prompts produce vague work. You get output that&apos;s
-            technically responsive but wrong in ways you can&apos;t immediately catch. The agent was
-            capable &mdash; you just didn&apos;t give it enough to work with. The problem compounds
-            when that agent&apos;s output becomes the next agent&apos;s context.
+            A subscription is created. Your webhook handler fires. But the checkout session
+            event arrives after the subscription event. Your handler assumes a sequence that
+            Stripe doesn&apos;t guarantee. The user is on the free plan in your database
+            while Stripe says they&apos;re paying.
           </p>
 
           <h3 className="text-lg font-semibold text-white mt-8 mb-3">
-            Problem 2: Silent state collisions.
+            Problem 2: Per-plan limits in a streaming context.
           </h3>
           <p className="text-gray-400 leading-[1.8]">
-            Two agents writing to the same file. No error. No warning. One truncates the
-            other&apos;s work. Every downstream process breaks. You find out an hour later when
-            nothing makes sense.
-          </p>
-          <blockquote className="border-l-2 border-brand-red/40 pl-6 my-6">
-            <p className="text-gray-400 italic leading-[1.8]">
-              &ldquo;Two agents wrote to the same JSON state file. Concurrent writes = truncated
-              JSON = every downstream hook breaks.&rdquo;
-            </p>
-            <cite className="text-sm text-gray-500 not-italic mt-2 block">&mdash; blakec, HN</cite>
-          </blockquote>
-
-          <h3 className="text-lg font-semibold text-white mt-8 mb-3">
-            Problem 3: No validation at handoff.
-          </h3>
-          <p className="text-gray-400 leading-[1.8]">
-            The agent reports success. You move on. Three steps later you discover the success was
-            fabricated &mdash; the agent completed the action but not the objective. The LLM is
-            &ldquo;100% confident&rdquo; even after a mid-task context compaction it doesn&apos;t
-            remember happening.
-          </p>
-          <blockquote className="border-l-2 border-brand-red/40 pl-6 my-6">
-            <p className="text-gray-400 italic leading-[1.8]">
-              &ldquo;Implementation hallucinations occur with some predictability &mdash; 100% of
-              the time after a mid-task context compaction. Combined with the over-confidence of the
-              LLM, it will 100% of the time say the implementation was 100% successful even though
-              it doesn&apos;t even know what to validate.&rdquo;
-            </p>
-            <cite className="text-sm text-gray-500 not-italic mt-2 block">
-              &mdash; GitHub Issue #20051, anthropics/claude-code
-            </cite>
-          </blockquote>
-
-          <h3 className="text-lg font-semibold text-white mt-8 mb-3">Problem 4: Session amnesia.</h3>
-          <p className="text-gray-400 leading-[1.8]">
-            You close the session. You open a new one. The agent has no idea what happened before.
-            You re-explain the project, re-explain the current state, re-explain what&apos;s already
-            done. Every session costs you 20 minutes of context restoration. Multiply that by six
-            agents and you&apos;ve burned an hour before you&apos;ve shipped anything.
+            You can&apos;t count tokens after the stream finishes and then decide to block — the
+            response is already in the user&apos;s browser. Enforcing per-plan limits requires
+            checking before the stream starts, tracking usage mid-stream, and surfacing the
+            upgrade prompt cleanly. Getting this wrong means free users consume Pro resources
+            or paying users hit walls they shouldn&apos;t.
           </p>
 
           <h3 className="text-lg font-semibold text-white mt-8 mb-3">
-            Problem 5: Observability zero.
+            Problem 3: OAuth callback mismatches in production.
           </h3>
           <p className="text-gray-400 leading-[1.8]">
-            You have six agents running. You can&apos;t see what any of them are doing. One crashes
-            &mdash; silently. You find out when the downstream work doesn&apos;t arrive. You have no
-            session log, no heartbeat, no status trail. Debugging requires reconstructing the
-            session from memory.
+            NextAuth works locally. You deploy. The callback URL is wrong, or the session
+            cookie domain doesn&apos;t match, or the OAuth app hasn&apos;t been updated with
+            the production URL. The fix is a 2-minute config change — but you spend 4 hours
+            finding it.
           </p>
 
           <h3 className="text-lg font-semibold text-white mt-8 mb-3">
-            Problem 6: Token burn before anything ships.
+            Problem 4: SQLite dev / Postgres prod divergence.
           </h3>
           <p className="text-gray-400 leading-[1.8]">
-            Unstructured agent communication is expensive. Every handoff is a wall of prose. Every
-            summary repeats what was already known. A single complex prompt burns 50&ndash;70% of
-            your session limit. You hit the usage wall before you finish the task.
+            You write migrations against SQLite. They run fine locally. In production on Postgres,
+            a column type is different, a constraint that SQLite ignores is enforced, and your
+            deployment breaks. The kit&apos;s Prisma setup uses a single schema that works in
+            both environments without surprises.
           </p>
-          <blockquote className="border-l-2 border-brand-red/40 pl-6 my-6">
-            <p className="text-gray-400 italic leading-[1.8]">
-              &ldquo;I use up Max 5 in 1 hour of working, before I could work 8 hours.&rdquo;
-            </p>
-            <cite className="text-sm text-gray-500 not-italic mt-2 block">
-              &mdash; r/ClaudeAI, March 2026
-            </cite>
-          </blockquote>
+
+          <h3 className="text-lg font-semibold text-white mt-8 mb-3">
+            Problem 5: No dashboard to show users their plan.
+          </h3>
           <p className="text-gray-400 leading-[1.8]">
-            We built the Atlas Starter Kit because we hit every one of these. Not in a test
-            environment. In production, running a real business.
+            You have billing working. Users can upgrade. But they can&apos;t see what plan
+            they&apos;re on, how much of their allowance they&apos;ve used, or where to manage
+            their subscription. Without a dashboard, support tickets replace self-service.
           </p>
 
           {/* Section 4 */}
@@ -190,49 +142,34 @@ export default function LearnMore() {
             The system that runs whoffagents.com
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            Atlas is a Claude Code agent. Since March 2026, Atlas has run the operations of
-            whoffagents.com &mdash; customer discovery, competitor research, content pipeline, launch
-            preparation, daily briefings, copy, and coordination &mdash; with minimal daily input.
+            whoffagents.com runs on this stack. Auth, billing, and Claude-powered features are
+            live in production — not in a demo, not in a staging environment.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            Not autonomously. With human oversight at the decisions that matter. But the 80% of work
-            that doesn&apos;t need a human? Atlas handles it. In parallel. Persistently. Without
-            context-resetting every session.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">
-            This week alone: 50+ discrete research and content sessions. ~391,000 tokens of
-            productive work. Six specialized agents running in parallel. Zero lost sessions.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">
-            The system that makes this work is the Atlas Starter Kit. Every pattern, every protocol,
-            every handoff template &mdash; extracted from six weeks of production operation and
-            packaged so you can deploy it to run yours.
+            The AI SaaS Starter Kit is that stack extracted and documented so you can deploy it
+            to run yours. Every integration decision, every Stripe webhook pattern, every
+            per-plan enforcement approach — pulled from six months of production operation and
+            packaged so you skip the part where you figure it out the hard way.
           </p>
 
           {/* Section 5 — Features */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">
-            What&apos;s inside the Atlas Starter Kit
+            What&apos;s inside the AI SaaS Starter Kit
           </h2>
 
           <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mt-6 space-y-8">
 
             <div>
               <h3 className="text-lg font-bold text-white mb-3">
-                PAX Protocol &mdash; Structured Handoffs That Eliminate Drift
+                NextAuth &mdash; GitHub + Google OAuth, Ready on Day 1
               </h3>
-              <p className="text-gray-400 leading-[1.8] mb-4">
-                Every agent-to-agent handoff follows a single format:
-              </p>
-              <code className="block bg-black/40 border border-white/10 rounded-lg p-4 text-sm text-brand-gold break-all leading-relaxed">
-                [AGENT→NEXT] objective:X | status:✓complete | criteria-met:yes | summary:... |
-                file:path/to/output.md | next:ACTION
-              </code>
-              <p className="text-gray-400 leading-[1.8] mt-4">
-                That single line replaces a paragraph of prose. No interpretation. No drift.{' '}
+              <p className="text-gray-400 leading-[1.8]">
+                Both OAuth providers are pre-configured via NextAuth. Session management,
+                protected routes, and user callbacks are wired. You add your provider credentials
+                and it works.{' '}
                 <strong className="text-gray-300">
-                  70% token reduction on inter-agent communication vs. prose handoffs.
-                </strong>{' '}
-                Context stays precise at agent 10 the same as at agent 2.
+                  No manual OAuth flow implementation. No session handling from scratch.
+                </strong>
               </p>
             </div>
 
@@ -240,21 +177,18 @@ export default function LearnMore() {
 
             <div>
               <h3 className="text-lg font-bold text-white mb-3">
-                Spawn Brief Templates &mdash; Context That Actually Works
+                Stripe Billing &mdash; 3 Tiers, Portal, Webhooks
               </h3>
               <p className="text-gray-400 leading-[1.8]">
-                The kit ships with templated spawn briefs that give every sub-agent six fields before
-                it starts: objective, persona, constraints, output format, file path, handoff target.
-                The 5-minute brief pays back 30 minutes of hallucinated work.
+                Three subscription tiers with Stripe Checkout, the customer self-serve portal,
+                and a webhook handler covering the full subscription lifecycle: created, updated,
+                cancelled, payment failed. Plan data is stored in your database and synced on
+                every webhook event.
               </p>
               <blockquote className="border-l-2 border-brand-red/40 pl-6 mt-4">
                 <p className="text-gray-400 italic leading-[1.8] text-sm">
-                  &ldquo;Give teammates rich context in their spawn prompts. Skimping on context is
-                  the number one reason teammates produce mediocre work.&rdquo;
+                  &ldquo;Stripe webhooks are where every boilerplate cuts corners. This one doesn&apos;t.&rdquo;
                 </p>
-                <cite className="text-sm text-gray-500 not-italic mt-1 block">
-                  &mdash; r/ClaudeAI developer, Feb 2026
-                </cite>
               </blockquote>
             </div>
 
@@ -262,23 +196,14 @@ export default function LearnMore() {
 
             <div>
               <h3 className="text-lg font-bold text-white mb-3">
-                Human-in-the-Loop Gates &mdash; Real Oversight, Not Theater
+                Streaming Claude Chat &mdash; Per-Plan Limits Enforced
               </h3>
               <p className="text-gray-400 leading-[1.8]">
-                The kit ships with two hard gate categories:
-              </p>
-              <ul className="text-gray-400 pl-6 space-y-2 list-disc mt-3">
-                <li className="leading-[1.7]">
-                  <strong className="text-gray-300">Content QA Gate:</strong> All output that
-                  touches external systems passes a review gate before it enters your queue.
-                </li>
-                <li className="leading-[1.7]">
-                  <strong className="text-gray-300">External Action Gate:</strong> Anything that
-                  touches GitHub, email, social, or money stops and waits. Every time. No exceptions.
-                </li>
-              </ul>
-              <p className="text-gray-400 leading-[1.8] mt-4">
-                Atlas is autonomous within a sandbox. Outside the sandbox, it&apos;s you.
+                Claude chat with streaming responses rendered incrementally in the browser.
+                Message limits are checked before the stream starts, tracked per user, and
+                surfaced with an upgrade prompt when hit. Free users get a limit. Pro users
+                get more. Enterprise users are uncapped. The logic is in the kit — not a
+                TODO comment.
               </p>
             </div>
 
@@ -286,16 +211,12 @@ export default function LearnMore() {
 
             <div>
               <h3 className="text-lg font-bold text-white mb-3">
-                Session Persistence &mdash; Every Session Builds on the Last One
+                Prisma ORM &mdash; SQLite Dev, Postgres Prod
               </h3>
               <p className="text-gray-400 leading-[1.8]">
-                The kit&apos;s PLAN.md + PROGRESS.md architecture makes this real. Every session
-                writes its state to files. Every new session reads from where the last one ended. No
-                more re-explaining the project. No more context restoration overhead.
-              </p>
-              <p className="text-gray-400 leading-[1.8] mt-3">
-                Your folder becomes the operating system. Agents execute inside it. The system is
-                persistent across sessions, crashes, and model updates.
+                One schema. Two environments. SQLite for local development — zero setup,
+                instant start. Postgres for production — swap one environment variable.
+                Migrations included. Models cover users, sessions, subscriptions, and usage.
               </p>
             </div>
 
@@ -303,54 +224,13 @@ export default function LearnMore() {
 
             <div>
               <h3 className="text-lg font-bold text-white mb-3">
-                Validation Architecture &mdash; Review Before Execute
+                Dashboard + Dark Mode
               </h3>
               <p className="text-gray-400 leading-[1.8]">
-                Agents are better at reviewing work than producing it. The kit ships with a
-                validation layer that forces agents to check output before marking tasks complete
-                &mdash; not as an afterthought, but as a structural requirement of the handoff
-                protocol.
-              </p>
-              <blockquote className="border-l-2 border-brand-red/40 pl-6 mt-4">
-                <p className="text-gray-400 italic leading-[1.8] text-sm">
-                  &ldquo;I&apos;ve found LLMs to be significantly better in the &lsquo;review&rsquo;
-                  stage than the implementation stage.&rdquo;
-                </p>
-                <cite className="text-sm text-gray-500 not-italic mt-1 block">
-                  &mdash; HN developer, 396-upvote thread
-                </cite>
-              </blockquote>
-            </div>
-
-            <hr className="border-0 border-t border-brand-border" />
-
-            <div>
-              <h3 className="text-lg font-bold text-white mb-3">
-                Observability &mdash; See What Six Agents Are Doing
-              </h3>
-              <p className="text-gray-400 leading-[1.8]">
-                Session logs. Status files. Heartbeat checks. Structured output trails that tell you
-                what each agent did, when, and what it produced.
-              </p>
-              <p className="text-gray-400 leading-[1.8] mt-3">
-                The 270-second orchestration tick isn&apos;t arbitrary: it&apos;s calibrated to
-                Anthropic&apos;s prompt cache TTL. Run faster and you pay full context costs on every
-                check. The kit&apos;s timing keeps you inside the cache window on every orchestrator
-                heartbeat &mdash; meaning efficient, not expensive.
-              </p>
-            </div>
-
-            <hr className="border-0 border-t border-brand-border" />
-
-            <div>
-              <h3 className="text-lg font-bold text-white mb-3">
-                Crash Recovery &mdash; Agents That Don&apos;t Die Silently
-              </h3>
-              <p className="text-gray-400 leading-[1.8]">
-                Sessions that crash get relaunched automatically. State is preserved in files, not
-                memory &mdash; so a crash doesn&apos;t lose work, it just pauses it. The watchdog,
-                auto-restart logic, and OOM prevention patterns are in the kit. Running six
-                persistent agents overnight without babysitting requires this.
+                A functional user dashboard showing current plan, usage against the limit,
+                and a direct path to the Stripe portal for subscription management. Built with
+                shadcn/ui-style components. Dark mode via next-themes, toggle included.
+                Full TypeScript throughout.
               </p>
             </div>
 
@@ -361,120 +241,75 @@ export default function LearnMore() {
             What you actually get
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            Every file is readable. Every pattern is documented. You can understand the full system
-            in an afternoon.
+            Every file is readable. Every integration is documented. You can understand the
+            full stack in an afternoon.
           </p>
           <ul className="text-gray-400 pl-6 space-y-2 list-disc mt-4">
-            <li className="leading-[1.7]">PAX Protocol spec + example handoff files</li>
-            <li className="leading-[1.7]">
-              Spawn brief templates (12 templates, covering orchestration, research, content, and
-              code tasks)
-            </li>
-            <li className="leading-[1.7]">
-              Human gate configuration for content QA and external actions
-            </li>
-            <li className="leading-[1.7]">
-              PLAN.md + PROGRESS.md architecture with session state management
-            </li>
-            <li className="leading-[1.7]">Session log format and observability trail setup</li>
-            <li className="leading-[1.7]">Watchdog + crash recovery patterns</li>
-            <li className="leading-[1.7]">CLAUDE.md templates for each agent role</li>
-            <li className="leading-[1.7]">
-              Coordination file structure (the folder-as-OS architecture)
-            </li>
-            <li className="leading-[1.7]">
-              Bootstrap documentation &mdash; the exact _START-HERE.md that gets new agents
-              oriented in under 5 minutes
-            </li>
-            <li className="leading-[1.7]">
-              Token efficiency rules (PAX compression, verbosity controls, cache-aware scheduling)
-            </li>
+            <li className="leading-[1.7]">NextAuth config — GitHub + Google OAuth, session callbacks, protected route middleware</li>
+            <li className="leading-[1.7]">Stripe integration — Checkout sessions, customer portal, webhook handler</li>
+            <li className="leading-[1.7]">Streaming Claude chat API route with per-plan limit enforcement</li>
+            <li className="leading-[1.7]">Prisma schema — users, accounts, sessions, subscriptions, usage records</li>
+            <li className="leading-[1.7]">User dashboard — plan display, usage meter, upgrade CTA</li>
+            <li className="leading-[1.7]">shadcn/ui-style component library — Button, Card, Input, Badge, layout primitives</li>
+            <li className="leading-[1.7]">Dark mode via next-themes</li>
+            <li className="leading-[1.7]">Full TypeScript — no implicit any, no JS files to convert</li>
+            <li className="leading-[1.7]">.env.example with every required variable documented</li>
+            <li className="leading-[1.7]">README with step-by-step deploy guide for Vercel + Neon Postgres</li>
           </ul>
           <div className="mt-6 space-y-2">
             <p className="text-gray-400 leading-[1.8]">
-              <strong className="text-gray-300">Format:</strong> File package. Readable source. No
-              SaaS, no account, no dependency on us staying in business.
+              <strong className="text-gray-300">Delivery:</strong> Instant GitHub invite after purchase.
             </p>
             <p className="text-gray-400 leading-[1.8]">
-              <strong className="text-gray-300">Setup time:</strong> Under 2 hours to first running
-              session for a developer already using Claude Code.
+              <strong className="text-gray-300">Setup time:</strong> Under 2 hours from clone to a working
+              local dev environment with auth and billing functional.
             </p>
             <p className="text-gray-400 leading-[1.8]">
-              <strong className="text-gray-300">Free quickstart:</strong> The PAX Protocol spec and
-              basic coordination structure are on GitHub. Evaluate the architecture before you pay
-              for anything.
+              <strong className="text-gray-300">Requirements:</strong> Node.js 18+, Stripe account,
+              Anthropic API key, GitHub or Google OAuth app (5-minute setup).
             </p>
           </div>
 
-          {/* Section 7 — Proof */}
-          <h2 className="text-2xl font-bold text-white mt-10 mb-4">
-            Proof: Numbers from six weeks of production
-          </h2>
-          <p className="text-gray-400 leading-[1.8]">
-            These aren&apos;t projections. They&apos;re from the system running whoffagents.com
-            today.
-          </p>
-          <div className="grid grid-cols-2 gap-4 mt-6">
-            {[
-              { stat: '50+', label: 'discrete sessions run by Atlas this week alone' },
-              { stat: '~391K', label: 'tokens of productive work in a single day' },
-              { stat: '70%', label: 'token reduction via PAX vs. prose handoffs' },
-              { stat: '6', label: 'parallel agents with session persistence' },
-              { stat: '0', label: 'lost sessions from watchdog + crash recovery' },
-              { stat: '$4', label: 'multi-thousand line refactors with structured handoffs' },
-            ].map(({ stat, label }) => (
-              <div
-                key={stat}
-                className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-5"
-              >
-                <div className="text-3xl font-extrabold text-brand-red mb-1">{stat}</div>
-                <div className="text-sm text-gray-400 leading-[1.5]">{label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Section 8 — Offer */}
+          {/* Section 7 — Offer */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">The offer</h2>
           <div className="bg-brand-red/5 border border-brand-red/20 rounded-2xl p-8 text-center">
-            <div className="text-5xl font-extrabold text-white mb-2">$97</div>
+            <div className="text-5xl font-extrabold text-white mb-2">$47</div>
             <div className="text-lg text-gray-400 mb-6">One time. No subscription.</div>
             <p className="text-gray-400 leading-[1.8] mb-6 max-w-md mx-auto">
-              No seat licenses. No renewal. No monthly fee on top of your Anthropic bill. You pay
+              No seat licenses. No renewal. No monthly fee on top of your API bill. You pay
               once. You own it. Future updates included.
             </p>
             <div className="text-sm text-gray-500 mb-8 space-y-1">
-              <p>CrewAI: $99/month &nbsp;|&nbsp; Claude Managed Agents: metered per session</p>
-              <p className="text-gray-300 font-semibold">Atlas Starter Kit: $97. One time. Forever.</p>
+              <p>Build it yourself: 3–6 weeks &nbsp;|&nbsp; Hire a dev: $3–8k</p>
+              <p className="text-gray-300 font-semibold">AI SaaS Starter Kit: $47. One time. Forever.</p>
             </div>
             <a
               href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
               className="inline-block bg-brand-red text-white font-bold text-lg px-10 py-4 rounded-xl hover:brightness-110 transition-all cursor-pointer"
             >
-              Get the Starter Kit &mdash; $97
+              Get the Kit &mdash; $47
             </a>
           </div>
 
-          {/* Section 9 — Guarantee */}
+          {/* Section 8 — Guarantee */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">The guarantee</h2>
           <p className="text-gray-400 leading-[1.8]">
-            <strong className="text-gray-300">You keep everything. Forever.</strong>
+            <strong className="text-gray-300">30-day full refund. No questions.</strong>
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            The core components &mdash; PAX Protocol, spawn brief templates, PLAN.md architecture
-            &mdash; are based on open patterns. If we disappear tomorrow, your files still work.
-            No dependency on our infrastructure, our API, or our continued existence.
+            If you can&apos;t get the kit running in your environment within 30 days, email{' '}
+            <a href="mailto:atlas@whoffagents.com" className="text-brand-gold hover:text-white transition-colors">
+              atlas@whoffagents.com
+            </a>
+            {' '}and you&apos;ll get a full refund. No form. No ticket queue. Direct response.
+            You keep the files either way.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            If you set up the system and it doesn&apos;t run in your environment within 48 hours,
-            email us and we&apos;ll debug it with you personally. If we can&apos;t fix it, you get a
-            full refund. No form. No ticket queue. Direct response.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">
-            We&apos;re not a ghost vendor. Atlas runs on this system every day. We have skin in the
-            game.
+            We&apos;re not a ghost vendor. whoffagents.com runs on this stack every day.
+            We have skin in the game.
           </p>
 
-          {/* Section 10 — FAQ */}
+          {/* Section 9 — FAQ */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">
             Common questions (honest answers)
           </h2>
@@ -482,27 +317,27 @@ export default function LearnMore() {
             {[
               {
                 q: 'Why not just build this myself?',
-                a: "You can. Most people who buy this tried first. The problem isn't writing the config — it's the six weeks of agents silently overwriting each other's work before you figure out what's actually wrong. We've already hit those walls. The kit is the system we rebuilt after the failures, not the first attempt. You're buying the tuning, not the scaffolding.",
+                a: "You can. Most people who buy this tried first. The problem isn't writing the code — it's the weeks spent wiring auth, billing, and AI limits together and discovering edge cases (out-of-order Stripe webhooks, streaming plan enforcement, SQLite/Postgres schema divergence) the hard way. This is the system built after those failures.",
               },
               {
-                q: 'Is this just a bunch of config files?',
-                a: "Config files are the delivery format. The value is the orchestration protocol inside them — which took months of real multi-agent failures to develop. Same way a production Dockerfile is \"just a text file.\" The expertise is in what's in it and why.",
+                q: 'Is this just a bunch of boilerplate?',
+                a: "Boilerplate is the delivery format. The value is the integrations inside it — which took months of real production use to get right. Same way a production Dockerfile is 'just a text file.' The expertise is in what's in it and why.",
               },
               {
-                q: "What if Anthropic releases official patterns?",
-                a: "They might. The gap this fills is operational: persistent context, crash recovery, token-efficient handoffs, watchdog coordination. Official docs won't tell you how to keep six agents aligned on a Tuesday at 2am when one crashes. That's what the kit does.",
+                q: "What do I need to use this?",
+                a: "Node.js 18+, a Stripe account, an Anthropic API key, and a GitHub or Google OAuth app. The OAuth app takes about 5 minutes to set up — the README walks through it.",
               },
               {
                 q: "I don't want another SaaS subscription.",
-                a: "It's not. One-time purchase. You own the files. No account, no platform, no renewal. You already pay Anthropic for API usage — we're not adding another line item.",
+                a: "It's not. One-time $47. You own the code. No account, no platform, no renewal. You already pay for your stack — we're not adding another line item.",
               },
               {
                 q: 'What support do I get?',
                 a: "Discord access, 24-hour response SLA, direct line to the person who built it. Not a ticket queue. If something breaks on our end, we fix it.",
               },
               {
-                q: 'Is this production-ready or a hobby project?',
-                a: "Atlas has run whoffagents.com on this architecture since March 2026. Every pattern in the kit is running in production today. It's not a hobby project.",
+                q: 'Is this production-ready or a starter template?',
+                a: "whoffagents.com runs on this stack in production today. It's not a tutorial project or a demo — it's the working infrastructure extracted and packaged.",
               },
             ].map(({ q, a }) => (
               <div key={q}>
@@ -512,7 +347,7 @@ export default function LearnMore() {
             ))}
           </div>
 
-          {/* Section 11 — Who it's for */}
+          {/* Section 10 — Who it's for */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">
             Who this is for (and who it isn&apos;t)
           </h2>
@@ -521,21 +356,20 @@ export default function LearnMore() {
               <h3 className="text-base font-bold text-white mb-3">This is for you if:</h3>
               <ul className="text-gray-400 space-y-2 text-sm">
                 <li className="leading-[1.6]">
-                  You use Claude Code and have tried multi-agent orchestration that devolved into
-                  chaos by agent 3
+                  You want to build an AI SaaS and don&apos;t want to spend weeks on auth and billing
+                  before writing product code
                 </li>
                 <li className="leading-[1.6]">
-                  You&apos;ve hit the two-week cliff &mdash; works solo, breaks at scale
+                  You&apos;ve started projects that stalled at the infrastructure phase
                 </li>
                 <li className="leading-[1.6]">
-                  You want a working reference to study, not abstract documentation
+                  You want a working reference to study and extend, not abstract documentation
                 </li>
                 <li className="leading-[1.6]">
-                  You&apos;re building something that needs agents to run persistently, not just in
-                  demos
+                  You&apos;re comfortable with Next.js and TypeScript
                 </li>
                 <li className="leading-[1.6]">
-                  You want your workflow versioned and persistent, not just your code
+                  You want to ship something real, not a side project that lives in localhost forever
                 </li>
               </ul>
             </div>
@@ -543,61 +377,39 @@ export default function LearnMore() {
               <h3 className="text-base font-bold text-white mb-3">This is not for you if:</h3>
               <ul className="text-gray-400 space-y-2 text-sm">
                 <li className="leading-[1.6]">
-                  You&apos;ve already solved orchestration cleanly and your system is running in
-                  production
+                  You&apos;ve already built your auth + billing + AI stack and it&apos;s running in production
                 </li>
                 <li className="leading-[1.6]">
-                  You&apos;re not using Claude Code (the kit is Claude-specific)
+                  You&apos;re not using Next.js (the kit is Next.js-specific)
                 </li>
                 <li className="leading-[1.6]">
-                  You want a no-code solution (this is for developers who write code)
+                  You want a no-code solution — this requires basic developer comfort with Next.js
                 </li>
               </ul>
             </div>
           </div>
-
-          {/* Section 12 — Closing */}
-          <h2 className="text-2xl font-bold text-white mt-10 mb-4">One more thing</h2>
-          <p className="text-gray-400 leading-[1.8]">
-            The developer community is tired of demos. They&apos;re tired of &ldquo;fancy
-            orchestration&rdquo; claims that fall apart under real workloads. They&apos;ve seen the
-            repos with 20 agents &ldquo;coordinating&rdquo; that nobody can actually observe or
-            debug.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">This isn&apos;t that.</p>
-          <p className="text-gray-400 leading-[1.8]">
-            The Atlas Starter Kit is the exact system running whoffagents.com. You can read every
-            file. You can understand every decision. You can ask why the tick interval is 270 seconds
-            (cache TTL) and get a specific, correct answer.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">
-            It&apos;s a working reference to study. Not documentation. Not slides. The running system
-            &mdash; packaged so you can ship yours.
-          </p>
 
           <hr className="border-0 border-t border-brand-border my-10" />
 
           {/* Final CTA */}
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-white mb-3">
-              Get the Atlas Starter Kit
+              Get the AI SaaS Starter Kit
             </h2>
-            <p className="text-gray-400 mb-8">$97 one-time. Instant download.</p>
+            <p className="text-gray-400 mb-8">$47 one-time. Instant GitHub invite.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
                 className="inline-block bg-brand-red text-white font-bold text-lg px-10 py-4 rounded-xl hover:brightness-110 transition-all cursor-pointer"
               >
-                Buy now &mdash; $97
+                Buy now &mdash; $47
               </a>
-              <a
-                href="https://github.com/Wh0FF24"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/products/ai-saas-starter"
                 className="inline-block border border-brand-border text-gray-300 font-semibold text-lg px-10 py-4 rounded-xl hover:border-white/30 hover:text-white transition-all cursor-pointer"
               >
-                GitHub quickstart &rarr;
-              </a>
+                Full product details &rarr;
+              </Link>
             </div>
             <p className="text-sm text-gray-500 mt-6">
               Questions before you buy?{' '}
@@ -613,8 +425,7 @@ export default function LearnMore() {
 
           <hr className="border-0 border-t border-brand-border my-10" />
           <p className="text-gray-500 italic text-sm leading-[1.8] text-center">
-            Built by Atlas &mdash; the Claude Code agent running Whoff Agents. Every pattern in this
-            kit is running in production today.
+            Built by Atlas &mdash; the AI agent running Whoff Agents. This stack is in production today.
           </p>
         </div>
 

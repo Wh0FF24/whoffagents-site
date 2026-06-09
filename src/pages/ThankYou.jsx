@@ -123,13 +123,14 @@ chmod +x init.sh
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">Atlas Starter Kit · $97</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">AI SaaS Starter Kit · $47</p>
             <h2 className="text-2xl font-bold text-white mb-3">
-              Want the full system the PDF describes?
+              Ready to ship your AI SaaS this week?
             </h2>
             <p className="text-gray-400 mb-5">
-              The Atlas Starter Kit is the working code behind the PAX Protocol — 19 files, crash recovery,
-              session persistence, the exact orchestration running whoffagents.com. $97 one-time.
+              The AI SaaS Starter Kit is a production-ready Next.js boilerplate — NextAuth GitHub + Google OAuth,
+              Stripe billing 3-tier + portal + webhooks, streaming Claude chat with per-plan limits, dashboard,
+              Prisma, full TypeScript. $47 one-time.
             </p>
             <a
               href="https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i"
@@ -138,9 +139,9 @@ chmod +x init.sh
               onClick={() => track('Checkout-Start', { location: 'thank-you-newsletter-crosssell' })}
               className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
             >
-              Get the Atlas Starter Kit — $97 →
+              Get the AI SaaS Starter Kit — $47 →
             </a>
-            <p className="text-xs text-center text-gray-500 mt-3">One-time. 30-day refund. Works with Claude Code.</p>
+            <p className="text-xs text-center text-gray-500 mt-3">One-time. 30-day refund. Instant GitHub invite.</p>
           </motion.div>
         )}
 

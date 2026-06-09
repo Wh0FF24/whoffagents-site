@@ -40,15 +40,16 @@ const products = [
   },
   {
     id: 1,
-    title: 'Atlas Starter Kit',
+    title: 'AI SaaS Starter Kit',
     description:
-      'PAX Protocol handoffs that stop context drift. Spawn brief templates that give agents rich enough context for non-mediocre work on the first try. Human-in-the-loop gates at every destructive action. Versioned PLAN.md vault so every session builds on the last. The exact system running whoffagents.com — packaged and readable. One-time $97.',
+      'Production-ready Next.js boilerplate for AI SaaS: NextAuth (GitHub + Google OAuth), Stripe billing with 3-tier pricing + customer portal + webhooks, streaming Claude chat with per-plan limits, dashboard, Prisma (SQLite dev / Postgres prod), shadcn/ui-style components, dark mode, full TypeScript. Clone, set your keys, launch.',
     category: 'kit',
-    price: '$97',
+    price: '$47',
     accent: 'gold',
-    timeline: 'Starter Kit — $97',
+    timeline: 'Starter Kit — $47',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
+    learnMoreLink: '/products/ai-saas-starter',
   },
   {
     id: 12,

@@ -19,45 +19,45 @@ const Cross = () => (
 const rows = [
   {
     label: 'Price',
-    diy: 'Engineer hours + API',
+    diy: 'Engineer hours + time',
     crew: '$99 / month',
-    atlas: <><span className="text-white font-extrabold text-lg">$97</span><br /><span className="text-brand-gold text-xs font-semibold">one-time · no subscription</span></>,
+    atlas: <><span className="text-white font-extrabold text-lg">$47</span><br /><span className="text-brand-gold text-xs font-semibold">one-time · no subscription</span></>,
   },
   {
-    label: 'Time to first agent',
+    label: 'Time to deploy',
     diy: '4 – 12 weeks',
     crew: 'Days (Python required)',
-    atlas: <span className="text-green-400 font-semibold">Under 1 day</span>,
+    atlas: <span className="text-green-400 font-semibold">An afternoon</span>,
   },
   {
-    label: 'Coding required',
-    diy: 'Yes — build everything',
-    crew: 'Yes — Python framework',
-    atlas: <><span className="text-white text-sm">No</span><br /><span className="text-gray-500 text-xs">Claude Code config files</span></>,
+    label: 'Auth (GitHub + Google)',
+    diy: 'Build it yourself',
+    crew: <Cross />,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">NextAuth, pre-wired</span></>,
   },
   {
-    label: 'Coordination protocol',
+    label: 'Stripe billing 3-tier',
+    diy: 'Build it yourself',
+    crew: <Cross />,
+    atlas: <><Check /><span className="text-brand-gold text-xs block text-center mt-1">portal + webhooks included</span></>,
+  },
+  {
+    label: 'Streaming Claude chat',
+    diy: 'Build it yourself',
+    crew: <Cross />,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">per-plan limits enforced</span></>,
+  },
+  {
+    label: 'Database setup',
     diy: 'You design it',
-    crew: 'Python class defs',
-    atlas: <><span className="text-white text-sm font-semibold">PAX Protocol</span><br /><span className="text-brand-gold text-xs">~70% token savings vs prose</span></>,
+    crew: 'Partial',
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">Prisma · SQLite dev / Postgres prod</span></>,
   },
   {
-    label: 'Crash recovery',
+    label: 'Dashboard + dark mode',
     diy: <Cross />,
     crew: <Cross />,
-    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">watchdog · tested Apr 14</span></>,
-  },
-  {
-    label: 'Session persistence',
-    diy: <Cross />,
-    crew: <Cross />,
-    atlas: <Check />,
-  },
-  {
-    label: 'Scales to 13+ agents',
-    diy: 'Needs architect',
-    crew: 'Possible, complex',
-    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">Pantheon hierarchy included</span></>,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">shadcn/ui-style · full TypeScript</span></>,
   },
   {
     label: 'Production tested',
@@ -66,10 +66,10 @@ const rows = [
     atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">runs whoffagents.com daily</span></>,
   },
   {
-    label: 'Named failures + fixes',
-    diy: <Cross />,
-    crew: <Cross />,
-    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">what broke, when, how we fixed it</span></>,
+    label: 'Delivery',
+    diy: 'N/A',
+    crew: 'Framework only',
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">instant GitHub invite</span></>,
   },
 ]
 
@@ -89,11 +89,11 @@ export default function ComparisonSection() {
             Pricing
           </p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-            Three paths to running AI agents.<br className="hidden md:block" /> One price that ends.
+            Three paths to a production AI SaaS.<br className="hidden md:block" /> One price that ends.
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
-            CrewAI charges $99/month to use a framework you still have to build.
-            Hiring a team costs $8k–$20k/month. The Atlas Starter Kit is $97. Once.
+            CrewAI charges $99/month for a framework you still have to build.
+            Hiring a team costs $8k–$20k/month. The AI SaaS Starter Kit is $47. Once.
           </p>
         </motion.div>
 
@@ -118,9 +118,9 @@ export default function ComparisonSection() {
                 </th>
                 <th className="px-5 py-4 text-center w-[24%] bg-brand-red/5 border-x border-brand-red/20">
                   <span className="text-brand-gold text-sm">★</span>{' '}
-                  <span className="text-white text-sm font-bold">Atlas Starter Kit</span>
+                  <span className="text-white text-sm font-bold">AI SaaS Starter Kit</span>
                   <br />
-                  <span className="text-brand-red text-xs font-semibold">$97 one-time</span>
+                  <span className="text-brand-red text-xs font-semibold">$47 one-time</span>
                 </th>
               </tr>
             </thead>
@@ -159,7 +159,7 @@ export default function ComparisonSection() {
             {' '}·{' '}
             DIY = <span className="text-gray-400 font-semibold">weeks + engineer time</span>
             {' '}·{' '}
-            Atlas Starter Kit = <span className="text-brand-gold font-semibold">$97, once</span>
+            AI SaaS Starter Kit = <span className="text-brand-gold font-semibold">$47, once</span>
           </p>
           <p className="text-gray-700 text-xs mb-8">After 1 month of CrewAI you've already spent more than twice as much.</p>
           <a
@@ -169,12 +169,12 @@ export default function ComparisonSection() {
             onClick={() => track('Checkout-Start', { location: 'comparison' })}
             className="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-red/90 text-white font-semibold px-8 py-3.5 rounded-lg text-sm transition-all duration-200 hover:shadow-[0_0_24px_rgba(200,16,46,0.35)]"
           >
-            Get the Atlas Starter Kit — $97
+            Get the AI SaaS Starter Kit — $47
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-          <p className="text-gray-700 text-xs mt-3">One-time payment · Instant download · No subscription</p>
+          <p className="text-gray-700 text-xs mt-3">One-time payment · Instant GitHub invite · No subscription</p>
         </motion.div>
       </div>
     </section>

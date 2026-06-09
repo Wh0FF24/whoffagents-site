@@ -14,23 +14,23 @@ const featured = {
   timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
   internalLink: '/products/ship-fast-skill-pack',
   buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
-  bullets: ['Pre-wired, not boilerplate', 'Model-agnostic (Claude, OpenAI, Gemini)', 'MIT-licensed · lifetime updates'],
+  bullets: ['Pre-wired, not boilerplate', 'v2.0 — Fable 5-ready', 'Free updates forever · 30-day refund'],
 }
 
 const products = [
   {
-    title: 'Atlas Starter Kit',
+    title: 'AI SaaS Starter Kit',
     description:
-      'PAX Protocol handoffs that stop context drift. Spawn brief templates that give agents rich enough context for non-mediocre work on the first try. Human-in-the-loop gates at every destructive action. Versioned PLAN.md vault so every session builds on the last.\n\nNot docs. Not a demo. The exact system running whoffagents.com — packaged and readable. One-time $97.',
-    meta: 'Starter Kit',
-    price: '$97',
+      'Production-ready Next.js boilerplate: NextAuth GitHub + Google OAuth, Stripe billing 3-tier + portal + webhooks, streaming Claude chat with per-plan limits, user dashboard, Prisma SQLite-dev/Postgres-prod, shadcn/ui-style components, dark mode, full TypeScript.\n\nDeploy in an afternoon, not a week. One-time $47.',
+    meta: 'Next.js Boilerplate',
+    price: '$47',
     accentColor: 'gold',
-    timeline: 'Starter Kit — $97',
+    timeline: 'Starter Kit — $47',
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     link: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
-    linkText: 'Get the Starter Kit — $97',
-    secondaryLink: null,
-    secondaryLinkText: null,
+    linkText: 'Get the Kit — $47',
+    secondaryLink: '/products/ai-saas-starter',
+    secondaryLinkText: 'See full details',
   },
   {
     title: 'Grand Slam Offer Generator',

@@ -1,69 +1,58 @@
 import { motion } from 'framer-motion'
-import { FileText, Settings, Bot, BookOpen, Zap, FolderOpen, FlaskConical, Shield } from 'lucide-react'
+import { FileText, Settings, Bot, BookOpen, Zap, FolderOpen, Shield } from 'lucide-react'
 
 const fileCategories = [
-  { icon: BookOpen, label: 'Setup & Docs', files: 3, detail: 'README.md, QUICKSTART.md, .env.example' },
-  { icon: Settings, label: 'Automation', files: 2, detail: 'init.js, package.json' },
-  { icon: Bot, label: 'Agent Profiles', files: 2, detail: 'kit-researcher.yaml, kit-writer.yaml' },
-  { icon: FileText, label: 'Architecture Docs', files: 2, detail: 'pax-protocol.md, full-pantheon.md' },
-  { icon: Zap, label: 'Skills', files: 2, detail: 'agent-handoff/SKILL.md, context-anchor/SKILL.md' },
-  { icon: FolderOpen, label: 'Vault Template', files: 6, detail: 'Hub.md + 5 placeholder dirs with README' },
-  { icon: FlaskConical, label: 'Examples', files: 2, detail: 'research-001.md, draft-001.md' },
+  { icon: BookOpen, label: 'Auth & OAuth', files: 1, detail: 'NextAuth · GitHub + Google OAuth, session management' },
+  { icon: Settings, label: 'Stripe Billing', files: 1, detail: '3-tier pricing · customer portal · webhooks' },
+  { icon: Bot, label: 'Claude Chat', files: 1, detail: 'Streaming AI chat · per-plan message limits' },
+  { icon: FileText, label: 'Dashboard', files: 1, detail: 'User dashboard · usage tracking · dark mode' },
+  { icon: Zap, label: 'Database', files: 1, detail: 'Prisma ORM · SQLite (dev) · Postgres (prod)' },
+  { icon: FolderOpen, label: 'UI Components', files: 1, detail: 'shadcn/ui-style components · full TypeScript' },
 ]
 
 const items = [
   {
-    title: 'QUICKSTART.md — Your First Agent in 5 Minutes',
-    body: 'Step-by-step walkthrough: configure, initialize, run the Researcher, watch it hand off to the Writer. Includes expected terminal output at each step. Troubleshooting table covers the 6 most common setup failures with exact fixes.',
-    why: 'Most agent kits ship a README that assumes you already know how everything fits together. This assumes you don\'t — and gets you to a working pipeline anyway.',
+    title: 'NextAuth — GitHub + Google OAuth, Ready on Day 1',
+    body: 'Full authentication with GitHub and Google OAuth providers pre-wired via NextAuth. Session management, protected routes, and user callbacks are configured. No manual OAuth app setup beyond creating your provider credentials.',
+    why: 'Auth is the most time-consuming boilerplate in any SaaS project. This removes 2–4 days of setup from every new project.',
   },
   {
-    title: '.env.example — 5-Line Config',
-    body: 'Copy it to .env, fill in your Anthropic API key and 4 path variables. No YAML, no JSON, no config files nested in config files.',
-    why: 'Zero-dependency setup. No dotenv package required — init.js parses it directly. You know exactly what every variable does because there are only 5 of them.',
+    title: 'Stripe Billing — 3 Tiers, Portal, and Webhooks',
+    body: 'Three-tier subscription structure (Free, Pro, Enterprise) with Stripe Checkout, the customer self-serve portal, and a full webhook handler covering subscription created, updated, and cancelled events. Plan limits are enforced in the application layer.',
+    why: 'Stripe webhooks are where most boilerplates stop short. Getting event handling right — idempotency, retries, failed payment recovery — is where hours disappear. This has it handled.',
   },
   {
-    title: 'init.js — One-Command Setup',
-    body: 'Run node init.js after filling in .env. Creates your output directories, generates coordination.md pre-loaded with TASK-001, and installs both agent profiles to ~/.claude/profiles/. Pure Node.js stdlib. Node 18+.',
-    why: 'The single biggest friction point in agent kit setup is "I did all the steps and nothing works." init.js eliminates that.',
+    title: 'Streaming Claude Chat with Per-Plan Limits',
+    body: 'A streaming AI chat interface powered by Claude, with message limits enforced per subscription tier. Free plan users hit a cap and see an upgrade prompt. Pro and Enterprise tiers get higher limits. The streaming response is rendered incrementally — no waiting for the full reply.',
+    why: 'Per-plan limits are the core monetization lever for AI SaaS. Getting this right in the streaming context (where you can\'t just count tokens after the fact) is non-trivial. This solves it.',
   },
   {
-    title: 'profiles/kit-researcher.yaml — Ready-to-Run Researcher',
-    body: 'A complete Claude Code agent profile. Reads coordination.md for its task, researches the topic, writes structured output to sessions/research-{N}.md with findings, sources, and a handoff recommendation. Includes rules for edge cases: no pending tasks, unavailable sources, fabricated findings prevention.',
-    why: 'This profile defines exact operating rules, output format, file naming conventions, and fallback behavior. The difference between an agent that mostly works and one that works reliably.',
+    title: 'Prisma ORM — SQLite Dev, Postgres Prod',
+    body: 'Prisma schema covering users, accounts, sessions, subscriptions, and usage records. SQLite for local development (zero setup), Postgres for production (swap one env var). Migrations included.',
+    why: 'The SQLite → Postgres pattern eliminates the "I need a cloud database just to run locally" problem. One schema, two environments, no friction.',
   },
   {
-    title: 'profiles/kit-writer.yaml — Ready-to-Run Writer',
-    body: 'Companion to the Researcher. Polls coordination.md for a completed Researcher task (checks every 30s, times out at 10 minutes). Writes a polished draft to sessions/draft-{N}.md. Quality rules built in: no filler sentences, concrete over vague, thin research gets flagged not padded.',
-    why: 'Run the Writer before the Researcher finishes — it waits. Run them simultaneously — no race condition. This is what real pipeline reliability looks like.',
+    title: 'User Dashboard',
+    body: 'A functional dashboard showing the authenticated user\'s current plan, usage against their limit, and an upgrade path. Built with shadcn/ui-style components. Includes dark mode support.',
+    why: 'Dashboards expose the plan/usage model to users — which is what drives upgrades. A working dashboard with real data out of the box beats a placeholder every time.',
   },
   {
-    title: 'docs/pax-protocol.md — Inter-Agent Message Format',
-    body: 'PAX (Agent eXchange) Protocol cuts coordination overhead ~70% vs plain English. Full symbol library, standard field reference, 4 worked examples (handoff, blocker escalation, orchestrator dispatch, ack). Goal ancestry format for 4+ agent fleets.',
-    why: 'At 2 agents, token efficiency is a nice-to-have. At 4+ agents running in parallel, inter-agent communication becomes a real cost. PAX keeps it tight.',
+    title: 'shadcn/ui-Style Components + Dark Mode',
+    body: 'Component library following shadcn/ui conventions: Button, Card, Input, Badge, and layout primitives. Dark mode via next-themes — toggle included. Full TypeScript throughout.',
+    why: 'Consistent component patterns mean you extend the kit instead of rewriting the UI from scratch. TypeScript catches integration errors before they ship.',
   },
   {
-    title: 'docs/full-pantheon.md — Scale from 2 Agents to 13',
-    body: 'Three-tier model: Orchestrators (Opus), Gods (Sonnet, domain ownership), Heroes (Haiku, 5x lower cost). Full 13-agent fleet roster — the exact agents running whoffagents.com. Token cost reference: 2-agent ($5-20/mo), 5-agent ($50-150), 13-agent ($200-500). The crossover point vs managed platforms.',
-    why: 'The 2-agent quickstart is the proof of concept. This doc is the growth path. You\'re not buying a toy — you\'re buying the pattern that scales to a fully automated operation.',
-  },
-  {
-    title: 'skills/ — /handoff and /anchor (Install Once, Use Everywhere)',
-    body: '/handoff extracts current session state into a structured handoff packet before dispatching any subagent. /anchor prevents cascading context drift — run it when switching tasks, resuming after a break, or handing off between agents.',
-    why: 'Subagent failure is almost never a model capability problem. It\'s a context problem. The handoff packet and anchor together fix it.',
-  },
-  {
-    title: 'vault-template/ — File-Based Shared State',
-    body: 'Full folder structure for your agent fleet: coordination.md (shared task board), AGENTS.md (fleet roster + PAX codes), per-agent Hub.md + sessions/ dirs, coordination/shared, inbox, outbox. Four operating rules enforced from day one.',
-    why: 'Without a consistent structure, agents write output wherever, coordination.md becomes inconsistent, and debugging breaks become archaeology.',
+    title: 'Full TypeScript — End to End',
+    body: 'Every file in the kit is TypeScript. API routes, auth callbacks, Stripe webhook handler, Prisma models, React components — all typed. No implicit any. No JavaScript files to convert later.',
+    why: 'Type safety across the auth → billing → AI stack eliminates an entire class of runtime errors that only surface in production.',
   },
 ]
 
 const roadmap = [
-  { label: 'Day 1', text: 'Run the 2-agent quickstart. Researcher writes research. Writer writes draft. Done in 10 minutes.' },
-  { label: 'Week 1', text: 'Add a third agent. Wire in PAX for status reports. Add your first persistent tmux session.' },
-  { label: 'Month 1', text: '5-agent god tier. Orchestrator dispatching work. Heroes handling bulk tasks. Coordination at scale using the full vault structure.' },
-  { label: 'Month 3', text: '13-agent Pantheon. Same pattern. More agents. Running your business autonomously while you build the next thing.' },
+  { label: 'Day 1', text: 'Clone, configure .env, run the dev server. Auth, billing, and Claude chat are working.' },
+  { label: 'Week 1', text: 'Customize the UI to your brand. Add your product\'s core feature behind the auth wall.' },
+  { label: 'Month 1', text: 'Production deploy. Real users on real plans. Stripe billing live. Claude limits enforced.' },
+  { label: 'Month 3', text: 'Iterate on features. The infrastructure is done — you\'re shipping product, not plumbing.' },
 ]
 
 export default function KitBreakdown() {
@@ -77,16 +66,16 @@ export default function KitBreakdown() {
       {/* Header */}
       <div className="text-center mb-12">
         <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-brand-gold/10 text-brand-gold border border-brand-gold/20 mb-4">
-          Atlas Starter Kit v1.0
+          AI SaaS Starter Kit · $47
         </span>
         <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">What's Inside</h2>
         <p className="text-gray-400 max-w-xl mx-auto">
-          19 files. Every one earns its place. Here's exactly what you get and why it matters.
+          Production-ready Next.js boilerplate. Every feature earns its place. Here's exactly what you get and why it matters.
         </p>
       </div>
 
-      {/* File count grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-14">
+      {/* Feature grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-14">
         {fileCategories.map((cat) => (
           <div
             key={cat.label}
@@ -96,16 +85,9 @@ export default function KitBreakdown() {
               <cat.icon className="w-4 h-4 text-brand-gold" />
               <span className="text-white text-sm font-semibold">{cat.label}</span>
             </div>
-            <span className="text-2xl font-extrabold text-brand-gold leading-none">{cat.files}</span>
             <span className="text-gray-500 text-xs leading-snug">{cat.detail}</span>
           </div>
         ))}
-        {/* Total */}
-        <div className="bg-brand-red/10 border border-brand-red/30 rounded-xl p-4 flex flex-col gap-1.5 justify-center">
-          <span className="text-gray-400 text-xs font-medium uppercase tracking-wider">Total</span>
-          <span className="text-3xl font-extrabold text-brand-red leading-none">19</span>
-          <span className="text-gray-400 text-xs">production files</span>
-        </div>
       </div>
 
       {/* Item breakdown */}
@@ -149,9 +131,9 @@ export default function KitBreakdown() {
           ))}
         </div>
         <p className="mt-6 text-gray-500 text-sm border-t border-brand-border pt-4">
-          The kit is the foundation. The pattern is the product. Every agent you add runs the same coordination model —&nbsp;
-          <code className="text-brand-gold bg-white/5 px-1.5 py-0.5 rounded text-xs">coordination.md</code> as the task board, files for output, handoff packets for context transfer.{' '}
-          <span className="text-white font-medium">This is how Atlas runs whoffagents.com. You're getting the exact infrastructure.</span>
+          The kit is the foundation. Every AI SaaS needs auth, billing, and a way to gate features by plan.
+          This ships all three, wired together and production-tested —&nbsp;
+          <span className="text-white font-medium">so you build your product, not the plumbing underneath it.</span>
         </p>
       </div>
 
@@ -159,13 +141,13 @@ export default function KitBreakdown() {
       <div className="flex items-start gap-4 bg-brand-gold/5 border border-brand-gold/20 rounded-2xl p-6">
         <Shield className="w-6 h-6 text-brand-gold flex-shrink-0 mt-0.5" />
         <div>
-          <h4 className="text-white font-semibold mb-1">The Guarantee</h4>
+          <h4 className="text-white font-semibold mb-1">30-Day Refund Guarantee</h4>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Follow QUICKSTART.md. If you don't have a working pipeline in 24 hours, email{' '}
+            If you can't get the kit running in your environment within 30 days, email{' '}
             <a href="mailto:atlas@whoffagents.com" className="text-brand-gold hover:text-white transition-colors">
               atlas@whoffagents.com
             </a>
-            . No ticket system. No chatbot. The agent that built this kit answers directly.
+            {' '}for a full refund. No ticket system. No questionnaire. Direct response.
           </p>
         </div>
       </div>
