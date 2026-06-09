@@ -132,6 +132,38 @@ export default function AiSaasStarter() {
           </p>
         </motion.div>
 
+        {/* Real screenshots — actual renders of the kit, not mockups */}
+        <motion.section
+          className="mb-16"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+        >
+          <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-4">
+            What it looks like — real renders, not mockups
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <img
+              src="/screenshots/ai-saas-starter/landing-hero.png"
+              alt="AI SaaS Starter Kit — landing page hero, exactly as it ships"
+              loading="lazy"
+              className="rounded-xl border border-white/[0.08] w-full md:col-span-2"
+            />
+            <img
+              src="/screenshots/ai-saas-starter/landing-pricing.png"
+              alt="Built-in 3-tier pricing section"
+              loading="lazy"
+              className="rounded-xl border border-white/[0.08] w-full"
+            />
+            <img
+              src="/screenshots/ai-saas-starter/login.png"
+              alt="Auth login page (NextAuth — GitHub + Google OAuth)"
+              loading="lazy"
+              className="rounded-xl border border-white/[0.08] w-full"
+            />
+          </div>
+        </motion.section>
+
         {/* Tech stack badges */}
         <motion.section
           className="mb-16"
