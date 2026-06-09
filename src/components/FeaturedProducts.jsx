@@ -97,7 +97,7 @@ export default function FeaturedProducts() {
                 {featured.timeline}
               </span>
               <span className="inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-brand-gold/10 text-brand-gold border border-brand-gold/20">
-                Validated — first sale Apr 18
+                Instant delivery · 30-day refund
               </span>
             </div>
             <span className="text-brand-gold font-mono font-bold text-lg">{featured.price} one-time</span>

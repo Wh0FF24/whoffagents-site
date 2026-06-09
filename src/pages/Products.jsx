@@ -51,6 +51,19 @@ const products = [
     buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
   },
   {
+    id: 12,
+    title: 'Fable 5 Skill Auditor',
+    description:
+      'Claude Fable 5 dropped June 9 — and Anthropic\'s own docs say skills written for prior models "can degrade output quality" on it. Some legacy patterns now trigger silent refusal-fallbacks or hard API rejections. This CLI scans your .claude/skills against 12 rules grounded in Anthropic\'s migration guide, flags every violation with line numbers, and auto-rewrites flagged skills lean via your local claude CLI. We ran it on our own 31-skill fleet first.',
+    category: 'skill',
+    price: '$19',
+    accent: 'gold',
+    timeline: 'NEW — Fable 5 ready',
+    timelineBadgeClass: 'bg-brand-gold/20 text-brand-gold border border-brand-gold/30',
+    buyLink: 'https://buy.stripe.com/4gM6oJ6J973D4rBfrDaZi0p',
+    featured: true,
+  },
+  {
     id: 2,
     title: 'Ship Fast Skill Pack',
     description:
@@ -103,13 +116,14 @@ const products = [
     id: 6,
     title: 'Crypto Data MCP Server',
     description:
-      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token, via MCP tool calls. Powers the trading dashboards running on whoffagents infra.',
+      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token, via MCP tool calls. Powers the trading dashboards running on whoffagents infra. Free and open source.',
     category: 'mcp',
-    price: '$19',
-    accent: 'red',
-    timeline: 'MCP Server — $19',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    buyLink: 'https://buy.stripe.com/8x26oJ6J9gEd7DN4MZaZi03',
+    price: 'Free',
+    accent: 'blue',
+    timeline: 'Open Source — Free',
+    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
+    githubLink: 'https://github.com/Wh0FF24/crypto-data-mcp',
+    learnMoreLink: '/products/crypto-data-mcp',
   },
   {
     id: 7,
@@ -330,14 +344,21 @@ export default function Products() {
                         </Link>
                       )}
                       {product.buyLink ? (
-                        <a
-                          href={product.buyLink?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.buyLink) : product.buyLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
-                        >
-                          {product.buttonLabel ? `${product.buttonLabel} →` : `Get the Kit — ${product.price} →`}
-                        </a>
+                        <>
+                          <a
+                            href={product.buyLink?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.buyLink) : product.buyLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
+                          >
+                            {product.buttonLabel ? `${product.buttonLabel} →` : `Get the Kit — ${product.price} →`}
+                          </a>
+                          {product.buyLink.startsWith('https://buy.stripe.com') && (
+                            <Link to="/refund-policy" className="text-[11px] text-gray-500 hover:text-gray-400 transition-colors">
+                              Instant delivery · 30-day refund
+                            </Link>
+                          )}
+                        </>
                       ) : product.githubLink ? (
                         <a
                           href={product.githubLink}
