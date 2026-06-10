@@ -83,7 +83,7 @@ const products = [
     id: 2,
     title: 'Ship Fast Skill Pack',
     description:
-      '11 Claude Code skills for the unfun layer of shipping a SaaS: auth-patterns, stripe-payments, testing-suite, api-routes, deploy-config, db-migrations, env-config, monitoring, seo-meta, error-handling — plus context-anchor to prevent context drift mid-build. v2.0: rewritten Fable 5-lean per Anthropic\'s migration guide, verified clean by our own auditor. Free updates forever. Drop into .claude/skills/ and go.',
+      '11 Claude Code skills for the unfun layer of shipping a SaaS: auth-setup, stripe-payments, deploy-config, api-builder, database-setup, testing-suite, ui-components, email-system, monitoring, seo-meta — plus context-anchor to prevent context drift mid-build. v2.0: rewritten Fable 5-lean per Anthropic\'s migration guide, verified clean by our own auditor (0 findings). Free updates forever. Copy into .claude/commands/ship-fast/ and go.',
     category: 'skill',
     price: '$49',
     accent: 'gold',
@@ -91,6 +91,7 @@ const products = [
     timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
     learnMoreLink: '/products/ship-fast-skill-pack',
+    demoGif: '/demos/shipfast-demo.gif',
   },
   {
     id: 3,
