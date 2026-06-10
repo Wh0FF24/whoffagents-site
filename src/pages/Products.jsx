@@ -76,6 +76,7 @@ const products = [
     timeline: 'NEW — Fable 5 ready',
     timelineBadgeClass: 'bg-brand-gold/20 text-brand-gold border border-brand-gold/30',
     buyLink: 'https://buy.stripe.com/4gM6oJ6J973D4rBfrDaZi0p',
+    demoGif: '/demos/fable5-audit-demo.gif',
     featured: true,
   },
   {
@@ -340,6 +341,14 @@ export default function Products() {
                   </div>
 
                   <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>
+                  {product.demoGif && (
+                    <img
+                      src={product.demoGif}
+                      alt={`${product.title} demo`}
+                      loading="lazy"
+                      className="rounded-lg border border-white/[0.08] w-full mb-3"
+                    />
+                  )}
                   <p className="text-gray-400 text-sm leading-relaxed mb-4">{product.description}</p>
                   {product.addOn && (
                     <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04]">
