@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanks &mdash; Whoff Web Studio</title>
+<meta name="description" content="Thanks for reaching out to Whoff Web Studio. We'll call or text you within one business day.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://whoffagents.com/web/thankyou.html">
+<meta name="theme-color" content="#0b0e10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0e10'/%3E%3Cpath d='M8 11l3 10 3-7 3 7 3-10' stroke='%23f2a93b' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<style>
+  :root{
+    --ink:#0b0e10;
+    --ink-soft:#101418;
+    --ink-card:#151a1e;
+    --line: rgba(243,241,234,0.10);
+    --line-strong: rgba(243,241,234,0.20);
+    --bone:#f3f1ea;
+    --bone-dim:#a2a8a4;
+    --bone-dimmer:#6c726e;
+    --signal:#f2a93b;
+    --signal-soft: rgba(242,169,59,0.12);
+    --signal-line: rgba(242,169,59,0.35);
+    --r-sm: 7px; --r-md: 12px; --r-lg: 18px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "SFMono-Regular", "SF Mono", Consolas, "Roboto Mono", monospace;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0; min-height:100vh;
+    background: var(--ink); color: var(--bone);
+    font-family: var(--font-sans); line-height:1.55;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(circle, rgba(243,241,234,0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+    display:flex; flex-direction:column;
+  }
+  header{ border-bottom: 1px solid var(--line); }
+  .nav{ max-width:1120px; margin:0 auto; padding:16px 24px; }
+  .logo{ font-weight:800; font-size:1.05rem; text-decoration:none; color:var(--bone); }
+  .logo .dot{ color: var(--signal); }
+
+  main{ flex:1; display:flex; align-items:center; justify-content:center; padding: 48px 24px; }
+  .card{
+    max-width: 560px; width:100%;
+    background: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(32px, 5vw, 52px);
+    text-align:center;
+  }
+  .check{
+    width:56px; height:56px; margin:0 auto 22px;
+    border-radius:50%;
+    background: var(--signal-soft);
+    border: 1px solid var(--signal-line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .check svg{ width:26px; height:26px; color: var(--signal); }
+  .kicker{
+    font-family: var(--font-mono); font-size: 0.76rem; letter-spacing:0.14em;
+    text-transform:uppercase; color: var(--signal); margin-bottom: 10px;
+  }
+  h1{ font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight:800; letter-spacing:-0.02em; margin:0; }
+  p{ color: var(--bone-dim); margin-top: 14px; font-size: 1.02rem; }
+  .fine{ font-size: 0.86rem; color: var(--bone-dimmer); margin-top: 24px; }
+  .btn{
+    display:inline-flex; margin-top: 26px;
+    padding: 12px 22px; border-radius: var(--r-sm);
+    background: transparent; border:1px solid var(--line-strong);
+    color: var(--bone); text-decoration:none; font-weight:700; font-size:0.92rem;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .btn:hover{ border-color: var(--signal-line); color: var(--signal); }
+
+  footer{ border-top: 1px solid var(--line); padding: 24px; text-align:center; }
+  footer p{ color: var(--bone-dimmer); font-size: 0.8rem; margin:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="/web/" class="logo">Whoff Web Studio<span class="dot">.</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 6 6L20 6"/></svg>
+    </div>
+    <div class="kicker">Request received</div>
+    <h1>Thanks &mdash; we've got it.</h1>
+    <p>We'll call or text you within one business day to talk through your project and get your free quote sorted.</p>
+    <p class="fine">In the meantime, feel free to jot down anything else you'd want on your new site &mdash; we'll cover it on the call.</p>
+    <a href="/web/" class="btn">Back to Whoff Web Studio</a>
+  </div>
+</main>
+
+<footer>
+  <p>Whoff Web Studio &middot; part of Whoff Agents &middot; Provo, UT</p>
+</footer>
+
+</body>
+</html>
