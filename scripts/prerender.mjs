@@ -57,6 +57,21 @@ const routeMeta = {
     description: 'The story behind Whoff Agents and Atlas, our AI-run business.',
     canonical: 'https://whoffagents.com/about',
   },
+  '/web': {
+    title: 'Web Design in Provo, Utah | Whoff Web Studio',
+    description: 'Modern, fast websites for Utah County businesses. Flat pricing from $1,500, live in days — not months. Built by Whoff Web Studio, part of Whoff Agents.',
+    canonical: 'https://whoffagents.com/web',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | Whoff Agents',
+    description: 'How Whoff Agents LLC collects, uses, and protects your information.',
+    canonical: 'https://whoffagents.com/privacy',
+  },
+  '/terms': {
+    title: 'Terms of Service | Whoff Agents',
+    description: 'The terms governing use of whoffagents.com and Whoff Agents LLC products and services.',
+    canonical: 'https://whoffagents.com/terms',
+  },
 }
 
 const routes = Object.keys(routeMeta)

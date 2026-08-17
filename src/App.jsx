@@ -17,6 +17,9 @@ import AtlasOps from './pages/AtlasOps'
 import ShipFast from './pages/ShipFast'
 import FreeSkill from './pages/FreeSkill'
 import AiSaasStarter from './pages/AiSaasStarter'
+import WebStudio from './pages/WebStudio'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
 import ScrollToTop from './components/ScrollToTop'
 import ExitIntentPopup from './components/ExitIntentPopup'
 import PHLaunchBanner from './components/PHLaunchBanner'
@@ -56,6 +59,9 @@ function App() {
               <Route path="/products/ship-fast-skill-pack" element={<ShipFast />} />
               <Route path="/products/ai-saas-starter" element={<AiSaasStarter />} />
               <Route path="/free-skill" element={<FreeSkill />} />
+              <Route path="/web" element={<WebStudio />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

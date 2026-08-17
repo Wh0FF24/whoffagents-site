@@ -35,6 +35,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white mb-4">Products</h4>
             <div className="space-y-2.5">
               <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Lead Qualification Agent</Link>
+              <Link to="/web" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Web Studio</Link>
               <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Pricing</Link>
               <Link to="/refund-policy" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Refund Guarantee</Link>
             </div>
@@ -57,8 +58,8 @@ export default function Footer() {
           <div className="text-xs text-gray-600">&copy; 2026 Whoff Agents. All rights reserved.</div>
           <div className="flex gap-6">
             <Link to="/refund-policy" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">30-Day Refund Policy</Link>
-            <a href="mailto:atlas@whoffagents.com?subject=Privacy%20Policy%20request" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Privacy Policy</a>
-            <a href="mailto:atlas@whoffagents.com?subject=Terms%20of%20Service%20request" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

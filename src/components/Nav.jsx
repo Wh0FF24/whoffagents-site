@@ -68,6 +68,12 @@ export default function Nav() {
             About
           </Link>
           <Link
+            to="/web"
+            className={`text-sm transition-colors duration-200 cursor-pointer ${location.pathname === '/web' ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
+          >
+            Web Studio
+          </Link>
+          <Link
             to="/blog"
             className={`text-sm transition-colors duration-200 cursor-pointer ${location.pathname.startsWith('/blog') ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
           >
@@ -131,6 +137,12 @@ export default function Nav() {
                 className={`block text-sm transition-colors cursor-pointer ${location.pathname === '/about' ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
               >
                 About
+              </Link>
+              <Link
+                to="/web"
+                className={`block text-sm transition-colors cursor-pointer ${location.pathname === '/web' ? 'text-white font-medium' : 'text-gray-400 hover:text-white'}`}
+              >
+                Web Studio
               </Link>
               <Link
                 to="/blog"
