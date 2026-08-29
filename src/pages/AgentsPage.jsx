@@ -7,7 +7,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  PhoneCall, Mail, MessageSquare, CalendarClock, Wrench, ArrowRight, Activity,
+  PhoneCall, Mail, MessageSquare, CalendarClock, CalendarCheck, Table2, Wrench, ArrowRight, Activity,
 } from 'lucide-react'
 import Card, { SectionHeader, accentVars } from '../components/ui/Card'
 import ReceiptsStrip from '../components/ReceiptsStrip'
@@ -32,9 +32,19 @@ const capabilities = [
     desc: 'Answers questions, confirms appointments, and keeps conversations moving while you’re busy with the actual work.',
   },
   {
+    icon: CalendarCheck,
+    title: 'It books jobs into your calendar',
+    desc: 'Checks what’s free, books the slot, sends the confirmation, and puts it on the calendar your office already uses — then sends a reminder the day before.',
+  },
+  {
+    icon: Table2,
+    title: 'It keeps your records up to date',
+    desc: 'Takes what comes in on the phone or by email and puts it where it belongs — your customer list, a spreadsheet, a job sheet — so nobody has to retype it later.',
+  },
+  {
     icon: CalendarClock,
     title: 'It does the repeat work',
-    desc: 'The tasks that come round every day or every week — reports, reminders, follow-ups, checking on things — done on schedule without anyone having to remember.',
+    desc: 'The tasks that come round every day or every week — reminders, follow-ups, chasing a quote nobody answered, the same report every Monday — done without anyone having to remember.',
   },
   {
     icon: Wrench,
@@ -243,41 +253,97 @@ export default function AgentsPage() {
           ))}
         </div>
 
-        {/* the three questions an owner asks before letting anything near
-            their customers — the websites side answers these, this page didn't */}
-        <div className="grid md:grid-cols-3 gap-5 mt-12">
-          <Card className="p-6">
-            <h3 className="type-h3 mb-2">Who looks after it?</h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              We do. It&apos;s our software on our systems — if it needs changing, you email
-              a person here and we change it. There&apos;s no ticket queue.
-            </p>
-          </Card>
-          <Card className="p-6">
-            <h3 className="type-h3 mb-2">Can you switch it off?</h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Any time, and it stops. Nothing is locked into your business, and calls go
-              back to however you handle them today.
-            </p>
-          </Card>
-          <Card className="p-6">
-            <h3 className="type-h3 mb-2">What about customer details?</h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Before anything goes live we tell you exactly what it can see and where that
-              information is kept. Our{' '}
-              <Link to="/privacy" className="text-brand-red-bright underline underline-offset-2">privacy policy</Link>
-              {' '}covers the rest.
-            </p>
-          </Card>
+      </section>
+
+      {/* ============ 03 — YOUR DATA + GETTING IT RIGHT.
+           The two things owners actually worry about: a leak of their customer
+           list, and an AI confidently telling a customer something untrue. ============ */}
+      <section data-reveal style={accentVars("03")} className="shell py-20">
+        <SectionHeader
+          index="03"
+          eyebrow="the two things everyone asks"
+          title="Your customers' details, and getting it right"
+          lede="Two fair questions before you let anything talk to your customers: what happens to their information, and what happens when it doesn't know the answer. Here are ours, in plain terms."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+          {[
+            {
+              h: 'It only sees what you allow',
+              d: 'You decide what it can reach — one inbox, one calendar, one spreadsheet — and we put that in writing before it goes live. It cannot go looking anywhere else.',
+            },
+            {
+              h: 'We don’t sell it or train on it',
+              d: 'Your customers’ information is not sold, and it is not used to train AI models. The only places it goes are the services needed to run your agent, and we name those for you up front.',
+            },
+            {
+              h: 'It doesn’t guess',
+              d: 'Asked something it hasn’t been given an answer for, it says so, takes a message, and flags it for you. We build it to admit what it doesn’t know rather than invent something.',
+            },
+            {
+              h: 'You read everything it did',
+              d: 'Every call and message is written down in plain language where you can check it. If it gets something wrong you will see it, and we fix it.',
+            },
+            {
+              h: 'You test it before customers do',
+              d: 'You try to trip it up on real situations first — wrong prices, odd questions, angry callers. Nothing reaches a customer until you say it is ready.',
+            },
+            {
+              h: 'You can switch it off',
+              d: 'Any time, and it stops. Calls go back to however you handle them today. Nothing is locked into your business, and a person here looks after it while it runs.',
+            },
+          ].map((c, i) => (
+            <Card key={c.h} className="p-5 rv-item" style={{ '--i': i }}>
+              <h3 className="type-h3 mb-2">{c.h}</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">{c.d}</p>
+            </Card>
+          ))}
         </div>
+        <p className="mono-note mt-6">
+          the full detail lives in our{' '}
+          <Link to="/privacy" className="underline underline-offset-2">privacy policy</Link>
+        </p>
+      </section>
+
+      {/* ============ 04 — ADVICE ON ITS OWN, no build attached ============ */}
+      <section data-reveal style={accentVars("04")} className="shell py-20">
+        <SectionHeader
+          index="04"
+          eyebrow="if you're not ready to build"
+          title="You can just hire the thinking"
+          lede="Plenty of owners know something in their week should be automated but don't know what — or whether it's even possible yet. You can buy our time for that on its own, with no build attached."
+        />
+        <div className="grid md:grid-cols-3 gap-5 mt-10">
+          {[
+            {
+              h: 'A working session on your business',
+              d: 'We go through how your week actually runs and mark which jobs an agent could carry, which it couldn’t, and which one is worth doing first. You keep the notes whether or not you hire us to build anything.',
+            },
+            {
+              h: 'A second opinion on AI you’re being sold',
+              d: 'If someone has quoted you for an AI tool and you want to know whether it is real, we will tell you straight. We build this for a living, so we know what is genuinely hard and what is marketing.',
+            },
+            {
+              h: 'Help for your own team',
+              d: 'If you have technical people and would rather they built it in-house, we will advise them instead — and sell them the same tools we use ourselves. We are happy either way.',
+            },
+          ].map((c, i) => (
+            <Card key={c.h} className="p-5 rv-item" style={{ '--i': i }}>
+              <h3 className="type-h3 mb-2">{c.h}</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">{c.d}</p>
+            </Card>
+          ))}
+        </div>
+        <p className="mono-note mt-6">
+          billed by the session and quoted before you book — ask in the form and we&apos;ll send the rate
+        </p>
       </section>
 
       {/* ============ PROOF ============ */}
-      <section data-reveal style={accentVars("03")} className="shell py-20">
+      <section data-reveal style={accentVars("05")} className="shell py-20">
         <Card ticks className="p-6 md:p-10">
           <div className="grid lg:grid-cols-[1fr_280px] gap-8 items-center">
             <div>
-              <p className="eyebrow mb-4"><span className="text-gray-600 mr-2">03</span>the proof</p>
+              <p className="eyebrow mb-4"><span className="text-gray-600 mr-2">05</span>the proof</p>
               <h2 className="type-h2 mb-5">Our own operations run on these agents</h2>
               <div className="space-y-4 text-gray-400 leading-relaxed">
                 <p>
@@ -322,7 +388,7 @@ export default function AgentsPage() {
         </Card>
       </section>
 
-      <LeadFormSection index="04" source="agents_page" />
+      <LeadFormSection index="06" source="agents_page" />
     </div>
   )
 }

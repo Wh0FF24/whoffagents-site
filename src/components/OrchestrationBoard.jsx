@@ -43,10 +43,10 @@ const LANES = [
     detail: 'phones · inbox · texts · routines', to: '/agents',
   },
   {
-    n: 3, label: 'TOOLS', sub: 'skills · MCP', y: 251, led: 'ob-led-3',
+    n: 3, label: 'TOOLS', sub: 'for developers', y: 251, led: 'ob-led-3',
     tint: '#3D8BDE', dim: 'rgba(61,139,222,0.55)',
     out: 'M 252 178 H 262 V 268 H 300', back: 'M 392 268 H 414 V 178 H 436',
-    detail: 'skills · MCP servers · kits', to: '/products',
+    detail: 'the tools we build with', to: '/products',
   },
 ]
 
@@ -121,7 +121,7 @@ export default function OrchestrationBoard() {
           className="text-[10px] tracking-[0.14em] uppercase text-gray-500"
           style={{ fontFamily: MONO }}
         >
-          whoff-agents / orchestration
+          whoff agents / how the work flows
         </span>
         <span className="ml-auto flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-ok status-blink" />
@@ -167,8 +167,8 @@ export default function OrchestrationBoard() {
           <rect x={136} y={136} width={116} height={58} rx="6" fill="none" stroke={C.red} strokeWidth="1.5" className="ob-flash ob-flash-ring" />
           <circle cx={152} cy={152} r="2.5" fill={C.red} className="node-breathe" />
           <text x={164} y={156} fontFamily={MONO} fontSize="9" letterSpacing="2" fill="#FFFFFF">ATLAS</text>
-          <text x={150} y={172} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.text}>orchestrator · 24/7</text>
-          <text x={150} y={182} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.faint}>routes every job</text>
+          <text x={150} y={172} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.text}>runs the shop · 24/7</text>
+          <text x={150} y={182} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.faint}>hands out every job</text>
         </g>
 
         {/* the three lanes — each its own colour, each a live control:
@@ -205,10 +205,10 @@ export default function OrchestrationBoard() {
           <circle cx={448} cy={148} r="2.5" fill={C.ok} />
           <circle cx={448} cy={148} r="2.5" fill={C.amber} className="ob-gate" />
           <text x={458} y={151} fontFamily={MONO} fontSize="8.5" letterSpacing="1.5" fill="#D7DADE">HUMAN REVIEW</text>
-          <text x={446} y={168} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.text}>nothing ships without</text>
+          <text x={446} y={168} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.text}>nothing goes out without</text>
           <text x={446} y={178} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.text}>a person signing off</text>
-          <text x={446} y={190} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.faint} className="ob-idle">gate: WILL</text>
-          <text x={446} y={190} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.ok} className="ob-pass">PASS · gate: WILL</text>
+          <text x={446} y={190} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.faint} className="ob-idle">checked by: Will</text>
+          <text x={446} y={190} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.ok} className="ob-pass">APPROVED by: Will</text>
         </g>
 
         {/* ship — flashes as the released job lands */}
@@ -221,7 +221,7 @@ export default function OrchestrationBoard() {
 
         {/* footer receipt — every line true */}
         <text x={16} y={318} fontFamily={MONO} fontSize="7.5" letterSpacing="1" fill={C.faint}>
-          am-brief 07:30 · pm-report 17:00 · build {typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—'}
+          morning brief 07:30 · evening report 17:00 · updated {typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—'}
         </text>
         <text x={544} y={318} textAnchor="end" fontFamily={MONO} fontSize="7.5" letterSpacing="1" fill={C.faint}>
           provo, ut

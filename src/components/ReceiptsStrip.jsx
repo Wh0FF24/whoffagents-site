@@ -15,10 +15,10 @@ import OpsTape from './OpsTape'
 import '../styles/board.css'
 
 const receipts = [
-  { k: 'build', v: typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—', note: 'agents built · human reviewed' },
-  { k: 'cadence', v: 'am-brief 07:30', note: 'pm-report 17:00' },
+  { k: 'last updated', v: typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—', note: 'agents built · human reviewed' },
+  { k: 'every day', v: 'morning brief 07:30', note: 'evening report 17:00' },
   { k: 'agents on duty', v: 'phones · email · builds', note: 'ask us for a live demo call', href: '#lead-form' },
-  { k: 'base', v: 'provo, utah', note: 'independent · $0 VC' },
+  { k: 'where we are', v: 'provo, utah', note: 'independent · $0 VC' },
 ]
 
 const AM_BRIEF = 7 * 60 + 30 // 07:30 MT — the real morning cron
@@ -43,10 +43,10 @@ function denverNow() {
 /* Honest countdown to the next standing run, midnight rollover included. */
 function nextRun({ h, m }) {
   const mins = Number(h) * 60 + Number(m)
-  let label = 'am-brief'
+  let label = 'morning brief'
   let at = AM_BRIEF
   if (mins >= AM_BRIEF && mins < PM_REPORT) {
-    label = 'pm-report'
+    label = 'evening report'
     at = PM_REPORT
   } else if (mins >= PM_REPORT) {
     at = AM_BRIEF + 24 * 60
@@ -91,12 +91,12 @@ export default function ReceiptsStrip() {
         {receipts.map(({ k, v, note, href }) => {
           let vNode = v
           let noteNode = note
-          if (now && k === 'base') {
+          if (now && k === 'where we are') {
             vNode = (
               <>provo {now.h}<Colon />{now.m}<Colon />{now.s} MT</>
             )
           }
-          if (now && k === 'cadence') noteNode = nextRun(now)
+          if (now && k === 'every day') noteNode = nextRun(now)
           return (
             <div key={k} className="min-w-0">
               <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">[{k}]</div>

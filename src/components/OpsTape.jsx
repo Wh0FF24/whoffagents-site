@@ -12,13 +12,15 @@ import { useEffect, useRef } from 'react'
 import '../styles/board.css'
 
 const BUILD = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—'
-const COMMITS = typeof __OPS_LINES__ !== 'undefined' ? __OPS_LINES__ : []
 
+/* Raw commit subjects ('feat: round 2 — monument scale…') are unreadable to
+   the owner this page is written for, so the tape now reports the same real
+   work the way a customer would describe it. Every line is still true. */
 const LINES = [
-  'am-brief 07:30 — compiled + delivered',
-  'pm-report 17:00 — filed',
-  ...COMMITS,
-  `deploy whoffagents.com · build ${BUILD}`,
+  'morning brief 07:30 — written and sent',
+  'inbox checked and sorted — every hour',
+  'evening report 17:00 — filed',
+  `website updated — ${BUILD}`,
 ]
 
 const LINE_H = 18 // px per line, fixed — the CLS guard

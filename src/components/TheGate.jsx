@@ -69,7 +69,7 @@ export default function TheGate() {
                   <span className="gate-led status-blink" style={{ background: '#F5A11C' }} />
                 </span>
                 <div className="gate-node-label">HUMAN REVIEW</div>
-                <div className="gate-node-sub">gate: WILL</div>
+                <div className="gate-node-sub">checked by: Will</div>
                 <div className="gate-node-sub gate-hold" style={{ color: '#F5A11C' }}>reviewing…</div>
               </div>
 
@@ -82,7 +82,7 @@ export default function TheGate() {
               </div>
 
               {/* PASS stamp — snaps in over the gate at px ≈ .55 */}
-              <div className="gate-stamp gate-pass">PASS · gate: WILL</div>
+              <div className="gate-stamp gate-pass">APPROVED by: Will</div>
 
               {/* the traveling job card — plateau via two nested wrappers:
                   outer 0→42% over px 0–.35, inner 0→42% over px .62–1 */}
@@ -123,13 +123,13 @@ export default function TheGate() {
               <span className="gate-ring" />
               <span className="gate-led" style={{ background: '#3ECF6E' }} />
               <div className="gate-node-label">HUMAN REVIEW</div>
-              <div className="gate-node-sub">gate: WILL</div>
+              <div className="gate-node-sub">checked by: Will</div>
               {/* the job, docked at the gate with its stamp */}
               <div className="gate-card-label mt-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
                 your website · rev 2
               </div>
               <div className="mt-2">
-                <span className="gate-stamp">PASS · gate: WILL</span>
+                <span className="gate-stamp">APPROVED by: Will</span>
               </div>
             </div>
             <div className="gate-vline" />

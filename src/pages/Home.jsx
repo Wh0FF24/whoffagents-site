@@ -117,6 +117,8 @@ const agentCapabilities = [
   { icon: PhoneCall, text: 'Answers your phone in a real voice — every call, takes messages, books callbacks' },
   { icon: Mail, text: 'Sorts your inbox and drafts the replies for you to approve' },
   { icon: MessageSquare, text: 'Texts customers back — questions, confirmations, follow-ups' },
+  { icon: CalendarClock, text: 'Books jobs straight into the calendar your office already uses' },
+  { icon: CalendarClock, text: 'Keeps spreadsheets and customer records up to date without retyping' },
   { icon: CalendarClock, text: 'Runs the repeat work on a schedule so nobody has to remember it' },
 ]
 
@@ -304,6 +306,9 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            <p className="mono-note mt-6">
+              not sure what to automate yet? you can hire an hour of our time on its own — no build attached
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/agents"
@@ -344,7 +349,7 @@ export default function Home() {
           index="06"
           eyebrow="path 03 · for developers"
           title="The tools we run on, packaged"
-          lede="Everything in the catalog exists because our own agents needed it first. Buy it, use it, own it — one-time prices, 30-day refunds."
+          lede="This part is for software developers — if you run a business, the two sections above are the ones for you. Everything in the catalog exists because our own agents needed it first. Buy it, use it, own it — one-time prices, 30-day refunds."
         />
         <div className="grid md:grid-cols-3 gap-5 mt-10">
           {devPicks.map(({ name, price, desc, to }, i) => (
@@ -383,7 +388,7 @@ export default function Home() {
         lines={['The agents built', 'this page.']}
         accentLine={1}
         accentColor="#F5A11C"
-        note="true story · ask us how · gate: WILL"
+        note="true story · ask us how"
       />
 
       <LeadFormSection index="08" source="homepage" />
