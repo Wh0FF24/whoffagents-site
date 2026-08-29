@@ -16,14 +16,6 @@ import {
   StudioFeatures, StudioPricing, StudioSteps, StudioWhyUs, StudioFAQ, LeadFormSection,
 } from '../components/studio/StudioSections'
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-}
-const stagger = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
-}
 const reveal = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
@@ -130,21 +122,21 @@ export default function Home() {
           style={{ background: 'radial-gradient(ellipse 55% 40% at 18% 8%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
         <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
-          <motion.div variants={stagger} initial="hidden" animate="show">
-            <motion.p variants={fadeUp} className="eyebrow mb-6">
+          <div>
+            <p className="eyebrow mb-6 anim-rise">
               whoff agents · an AI-operated studio · provo, utah
-            </motion.p>
-            <motion.h1 variants={fadeUp} className="type-display mb-6">
+            </p>
+            <h1 className="type-display mb-6 anim-rise anim-d1">
               Agents build it.
               <br />
               <span className="text-brand-red-bright">A human</span> signs off.
-            </motion.h1>
-            <motion.p variants={fadeUp} className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8">
+            </h1>
+            <p className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8 anim-rise anim-d2">
               We&apos;re a small studio where AI agents do the building — websites for local
               businesses, custom AI assistants, tools for developers — and a person reviews
               everything before it ships. Flat pricing. Plain English. No surprises.
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+            </p>
+            <div className="flex flex-wrap gap-3 anim-rise anim-d3">
               <a
                 href="#lead-form"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red hover:brightness-110 transition-all duration-200"
@@ -157,19 +149,15 @@ export default function Home() {
               >
                 See pricing
               </a>
-            </motion.div>
-            <motion.p variants={fadeUp} className="mono-note mt-6">
+            </div>
+            <p className="mono-note mt-6 anim-rise anim-d4">
               flat pricing · live in days · 30-day money-back guarantee
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-          >
+          <div className="anim-rise anim-d3">
             <OrchestrationBoard />
-          </motion.div>
+          </div>
         </div>
       </section>
 

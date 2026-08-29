@@ -35,7 +35,9 @@ function App() {
       <ScrollToTop />
       <Nav />
       <main className="flex-1">
-        <AnimatePresence mode="wait">
+        {/* initial={false}: the very first paint (incl. prerendered HTML)
+            renders at full opacity — only client-side route changes fade. */}
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0 }}

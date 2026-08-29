@@ -13,14 +13,6 @@ import Card, { SectionHeader } from '../components/ui/Card'
 import ReceiptsStrip from '../components/ReceiptsStrip'
 import { LeadFormSection } from '../components/studio/StudioSections'
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-}
-const stagger = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
-}
 const reveal = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
@@ -84,21 +76,21 @@ export default function AgentsPage() {
           style={{ background: 'radial-gradient(ellipse 55% 40% at 20% 10%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
         <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
-          <motion.div variants={stagger} initial="hidden" animate="show">
-            <motion.p variants={fadeUp} className="eyebrow mb-6">
+          <div>
+            <p className="eyebrow mb-6 anim-rise">
               custom AI agents · scoped per project
-            </motion.p>
-            <motion.h1 variants={fadeUp} className="type-display mb-6">
+            </p>
+            <h1 className="type-display mb-6 anim-rise anim-d1">
               We run on our
               <br />
               own <span className="text-brand-red-bright">agents.</span>
-            </motion.h1>
-            <motion.p variants={fadeUp} className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8">
+            </h1>
+            <p className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8 anim-rise anim-d2">
               AI agents answer this company&apos;s phones, triage its inbox, write its reports, and
               built the page you&apos;re reading. We build the same thing for your business:
               tell us what you need, we scope it, we build it, you approve it.
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+            </p>
+            <div className="flex flex-wrap gap-3 anim-rise anim-d3">
               <a
                 href="#lead-form"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red hover:brightness-110 transition-all duration-200"
@@ -111,23 +103,18 @@ export default function AgentsPage() {
               >
                 <PhoneCall className="w-4 h-4" /> Hear one live
               </a>
-            </motion.div>
-            <motion.p variants={fadeUp} className="mono-note mt-6">
+            </div>
+            <p className="mono-note mt-6 anim-rise anim-d4">
               (540) 584-1986 — a real line, answered by an agent, 24/7
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-            className="hidden lg:block"
-          >
+          <div className="hidden lg:block anim-rise anim-d3">
             <div className="card-surface corner-ticks p-6">
               <img src="/art/path-agents.svg" alt="" className="w-full" aria-hidden="true" />
               <p className="mono-note text-center mt-2">one agent · every channel</p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

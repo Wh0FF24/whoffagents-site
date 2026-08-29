@@ -240,6 +240,21 @@ body {
   transform-box: fill-box;
 }
 
+/* CSS-only hero entrance — runs at first paint, no JS needed, so the
+   prerendered HTML is never invisible while the bundle loads (LCP). */
+@keyframes rise-in {
+  /* starts partially visible so the element counts as painted on the very
+     first frame — the entrance reads the same, LCP doesn't wait for it */
+  from { opacity: 0.3; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim-rise { animation: rise-in 0.45s ease-out both; }
+.anim-d1 { animation-delay: 0.05s; }
+.anim-d2 { animation-delay: 0.11s; }
+.anim-d3 { animation-delay: 0.17s; }
+.anim-d4 { animation-delay: 0.23s; }
+.anim-d5 { animation-delay: 0.29s; }
+
 /* caret blink for terminal fragments */
 @keyframes caret-blink {
   0%, 45% { opacity: 1; }
@@ -251,5 +266,6 @@ body {
   .trace-pulse, .trace-pulse--slow, .status-blink, .node-breathe, .caret-blink {
     animation: none;
   }
+  .anim-rise { animation: none; }
   html { scroll-behavior: auto; }
 }
