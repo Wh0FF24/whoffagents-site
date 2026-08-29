@@ -1,17 +1,54 @@
 @import "tailwindcss";
 
+/* ============================================================
+   WHOFF AGENTS — design system "ops-room noir"
+   Canvas: near-black. Accent: brand red + bright signal red.
+   Gold is a deliberate secondary (badges, rare highlights only).
+   Type: Big Shoulders (display) · Archivo (text) · JetBrains Mono (labels)
+   All fonts self-hosted from /public/fonts — no runtime CDN.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Big Shoulders';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/bigshoulders-var-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/archivo-var-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jetbrainsmono-var-latin.woff2') format('woff2');
+}
+
 @theme inline {
+  /* brand (legacy tokens kept — many pages reference them) */
   --color-brand-red: #C8102E;
+  --color-brand-red-bright: #E5484D;
   --color-brand-blue: #002E5D;
   --color-brand-blue-light: #0062B8;
-  --color-brand-gold: #FFB81C;
+  --color-brand-gold: #F5A11C;
   --color-brand-silver: #C0C0C0;
-  --color-brand-dark: #0a0a0a;
-  --color-brand-card: #111111;
-  --color-brand-border: #1e1e1e;
+  --color-brand-dark: #0A0A0B;
+  --color-brand-card: #101114;
+  --color-brand-border: #1F2126;
+  --color-brand-ok: #3ECF6E;
   --color-brand-glow-red: rgba(200, 16, 46, 0.15);
-  --color-brand-glow-gold: rgba(255, 184, 28, 0.15);
+  --color-brand-glow-gold: rgba(245, 161, 28, 0.15);
   --color-brand-glow-blue: rgba(0, 46, 93, 0.25);
+
+  --font-display: 'Big Shoulders', 'Archivo Black', sans-serif;
+  --font-sans: 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
 }
 
 html {
@@ -19,19 +56,137 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #0a0a0a;
-  color: #e5e5e5;
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  background-color: #0A0A0B;
+  /* faint drafting grid, fixed so sections scroll over it */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-attachment: fixed;
+  color: #E7E9EC;
   -webkit-font-smoothing: antialiased;
   margin: 0;
 }
 
 ::selection {
-  background: rgba(255, 184, 28, 0.3);
+  background: rgba(200, 16, 46, 0.45);
   color: white;
 }
 
-/* Noise texture overlay */
+/* ---------- TYPE SCALE — the one scale, used sitewide ----------
+   .type-display  hero statements (Big Shoulders, condensed industrial)
+   .type-h1       page titles
+   .type-h2       section titles
+   .eyebrow       mono section labels
+------------------------------------------------------------------ */
+.type-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 72;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.95;
+  font-size: clamp(2.9rem, 8vw, 5.5rem);
+  color: #fff;
+}
+.type-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 72;
+  text-transform: uppercase;
+  letter-spacing: 0.008em;
+  line-height: 1.0;
+  font-size: clamp(2.4rem, 5.5vw, 3.75rem);
+  color: #fff;
+}
+.type-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 60;
+  text-transform: uppercase;
+  letter-spacing: 0.012em;
+  line-height: 1.04;
+  font-size: clamp(1.75rem, 3.6vw, 2.6rem);
+  color: #fff;
+}
+.type-h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.06rem;
+  line-height: 1.35;
+  color: #fff;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8A9099;
+}
+.eyebrow::before {
+  content: '▸ ';
+  color: #E5484D;
+}
+.mono-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: #5C636C;
+}
+
+/* ---------- SURFACES — the one card primitive ---------- */
+.card-surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.012));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+}
+.card-surface--featured {
+  background: linear-gradient(180deg, rgba(200, 16, 46, 0.10), rgba(200, 16, 46, 0.03));
+  border-color: rgba(229, 72, 77, 0.38);
+}
+
+/* corner ticks — the drafting-mark signature on key surfaces */
+.corner-ticks {
+  position: relative;
+}
+.corner-ticks::before,
+.corner-ticks::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid rgba(229, 72, 77, 0.75);
+  border-left: 1px solid rgba(229, 72, 77, 0.75);
+}
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid rgba(229, 72, 77, 0.75);
+  border-right: 1px solid rgba(229, 72, 77, 0.75);
+}
+
+/* section spine — thin red rule threading down the page */
+.spine {
+  position: relative;
+}
+.spine::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(229, 72, 77, 0.35) 12%, rgba(229, 72, 77, 0.35) 88%, transparent);
+}
+
+/* noise texture overlay (kept from prior system) */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -41,24 +196,60 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Vignette overlay */
 .vignette-overlay {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.42) 100%);
 }
 
-/* Marquee animation for tech strip */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* ---------- MOTION (transform/opacity only) ---------- */
+
+/* traveling pulse along schematic traces */
+@keyframes trace-pulse {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -600; }
 }
-.animate-marquee {
-  animation: marquee 30s linear infinite;
+.trace-pulse {
+  stroke-dasharray: 10 590;
+  animation: trace-pulse 7s linear infinite;
 }
+.trace-pulse--slow {
+  stroke-dasharray: 8 592;
+  animation: trace-pulse 11s linear infinite;
+}
+
+/* status dot blink */
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+.status-blink {
+  animation: status-blink 2.4s ease-in-out infinite;
+}
+
+/* soft node glow breathing */
+@keyframes node-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.12); }
+}
+.node-breathe {
+  animation: node-breathe 3.2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* caret blink for terminal fragments */
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+}
+.caret-blink { animation: caret-blink 1.1s steps(1) infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; }
+  .trace-pulse, .trace-pulse--slow, .status-blink, .node-breathe, .caret-blink {
+    animation: none;
+  }
+  html { scroll-behavior: auto; }
 }
