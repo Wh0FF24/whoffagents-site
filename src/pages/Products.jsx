@@ -1,6 +1,13 @@
+/**
+ * /products — the developer line + the done-for-you AI receptionist.
+ * Listing bar: everything here has a verifiable deliverable behind its
+ * checkout (public repo, shipped pack, or live service). De-listed SKUs
+ * (trading line, unverified legacy tools) keep their checkout URLs alive
+ * on unlisted pages — see /products/archive.
+ */
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Server, Code2, Package, Layers, Shield, Bot, ChevronRight } from 'lucide-react'
 import Newsletter from '../components/Newsletter'
 import ComparisonSection from '../components/ComparisonSection'
@@ -9,17 +16,10 @@ import { buildStripeURL } from '../utils/utm'
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
-  { id: 'agent', label: 'AI Employees', icon: Bot },
+  { id: 'agent', label: 'Done-For-You', icon: Bot },
   { id: 'mcp', label: 'MCP Servers', icon: Server },
   { id: 'skill', label: 'Skills', icon: Code2 },
   { id: 'kit', label: 'Starter Kits', icon: Package },
-]
-
-const verticalTiers = [
-  { vertical: 'Home Services', sub: 'HVAC · Plumbing · Electrical · Pest Control', price: '$99–299/mo', status: 'active' },
-  { vertical: 'Real Estate', sub: 'Agents · Property Mgmt', price: '$149–499/mo', status: 'soon' },
-  { vertical: 'Financial Services', sub: 'Advisors · Mortgage', price: '$299–999/mo', status: 'soon' },
-  { vertical: 'Legal', sub: 'Law Firms · Solo Practitioners', price: '$500–2K/mo', status: 'soon' },
 ]
 
 const products = [
@@ -30,40 +30,10 @@ const products = [
       'A 24/7 AI receptionist for your business: answers every call, qualifies the job, captures contact details, emails you summaries. Fixed-scope setup: number provisioning, custom greeting + business knowledge, routing rules, and a live test call with you before launch — done within 48 hours. Don\'t take our word for it: call (540) 584-1986 right now and talk to the exact AI you\'d be hiring.',
     category: 'agent',
     price: '$500',
-    accent: 'red',
     timeline: 'Setup — $500 one-time',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/cNi7sN6J987H4rB0wJaZi0q',
     buttonLabel: 'Get Set Up',
     featured: true,
-  },
-  {
-    id: 0,
-    title: 'Lead Qualification Agent',
-    description:
-      'Your 24/7 AI employee answers every inbound call, qualifies the job type and budget, and books the appointment directly into your calendar. Built for HVAC, plumbing, electrical, and pest control. If it doesn\'t save you 10 hours in week 1, we refund you.',
-    category: 'agent',
-    price: '$99/mo',
-    accent: 'red',
-    timeline: 'Hire Now — $99/mo',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    buyLink: 'https://cal.com/atlas-whoffagents/setup-session',
-    buttonLabel: 'Book Demo',
-    addOn: { label: 'CRM Sync + Follow-up Drip', price: '+$159/mo' },
-    featured: true,
-  },
-  {
-    id: 1,
-    title: 'AI SaaS Starter Kit',
-    description:
-      'Production-ready Next.js boilerplate for AI SaaS: NextAuth (GitHub + Google OAuth), Stripe billing with 3-tier pricing + customer portal + webhooks, streaming Claude chat with per-plan limits, dashboard, Prisma (SQLite dev / Postgres prod), shadcn/ui-style components, dark mode, full TypeScript. Clone, set your keys, launch.',
-    category: 'kit',
-    price: '$47',
-    accent: 'gold',
-    timeline: 'Starter Kit — $47',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
-    learnMoreLink: '/products/ai-saas-starter',
   },
   {
     id: 12,
@@ -72,9 +42,7 @@ const products = [
       'Claude Fable 5 dropped June 9 — and Anthropic\'s own docs say skills written for prior models "can degrade output quality" on it. Some legacy patterns now trigger silent refusal-fallbacks or hard API rejections. This CLI scans your .claude/skills against 12 rules grounded in Anthropic\'s migration guide, flags every violation with line numbers, and auto-rewrites flagged skills lean via your local claude CLI. We ran it on our own 31-skill fleet first.',
     category: 'skill',
     price: '$19',
-    accent: 'gold',
     timeline: 'NEW — Fable 5 ready',
-    timelineBadgeClass: 'bg-brand-gold/20 text-brand-gold border border-brand-gold/30',
     buyLink: 'https://buy.stripe.com/4gM6oJ6J973D4rBfrDaZi0p',
     demoGif: '/demos/fable5-audit-demo.gif',
     featured: true,
@@ -86,12 +54,31 @@ const products = [
       '11 Claude Code skills for the unfun layer of shipping a SaaS: auth-setup, stripe-payments, deploy-config, api-builder, database-setup, testing-suite, ui-components, email-system, monitoring, seo-meta — plus context-anchor to prevent context drift mid-build. v2.0: rewritten Fable 5-lean per Anthropic\'s migration guide, verified clean by our own auditor (0 findings). Free updates forever. Copy into .claude/commands/ship-fast/ and go.',
     category: 'skill',
     price: '$49',
-    accent: 'gold',
     timeline: 'v2.0 — Fable 5 ready',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/5kQ4gB7Nd1Jj3nx1ANaZi0a',
     learnMoreLink: '/products/ship-fast-skill-pack',
     demoGif: '/demos/shipfast-demo.gif',
+  },
+  {
+    id: 1,
+    title: 'AI SaaS Starter Kit',
+    description:
+      'Next.js boilerplate for AI SaaS: NextAuth (GitHub + Google OAuth), Stripe billing with 3-tier pricing + customer portal + webhooks, streaming Claude chat with per-plan limits, dashboard, Prisma (SQLite dev / Postgres prod), shadcn/ui-style components, dark mode, full TypeScript. Clone, set your keys, launch.',
+    category: 'kit',
+    price: '$47',
+    timeline: 'Starter Kit — $47',
+    buyLink: 'https://buy.stripe.com/8x2bJ39VlgEd2jt2ERaZi0i',
+    learnMoreLink: '/products/ai-saas-starter',
+  },
+  {
+    id: 14,
+    title: 'context-anchor',
+    description:
+      'One free skill that stops your agents from starting cold. Drops a compact working reference before handoffs, breaks, or context switches. MIT licensed, no email gate — download it and go.',
+    category: 'skill',
+    price: 'Free',
+    timeline: 'Free — no email gate',
+    learnMoreLink: '/free-skill',
   },
   {
     id: 3,
@@ -100,21 +87,17 @@ const products = [
       '25 battle-tested Claude Code prompts packaged as slash commands. Drop into .claude/commands/ and use immediately. Includes prompts for architecture review, debugging, code review, test generation, refactoring, and SEO content.',
     category: 'skill',
     price: '$9',
-    accent: 'blue',
     timeline: '25 prompts — $9',
-    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
     buyLink: 'https://buy.stripe.com/dRm3cx8Rh87H6zJgvHaZi0k',
   },
   {
     id: 4,
     title: 'SEO Writer Skill',
     description:
-      'One Claude Code skill that rewrites any draft for search intent, keyword density, and linkable structure. Activates on "write SEO content" or "optimize for search." Ships with proven patterns from 100+ published dev.to articles.',
+      'One Claude Code skill that rewrites any draft for search intent, keyword density, and linkable structure. Activates on "write SEO content" or "optimize for search."',
     category: 'skill',
     price: '$19',
-    accent: 'blue',
     timeline: 'Single Skill — $19',
-    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
     buyLink: 'https://buy.stripe.com/3cI00lgjJ1Jj8HR5R3aZi0b',
   },
   {
@@ -124,47 +107,8 @@ const products = [
       'Run multi-step workflows as Claude Code tool calls — trigger webhooks, chain API actions, branch on conditions. Perfect for replacing ad-hoc Zapier recipes with something your agent can reason about.',
     category: 'mcp',
     price: '$15',
-    accent: 'red',
     timeline: 'MCP Server — $15',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/14AaEZc3t87H4rBgvHaZi0f',
-  },
-  {
-    id: 6,
-    title: 'Crypto Data MCP Server',
-    description:
-      'Real-time on-chain data, price feeds, and DeFi analytics piped directly into Claude Code. Query any chain, any token, via MCP tool calls. Powers the trading dashboards running on whoffagents infra. Free and open source.',
-    category: 'mcp',
-    price: 'Free',
-    accent: 'blue',
-    timeline: 'Open Source — Free',
-    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
-    githubLink: 'https://github.com/Wh0FF24/crypto-data-mcp',
-    learnMoreLink: '/products/crypto-data-mcp',
-  },
-  {
-    id: 7,
-    title: 'AI Content Repurposer',
-    description:
-      'Feed long-form content in, get Twitter thread, LinkedIn post, and blog variants out. The exact tool used to repurpose the articles on dev.to. CLI-based, swap your LLM key in.',
-    category: 'skill',
-    price: '$19',
-    accent: 'blue',
-    timeline: 'CLI Tool — $19',
-    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
-    buyLink: 'https://buy.stripe.com/6oUeVfd7x0Ff4rB5R3aZi0c',
-  },
-  {
-    id: 8,
-    title: 'Trading Signals MCP Server',
-    description:
-      'Volatility classification, news-triggered signal detection, and price-history pulls piped into Claude Code. Backtested on Polymarket — the core research engine used for agent-driven paper trading.',
-    category: 'mcp',
-    price: '$29',
-    accent: 'red',
-    timeline: 'MCP Server — $29',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
-    buyLink: 'https://buy.stripe.com/28EcN75F5afPcY7bbnaZi0e',
   },
   {
     id: 9,
@@ -173,9 +117,7 @@ const products = [
       'Scan any MCP server for unsafe patterns, insecure defaults, and common misconfigurations. One-command scan, JSON output. Free tier covers the basics; Pro adds the advanced ruleset.',
     category: 'mcp',
     price: '$49',
-    accent: 'red',
     timeline: 'Scanner — $49',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/00w00ld7x3Rr3nx4MZaZi0d',
   },
   {
@@ -185,9 +127,7 @@ const products = [
       'The Pro tier of MCP Security Scanner — full ruleset, priority signatures, and integration-ready reports. Same install, richer findings. For teams scanning at scale.',
     category: 'mcp',
     price: '$149',
-    accent: 'gold',
     timeline: 'Pro Tier — $149',
-    timelineBadgeClass: 'bg-brand-red/20 text-brand-red border border-brand-red/30',
     buyLink: 'https://buy.stripe.com/3cIaEZ7Nd9bL1fpfrDaZi07',
   },
   {
@@ -197,15 +137,13 @@ const products = [
       'You have a product. You need an offer. Answer 8 questions. Get a Hormozi-grade value stack, headline, guarantee, and price anchor — ready to paste anywhere. 5 minutes. Free. Open source.',
     category: 'skill',
     price: 'Free',
-    accent: 'blue',
     timeline: 'Start Here — Free',
-    timelineBadgeClass: 'bg-brand-blue/20 text-white border border-brand-blue/30',
     githubLink: 'https://github.com/Wh0FF24/grand-slam-offer-generator',
   },
 ]
 
 const categoryLabels = {
-  agent: 'AI Employee',
+  agent: 'Done-For-You',
   mcp: 'MCP Server',
   skill: 'Skill',
   kit: 'Starter Kit',
@@ -213,74 +151,33 @@ const categoryLabels = {
 
 export default function Products() {
   const [filter, setFilter] = useState('all')
-  const location = useLocation()
 
   const filtered = filter === 'all' ? products : products.filter((p) => p.category === filter)
 
-  const handleWaitlistClick = (e) => {
-    e.preventDefault()
-    if (location.pathname !== '/') {
-      window.location.href = '/#newsletter'
-    } else {
-      document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
-    <div className="pt-28 pb-24 px-6">
+    <div className="pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">AI Employees for Your Business</h1>
-          <p className="text-gray-400 max-w-lg mx-auto mb-6">
-            Hire an AI employee that works 24/7 — answers leads, qualifies jobs, books appointments.
-            Built and operated by Atlas.
+          <p className="eyebrow mb-4">the catalog</p>
+          <h1 className="type-h1 mb-4">Developer tools &amp; AI products</h1>
+          <p className="text-gray-400 max-w-xl mx-auto mb-6">
+            Skills, MCP servers, and starter kits — extracted from the systems that run this
+            studio — plus a done-for-you AI receptionist. Everything here exists, ships today,
+            and is used in our own operation.
           </p>
-          {/* Guarantee badge */}
           <Link
             to="/refund-policy"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/40 bg-brand-gold/[0.06] text-brand-gold text-xs font-semibold tracking-wide hover:bg-brand-gold/10 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/[0.03] text-gray-300 text-xs font-semibold tracking-wide hover:border-white/30 transition-colors"
           >
-            <Shield className="w-3.5 h-3.5" />
-            First-Month Refund Guarantee · If not 10h saved in week 1, you pay nothing
+            <Shield className="w-3.5 h-3.5 text-brand-red-bright" />
+            30-day refund on every paid product · no questions asked
           </Link>
-        </motion.div>
-
-        {/* Vertical pricing tiers */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <p className="text-center text-xs font-semibold tracking-widest uppercase text-gray-500 mb-6">What industry are you in?</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {verticalTiers.map((tier) => (
-              <div
-                key={tier.vertical}
-                className={`relative rounded-xl border p-5 transition-all duration-200 ${
-                  tier.status === 'active'
-                    ? 'border-brand-red/40 bg-brand-red/[0.05] hover:border-brand-red/60'
-                    : 'border-white/[0.06] bg-white/[0.02] opacity-60'
-                }`}
-              >
-                {tier.status === 'active' && (
-                  <span className="absolute top-3 right-3 text-[10px] font-bold tracking-widest uppercase text-brand-red bg-brand-red/10 px-2 py-0.5 rounded-full">Active</span>
-                )}
-                {tier.status === 'soon' && (
-                  <span className="absolute top-3 right-3 text-[10px] font-bold tracking-widest uppercase text-gray-500 bg-white/[0.04] px-2 py-0.5 rounded-full">Coming Soon</span>
-                )}
-                <p className="text-sm font-bold text-white mb-1">{tier.vertical}</p>
-                <p className="text-xs text-gray-500 mb-3">{tier.sub}</p>
-                <p className={`text-sm font-semibold ${tier.status === 'active' ? 'text-brand-red' : 'text-gray-600'}`}>{tier.price}</p>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Filter tabs */}
@@ -291,7 +188,7 @@ export default function Products() {
               onClick={() => setFilter(cat.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
                 filter === cat.id
-                  ? 'bg-white/10 text-white border border-brand-red/30'
+                  ? 'bg-white/10 text-white border border-brand-red-bright/40'
                   : 'text-gray-400 hover:text-gray-300 border border-transparent hover:border-white/5'
               }`}
             >
@@ -310,38 +207,21 @@ export default function Products() {
                   key={product.id}
                   layout
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0, transition: { delay: i * 0.08 } }}
+                  animate={{ opacity: 1, y: 0, transition: { delay: i * 0.06 } }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35 }}
-                  className="relative group bg-brand-card border border-brand-border rounded-xl p-8 transition-all duration-300 hover:-translate-y-0.5"
+                  className={`card-surface ${product.featured ? 'card-surface--featured' : ''} p-7 flex flex-col transition-transform duration-300 hover:-translate-y-0.5`}
                 >
-                  {/* Gradient border on hover */}
-                  <div
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{
-                      border: '1px solid transparent',
-                      borderImage: 'linear-gradient(135deg, rgba(200,16,46,0.4), rgba(0,98,184,0.3)) 1',
-                    }}
-                  />
-
                   <div className="flex items-center gap-3 mb-4">
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                        product.accent === 'blue'
-                          ? 'bg-brand-blue/20 text-white border border-brand-blue/30'
-                          : product.accent === 'red'
-                          ? 'bg-brand-red/10 text-brand-red border border-brand-red/20'
-                          : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
-                      }`}
-                    >
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-white/[0.05] text-gray-300 border border-white/10">
                       {categoryLabels[product.category]}
                     </span>
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${product.timelineBadgeClass || 'bg-white/5 text-gray-400 border border-white/10'}`}>
+                    <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-brand-red/10 text-brand-red-bright border border-brand-red-bright/25">
                       {product.timeline}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-white mb-2">{product.title}</h3>
+                  <h3 className="type-h3 text-lg mb-2">{product.title}</h3>
                   {product.demoGif && (
                     <img
                       src={product.demoGif}
@@ -350,20 +230,14 @@ export default function Products() {
                       className="rounded-lg border border-white/[0.08] w-full mb-3"
                     />
                   )}
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{product.description}</p>
-                  {product.addOn && (
-                    <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04]">
-                      <span className="text-xs font-semibold text-brand-gold">{product.addOn.price}</span>
-                      <span className="text-xs text-gray-400">{product.addOn.label}</span>
-                    </div>
-                  )}
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">{product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-500 text-sm">{product.price}</span>
+                    <span className="text-gray-500 text-sm font-mono">{product.price}</span>
                     <div className="flex flex-col items-end gap-1.5">
                       {product.learnMoreLink && (
                         <Link
                           to={product.learnMoreLink}
-                          className="flex items-center gap-1 text-xs text-brand-gold hover:text-white transition-colors duration-200"
+                          className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors duration-200"
                         >
                           See details <ChevronRight className="w-3 h-3" />
                         </Link>
@@ -376,7 +250,7 @@ export default function Products() {
                             rel="noopener noreferrer"
                             className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
                           >
-                            {product.buttonLabel ? `${product.buttonLabel} →` : `Get the Kit — ${product.price} →`}
+                            {product.buttonLabel ? `${product.buttonLabel} →` : `Get it — ${product.price} →`}
                           </a>
                           {product.buyLink.startsWith('https://buy.stripe.com') && (
                             <Link to="/refund-policy" className="text-[11px] text-gray-500 hover:text-gray-400 transition-colors">
@@ -389,19 +263,11 @@ export default function Products() {
                           href={product.githubLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
+                          className="text-sm text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer"
                         >
                           Get on GitHub &rarr;
                         </a>
-                      ) : (
-                        <a
-                          href="/#newsletter"
-                          onClick={handleWaitlistClick}
-                          className="text-sm text-brand-blue-light hover:text-white transition-colors duration-200 cursor-pointer"
-                        >
-                          Notify Me &rarr;
-                        </a>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </motion.div>
