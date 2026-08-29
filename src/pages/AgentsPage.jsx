@@ -19,7 +19,7 @@ const capabilities = [
   {
     icon: PhoneCall,
     title: 'It answers your phone',
-    desc: 'A real voice on your line that picks up every call, takes messages, gets the caller’s details down, and books callbacks — day or night, no hold music.',
+    desc: 'A natural speaking voice on your line — not a phone tree — that picks up every call, takes messages, gets the caller’s details down, and books callbacks — day or night, no hold music.',
   },
   {
     icon: Mail,
@@ -49,7 +49,7 @@ const capabilities = [
   {
     icon: Wrench,
     title: 'It works with your tools',
-    desc: 'We connect it to the software you already run your business on, so it fits how you work instead of adding another thing to learn.',
+    desc: 'Our own agents already run on email, phone and text every day. For your build we connect to what you use — your calendar, your spreadsheets, your customer list. Name the software and we’ll tell you yes or no before you pay anything.',
   },
 ]
 
@@ -94,7 +94,7 @@ export default function AgentsPage() {
             <div>
               <p className="text-gray-300 text-lg leading-relaxed max-w-xl mb-5 anim-rise anim-d2">
                 We build a custom AI assistant for your business — software that takes over
-                a job you&apos;d otherwise hire someone to do. It answers your phone in a real
+                a job you&apos;d otherwise hire someone to do. It answers your phone in a natural speaking
                 voice, sorts and drafts your email, texts customers back, and runs the
                 repeat work on a schedule.
               </p>
@@ -119,7 +119,7 @@ export default function AgentsPage() {
                 </a>
               </div>
               <p className="mono-note mt-6 anim-rise anim-d4">
-                Ask for a live demo call in the inquiry — you&apos;ll talk to a real agent voice before you spend a dollar
+                Ask for a live demo call in the inquiry — you&apos;ll hear exactly what your customers would hear, before you spend a dollar
               </p>
             </div>
 
@@ -148,7 +148,7 @@ export default function AgentsPage() {
             },
             {
               t: 'same call',
-              h: 'It answers in a real voice and handles her.',
+              h: 'It answers, and handles her.',
               s: 'Gets her name, her number, and what she needs — and books her in.',
             },
             {
@@ -175,6 +175,60 @@ export default function AgentsPage() {
         <p className="mono-note mt-6">
           the phone is just the most common one — the same idea covers email, texts, and the work that repeats every week
         </p>
+      </section>
+
+      {/* ============ THE PRICED ENTRY POINT.
+           This product is real, fixed-scope and purchasable — it was sitting in
+           the developer catalogue behind a nav item called "Dev Tools", which is
+           the last place a business owner would look. It is also the only price
+           on this page, and "no price anywhere" reads as "expensive". ============ */}
+      <section data-reveal className="shell pt-8 pb-2">
+        <Card featured ticks className="p-6 md:p-9">
+          <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-8 items-center">
+            <div>
+              <p className="eyebrow mb-4">start here · already built</p>
+              <h2 className="type-h2 mb-4">
+                If what you want is the phone answered, it&apos;s{' '}
+                <span className="text-brand-red-bright">$500</span>, one time.
+              </h2>
+              <p className="text-gray-300 leading-relaxed mb-5 max-w-2xl">
+                The most common job people ask us for is already packaged at a fixed
+                price. We set up the number, teach it your business, write what it says
+                when it picks up, decide who gets which call, and run a live test call
+                with you before it ever speaks to a customer. It answers every call,
+                works out what the job is, takes the caller&apos;s details, and emails
+                you a summary.
+              </p>
+              <ul className="text-sm text-gray-400 leading-relaxed space-y-1.5 mb-6">
+                <li>— one-time setup, no retainer attached to it</li>
+                <li>— you hear it and sign off before it goes live</li>
+                <li>— anything more involved is quoted as its own project</li>
+              </ul>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://buy.stripe.com/cNi7sN6J987H4rB0wJaZi0q"
+                  className="cta-solid btn-charge inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
+                >
+                  Get set up — $500 <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#lead-form"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-gray-200 border border-white/15 hover:border-white/30 transition-all"
+                >
+                  Ask a question first
+                </a>
+              </div>
+            </div>
+            <div className="hidden lg:block">
+              <p className="mono-note leading-relaxed">
+                everything else on this page — email, texts, calendars, records, the
+                repeat work — is quoted per project, because what it costs depends
+                entirely on what you want it to do. tell us the job and we&apos;ll send
+                the number before you commit to anything.
+              </p>
+            </div>
+          </div>
+        </Card>
       </section>
 
       {/* ============ IS / ISN'T — kills the "is this a device?" read ============ */}
@@ -291,6 +345,18 @@ export default function AgentsPage() {
               h: 'You can switch it off',
               d: 'Any time, and it stops. Calls go back to however you handle them today. Nothing is locked into your business, and a person here looks after it while it runs.',
             },
+            {
+              h: 'It tells people it’s an assistant',
+              d: 'Callers are told they are speaking to an assistant. We don’t pretend it is a person, so you never get the call from a customer who worked it out halfway through.',
+            },
+            {
+              h: 'It can’t invent a price',
+              d: 'It can only say what you gave it. No prices, no lead times, no promises you didn’t make — if you didn’t give it the answer, it takes a message instead.',
+            },
+            {
+              h: 'A real emergency reaches you',
+              d: 'You decide what counts as urgent. When it hears one, it stops taking a message and puts the call through to whoever is on call — no queue, no callback form.',
+            },
           ].map((c, i) => (
             <Card key={c.h} className="p-5 rv-item" style={{ '--i': i }}>
               <h3 className="type-h3 mb-2">{c.h}</h3>
@@ -358,12 +424,6 @@ export default function AgentsPage() {
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link
-                  to="/atlas/ops"
-                  className="btn-charge inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
-                >
-                  <Activity className="w-4 h-4 text-brand-red-bright" /> See the live ops log
-                </Link>
                 <a
                   href="#lead-form"
                   className="btn-charge inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"

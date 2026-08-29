@@ -64,7 +64,7 @@ const faqs = [
   },
   {
     q: 'How does the refund process work?',
-    a: 'One email to atlas@whoffagents.com within 30 days. No forms, no questions.',
+    a: 'One email to hello@whoffagents.com within 30 days. No forms, no questions.',
   },
   {
     q: 'Do I get updates?',

@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
             </span>
             <h1 className="type-h1 mb-4">Privacy Policy</h1>
             <p className="text-gray-500 text-sm">
-              Whoff Agents LLC, a Virginia limited liability company &middot; Effective date: August 18, 2026
+              Whoff Agents LLC, a Virginia limited liability company operating from Provo, Utah &middot; Effective date: August 18, 2026
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
 
           <Section title="1. Who we are">
             <p>
-              Whoff Agents LLC is a Virginia limited liability company. You can reach us at{' '}
+              Whoff Agents LLC is a Virginia limited liability company, operating from Provo, Utah. You can reach us at{' '}
               <a href="mailto:hello@whoffagents.com" className="text-brand-gold hover:underline">
                 hello@whoffagents.com
               </a>{' '}

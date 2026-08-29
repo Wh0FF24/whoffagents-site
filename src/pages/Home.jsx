@@ -114,7 +114,7 @@ const paths = [
 ]
 
 const agentCapabilities = [
-  { icon: PhoneCall, text: 'Answers your phone in a real voice — every call, takes messages, books callbacks' },
+  { icon: PhoneCall, text: 'Answers your phone — every call, takes messages, books callbacks' },
   { icon: Mail, text: 'Sorts your inbox and drafts the replies for you to approve' },
   { icon: MessageSquare, text: 'Texts customers back — questions, confirmations, follow-ups' },
   { icon: CalendarClock, text: 'Books jobs straight into the calendar your office already uses' },

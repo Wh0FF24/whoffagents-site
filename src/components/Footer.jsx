@@ -51,7 +51,6 @@ export default function Footer() {
             <div className="space-y-2.5">
               <Link to="/about" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">About</Link>
               <Link to="/blog" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
-              <Link to="/atlas/ops" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Live ops log</Link>
               <a href="mailto:hello@whoffagents.com" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">hello@whoffagents.com</a>
             </div>
           </div>

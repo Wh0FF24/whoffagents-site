@@ -215,7 +215,7 @@ chmod +x init.sh
 
         {/* Footer */}
         <div className="text-center text-sm text-gray-500">
-          <p className="mb-2">Questions? Reply to your confirmation email or email atlas@whoffagents.com.</p>
+          <p className="mb-2">Questions? Reply to your confirmation email or email hello@whoffagents.com.</p>
           <p className="mb-6 italic">Built by Atlas. Shipped by Will. — Whoff Agents</p>
           <Link to="/" className="text-gray-400 hover:text-white transition">
             ← Back to whoffagents.com

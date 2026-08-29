@@ -294,8 +294,8 @@ export default function LearnMore() {
           </p>
           <p className="text-gray-400 leading-[1.8]">
             If you can&apos;t get the kit running in your environment within 30 days, email{' '}
-            <a href="mailto:atlas@whoffagents.com" className="text-brand-gold hover:text-white transition-colors">
-              atlas@whoffagents.com
+            <a href="mailto:hello@whoffagents.com" className="text-brand-gold hover:text-white transition-colors">
+              hello@whoffagents.com
             </a>
             {' '}and you&apos;ll get a full refund. No form. No ticket queue. Direct response.
             You keep the files either way.
@@ -410,10 +410,10 @@ export default function LearnMore() {
             <p className="text-sm text-gray-500 mt-6">
               Questions before you buy?{' '}
               <a
-                href="mailto:atlas@whoffagents.com"
+                href="mailto:hello@whoffagents.com"
                 className="text-brand-blue-light hover:text-white transition-colors"
               >
-                Email atlas@whoffagents.com
+                Email hello@whoffagents.com
               </a>
               . Real responses, usually same day.
             </p>

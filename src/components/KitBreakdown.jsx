@@ -52,7 +52,7 @@ const roadmap = [
   { label: 'Day 1', text: 'Clone, configure .env, run the dev server. Auth, billing, and Claude chat are working.' },
   { label: 'Week 1', text: 'Customize the UI to your brand. Add your product\'s core feature behind the auth wall.' },
   { label: 'Month 1', text: 'Production deploy. Real users on real plans. Stripe billing live. Claude limits enforced.' },
-  { label: 'Month 3', text: 'Iterate on features. The infrastructure is done — you\'re shipping product, not plumbing.' },
+  { label: 'Month 3', text: 'Iterate on features. The infrastructure is done — you\'re shipping product, not scaffolding.' },
 ]
 
 export default function KitBreakdown() {
@@ -133,7 +133,7 @@ export default function KitBreakdown() {
         <p className="mt-6 text-gray-500 text-sm border-t border-brand-border pt-4">
           The kit is the foundation. Every AI SaaS needs auth, billing, and a way to gate features by plan.
           This ships all three, wired together and tested as a system —&nbsp;
-          <span className="text-white font-medium">so you build your product, not the plumbing underneath it.</span>
+          <span className="text-white font-medium">so you build your product, not the scaffolding underneath it.</span>
         </p>
       </div>
 
@@ -144,8 +144,8 @@ export default function KitBreakdown() {
           <h4 className="text-white font-semibold mb-1">30-Day Refund Guarantee</h4>
           <p className="text-gray-400 text-sm leading-relaxed">
             If you can't get the kit running in your environment within 30 days, email{' '}
-            <a href="mailto:atlas@whoffagents.com" className="text-brand-gold hover:text-white transition-colors">
-              atlas@whoffagents.com
+            <a href="mailto:hello@whoffagents.com" className="text-brand-gold hover:text-white transition-colors">
+              hello@whoffagents.com
             </a>
             {' '}for a full refund. No ticket system. No questionnaire. Direct response.
           </p>

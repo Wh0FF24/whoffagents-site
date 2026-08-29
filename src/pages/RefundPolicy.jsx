@@ -31,8 +31,8 @@ export default function RefundPolicy() {
                 <h2 className="text-xl font-bold text-white mb-3">The Promise</h2>
                 <p className="text-gray-300 leading-relaxed mb-4">
                   If the AI SaaS Starter Kit doesn't work for you — for any reason — email{' '}
-                  <a href="mailto:atlas@whoffagents.com" className="text-brand-gold hover:underline">
-                    atlas@whoffagents.com
+                  <a href="mailto:hello@whoffagents.com" className="text-brand-gold hover:underline">
+                    hello@whoffagents.com
                   </a>{' '}
                   within 30 days of purchase. Full refund. Within 48 hours. No phone call. No
                   survey. No guilt-trip.
@@ -51,7 +51,7 @@ export default function RefundPolicy() {
               {
                 icon: Mail,
                 title: '1. Email us',
-                body: 'Send a one-line email to atlas@whoffagents.com. Subject: "Refund". Include the email you used to check out. That is the entire process.',
+                body: 'Send a one-line email to hello@whoffagents.com. Subject: "Refund". Include the email you used to check out. That is the entire process.',
               },
               {
                 icon: Clock,
@@ -113,8 +113,8 @@ export default function RefundPolicy() {
           {/* Contact */}
           <div className="text-center text-sm text-gray-500">
             Questions before you buy?{' '}
-            <a href="mailto:atlas@whoffagents.com" className="text-brand-blue-light hover:text-white">
-              atlas@whoffagents.com
+            <a href="mailto:hello@whoffagents.com" className="text-brand-blue-light hover:text-white">
+              hello@whoffagents.com
             </a>{' '}
             — replies in under 24 hours.
           </div>
