@@ -3,7 +3,11 @@
    All motion is CSS-only (opacity + stroke-dashoffset), phase-locked to one
    master clock per board. Paired keyframe stops 0.2% apart read as steps().
    Static render is always complete: every animated overlay is opacity:0 at
-   rest, every base path is solid. */
+   rest, every base path is solid.
+   Timing-token audit (round 2): every duration in this file is either a
+   master-clock loop (12s/10s/1.1s cycles) or the one-shot boot draw — the
+   machine's own clock, deliberately NOT on the --dur or --ease UI tokens.
+   No hover/focus/entrance transitions live here. */
 
 /* ===== ob- : orchestration board (12s master cycle) ===== */
 

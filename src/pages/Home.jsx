@@ -6,16 +6,72 @@
  *   03 tools for developers           (/products)
  * Nothing on this page is aspirational: every offer is deliverable today.
  */
-import { useEffect } from 'react'
+import { useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowDown, PhoneCall, Mail, MessageSquare, CalendarClock, Terminal } from 'lucide-react'
 import OrchestrationBoard from '../components/OrchestrationBoard'
+import SignalField from '../components/SignalField'
+import TheGate from '../components/TheGate'
 import ReceiptsStrip from '../components/ReceiptsStrip'
 import Card, { SectionHeader } from '../components/ui/Card'
 import {
   StudioFeatures, StudioPricing, StudioSteps, StudioWhyUs, StudioFAQ, LeadFormSection,
 } from '../components/studio/StudioSections'
 import { initReveal } from '../utils/reveal'
+
+/**
+ * Per-character monument assembly — split at render time (server-safe:
+ * plain string.split in JSX, the spans ship in the prerendered HTML).
+ * Words wrap as units (.mch-w inline-block); real spaces between words
+ * keep copy/paste and wrapping native. --ci staggers the rise 22ms/char
+ * (`from` continues the count across segments so the wave reads left to
+ * right through the accent span and line break).
+ */
+function MonuChars({ text, from = 0 }) {
+  let i = from
+  return text.split(' ').map((word, wi, arr) => (
+    <Fragment key={wi}>
+      <span className="mch-w">
+        {[...word].map((ch, ci) => (
+          <span key={ci} className="mch" style={{ '--ci': i++ }}>{ch}</span>
+        ))}
+      </span>
+      {wi < arr.length - 1 ? ' ' : null}
+    </Fragment>
+  ))
+}
+
+/**
+ * Full-bleed statement break — a true line from the site, monument-set.
+ * Per-word masked rise via the existing [data-reveal].in mechanism under
+ * html.js; fully visible statically otherwise (no-JS / prerender / print).
+ */
+function StatementBreak({ lines, accentLine, note }) {
+  let w = 0
+  return (
+    <section data-reveal className="stmt-break" aria-label={lines.join(' ')}>
+      <div className="stmt-inner">
+        <p className="stmt-display" aria-hidden="true">
+          {lines.map((line, li) => (
+            <span key={li} className={`stmt-line${li === accentLine ? ' text-brand-red-bright' : ''}`}>
+              {line.split(' ').map((word, wi, arr) => (
+                <Fragment key={wi}>
+                  <span className="stmt-w">
+                    <span className="stmt-wi" style={{ '--wi': w++ }}>{word}</span>
+                  </span>
+                  {wi < arr.length - 1 ? ' ' : null}
+                </Fragment>
+              ))}
+            </span>
+          ))}
+        </p>
+        <div className="stmt-note">
+          <span className="stmt-note-chip mono-note">{note}</span>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 const paths = [
   {
@@ -120,49 +176,61 @@ export default function Home() {
   useEffect(() => { initReveal() }, [])
   return (
     <div className="relative">
-      {/* ============ HERO ============ */}
-      <section className="relative pt-36 pb-16 px-6 overflow-hidden">
+      {/* ============ HERO — monument stack ============ */}
+      <section className="relative pt-28 pb-16 px-6 overflow-hidden">
+        {/* signal field canvas (Builder Y) — behind the glow, behind content */}
+        <div className="absolute inset-0 pointer-events-none">
+          <SignalField />
+        </div>
         {/* red signal glow, top-left */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 55% 40% at 18% 8%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
-          <div>
-            <p className="eyebrow mb-6 anim-rise">
-              whoff agents · an AI-operated studio · provo, utah
-            </p>
-            <h1 className="type-display mb-6 anim-rise anim-d1">
-              Agents build it.
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <p className="eyebrow mb-6 anim-rise">
+            whoff agents · an AI-operated studio · provo, utah
+          </p>
+          {/* per-char monument assembly — chars ship in the prerendered HTML,
+              start 25%-visible (LCP-safe), stagger 22ms/char left to right */}
+          <h1 className="type-display mb-10" aria-label="Agents build it. A human signs off.">
+            <span aria-hidden="true">
+              <MonuChars text="Agents build it." />
               <br />
-              <span className="text-brand-red-bright">A human</span> signs off.
-            </h1>
-            <p className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8 anim-rise anim-d2">
-              We&apos;re a small studio where AI agents do the building — websites for local
-              businesses, custom AI assistants, tools for developers — and a person reviews
-              everything before it ships. Flat pricing. Plain English. No surprises.
-            </p>
-            <div className="flex flex-wrap gap-3 anim-rise anim-d3">
-              <a
-                href="#lead-form"
-                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
-              >
-                Get a free quote <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#pricing"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
-              >
-                See pricing
-              </a>
+              <span className="text-brand-red-bright"><MonuChars text="A human" from={14} /></span>
+              {' '}
+              <MonuChars text="signs off." from={20} />
+            </span>
+          </h1>
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-x-14 gap-y-10 items-center">
+            <div>
+              <p className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8 anim-rise anim-d2">
+                We&apos;re a small studio where AI agents do the building — websites for local
+                businesses, custom AI assistants, tools for developers — and a person reviews
+                everything before it ships. Flat pricing. Plain English. No surprises.
+              </p>
+              <div className="flex flex-wrap gap-3 anim-rise anim-d3">
+                <a
+                  href="#lead-form"
+                  className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
+                >
+                  Get a free quote <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
+                >
+                  See pricing
+                </a>
+              </div>
+              <p className="mono-note mt-6 anim-rise anim-d4">
+                flat pricing · live in days · 30-day money-back guarantee
+              </p>
             </div>
-            <p className="mono-note mt-6 anim-rise anim-d4">
-              flat pricing · live in days · 30-day money-back guarantee
-            </p>
-          </div>
 
-          <div className="anim-rise anim-d3">
-            <OrchestrationBoard />
+            <div className="anim-rise anim-d3">
+              <OrchestrationBoard />
+            </div>
           </div>
         </div>
       </section>
@@ -199,7 +267,17 @@ export default function Home() {
         <StudioSteps index="03" />
       </div>
 
+      {/* ============ 03.5 — THE GATE (pinned scroll narrative) ============ */}
+      <TheGate />
+
       <StudioWhyUs index="04" />
+
+      {/* ============ STATEMENT BREAK 1 ============ */}
+      <StatementBreak
+        lines={['Agents do the labor.', 'A person owns the judgment.']}
+        accentLine={1}
+        note="the honest shape of it · from /agents"
+      />
 
       {/* ============ PATH 02 — CUSTOM AGENTS ============ */}
       <section data-reveal className="spine relative max-w-6xl mx-auto px-6 pl-6 lg:pl-10 py-20">
@@ -295,6 +373,13 @@ export default function Home() {
           a: "Yes, really. AI agents run this company's day-to-day — they built this website, they answer our phones, they write our reports — with a human directing the work and reviewing everything that ships. We sell what we use on ourselves every day.",
         },
       ]} />
+
+      {/* ============ STATEMENT BREAK 2 ============ */}
+      <StatementBreak
+        lines={['The agents built', 'this page.']}
+        accentLine={1}
+        note="true story · ask us how · gate: WILL"
+      />
 
       <LeadFormSection index="08" source="homepage" />
     </div>

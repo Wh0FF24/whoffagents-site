@@ -51,6 +51,21 @@
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
 }
 
+/* ---------- HOUSE MOTION — one bezier family, one duration scale ----------
+   Every transition/animation on the site composes these five tokens.
+   (Loop durations — trace-pulse, status-blink, the board clocks — are
+   exempt: they are the machine's clock, not entrance motion.)
+   --ease-house  the signature curve: confident settle, no bounce
+   --ease-snap   mechanical snap for stamps/latches (PASS, toggles)
+--------------------------------------------------------------------------- */
+:root {
+  --ease-house: cubic-bezier(.3, .26, .38, 1);
+  --ease-snap: cubic-bezier(.86, 0, .07, 1);
+  --dur-s: .3s;
+  --dur-m: .6s;
+  --dur-l: 1s;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -85,9 +100,9 @@ body {
   font-weight: 800;
   font-variation-settings: 'opsz' 72;
   text-transform: uppercase;
-  letter-spacing: 0.005em;
-  line-height: 0.95;
-  font-size: clamp(2.9rem, 8vw, 5.5rem);
+  letter-spacing: -0.005em;
+  line-height: 0.92;
+  font-size: clamp(3.4rem, 10.5vw, 8.75rem);
   color: #fff;
 }
 .type-h1 {
@@ -222,7 +237,7 @@ body {
   height: 5px;
   border-radius: 9999px;
   background: #2A2D33;
-  transition: background 0.4s, box-shadow 0.4s;
+  transition: background var(--dur-s) var(--ease-house), box-shadow var(--dur-s) var(--ease-house);
 }
 html.js [data-reveal].in .spine-dot,
 html.js .spine:has([data-reveal].in) > .spine-dot {
@@ -292,7 +307,7 @@ html.js .spine:has([data-reveal].in) > .spine-dot {
   from { opacity: 0.3; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.anim-rise { animation: rise-in 0.45s ease-out both; }
+.anim-rise { animation: rise-in var(--dur-m) var(--ease-house) both; }
 .anim-d1 { animation-delay: 0.05s; }
 .anim-d2 { animation-delay: 0.11s; }
 .anim-d3 { animation-delay: 0.17s; }
@@ -313,7 +328,7 @@ html.js .spine:has([data-reveal].in) > .spine-dot {
    parent [data-reveal] gains .in. Children animate (backwards fill, no
    forwards) so their own hover transitions keep their native timing. */
 [data-reveal] {
-  transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: opacity var(--dur-m) var(--ease-house), transform var(--dur-m) var(--ease-house);
 }
 html.js [data-reveal]:not(.in) {
   opacity: 0;
@@ -326,8 +341,404 @@ html.js [data-reveal]:not(.in) .rv-item {
   from { opacity: 0; transform: translateY(12px); }
 }
 html.js [data-reveal].in .rv-item {
-  animation: rv-item-in 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation: rv-item-in var(--dur-m) var(--ease-house) backwards;
   animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* ---------- MONUMENT — per-character hero assembly ----------
+   Pure keyframes (no JS) so it runs at first paint like anim-rise.
+   Chars start 25%-visible + translated within their inline-blocks:
+   painted on frame one (LCP-safe), zero layout shift (transform only). */
+.mch-w {
+  display: inline-block;
+}
+.mch {
+  display: inline-block;
+  animation: mch-rise var(--dur-m) var(--ease-house) both;
+  animation-delay: calc(var(--ci, 0) * 22ms);
+}
+@keyframes mch-rise {
+  from { opacity: 0.25; transform: translateY(0.28em); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- STATEMENT BREAKS — full-bleed display interludes ----------
+   Giant true lines between sections. Per-word masked rise driven by the
+   existing [data-reveal].in mechanism under html.js; fully visible
+   statically otherwise. Kept under 60vh — statements, not walls. */
+.stmt-break {
+  padding: clamp(4rem, 10vh, 7rem) 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+.stmt-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  position: relative;
+}
+.stmt-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 72;
+  text-transform: uppercase;
+  letter-spacing: 0.002em;
+  /* sized so each statement sets as its two written lines at >=1024
+     (keeps the whole break under 60vh — statements, not walls) */
+  font-size: clamp(2.6rem, 7.2vw, 5.9rem);
+  line-height: 0.95;
+  color: #fff;
+  margin: 0;
+}
+.stmt-line { display: block; }
+/* mask needs a hair of line-height headroom; negative margin between
+   lines restores the .95 visual leading */
+.stmt-line + .stmt-line { margin-top: -0.1em; }
+.stmt-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1.05;
+}
+.stmt-wi {
+  display: inline-block;
+  transform: none;
+}
+html.js .stmt-wi {
+  transition: transform var(--dur-l) var(--ease-house);
+  transition-delay: calc(var(--wi, 0) * 70ms);
+}
+html.js [data-reveal]:not(.in) .stmt-wi {
+  transform: translateY(110%);
+}
+.stmt-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 2rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.stmt-note-chip {
+  position: relative;
+  display: inline-block;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+/* static mini corner ticks (board grammar) — no hover growth on a chip */
+.stmt-note-chip::before,
+.stmt-note-chip::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+}
+.stmt-note-chip::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid rgba(229, 72, 77, 0.75);
+  border-left: 1px solid rgba(229, 72, 77, 0.75);
+}
+.stmt-note-chip::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid rgba(229, 72, 77, 0.75);
+  border-right: 1px solid rgba(229, 72, 77, 0.75);
+}
+
+/* ============================================================
+   GATE — the pinned human-review scene (TheGate.jsx)
+   Consumes --px (0→1, set by fx.js on the [data-scrub] wrapper,
+   measured on the wrapper for sticky scenes). Every beat is a pure
+   function of --px, so reverse scroll reverses it exactly and the
+   no-JS / prerendered state (--px: 0) is the legible opening frame:
+   card at BUILD, all stations labeled.
+   Travel plateau: two nested full-rail wrappers — outer translates
+   0→42% over px 0→.35, inner 0→42% over px .62→1. Sum = travel,
+   pause at the gate, travel. Zero JS, zero layout shift.
+   ============================================================ */
+.gate-wrap { height: 220vh; }
+.gate-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* travel fractions — leg 1 (BUILD→GATE) and leg 2 (GATE→SHIP) */
+  --gf1: clamp(0, var(--px, 0) / .35, 1);
+  --gf2: clamp(0, (var(--px, 0) - .62) / .38, 1);
+}
+.gate-stage-inner {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.gate-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 72;
+  text-transform: uppercase;
+  letter-spacing: 0.002em;
+  line-height: 0.95;
+  font-size: clamp(2rem, 4.6vw, 3.9rem);
+  color: #fff;
+  margin: 0;
+}
+
+/* --- the rail: trace + stations + traveling card --- */
+.gate-rail {
+  position: relative;
+  height: 300px;
+  margin-top: 3rem;
+}
+.gate-trace {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 96px;
+  height: 1px;
+  background: #2A2D33;
+}
+/* red conductor segments light behind the card as it travels */
+.gate-seg {
+  position: absolute;
+  top: 96px;
+  height: 1px;
+  background: rgba(229, 72, 77, 0.8);
+  transform-origin: left;
+}
+.gate-seg-1 { left: 8%; width: 42%; transform: scaleX(var(--gf1)); }
+.gate-seg-2 { left: 50%; width: 42%; transform: scaleX(var(--gf2)); }
+/* square junctions where station stubs meet the trace */
+.gate-junction {
+  position: absolute;
+  top: 94px;
+  width: 5px;
+  height: 5px;
+  margin-left: -2px;
+  background: #2A2D33;
+}
+/* stubs from trace down to the stations */
+.gate-stub {
+  position: absolute;
+  top: 96px;
+  width: 1px;
+  height: 26px;
+  background: #2A2D33;
+}
+
+/* --- stations (board grammar: mono labels, corner tick, LEDs) --- */
+.gate-node {
+  position: relative;
+  background: #0E0F12;
+  border: 1px solid #2A2D33;
+  border-radius: 3px;
+  padding: 10px 14px 9px;
+  min-width: 132px;
+}
+/* desktop rail placement */
+.gate-node--rail {
+  position: absolute;
+  top: 122px;
+  transform: translateX(-50%);
+}
+.gate-node::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 9px;
+  height: 9px;
+  border-top: 1px solid #5C636C;
+  border-left: 1px solid #5C636C;
+}
+.gate-node-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #D7DADE;
+  white-space: nowrap;
+}
+.gate-node-sub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: #5C636C;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+.gate-led {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+}
+/* the gate — larger, double ring like ATLAS */
+.gate-node--gate {
+  border-color: rgba(229, 72, 77, 0.55);
+  padding: 12px 18px 11px;
+}
+.gate-node--gate::before { border-color: #E5484D; }
+.gate-ring {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(229, 72, 77, 0.22);
+  border-radius: 6px;
+  pointer-events: none;
+}
+/* bright ring overlay — ignites as the job arrives for review */
+.gate-ring-hot {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid #E5484D;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: clamp(0, (var(--px, 0) - .3) * 6, 1);
+}
+/* ship — red-tinted like the board's ship node */
+.gate-node--ship {
+  background: rgba(229, 72, 77, 0.08);
+  border-color: rgba(229, 72, 77, 0.55);
+}
+.gate-node--ship::before { border-color: #E5484D; }
+.gate-ship-flash {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: rgba(229, 72, 77, 0.22);
+  box-shadow: 0 0 18px rgba(229, 72, 77, 0.35);
+  pointer-events: none;
+  opacity: clamp(0, (var(--px, 0) - .8) * 6, 1);
+}
+
+/* --- the traveling job card (plateau via nested wrappers) --- */
+.gate-run-a,
+.gate-run-b {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.gate-run-a { transform: translateX(calc(var(--gf1) * 42%)); }
+.gate-run-b { transform: translateX(calc(var(--gf2) * 42%)); }
+.gate-card {
+  position: absolute;
+  top: 96px;
+  left: 8%;
+  transform: translate(-50%, -50%);
+  width: 164px;
+  padding: 10px 12px 9px;
+  pointer-events: auto;
+}
+.gate-card-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: #D7DADE;
+  white-space: nowrap;
+}
+.gate-card-sub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: #5C636C;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+/* --- choreography windows (pure functions of --px) --- */
+/* hold window .35–.58: amber LED blink + "reviewing…" */
+.gate-hold {
+  opacity: clamp(0, min((var(--px, 0) - .35) * 12, (.58 - var(--px, 0)) * 12), 1);
+}
+/* PASS stamp — round-1 PASS grammar: green corner-ticked rect */
+.gate-stamp {
+  position: relative;
+  display: inline-block;
+  padding: 7px 12px;
+  background: rgba(62, 207, 110, 0.06);
+  border: 1px solid rgba(62, 207, 110, 0.45);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: #3ECF6E;
+  white-space: nowrap;
+}
+.gate-stamp::before,
+.gate-stamp::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+}
+.gate-stamp::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid #3ECF6E;
+  border-left: 1px solid #3ECF6E;
+}
+.gate-stamp::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid #3ECF6E;
+  border-right: 1px solid #3ECF6E;
+}
+/* desktop choreography: appears at .55, steep ramp reads as a snap; the
+   short snap-eased transition smooths the step in both scrub engines */
+.gate-pass {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  translate: -50%;
+  opacity: clamp(0, (var(--px, 0) - .55) * 14, 1);
+  transform: scale(calc(.94 + clamp(0, (var(--px, 0) - .55) * 14, 1) * .06));
+  transition: opacity var(--dur-s) var(--ease-snap), transform var(--dur-s) var(--ease-snap);
+}
+/* tail annotation after ship */
+.gate-tail {
+  position: absolute;
+  left: 92%;
+  top: 216px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: clamp(0, (var(--px, 0) - .82) * 8, 1);
+}
+/* full-bleed window wrappers for choreographed layers (keeps animated
+   opacity separate from looping LED blink opacity) */
+.gate-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* --- mobile/tablet compact static version (<1024px) --- */
+.gate-compact {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4.5rem 1.5rem;
+}
+/* this display:flex would otherwise out-cascade the lg:hidden utility
+   (index.css loads after the tailwind import) — enforce the split here */
+@media (min-width: 64rem) {
+  .gate-compact { display: none; }
+}
+.gate-vline {
+  width: 1px;
+  height: 34px;
+  background: #2A2D33;
+  margin: 0 auto;
+}
+.gate-vjunction {
+  width: 5px;
+  height: 5px;
+  background: #2A2D33;
+  margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -335,6 +746,23 @@ html.js [data-reveal].in .rv-item {
     animation: none;
   }
   .anim-rise { animation: none; }
+  /* monument chars: static and complete */
+  .mch { animation: none; }
+  /* statement words: static */
+  html.js .stmt-wi,
+  html.js [data-reveal]:not(.in) .stmt-wi {
+    transform: none;
+    transition: none;
+  }
+  /* gate: composed end-state (card at SHIP, PASS visible), no dead scroll */
+  .gate-wrap { height: auto; }
+  .gate-stage {
+    position: relative;
+    height: auto;
+    padding: 5rem 0;
+    --px: 1;
+  }
+  .gate-pass { transition: none; }
   html { scroll-behavior: auto; }
   /* reveal: static — content shown immediately, .in still lands via JS */
   html.js [data-reveal],

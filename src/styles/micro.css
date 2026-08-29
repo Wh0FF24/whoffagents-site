@@ -1,6 +1,9 @@
 /* Builder C micro — imported once from Card.jsx. Defaults = final state
-   (no-JS safe); reveal contract = html.js + [data-reveal].in */
-:root{--mz:cubic-bezier(.2,.8,.2,1)}
+   (no-JS safe); reveal contract = html.js + [data-reveal].in
+   Timing vocabulary: --ease-house/--dur-* tokens (defined in index.css,
+   fallbacks inline). --mz is the local alias for the house ease. Sub-.25s
+   mechanical flashes (.12s/.18s/90ms) deliberately stay literal. */
+:root{--mz:var(--ease-house,cubic-bezier(.3,.26,.38,1))}
 
 .ghost-index{position:absolute;left:-.08em;top:-.35em;z-index:0;font-family:var(--font-display);font-weight:800;font-size:clamp(6rem,13vw,10.5rem);line-height:1;color:transparent;-webkit-text-stroke:1px #E5484D42;user-select:none}
 @supports not (-webkit-text-stroke:1px red){.ghost-index{color:#FFFFFF0B}}
@@ -8,31 +11,31 @@
 .solder-rule{display:block;margin-top:18px}
 @media (prefers-reduced-motion:no-preference){
 html.js [data-reveal]:not(.in) .ghost-index{opacity:0;transform:translateY(24px)}
-html.js [data-reveal].in .ghost-index{transition:opacity .8s var(--mz),transform .8s var(--mz)}
+html.js [data-reveal].in .ghost-index{transition:opacity var(--dur-m,.6s) var(--mz),transform var(--dur-m,.6s) var(--mz)}
 html.js [data-reveal]:not(.in) .sr-draw{stroke-dashoffset:100}
-html.js [data-reveal].in .sr-draw{transition:stroke-dashoffset .9s ease-out}
+html.js [data-reveal].in .sr-draw{transition:stroke-dashoffset var(--dur-l,1s) var(--mz)}
 html.js [data-reveal]:not(.in) .sr-j{stroke-width:0;opacity:0}
-html.js [data-reveal].in .sr-j{transition:stroke-width .2s ease-out,opacity .2s ease-out}
+html.js [data-reveal].in .sr-j{transition:stroke-width .2s var(--mz),opacity .2s var(--mz)}
 html.js [data-reveal].in .sr-j1{transition-delay:.6s}
 html.js [data-reveal].in .sr-j2{transition-delay:.75s}
 }
 
-.corner-ticks::before,.corner-ticks::after{transition:.35s var(--mz)}
+.corner-ticks::before,.corner-ticks::after{transition:var(--dur-s,.3s) var(--mz)}
 .corner-ticks:hover::before,.corner-ticks:hover::after,
 .corner-ticks:focus-within::before,.corner-ticks:focus-within::after{width:38px;height:38px;border-color:#E5484D}
-.card-surface{transition:border-color .3s,box-shadow .3s}
+.card-surface{transition:border-color var(--dur-s,.3s) var(--mz),box-shadow var(--dur-s,.3s) var(--mz)}
 .card-surface:not(.card-surface--featured):hover{border-color:#E5484D47;box-shadow:inset 0 0 0 1px #E5484D14}
 
 .link-trace{position:relative}
-.link-trace::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1px;background:#E5484DCC;transform:scaleX(0);transform-origin:left;transition:transform .25s var(--mz)}
-.link-trace::before{content:'';position:absolute;left:0;bottom:-4px;width:3px;height:3px;background:#E5484D;box-shadow:0 0 4px #E5484DBF;opacity:0;transition:left .25s var(--mz),opacity .12s linear}
+.link-trace::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1px;background:#E5484DCC;transform:scaleX(0);transform-origin:left;transition:transform var(--dur-s,.3s) var(--mz)}
+.link-trace::before{content:'';position:absolute;left:0;bottom:-4px;width:3px;height:3px;background:#E5484D;box-shadow:0 0 4px #E5484DBF;opacity:0;transition:left var(--dur-s,.3s) var(--mz),opacity .12s linear}
 .link-trace:hover::after,.link-trace:focus-visible::after{transform:scaleX(1)}
 .link-trace:hover::before,.link-trace:focus-visible::before{opacity:1;left:calc(100% - 3px)}
 .link-trace[aria-current="page"]::before{opacity:1}
 .link-trace[aria-current="page"]::after{transform:scaleX(1);background:#E5484D4D}
 
 .field-armed{position:relative}
-.field-armed::before,.field-armed::after{content:'';position:absolute;width:14px;height:14px;opacity:0;transform:scale(1.08);filter:drop-shadow(0 0 3px #E5484D73);transition:opacity .18s ease-out,transform .18s ease-out}
+.field-armed::before,.field-armed::after{content:'';position:absolute;width:14px;height:14px;opacity:0;transform:scale(1.08);filter:drop-shadow(0 0 3px #E5484D73);transition:opacity .18s var(--mz),transform .18s var(--mz)}
 .field-armed::before{top:-2px;left:-2px;border-top:1px solid #E5484DE6;border-left:1px solid #E5484DE6}
 .field-armed::after{bottom:-2px;right:-2px;border-bottom:1px solid #E5484DE6;border-right:1px solid #E5484DE6}
 .field-armed:focus-within::before,.field-armed:focus-within::after{opacity:1;transform:scale(1)}
@@ -40,8 +43,8 @@ html.js [data-reveal].in .sr-j2{transition-delay:.75s}
 .field-armed:focus-within input,.field-armed:focus-within textarea{border-color:#E5484D80}
 
 /* CTA: lighten blend keeps text legible */
-.btn-charge{position:relative;overflow:hidden;isolation:isolate;transition:box-shadow .28s}
-.btn-charge::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#E5484D,#F2555A);mix-blend-mode:lighten;transform:scaleX(0);transform-origin:left;transition:transform .28s var(--mz)}
+.btn-charge{position:relative;overflow:hidden;isolation:isolate;transition:box-shadow var(--dur-s,.3s) var(--mz)}
+.btn-charge::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#E5484D,#F2555A);mix-blend-mode:lighten;transform:scaleX(0);transform-origin:left;transition:transform var(--dur-s,.3s) var(--mz)}
 .btn-charge:hover::before,.btn-charge:focus-visible::before{transform:scaleX(1)}
 .btn-charge:hover,.btn-charge:focus-visible{box-shadow:0 0 24px #E5484D59}
 .btn-charge::after{content:'';position:absolute;inset:0;z-index:2;background:#FFFFFF1F;opacity:0;transition:opacity 90ms steps(1)}

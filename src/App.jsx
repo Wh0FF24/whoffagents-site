@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import { initFx } from './utils/fx'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -27,6 +29,12 @@ import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const location = useLocation()
+
+  // systems layer (scrub --px, scramble decode, smooth scroll) — initFx
+  // idle-schedules itself past first paint and is a no-op during SSR
+  useEffect(() => {
+    initFx()
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col">
