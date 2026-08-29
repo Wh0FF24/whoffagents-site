@@ -236,13 +236,13 @@ export default function Home() {
               the same kind we&apos;d build for you. Call it. Ask it anything.
             </p>
             <a
-              href="tel:+15405841986"
+              href="#lead-form"
               className="inline-flex items-center gap-3 px-6 py-4 rounded-lg bg-black/40 border border-white/10 hover:border-brand-red-bright/50 transition-all font-mono text-lg text-white"
             >
               <PhoneCall className="w-5 h-5 text-brand-red-bright" />
-              (540) 584-1986
+              Request a live demo call
             </a>
-            <p className="mono-note mt-4">live 24/7 · answered by an agent</p>
+            <p className="mono-note mt-4">tell us in the form — an agent will phone you</p>
           </Card>
         </div>
       </motion.section>

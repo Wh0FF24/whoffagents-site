@@ -98,14 +98,14 @@ export default function AgentsPage() {
                 Ask about an agent <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="tel:+15405841986"
+                href="#inquiry"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
               >
                 <PhoneCall className="w-4 h-4" /> Hear one live
               </a>
             </div>
             <p className="mono-note mt-6 anim-rise anim-d4">
-              (540) 584-1986 — a real line, answered by an agent, 24/7
+              Ask for a live demo call in the inquiry — you'll talk to a real agent voice before you spend a dollar
             </p>
           </div>
 
@@ -198,7 +198,7 @@ export default function AgentsPage() {
                   <Activity className="w-4 h-4 text-brand-red-bright" /> See the live ops log
                 </Link>
                 <a
-                  href="tel:+15405841986"
+                  href="#inquiry"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
                 >
                   <PhoneCall className="w-4 h-4 text-brand-red-bright" /> Call the agent line

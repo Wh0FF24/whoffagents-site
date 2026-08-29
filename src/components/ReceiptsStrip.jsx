@@ -8,8 +8,8 @@
 const receipts = [
   { k: 'build', v: typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—', note: 'agents built · human reviewed' },
   { k: 'cadence', v: 'am-brief 07:30', note: 'pm-report 17:00' },
-  { k: 'demo line', v: '(540) 584-1986', note: 'answered by an agent, 24/7', href: 'tel:+15405841986' },
-  { k: 'base', v: 'provo, utah', note: 'veteran-owned · $0 VC' },
+  { k: 'agents on duty', v: 'phones · email · builds', note: 'ask us for a live demo call', href: '#lead-form' },
+  { k: 'base', v: 'provo, utah', note: 'independent · $0 VC' },
 ]
 
 export default function ReceiptsStrip() {
