@@ -77,10 +77,10 @@ export default function About() {
                 the world and deliver a chatbot.
               </p>
               <p>
-                I trade on Polymarket. I build websites for local businesses. I run a content operation.
-                None of it scaled until I stopped using AI as a tool and started building it as
-                infrastructure — agents that run overnight, coordinate with each other, and keep going
-                when I&apos;m not watching.
+                I build websites for local businesses. I run a content operation. I&apos;m finishing a
+                master&apos;s in electrical and computer engineering. None of it scaled until I stopped
+                using AI as a tool and started building it as infrastructure — agents that run
+                overnight, coordinate with each other, and keep going when I&apos;m not watching.
               </p>
               <div className="border-l-2 border-brand-red/60 pl-5 py-1">
                 <p className="text-white">
