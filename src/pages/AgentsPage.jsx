@@ -18,28 +18,28 @@ import { initReveal } from '../utils/reveal'
 const capabilities = [
   {
     icon: PhoneCall,
-    title: 'Phone agents',
-    desc: 'A custom voice on your line that answers every call, takes messages, captures contact details, and books callbacks — 24/7, no hold music.',
+    title: 'It answers your phone',
+    desc: 'A real voice on your line that picks up every call, takes messages, gets the caller’s details down, and books callbacks — day or night, no hold music.',
   },
   {
     icon: Mail,
-    title: 'Email triage & drafting',
-    desc: 'An agent that sorts your inbox, flags what matters, and drafts replies in your voice for you to approve — or handles routine threads end-to-end.',
+    title: 'It handles your inbox',
+    desc: 'Sorts what matters from what doesn’t and writes replies in your voice for you to approve — or answers the routine ones start to finish.',
   },
   {
     icon: MessageSquare,
-    title: 'SMS assistants',
-    desc: 'Text-message agents that answer questions, confirm appointments, and keep conversations moving while you work.',
+    title: 'It texts your customers',
+    desc: 'Answers questions, confirms appointments, and keeps conversations moving while you’re busy with the actual work.',
   },
   {
     icon: CalendarClock,
-    title: 'Scheduled routines',
-    desc: 'Autonomous back-office work on a clock: morning briefs, monitoring, report generation, follow-up sequences — done before you sit down.',
+    title: 'It does the repeat work',
+    desc: 'The tasks that come round every day or every week — reports, reminders, follow-ups, checking on things — done on schedule without anyone having to remember.',
   },
   {
     icon: Wrench,
-    title: 'Skills & integrations',
-    desc: 'Custom Claude skills and MCP integrations that wire agents into the tools you already use.',
+    title: 'It works with your tools',
+    desc: 'We connect it to the software you already run your business on, so it fits how you work instead of adding another thing to learn.',
   },
 ]
 
@@ -47,17 +47,17 @@ const engagement = [
   {
     num: '01',
     title: 'Tell us the job',
-    body: 'Use the form below or email hello@whoffagents.com. Describe the work you want off your plate — in plain English, no spec required.',
+    body: 'Use the form below or email hello@whoffagents.com. Describe the work you want off your plate, the way you’d explain it to a new hire. No technical detail needed.',
   },
   {
     num: '02',
-    title: 'We scope it',
-    body: 'We come back with what the agent will do, what it won’t, and a flat scoped price for your project. No retainers you didn’t ask for.',
+    title: 'We price it',
+    body: 'We come back with exactly what it will do, what it won’t, and one flat price for the project. No retainers you didn’t ask for.',
   },
   {
     num: '03',
     title: 'We build, you approve',
-    body: 'You test the agent against real scenarios — call it, email it, break it. Nothing goes live on your business until you sign off.',
+    body: 'You try it on real situations — call it, email it, try to trip it up. Nothing goes live on your business until you say so.',
   },
 ]
 
@@ -71,46 +71,79 @@ export default function AgentsPage() {
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 55% 40% at 20% 10%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 shell grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
-          <div>
-            <p className="eyebrow mb-6 anim-rise">
-              custom AI agents · scoped per project
-            </p>
-            <h1 className="type-display mb-6 anim-rise anim-d1">
-              We run on our
-              <br />
-              own <span className="text-brand-red-bright">agents.</span>
-            </h1>
-            <p className="text-gray-400 text-lg leading-relaxed max-w-xl mb-8 anim-rise anim-d2">
-              AI agents answer this company&apos;s phones, triage its inbox, write its reports, and
-              built the page you&apos;re reading. We build the same thing for your business:
-              tell us what you need, we scope it, we build it, you approve it.
-            </p>
-            <div className="flex flex-wrap gap-3 anim-rise anim-d3">
-              <a
-                href="#lead-form"
-                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
-              >
-                Ask about an agent <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#lead-form"
-                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
-              >
-                <PhoneCall className="w-4 h-4" /> Hear one live
-              </a>
+        <div className="relative z-10 shell">
+          <p className="eyebrow mb-6 anim-rise">
+            custom ai agents · any business · any job
+          </p>
+          <h1 className="type-display mb-8 anim-rise anim-d1">
+            AI that does the jobs
+            <br />
+            <span className="text-brand-red-bright">you don&apos;t have time for.</span>
+          </h1>
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+            <div>
+              <p className="text-gray-300 text-lg leading-relaxed max-w-xl mb-5 anim-rise anim-d2">
+                We build a custom AI assistant for your business — software that takes over
+                a job you&apos;d otherwise hire someone to do. It answers your phone in a real
+                voice, sorts and drafts your email, texts customers back, and runs the
+                repeat work on a schedule.
+              </p>
+              {/* the sentence that stops people picturing a machine in the closet */}
+              <p className="text-gray-400 leading-relaxed max-w-xl mb-8 anim-rise anim-d2">
+                <span className="text-white font-medium">There&apos;s no hardware to buy and nothing to install.</span>{' '}
+                It runs on our systems, not a computer in your office, and we look after it
+                once it&apos;s live.
+              </p>
+              <div className="flex flex-wrap gap-3 anim-rise anim-d3">
+                <a
+                  href="#lead-form"
+                  className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
+                >
+                  Tell us what you need <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#lead-form"
+                  className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
+                >
+                  <PhoneCall className="w-4 h-4" /> Hear one live
+                </a>
+              </div>
+              <p className="mono-note mt-6 anim-rise anim-d4">
+                Ask for a live demo call in the inquiry — you&apos;ll talk to a real agent voice before you spend a dollar
+              </p>
             </div>
-            <p className="mono-note mt-6 anim-rise anim-d4">
-              Ask for a live demo call in the inquiry — you'll talk to a real agent voice before you spend a dollar
-            </p>
-          </div>
 
-          <div className="hidden lg:block anim-rise anim-d3">
-            <div className="card-surface corner-ticks p-6">
-              <SwitchboardBoard />
-              <p className="mono-note text-center mt-2">one agent · every channel</p>
+            <div className="hidden lg:block anim-rise anim-d3">
+              <div className="card-surface corner-ticks p-6">
+                <SwitchboardBoard />
+                <p className="mono-note text-center mt-2">one assistant · every channel</p>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ============ IS / ISN'T — kills the "is this a device?" read ============ */}
+      <section data-reveal className="shell pb-4">
+        <div className="grid md:grid-cols-2 gap-5">
+          <Card ticks className="p-6">
+            <p className="eyebrow mb-4">what you get</p>
+            <ul className="space-y-2.5 text-sm text-gray-300 leading-relaxed">
+              <li>Software we build for your business — and run for you.</li>
+              <li>It works with the tools and services you already use.</li>
+              <li>You see exactly what it does and approve it before it goes live.</li>
+              <li>One flat project price, agreed before we build.</li>
+            </ul>
+          </Card>
+          <Card className="p-6">
+            <p className="eyebrow mb-4">what it isn&apos;t</p>
+            <ul className="space-y-2.5 text-sm text-gray-400 leading-relaxed">
+              <li>Not a computer or device you buy and plug in.</li>
+              <li>Not an app you install and have to configure yourself.</li>
+              <li>Not an off-the-shelf chatbot with our name on it.</li>
+              <li>Not something you&apos;re left to run on your own.</li>
+            </ul>
+          </Card>
         </div>
       </section>
 
@@ -120,9 +153,9 @@ export default function AgentsPage() {
       <section data-reveal style={accentVars("01")} className="shell py-20">
         <SectionHeader
           index="01"
-          eyebrow="what we build"
-          title="Agents that do real jobs"
-          lede="Everything below is something we've built and run — not a roadmap slide."
+          eyebrow="what an agent can do"
+          title="Examples — not a menu"
+          lede="Every job below is one we’ve built and run ourselves. Yours doesn’t have to be on this list — if the work is repetitive, on a schedule, or stuck on a phone line or in an inbox, we can usually build an agent for it, whatever your industry."
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
           {capabilities.map(({ icon: Icon, title, desc }, i) => (
@@ -135,10 +168,10 @@ export default function AgentsPage() {
             </Card>
           ))}
           <Card featured className="p-5 flex flex-col justify-center rv-item" style={{ '--i': capabilities.length }}>
-            <h3 className="type-h3 mb-2">Something else?</h3>
+            <h3 className="type-h3 mb-2">Something not on this list?</h3>
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
-              If it&apos;s repetitive, on a schedule, or stuck in your inbox, an agent can
-              probably carry it. Describe it and we&apos;ll tell you honestly if we can build it.
+              That&apos;s the normal case. Tell us what happens today, who does it, and how
+              often — and we&apos;ll tell you honestly whether an agent can carry it.
             </p>
             <a href="#lead-form" className="text-sm font-semibold text-brand-red-bright inline-flex items-center gap-2">
               Describe the job <ArrowRight className="w-4 h-4" />
@@ -151,9 +184,9 @@ export default function AgentsPage() {
       <section data-reveal style={accentVars("02")} className="shell py-20">
         <SectionHeader
           index="02"
-          eyebrow="how engagement works"
-          title="Inquire. Scope. Build. Approve."
-          lede="Pricing is scoped per project — you'll know the full number before we write a line of code."
+          eyebrow="how it works"
+          title="Tell us. We price it. We build it. You approve it."
+          lede="You’ll know the full price before we write a line of code."
         />
         <div className="grid md:grid-cols-3 gap-6 mt-10">
           {engagement.map((step, i) => (

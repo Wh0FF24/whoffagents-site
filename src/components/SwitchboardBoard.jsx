@@ -27,10 +27,10 @@ const C = {
 /* jacks — one per capability on this page (subs are fragments of that copy) */
 const jacks = [
   { y: 40, label: 'PHONE', sub: 'every call' },
-  { y: 116, label: 'EMAIL', sub: 'triage · drafts' },
-  { y: 192, label: 'SMS', sub: 'threads moving' },
-  { y: 268, label: 'CRON', sub: 'on a clock' },
-  { y: 344, label: 'SKILLS·MCP', sub: 'integrations' },
+  { y: 116, label: 'EMAIL', sub: 'sorts + replies' },
+  { y: 192, label: 'TEXTS', sub: 'keeps it moving' },
+  { y: 268, label: 'ROUTINES', sub: 'on a schedule' },
+  { y: 344, label: 'YOUR TOOLS', sub: 'already in use' },
 ]
 
 /* patch traces: jack (right edge x=108) into the core (left edge x=360) */
@@ -45,10 +45,10 @@ const traces = [
 /* captions — derived from the capabilities copy rendered on this page */
 const captions = [
   'phone: answers every call · takes messages · books callbacks',
-  'email: sorts · flags · drafts for your approval',
-  'sms: answers · confirms · keeps threads moving',
-  'cron: morning briefs · monitoring · reports on a clock',
-  'skills: custom Claude skills · MCP integrations',
+  'email: sorts the inbox · drafts replies for your approval',
+  'texts: answers questions · confirms appointments',
+  'routines: daily reports and follow-ups, done on a schedule',
+  'your tools: connects to the software you already run on',
 ]
 
 function Jack({ y, label, sub, slot }) {
@@ -104,7 +104,7 @@ export default function SwitchboardBoard() {
           <circle cx={372} cy={187} r="2.5" fill={C.red} className="node-breathe" />
           <text x={384} y={191} fontFamily={MONO} fontSize="9" letterSpacing="2" fill="#FFFFFF">AGENT</text>
           <text x={370} y={209} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.text}>24/7 · no hold music</text>
-          <text x={370} y={219} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.faint}>scoped per project</text>
+          <text x={370} y={219} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.faint}>built for your business</text>
         </g>
 
         {/* footer receipt — same true lines as the home board */}

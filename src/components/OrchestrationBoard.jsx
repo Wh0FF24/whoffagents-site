@@ -40,7 +40,7 @@ const LANES = [
     n: 2, label: 'AGENTS', sub: 'phones · email', y: 148, led: 'ob-led-2',
     tint: '#F5A11C', dim: 'rgba(245,161,28,0.55)',
     out: 'M 252 165 H 300', back: 'M 392 165 H 436',
-    detail: 'phones · inbox · sms · cron', to: '/agents',
+    detail: 'phones · inbox · texts · routines', to: '/agents',
   },
   {
     n: 3, label: 'TOOLS', sub: 'skills · MCP', y: 251, led: 'ob-led-3',

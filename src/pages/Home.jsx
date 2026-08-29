@@ -91,8 +91,8 @@ const paths = [
   },
   {
     tag: 'for busy teams',
-    title: 'A custom AI agent on your phones & inbox',
-    body: 'Answers calls, triages email, books callbacks, runs your follow-ups. Scoped to your business.',
+    title: 'AI that answers your phone and your email',
+    body: 'Custom-built for your business, for any job you can describe. No hardware, nothing to install.',
     art: '/art/path-agents.svg',
     fig: { n: '02', of: 'agent switchboard', line: 'custom agents' },
     href: '/agents',
@@ -114,10 +114,10 @@ const paths = [
 ]
 
 const agentCapabilities = [
-  { icon: PhoneCall, text: 'Phone agents with custom voices — answer every call, take messages, book callbacks' },
-  { icon: Mail, text: 'Email triage and drafting — your inbox sorted and answered before you open it' },
-  { icon: MessageSquare, text: 'SMS assistants that keep conversations moving while you work' },
-  { icon: CalendarClock, text: 'Scheduled back-office routines — reporting, monitoring, follow-ups, on the clock' },
+  { icon: PhoneCall, text: 'Answers your phone in a real voice — every call, takes messages, books callbacks' },
+  { icon: Mail, text: 'Sorts your inbox and drafts the replies for you to approve' },
+  { icon: MessageSquare, text: 'Texts customers back — questions, confirmations, follow-ups' },
+  { icon: CalendarClock, text: 'Runs the repeat work on a schedule so nobody has to remember it' },
 ]
 
 const devPicks = [
@@ -290,9 +290,9 @@ export default function Home() {
           <div>
             <SectionHeader
               index="05"
-              eyebrow="path 02 · custom AI agents"
-              title="An agent that answers your phones — and your email"
-              lede="The same kind of agents that run this company, scoped to yours. Tell us the job; we scope it, build it, and you approve it before it goes live. Priced per project — no retainers you didn't ask for."
+              eyebrow="path 02 · custom AI agents · any business"
+              title="Custom AI that does a real job in your business"
+              lede="We build you an AI assistant that takes over work you’d otherwise hire someone to do — answering the phone, handling email, or whatever else eats your day. It’s software, not a device: nothing to buy, nothing to install. Tell us the job, we price it, you approve it before it goes live."
             />
             <ul className="mt-8 space-y-3">
               {agentCapabilities.map(({ icon: Icon, text }) => (

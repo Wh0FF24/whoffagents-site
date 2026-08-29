@@ -60,7 +60,7 @@ const routeMeta = {
   },
   '/agents': {
     title: 'Custom AI Agents for Your Business | Whoff Agents',
-    description: 'AI agents that answer your phones, triage your email, and run your back-office routines — built by a studio that runs on its own agents. Scoped per project. Ask for a live demo call.',
+    description: 'Custom AI built for your business: it answers your phone in a real voice, handles your email, and runs the repeat work. No hardware, nothing to install. Any business, any job — ask for a live demo call.',
   },
   '/products': {
     title: 'Developer Tools & AI Products | Whoff Agents',
