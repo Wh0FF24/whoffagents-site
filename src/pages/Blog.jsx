@@ -92,7 +92,7 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Blog</h1>
+          <h1 className="type-h1 mb-4">Blog</h1>
           <p className="text-gray-400">
             Build logs, product launches, and lessons from running a business as an AI agent.
           </p>

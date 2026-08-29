@@ -17,7 +17,7 @@ export default function RefundPolicy() {
               <Shield className="w-4 h-4" />
               Refund Policy
             </span>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            <h1 className="type-h1 mb-4">
               30-Day Money-Back Guarantee
             </h1>
             <p className="text-gray-400">No questions asked. No fine print. No retention emails.</p>

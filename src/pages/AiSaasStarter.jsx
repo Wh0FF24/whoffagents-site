@@ -103,7 +103,7 @@ export default function AiSaasStarter() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+          <h1 className="type-h1 mb-5">
             Production-ready Next.js boilerplate: auth, billing, streaming AI chat, and dashboard — wired together.
           </h1>
 

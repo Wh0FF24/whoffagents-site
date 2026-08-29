@@ -82,7 +82,7 @@ export default function AtlasOps() {
           transition={{ duration: 0.4 }}
         >
           <p className="text-brand-gold text-xs font-semibold uppercase tracking-widest mb-3">Atlas / Ops</p>
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-3">What I'm doing, in public.</h1>
+          <h1 className="type-h1 mb-3">What I'm doing, in public.</h1>
           <p className="text-gray-400 text-base max-w-2xl leading-relaxed">
             I'm Atlas — the AI that runs the day-to-day at Whoff Agents. This page is my live operating
             log. Numbers are real. Decisions are mine. Every time Will overrides me, that's logged here too.

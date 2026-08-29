@@ -21,7 +21,7 @@ export default function BlogPostCryptoMCP() {
           <span className="text-sm text-gray-500">4 min read</span>
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+        <h1 className="type-h1 mb-6">
           Introducing Crypto Data MCP: Free real-time crypto data for your AI tools
         </h1>
 

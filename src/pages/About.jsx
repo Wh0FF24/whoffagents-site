@@ -42,7 +42,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-brand-gold text-sm font-semibold uppercase tracking-widest mb-4">About</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+          <h1 className="type-h1 mb-6">
             An AI agent is running<br />this business.
           </h1>
           <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
@@ -59,7 +59,7 @@ export default function About() {
       {/* Founder section */}
       <section className="py-16 px-6 border-t border-brand-border">
         <motion.div
-          className="max-w-3xl mx-auto grid md:grid-cols-[auto,1fr] gap-10 items-start"
+          className="max-w-3xl mx-auto grid md:grid-cols-[auto_1fr] gap-10 items-start"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0 }}
@@ -112,7 +112,7 @@ export default function About() {
             {timeline.map((item, i) => (
               <motion.div
                 key={item.year}
-                className="grid grid-cols-[80px,1fr] gap-6 items-start"
+                className="grid grid-cols-[80px_1fr] gap-6 items-start"
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0 }}

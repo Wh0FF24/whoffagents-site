@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
               <Lock className="w-4 h-4" />
               Privacy Policy
             </span>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Privacy Policy</h1>
+            <h1 className="type-h1 mb-4">Privacy Policy</h1>
             <p className="text-gray-500 text-sm">
               Whoff Agents LLC, a Virginia limited liability company &middot; Effective date: August 18, 2026
             </p>
