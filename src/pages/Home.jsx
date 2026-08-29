@@ -6,7 +6,7 @@
  *   03 tools for developers           (/products)
  * Nothing on this page is aspirational: every offer is deliverable today.
  */
-import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowDown, PhoneCall, Mail, MessageSquare, CalendarClock, Terminal } from 'lucide-react'
 import OrchestrationBoard from '../components/OrchestrationBoard'
@@ -15,13 +15,7 @@ import Card, { SectionHeader } from '../components/ui/Card'
 import {
   StudioFeatures, StudioPricing, StudioSteps, StudioWhyUs, StudioFAQ, LeadFormSection,
 } from '../components/studio/StudioSections'
-
-const reveal = {
-  initial: { opacity: 0, y: 18 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.5 },
-}
+import { initReveal } from '../utils/reveal'
 
 const paths = [
   {
@@ -29,6 +23,7 @@ const paths = [
     title: 'A website that wins you customers',
     body: 'Custom-designed, live in days, flat pricing from $1,500. Found on Google, fast on phones.',
     art: '/art/path-websites.svg',
+    fig: { n: '01', file: 'path-websites.svg', dims: '2048×2015' },
     href: '#web-studio',
     anchor: true,
     cta: 'See how it works',
@@ -39,6 +34,7 @@ const paths = [
     title: 'A custom AI agent on your phones & inbox',
     body: 'Answers calls, triages email, books callbacks, runs your follow-ups. Scoped to your business.',
     art: '/art/path-agents.svg',
+    fig: { n: '02', file: 'path-agents.svg', dims: '1623×1520' },
     href: '/agents',
     cta: 'Explore custom agents',
     accent: 'outline', // red outline
@@ -48,6 +44,7 @@ const paths = [
     title: 'The tools we run on, packaged',
     body: 'Claude Code skills, MCP servers, and starter kits — extracted from our own daily operation.',
     art: '/art/path-devtools.svg',
+    fig: { n: '03', file: 'path-devtools.svg', dims: '1863×1043' },
     href: '/products',
     cta: 'Browse the tools',
     accent: 'ghost', // graphite
@@ -82,7 +79,7 @@ const devPicks = [
   },
 ]
 
-function PathCard({ tag, title, body, art, href, anchor, cta, accent }) {
+function PathCard({ tag, title, body, art, fig, href, anchor, cta, accent, index = 0 }) {
   const ctaCls = {
     solid: 'bg-brand-red text-white hover:brightness-110',
     outline: 'border border-brand-red-bright/50 text-brand-red-bright hover:bg-brand-red/10',
@@ -91,8 +88,15 @@ function PathCard({ tag, title, body, art, href, anchor, cta, accent }) {
 
   const inner = (
     <>
-      <div className="h-40 flex items-center justify-center border-b border-white/[0.06] bg-black/20 overflow-hidden">
-        <img src={art} alt="" loading="lazy" className="h-[150%] w-auto opacity-90 transition-transform duration-500 group-hover:scale-105" aria-hidden="true" />
+      {/* blueprint frame around the art region (fig-frame/fig-caption: micro.css) */}
+      <div className="fig-frame relative rounded-t-[13px] overflow-hidden">
+        <div className="h-40 flex items-center justify-center border-b border-white/[0.06] bg-black/20 overflow-hidden">
+          <img src={art} alt="" loading="lazy" className="h-[150%] w-auto opacity-90 transition-transform duration-500 group-hover:scale-105" aria-hidden="true" />
+        </div>
+        <div className="fig-caption">
+          <span>fig. {fig.n} / {fig.file}</span>
+          <span>{fig.dims}</span>
+        </div>
       </div>
       <div className="p-6 flex flex-col flex-1">
         <p className="eyebrow mb-3">{tag}</p>
@@ -105,13 +109,15 @@ function PathCard({ tag, title, body, art, href, anchor, cta, accent }) {
     </>
   )
 
-  const cls = 'card-surface group flex flex-col overflow-hidden hover:-translate-y-1 transition-transform duration-300'
+  const cls = 'card-surface corner-ticks rv-item group flex flex-col hover:-translate-y-1 transition-transform duration-300'
+  const style = { '--i': index }
   return anchor
-    ? <a href={href} className={cls}>{inner}</a>
-    : <Link to={href} className={cls}>{inner}</Link>
+    ? <a href={href} className={cls} style={style}>{inner}</a>
+    : <Link to={href} className={cls} style={style}>{inner}</Link>
 }
 
 export default function Home() {
+  useEffect(() => { initReveal() }, [])
   return (
     <div className="relative">
       {/* ============ HERO ============ */}
@@ -139,7 +145,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-3 anim-rise anim-d3">
               <a
                 href="#lead-form"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red hover:brightness-110 transition-all duration-200"
+                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
               >
                 Get a free quote <ArrowRight className="w-4 h-4" />
               </a>
@@ -162,18 +168,19 @@ export default function Home() {
       </section>
 
       {/* ============ THREE PATHS ============ */}
-      <motion.section {...reveal} className="max-w-6xl mx-auto px-6 pb-20">
+      <section data-reveal className="max-w-6xl mx-auto px-6 pb-20">
         <div className="grid md:grid-cols-3 gap-5">
-          {paths.map((p) => <PathCard key={p.tag} {...p} />)}
+          {paths.map((p, i) => <PathCard key={p.tag} {...p} index={i} />)}
         </div>
-      </motion.section>
+      </section>
 
       <ReceiptsStrip />
 
       {/* ============ PATH 01 — WEB STUDIO ============ */}
-      <div id="web-studio" className="scroll-mt-16 relative">
+      <div id="web-studio" className="scroll-mt-16 relative spine">
+        <span aria-hidden="true" className="spine-dot hidden lg:block top-[5.45rem]" />
         <div className="max-w-6xl mx-auto px-6 pt-20">
-          <motion.div {...reveal}>
+          <div data-reveal>
             <p className="eyebrow mb-4">path 01 · whoff web studio</p>
             <h2 className="type-h1 mb-4">
               Websites for local businesses.
@@ -185,7 +192,7 @@ export default function Home() {
               Flat pricing from $1,500, and the first thing you see is a working version
               of your actual site.
             </p>
-          </motion.div>
+          </div>
         </div>
         <StudioFeatures index="01" />
         <StudioPricing index="02" />
@@ -195,7 +202,8 @@ export default function Home() {
       <StudioWhyUs index="04" />
 
       {/* ============ PATH 02 — CUSTOM AGENTS ============ */}
-      <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal className="spine relative max-w-6xl mx-auto px-6 pl-6 lg:pl-10 py-20">
+        <span aria-hidden="true" className="spine-dot hidden lg:block top-[5.45rem]" />
         <div className="grid lg:grid-cols-[1fr_1fr] gap-10 items-center">
           <div>
             <SectionHeader
@@ -245,10 +253,11 @@ export default function Home() {
             <p className="mono-note mt-4">tell us in the form — an agent will phone you</p>
           </Card>
         </div>
-      </motion.section>
+      </section>
 
       {/* ============ PATH 03 — DEVELOPER TOOLS ============ */}
-      <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal className="spine relative max-w-6xl mx-auto px-6 pl-6 lg:pl-10 py-20">
+        <span aria-hidden="true" className="spine-dot hidden lg:block top-[5.45rem]" />
         <SectionHeader
           index="06"
           eyebrow="path 03 · for developers"
@@ -256,8 +265,8 @@ export default function Home() {
           lede="Everything in the catalog exists because our own agents needed it first. Buy it, use it, own it — one-time prices, 30-day refunds."
         />
         <div className="grid md:grid-cols-3 gap-5 mt-10">
-          {devPicks.map(({ name, price, desc, to }) => (
-            <Link key={name} to={to} className="card-surface group p-6 flex flex-col hover:-translate-y-1 transition-transform duration-300">
+          {devPicks.map(({ name, price, desc, to }, i) => (
+            <Link key={name} to={to} style={{ '--i': i }} className="card-surface corner-ticks rv-item group p-6 flex flex-col hover:-translate-y-1 transition-transform duration-300">
               <div className="flex items-center justify-between mb-4">
                 <Terminal className="w-4 h-4 text-gray-500" />
                 <span className="font-mono text-sm text-brand-red-bright font-bold">{price}</span>
@@ -278,7 +287,7 @@ export default function Home() {
             Browse all developer tools <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-      </motion.section>
+      </section>
 
       <StudioFAQ index="07" extraFaqs={[
         {

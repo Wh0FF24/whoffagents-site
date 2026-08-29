@@ -18,12 +18,34 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { execSync } from 'node:child_process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { build } from 'vite'
 import react from '@vitejs/plugin-react'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
+
+/**
+ * Real recent commit subjects for the ops tape — same logic as the
+ * getOpsLines() in vite.config.js (this SSR build has its own independent
+ * define block, so both must define __OPS_LINES__ — keep them in sync).
+ * Conventional-commit subjects only; housekeeping/meta lines are dropped so
+ * internal cleanup language never renders on the site. Returns [] whenever
+ * git history is unavailable (e.g. a shallow CI clone).
+ */
+function getOpsLines() {
+  try {
+    return execSync('git log -12 --format=%s', { encoding: 'utf8', cwd: rootDir })
+      .split('\n')
+      .map((s) => s.trim())
+      .filter((s) => /^(feat|fix|perf|style|docs|chore):/.test(s))
+      .filter((s) => !/honest|fabricat|purge|remove/i.test(s))
+      .slice(0, 4)
+  } catch {
+    return []
+  }
+}
 
 const SITE = 'https://whoffagents.com'
 
@@ -146,6 +168,7 @@ await build({
     'import.meta.env.DEV': false,
     'import.meta.env.MODE': '"production"',
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+    __OPS_LINES__: JSON.stringify(getOpsLines()),
   },
   build: {
     ssr: path.join(rootDir, 'src/entry-server.jsx'),

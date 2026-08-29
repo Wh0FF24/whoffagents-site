@@ -7,7 +7,6 @@
  * Luke's outreach pipeline depends on them. Do not rename anything here.
  */
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import {
   Zap, CheckCircle2, CalendarClock, Search, Check, ArrowRight,
   Smartphone, ServerCog, PhoneCall,
@@ -208,7 +207,7 @@ export function LeadForm({ source = 'web_studio_page' }) {
   }
 
   const inputCls =
-    'px-4 py-3 rounded-lg text-sm bg-white/[0.04] border border-white/[0.1] text-white placeholder-gray-500 focus:outline-none focus:border-brand-red-bright/60 transition-all'
+    'w-full px-4 py-3 rounded-lg text-sm bg-white/[0.04] border border-white/[0.1] text-white placeholder-gray-500 focus:outline-none focus:border-brand-red-bright/60 transition-all'
 
   return (
     <Card ticks className="p-6 md:p-10">
@@ -229,54 +228,66 @@ export function LeadForm({ source = 'web_studio_page' }) {
         <div className="grid md:grid-cols-2 gap-5">
           <div className="md:col-span-2 flex flex-col gap-2">
             <label htmlFor="business_name" className="text-sm text-gray-400 font-medium">Business name</label>
-            <input
-              id="business_name" required autoComplete="organization"
-              value={fields.business_name} onChange={update('business_name')}
-              className={inputCls}
-            />
+            <div className="field-armed relative">
+              <input
+                id="business_name" required autoComplete="organization"
+                value={fields.business_name} onChange={update('business_name')}
+                className={inputCls}
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="text-sm text-gray-400 font-medium">Your name</label>
-            <input
-              id="name" required autoComplete="name"
-              value={fields.name} onChange={update('name')}
-              className={inputCls}
-            />
+            <div className="field-armed relative">
+              <input
+                id="name" required autoComplete="name"
+                value={fields.name} onChange={update('name')}
+                className={inputCls}
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="phone" className="text-sm text-gray-400 font-medium">Phone</label>
-            <input
-              id="phone" type="tel" required autoComplete="tel"
-              value={fields.phone} onChange={update('phone')}
-              className={inputCls}
-            />
+            <div className="field-armed relative">
+              <input
+                id="phone" type="tel" required autoComplete="tel"
+                value={fields.phone} onChange={update('phone')}
+                className={inputCls}
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-sm text-gray-400 font-medium">Email</label>
-            <input
-              id="email" type="email" required autoComplete="email"
-              value={fields.email} onChange={update('email')}
-              className={inputCls}
-            />
+            <div className="field-armed relative">
+              <input
+                id="email" type="email" required autoComplete="email"
+                value={fields.email} onChange={update('email')}
+                className={inputCls}
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="current_website" className="text-sm text-gray-400 font-medium">
               Current website <span className="text-gray-600 font-normal">(optional)</span>
             </label>
-            <input
-              id="current_website" autoComplete="url"
-              value={fields.current_website} onChange={update('current_website')}
-              className={inputCls}
-            />
+            <div className="field-armed relative">
+              <input
+                id="current_website" autoComplete="url"
+                value={fields.current_website} onChange={update('current_website')}
+                className={inputCls}
+              />
+            </div>
           </div>
           <div className="md:col-span-2 flex flex-col gap-2">
             <label htmlFor="needs" className="text-sm text-gray-400 font-medium">What do you need?</label>
-            <textarea
-              id="needs" required rows={4}
-              placeholder="A new site, a redesign, online booking, an AI agent for your phones..."
-              value={fields.needs} onChange={update('needs')}
-              className={`${inputCls} resize-y`}
-            />
+            <div className="field-armed relative">
+              <textarea
+                id="needs" required rows={4}
+                placeholder="A new site, a redesign, online booking, an AI agent for your phones..."
+                value={fields.needs} onChange={update('needs')}
+                className={`${inputCls} resize-y`}
+              />
+            </div>
           </div>
         </div>
 
@@ -284,7 +295,7 @@ export function LeadForm({ source = 'web_studio_page' }) {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg font-bold text-white bg-brand-red hover:brightness-110 transition-all duration-200 disabled:opacity-50 cursor-pointer"
+            className="btn-charge inline-flex items-center gap-2 px-8 py-3.5 rounded-lg font-bold text-white bg-brand-red transition-all duration-200 disabled:opacity-50 cursor-pointer"
           >
             {status === 'loading' ? 'Sending...' : 'Send it — get my free quote'} <ArrowRight className="w-4 h-4" />
           </button>
@@ -306,24 +317,17 @@ export function LeadForm({ source = 'web_studio_page' }) {
 
 /* ---------------- sections ---------------- */
 
-const reveal = {
-  initial: { opacity: 0, y: 18 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.5 },
-}
-
 export function StudioFeatures({ index = '01' }) {
   return (
-    <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+    <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
       <SectionHeader
         index={index}
         eyebrow="what you get"
         title="Everything a website should actually do"
       />
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {studioFeatures.map(({ icon: Icon, title, desc }) => (
-          <Card key={title} className="p-5">
+        {studioFeatures.map(({ icon: Icon, title, desc }, i) => (
+          <Card key={title} className="rv-item p-5" style={{ '--i': i }}>
             <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-brand-red/10 border border-brand-red-bright/25 mb-4">
               <Icon className="w-4 h-4 text-brand-red-bright" />
             </div>
@@ -332,13 +336,13 @@ export function StudioFeatures({ index = '01' }) {
           </Card>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 }
 
 export function StudioPricing({ index = '02' }) {
   return (
-    <motion.section {...reveal} id="pricing" className="max-w-6xl mx-auto px-6 py-20 scroll-mt-24">
+    <section data-reveal id="pricing" className="max-w-6xl mx-auto px-6 py-20 scroll-mt-24">
       <SectionHeader
         index={index}
         eyebrow="pricing"
@@ -347,8 +351,8 @@ export function StudioPricing({ index = '02' }) {
       />
 
       <div className="grid md:grid-cols-3 gap-5 mt-10 mb-10">
-        {studioTiers.map((tier) => (
-          <Card key={tier.name} featured={tier.featured} className="relative flex flex-col p-6">
+        {studioTiers.map((tier, i) => (
+          <Card key={tier.name} featured={tier.featured} className="rv-item relative flex flex-col p-6" style={{ '--i': i }}>
             {tier.featured && (
               <span className="absolute -top-3 left-6 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide bg-brand-gold text-black">
                 Most popular
@@ -414,17 +418,17 @@ export function StudioPricing({ index = '02' }) {
           <span className="text-white font-semibold">30-day guarantee:</span> don&apos;t love it, full refund.
         </p>
       </Card>
-    </motion.section>
+    </section>
   )
 }
 
 export function StudioSteps({ index = '03' }) {
   return (
-    <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+    <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
       <SectionHeader index={index} eyebrow="how it works" title="Three steps. Live in days." />
       <div className="grid md:grid-cols-3 gap-6 mt-10">
-        {studioSteps.map((step) => (
-          <div key={step.num} className="border-t border-brand-red-bright/40 pt-5 relative">
+        {studioSteps.map((step, i) => (
+          <div key={step.num} style={{ '--i': i }} className="rv-item border-t border-brand-red-bright/40 pt-5 relative">
             <span className="absolute -top-[5px] left-0 w-2 h-2 bg-brand-red-bright rounded-full" />
             <div className="text-brand-red-bright font-mono text-sm font-bold">{step.num}</div>
             <h3 className="type-h3 mt-3 mb-2">{step.title}</h3>
@@ -432,13 +436,13 @@ export function StudioSteps({ index = '03' }) {
           </div>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 }
 
 export function StudioWhyUs({ index = '04' }) {
   return (
-    <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+    <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
       <Card ticks className="p-6 md:p-10 grid lg:grid-cols-[1fr_300px] gap-8 items-center">
         <div>
           <p className="eyebrow mb-4"><span className="text-gray-600 mr-2">{index}</span>why us</p>
@@ -469,14 +473,14 @@ export function StudioWhyUs({ index = '04' }) {
           aria-hidden="true"
         />
       </Card>
-    </motion.section>
+    </section>
   )
 }
 
 export function StudioFAQ({ index = '05', extraFaqs = [] }) {
   const faqs = [...studioFaqs, ...extraFaqs]
   return (
-    <motion.section {...reveal} id="faq" className="max-w-3xl mx-auto px-6 py-20 scroll-mt-24">
+    <section data-reveal id="faq" className="max-w-3xl mx-auto px-6 py-20 scroll-mt-24">
       <SectionHeader index={index} eyebrow="questions" title="Asked by every owner we talk to" center />
       <div className="mt-10 space-y-3">
         {faqs.map(({ q, a }) => (
@@ -489,13 +493,13 @@ export function StudioFAQ({ index = '05', extraFaqs = [] }) {
           </details>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 }
 
 export function LeadFormSection({ index = '06', source }) {
   return (
-    <motion.section {...reveal} id="lead-form" className="max-w-4xl mx-auto px-6 py-20 scroll-mt-24">
+    <section data-reveal id="lead-form" className="max-w-4xl mx-auto px-6 py-20 scroll-mt-24">
       <SectionHeader
         index={index}
         eyebrow="get started"
@@ -505,6 +509,6 @@ export function LeadFormSection({ index = '06', source }) {
       <div className="mt-10">
         <LeadForm source={source} />
       </div>
-    </motion.section>
+    </section>
   )
 }

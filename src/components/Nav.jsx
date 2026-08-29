@@ -64,7 +64,8 @@ export default function Nav() {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm transition-colors duration-200 ${
+              aria-current={isActive(l) ? 'page' : undefined}
+              className={`link-trace text-sm transition-colors duration-200 ${
                 isActive(l) ? 'text-white font-medium' : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -74,9 +75,9 @@ export default function Nav() {
           <a
             href={quoteHref}
             onClick={onQuoteClick}
-            className="text-sm font-semibold px-4 py-2 rounded-lg bg-brand-red text-white hover:brightness-110 transition-all duration-200"
+            className="btn-charge text-sm font-semibold px-4 py-2 rounded-lg bg-brand-red text-white"
           >
-            Get a quote
+            <span>Get a quote</span>
           </a>
         </div>
 
@@ -105,6 +106,7 @@ export default function Nav() {
                 <Link
                   key={l.to}
                   to={l.to}
+                  aria-current={isActive(l) ? 'page' : undefined}
                   className={`block text-sm transition-colors ${
                     isActive(l) ? 'text-white font-medium' : 'text-gray-400 hover:text-white'
                   }`}
@@ -118,9 +120,9 @@ export default function Nav() {
                   onQuoteClick(e)
                   setMobileOpen(false)
                 }}
-                className="block text-sm text-center font-semibold bg-brand-red text-white px-4 py-2.5 rounded-lg"
+                className="btn-charge block text-sm text-center font-semibold bg-brand-red text-white px-4 py-2.5 rounded-lg"
               >
-                Get a quote
+                <span>Get a quote</span>
               </a>
             </div>
           </motion.div>

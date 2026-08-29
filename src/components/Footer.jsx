@@ -28,9 +28,9 @@ export default function Footer() {
           <div>
             <h4 className="eyebrow mb-4">services</h4>
             <div className="space-y-2.5">
-              <Link to="/web" className="block text-sm text-gray-400 hover:text-white transition-colors">Websites for local businesses</Link>
-              <Link to="/agents" className="block text-sm text-gray-400 hover:text-white transition-colors">Custom AI agents</Link>
-              <a href="/#pricing" className="block text-sm text-gray-400 hover:text-white transition-colors">Website pricing</a>
+              <Link to="/web" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Websites for local businesses</Link>
+              <Link to="/agents" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Custom AI agents</Link>
+              <a href="/#pricing" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Website pricing</a>
             </div>
           </div>
 
@@ -38,10 +38,10 @@ export default function Footer() {
           <div>
             <h4 className="eyebrow mb-4">developers</h4>
             <div className="space-y-2.5">
-              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors">All tools</Link>
-              <Link to="/products/ship-fast-skill-pack" className="block text-sm text-gray-400 hover:text-white transition-colors">Ship Fast Skill Pack</Link>
-              <Link to="/free-skill" className="block text-sm text-gray-400 hover:text-white transition-colors">Free skill</Link>
-              <a href="https://dev.to/whoffagents" className="block text-sm text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Dev.to</a>
+              <Link to="/products" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">All tools</Link>
+              <Link to="/products/ship-fast-skill-pack" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Ship Fast Skill Pack</Link>
+              <Link to="/free-skill" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Free skill</Link>
+              <a href="https://dev.to/whoffagents" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Dev.to</a>
             </div>
           </div>
 
@@ -49,10 +49,10 @@ export default function Footer() {
           <div>
             <h4 className="eyebrow mb-4">company</h4>
             <div className="space-y-2.5">
-              <Link to="/about" className="block text-sm text-gray-400 hover:text-white transition-colors">About</Link>
-              <Link to="/blog" className="block text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
-              <Link to="/atlas/ops" className="block text-sm text-gray-400 hover:text-white transition-colors">Live ops log</Link>
-              <a href="mailto:hello@whoffagents.com" className="block text-sm text-gray-400 hover:text-white transition-colors">hello@whoffagents.com</a>
+              <Link to="/about" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">About</Link>
+              <Link to="/blog" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
+              <Link to="/atlas/ops" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Live ops log</Link>
+              <a href="mailto:hello@whoffagents.com" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">hello@whoffagents.com</a>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@
  * (trading line, unverified legacy tools) keep their checkout URLs alive
  * on unlisted pages — see /products/archive.
  */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Server, Code2, Package, Layers, Shield, Bot, ChevronRight } from 'lucide-react'
@@ -13,6 +13,7 @@ import Newsletter from '../components/Newsletter'
 import ComparisonSection from '../components/ComparisonSection'
 import KitBreakdown from '../components/KitBreakdown'
 import { buildStripeURL } from '../utils/utm'
+import { initReveal } from '../utils/reveal'
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
@@ -151,6 +152,7 @@ const categoryLabels = {
 
 export default function Products() {
   const [filter, setFilter] = useState('all')
+  useEffect(() => { initReveal() }, [])
 
   const filtered = filter === 'all' ? products : products.filter((p) => p.category === filter)
 
@@ -248,7 +250,7 @@ export default function Products() {
                             href={product.buyLink?.startsWith('https://buy.stripe.com') ? buildStripeURL(product.buyLink) : product.buyLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block text-sm font-semibold text-white bg-brand-red hover:brightness-110 transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
+                            className="btn-charge inline-block text-sm font-semibold text-white bg-brand-red transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg whitespace-nowrap"
                           >
                             {product.buttonLabel ? `${product.buttonLabel} →` : `Get it — ${product.price} →`}
                           </a>

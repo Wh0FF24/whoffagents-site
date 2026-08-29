@@ -5,13 +5,16 @@
  * umbrella detours — a local-business lead lands here and sees only
  * their pitch.
  */
+import { useEffect } from 'react'
 import { ArrowRight } from 'lucide-react'
 import ReceiptsStrip from '../components/ReceiptsStrip'
 import {
   StudioFeatures, StudioPricing, StudioSteps, StudioWhyUs, StudioFAQ, LeadFormSection,
 } from '../components/studio/StudioSections'
+import { initReveal } from '../utils/reveal'
 
 export default function WebStudio() {
+  useEffect(() => { initReveal() }, [])
   return (
     <div className="relative">
       {/* ============ HERO ============ */}
@@ -37,7 +40,7 @@ export default function WebStudio() {
             <div className="flex flex-wrap gap-3 mb-8 anim-rise anim-d3">
               <a
                 href="#lead-form"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red hover:brightness-110 transition-all duration-200"
+                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
               >
                 Get your free quote <ArrowRight className="w-4 h-4" />
               </a>
@@ -64,7 +67,13 @@ export default function WebStudio() {
 
           <div className="hidden lg:block anim-rise anim-d3">
             <div className="card-surface corner-ticks p-6">
-              <img src="/art/path-websites.svg" alt="" className="w-full" aria-hidden="true" />
+              <div className="fig-frame relative">
+                <img src="/art/path-websites.svg" alt="" className="w-full" aria-hidden="true" />
+                <div className="fig-caption">
+                  <span>fig. 01 / path-websites.svg</span>
+                  <span>2048×2015</span>
+                </div>
+              </div>
               <p className="mono-note text-center mt-2">custom-designed · no templates · yours</p>
             </div>
           </div>

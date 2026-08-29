@@ -4,21 +4,16 @@
  * price points, no retainer figures, no delivery-date promises. Every
  * capability listed is something the org has demonstrably built and runs.
  */
-import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   PhoneCall, Mail, MessageSquare, CalendarClock, Wrench, ArrowRight, Activity,
 } from 'lucide-react'
 import Card, { SectionHeader } from '../components/ui/Card'
 import ReceiptsStrip from '../components/ReceiptsStrip'
+import SwitchboardBoard from '../components/SwitchboardBoard'
 import { LeadFormSection } from '../components/studio/StudioSections'
-
-const reveal = {
-  initial: { opacity: 0, y: 18 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.5 },
-}
+import { initReveal } from '../utils/reveal'
 
 const capabilities = [
   {
@@ -67,6 +62,7 @@ const engagement = [
 ]
 
 export default function AgentsPage() {
+  useEffect(() => { initReveal() }, [])
   return (
     <div className="relative">
       {/* ============ HERO ============ */}
@@ -93,13 +89,13 @@ export default function AgentsPage() {
             <div className="flex flex-wrap gap-3 anim-rise anim-d3">
               <a
                 href="#lead-form"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red hover:brightness-110 transition-all duration-200"
+                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
               >
                 Ask about an agent <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="#inquiry"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
+                href="#lead-form"
+                className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-gray-300 border border-white/10 hover:border-white/25 transition-all duration-200"
               >
                 <PhoneCall className="w-4 h-4" /> Hear one live
               </a>
@@ -111,7 +107,7 @@ export default function AgentsPage() {
 
           <div className="hidden lg:block anim-rise anim-d3">
             <div className="card-surface corner-ticks p-6">
-              <img src="/art/path-agents.svg" alt="" className="w-full" aria-hidden="true" />
+              <SwitchboardBoard />
               <p className="mono-note text-center mt-2">one agent · every channel</p>
             </div>
           </div>
@@ -121,7 +117,7 @@ export default function AgentsPage() {
       <ReceiptsStrip />
 
       {/* ============ WHAT WE BUILD ============ */}
-      <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
         <SectionHeader
           index="01"
           eyebrow="what we build"
@@ -129,8 +125,8 @@ export default function AgentsPage() {
           lede="Everything below is something we've built and run — not a roadmap slide."
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-          {capabilities.map(({ icon: Icon, title, desc }) => (
-            <Card key={title} className="p-5">
+          {capabilities.map(({ icon: Icon, title, desc }, i) => (
+            <Card key={title} className="p-5 rv-item" style={{ '--i': i }}>
               <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-brand-red/10 border border-brand-red-bright/25 mb-4">
                 <Icon className="w-4 h-4 text-brand-red-bright" />
               </div>
@@ -138,7 +134,7 @@ export default function AgentsPage() {
               <p className="text-sm text-gray-400 leading-relaxed">{desc}</p>
             </Card>
           ))}
-          <Card featured className="p-5 flex flex-col justify-center">
+          <Card featured className="p-5 flex flex-col justify-center rv-item" style={{ '--i': capabilities.length }}>
             <h3 className="type-h3 mb-2">Something else?</h3>
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
               If it&apos;s repetitive, on a schedule, or stuck in your inbox, an agent can
@@ -149,10 +145,10 @@ export default function AgentsPage() {
             </a>
           </Card>
         </div>
-      </motion.section>
+      </section>
 
       {/* ============ HOW IT WORKS ============ */}
-      <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
         <SectionHeader
           index="02"
           eyebrow="how engagement works"
@@ -160,8 +156,8 @@ export default function AgentsPage() {
           lede="Pricing is scoped per project — you'll know the full number before we write a line of code."
         />
         <div className="grid md:grid-cols-3 gap-6 mt-10">
-          {engagement.map((step) => (
-            <div key={step.num} className="border-t border-brand-red-bright/40 pt-5 relative">
+          {engagement.map((step, i) => (
+            <div key={step.num} className="border-t border-brand-red-bright/40 pt-5 relative rv-item" style={{ '--i': i }}>
               <span className="absolute -top-[5px] left-0 w-2 h-2 bg-brand-red-bright rounded-full" />
               <div className="text-brand-red-bright font-mono text-sm font-bold">{step.num}</div>
               <h3 className="type-h3 mt-3 mb-2">{step.title}</h3>
@@ -169,10 +165,10 @@ export default function AgentsPage() {
             </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
       {/* ============ PROOF ============ */}
-      <motion.section {...reveal} className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
         <Card ticks className="p-6 md:p-10">
           <div className="grid lg:grid-cols-[1fr_280px] gap-8 items-center">
             <div>
@@ -193,28 +189,33 @@ export default function AgentsPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   to="/atlas/ops"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
+                  className="btn-charge inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
                 >
                   <Activity className="w-4 h-4 text-brand-red-bright" /> See the live ops log
                 </Link>
                 <a
-                  href="#inquiry"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
+                  href="#lead-form"
+                  className="btn-charge inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
                 >
                   <PhoneCall className="w-4 h-4 text-brand-red-bright" /> Call the agent line
                 </a>
               </div>
             </div>
-            <img
-              src="/art/hero-orchestration.svg"
-              alt=""
-              loading="lazy"
-              className="hidden lg:block w-full opacity-80"
-              aria-hidden="true"
-            />
+            <div className="hidden lg:block">
+              <div className="fig-frame">
+                <img
+                  src="/art/hero-orchestration.svg"
+                  alt=""
+                  loading="lazy"
+                  className="w-full opacity-80"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="fig-caption"><span>fig. 02 / hero-orchestration.svg</span><span>2022×1343</span></div>
+            </div>
           </div>
         </Card>
-      </motion.section>
+      </section>
 
       <LeadFormSection index="04" source="agents_page" />
     </div>
