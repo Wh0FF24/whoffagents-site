@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-border pt-16 pb-8 px-6 relative z-10">
-      <div className="max-w-6xl mx-auto">
+    <footer className="border-t border-brand-border pt-16 pb-8 relative z-10">
+      <div className="shell">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">

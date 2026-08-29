@@ -12,7 +12,7 @@ import { ArrowRight, ArrowDown, PhoneCall, Mail, MessageSquare, CalendarClock, T
 import OrchestrationBoard from '../components/OrchestrationBoard'
 import TheGate from '../components/TheGate'
 import ReceiptsStrip from '../components/ReceiptsStrip'
-import Card, { SectionHeader } from '../components/ui/Card'
+import Card, { SectionHeader, accentVars } from '../components/ui/Card'
 import {
   StudioFeatures, StudioPricing, StudioSteps, StudioWhyUs, StudioFAQ, LeadFormSection,
 } from '../components/studio/StudioSections'
@@ -184,13 +184,13 @@ export default function Home() {
   return (
     <div className="relative">
       {/* ============ HERO — monument stack ============ */}
-      <section className="relative pt-28 pb-16 px-6 overflow-hidden">
+      <section className="relative pt-28 pb-16 overflow-hidden">
         {/* red signal glow, top-left */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 55% 40% at 18% 8%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="relative z-10 shell">
           <p className="eyebrow mb-6 anim-rise">
             whoff agents · an AI-operated studio · provo, utah
           </p>
@@ -239,7 +239,7 @@ export default function Home() {
       </section>
 
       {/* ============ THREE PATHS ============ */}
-      <section data-reveal className="max-w-6xl mx-auto px-6 pb-20">
+      <section data-reveal className="shell pb-20">
         <div className="grid md:grid-cols-3 gap-5">
           {paths.map((p, i) => <PathCard key={p.tag} {...p} index={i} />)}
         </div>
@@ -250,7 +250,7 @@ export default function Home() {
       {/* ============ PATH 01 — WEB STUDIO ============ */}
       <div id="web-studio" className="scroll-mt-16 relative spine">
         <span aria-hidden="true" className="spine-dot hidden lg:block top-[5.45rem]" />
-        <div className="max-w-6xl mx-auto px-6 pt-20">
+        <div className="shell pt-20">
           <div data-reveal>
             <p className="eyebrow mb-4">path 01 · whoff web studio</p>
             <h2 className="type-h1 mb-4">
@@ -284,7 +284,7 @@ export default function Home() {
       />
 
       {/* ============ PATH 02 — CUSTOM AGENTS ============ */}
-      <section data-reveal className="spine relative max-w-6xl mx-auto px-6 pl-6 lg:pl-10 py-20">
+      <section data-reveal style={accentVars("05")} className="spine relative shell pl-6 lg:pl-10 py-20">
         <span aria-hidden="true" className="spine-dot hidden lg:block top-[5.45rem]" />
         <div className="grid lg:grid-cols-[1fr_1fr] gap-10 items-center">
           <div>
@@ -338,7 +338,7 @@ export default function Home() {
       </section>
 
       {/* ============ PATH 03 — DEVELOPER TOOLS ============ */}
-      <section data-reveal className="spine relative max-w-6xl mx-auto px-6 pl-6 lg:pl-10 py-20">
+      <section data-reveal style={accentVars("06")} className="spine relative shell pl-6 lg:pl-10 py-20">
         <span aria-hidden="true" className="spine-dot hidden lg:block top-[5.45rem]" />
         <SectionHeader
           index="06"

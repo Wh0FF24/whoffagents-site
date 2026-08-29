@@ -42,7 +42,7 @@ export default function Nav() {
         scrolled ? 'bg-brand-dark/92 backdrop-blur-xl' : 'bg-brand-dark/70 backdrop-blur-xl'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="shell h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
           <img src="/logo.png" alt="Whoff Agents" className="h-9 w-9 rounded-md" />
           <div className="flex flex-col leading-none">

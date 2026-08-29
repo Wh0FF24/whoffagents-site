@@ -157,8 +157,8 @@ export default function Products() {
   const filtered = filter === 'all' ? products : products.filter((p) => p.category === filter)
 
   return (
-    <div className="pt-32 pb-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="pt-32 pb-24">
+      <div className="shell">
         {/* Header */}
         <motion.div
           className="text-center mb-14"

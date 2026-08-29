@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import {
   PhoneCall, Mail, MessageSquare, CalendarClock, Wrench, ArrowRight, Activity,
 } from 'lucide-react'
-import Card, { SectionHeader } from '../components/ui/Card'
+import Card, { SectionHeader, accentVars } from '../components/ui/Card'
 import ReceiptsStrip from '../components/ReceiptsStrip'
 import SwitchboardBoard from '../components/SwitchboardBoard'
 import { LeadFormSection } from '../components/studio/StudioSections'
@@ -66,12 +66,12 @@ export default function AgentsPage() {
   return (
     <div className="relative">
       {/* ============ HERO ============ */}
-      <section className="relative pt-36 pb-16 px-6 overflow-hidden">
+      <section className="relative pt-36 pb-16 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 55% 40% at 20% 10%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+        <div className="relative z-10 shell grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
             <p className="eyebrow mb-6 anim-rise">
               custom AI agents · scoped per project
@@ -117,7 +117,7 @@ export default function AgentsPage() {
       <ReceiptsStrip />
 
       {/* ============ WHAT WE BUILD ============ */}
-      <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal style={accentVars("01")} className="shell py-20">
         <SectionHeader
           index="01"
           eyebrow="what we build"
@@ -148,7 +148,7 @@ export default function AgentsPage() {
       </section>
 
       {/* ============ HOW IT WORKS ============ */}
-      <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal style={accentVars("02")} className="shell py-20">
         <SectionHeader
           index="02"
           eyebrow="how engagement works"
@@ -168,7 +168,7 @@ export default function AgentsPage() {
       </section>
 
       {/* ============ PROOF ============ */}
-      <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
+      <section data-reveal style={accentVars("03")} className="shell py-20">
         <Card ticks className="p-6 md:p-10">
           <div className="grid lg:grid-cols-[1fr_280px] gap-8 items-center">
             <div>

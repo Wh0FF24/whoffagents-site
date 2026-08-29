@@ -42,6 +42,27 @@ function accentFor(index) {
 }
 
 /**
+ * Put these on a SECTION wrapper and everything inside it — icon chips, card
+ * borders, drafting ticks, check marks, hover states — picks up that section's
+ * colour instead of defaulting to red. Works because the Tailwind theme is
+ * declared with @theme (not @theme inline), so `text-brand-red-bright` and
+ * friends compile to var() references we can re-point per scope.
+ * --color-brand-red (solid CTA fills) is deliberately NOT rotated here; it is
+ * re-pinned on .btn-charge/.cta-solid so the action colour stays constant.
+ */
+export function accentVars(index) {
+  const a = accentFor(index)
+  return {
+    '--sec-accent': a.line,
+    '--sec-ghost': a.ghost,
+    '--tick': `${a.line}BF`,
+    '--tick-hot': a.line,
+    '--color-brand-red-bright': a.line,
+    '--color-brand-red': a.line,
+  }
+}
+
+/**
  * Numbered section header. With an index it gains the ghost numeral and the
  * self-soldering circuit rule; both render in their final state without JS
  * and play a one-time entrance when the reveal system (html.js + [data-reveal].in)

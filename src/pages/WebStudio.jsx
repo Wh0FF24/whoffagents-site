@@ -18,12 +18,12 @@ export default function WebStudio() {
   return (
     <div className="relative">
       {/* ============ HERO ============ */}
-      <section className="relative pt-36 pb-16 px-6 overflow-hidden">
+      <section className="relative pt-36 pb-16 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 55% 40% at 20% 10%, rgba(200,16,46,0.13) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+        <div className="relative z-10 shell grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
           <div>
             <p className="eyebrow mb-6 anim-rise">
               whoff web studio · provo, utah

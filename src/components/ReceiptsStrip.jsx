@@ -87,7 +87,7 @@ export default function ReceiptsStrip() {
           backgroundPosition: 'center',
         }}
       />
-      <div className="relative max-w-6xl mx-auto px-6 py-5 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4 font-mono">
+      <div className="relative shell py-5 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4 font-mono">
         {receipts.map(({ k, v, note, href }) => {
           let vNode = v
           let noteNode = note
@@ -111,7 +111,7 @@ export default function ReceiptsStrip() {
         })}
       </div>
       {/* ops tape — the receipts' long-form sibling, same band */}
-      <div className="relative max-w-6xl mx-auto px-6 pb-5 font-mono">
+      <div className="relative shell pb-5 font-mono">
         <OpsTape />
       </div>
     </div>

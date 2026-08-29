@@ -11,7 +11,7 @@ import {
   Zap, CheckCircle2, CalendarClock, Search, Check, ArrowRight,
   Smartphone, ServerCog, PhoneCall,
 } from 'lucide-react'
-import Card, { SectionHeader } from '../ui/Card'
+import Card, { SectionHeader, accentVars } from '../ui/Card'
 import { track } from '../../utils/analytics'
 
 const FORM_ACTION = 'https://whoff-web-studio.netlify.app/'
@@ -319,7 +319,7 @@ export function LeadForm({ source = 'web_studio_page' }) {
 
 export function StudioFeatures({ index = '01' }) {
   return (
-    <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
+    <section data-reveal style={accentVars(index)} className="shell py-20">
       <SectionHeader
         index={index}
         eyebrow="what you get"
@@ -342,7 +342,7 @@ export function StudioFeatures({ index = '01' }) {
 
 export function StudioPricing({ index = '02' }) {
   return (
-    <section data-reveal id="pricing" className="max-w-6xl mx-auto px-6 py-20 scroll-mt-24">
+    <section data-reveal id="pricing" style={accentVars(index)} className="shell py-20 scroll-mt-24">
       <SectionHeader
         index={index}
         eyebrow="pricing"
@@ -382,7 +382,7 @@ export function StudioPricing({ index = '02' }) {
               href="#lead-form"
               className={`mt-6 text-center px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                 tier.featured
-                  ? 'bg-brand-red text-white hover:brightness-110'
+                  ? 'cta-solid bg-brand-red text-white hover:brightness-110'
                   : 'border border-white/15 text-gray-200 hover:border-white/30'
               }`}
             >
@@ -424,7 +424,7 @@ export function StudioPricing({ index = '02' }) {
 
 export function StudioSteps({ index = '03' }) {
   return (
-    <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
+    <section data-reveal style={accentVars(index)} className="shell py-20">
       <SectionHeader index={index} eyebrow="how it works" title="Three steps. Live in days." />
       <div className="grid md:grid-cols-3 gap-6 mt-10">
         {studioSteps.map((step, i) => (
@@ -442,7 +442,7 @@ export function StudioSteps({ index = '03' }) {
 
 export function StudioWhyUs({ index = '04' }) {
   return (
-    <section data-reveal className="max-w-6xl mx-auto px-6 py-20">
+    <section data-reveal style={accentVars(index)} className="shell py-20">
       <Card ticks className="p-6 md:p-10 grid lg:grid-cols-[1fr_300px] gap-8 items-center">
         <div>
           <p className="eyebrow mb-4"><span className="text-gray-600 mr-2">{index}</span>why us</p>
@@ -480,7 +480,7 @@ export function StudioWhyUs({ index = '04' }) {
 export function StudioFAQ({ index = '05', extraFaqs = [] }) {
   const faqs = [...studioFaqs, ...extraFaqs]
   return (
-    <section data-reveal id="faq" className="max-w-3xl mx-auto px-6 py-20 scroll-mt-24">
+    <section data-reveal id="faq" style={accentVars(index)} className="max-w-3xl mx-auto px-6 py-20 scroll-mt-24">
       <SectionHeader index={index} eyebrow="questions" title="Asked by every owner we talk to" center />
       <div className="mt-10 space-y-3">
         {faqs.map(({ q, a }) => (
@@ -499,7 +499,7 @@ export function StudioFAQ({ index = '05', extraFaqs = [] }) {
 
 export function LeadFormSection({ index = '06', source }) {
   return (
-    <section data-reveal id="lead-form" className="max-w-4xl mx-auto px-6 py-20 scroll-mt-24">
+    <section data-reveal id="lead-form" style={accentVars(index)} className="max-w-4xl mx-auto px-6 py-20 scroll-mt-24">
       <SectionHeader
         index={index}
         eyebrow="get started"
