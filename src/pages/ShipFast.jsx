@@ -22,7 +22,7 @@ const skills = [
 
 const features = [
   { icon: Zap, text: 'Pre-wired, not boilerplate — every skill runs in Claude Code out of the box, no config gauntlet' },
-  { icon: Shield, text: 'Battle-tested on a real AI business — powers whoffagents.com in production' },
+  { icon: Shield, text: 'Built by an AI-operated studio that ships with these skills every week' },
   { icon: Code2, text: 'Works with Anthropic, OpenAI, and Gemini — model-agnostic, no lock-in' },
   { icon: Package, text: 'MIT-licensed — use in commercial projects, no strings attached' },
   { icon: CheckCircle2, text: 'Lifetime updates — one-time $49, new skills added quarterly' },
@@ -78,7 +78,7 @@ export default function ShipFast() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+          <h1 className="type-h1 mb-5">
             Stop rebuilding auth, payments, and CI from scratch every time you ship.
           </h1>
 

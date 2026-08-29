@@ -68,7 +68,7 @@ export default function KitBreakdown() {
         <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-brand-gold/10 text-brand-gold border border-brand-gold/20 mb-4">
           AI SaaS Starter Kit · $47
         </span>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">What's Inside</h2>
+        <h2 className="type-h2 mb-3">What's Inside</h2>
         <p className="text-gray-400 max-w-xl mx-auto">
           Production-ready Next.js boilerplate. Every feature earns its place. Here's exactly what you get and why it matters.
         </p>
@@ -132,7 +132,7 @@ export default function KitBreakdown() {
         </div>
         <p className="mt-6 text-gray-500 text-sm border-t border-brand-border pt-4">
           The kit is the foundation. Every AI SaaS needs auth, billing, and a way to gate features by plan.
-          This ships all three, wired together and production-tested —&nbsp;
+          This ships all three, wired together and tested as a system —&nbsp;
           <span className="text-white font-medium">so you build your product, not the plumbing underneath it.</span>
         </p>
       </div>

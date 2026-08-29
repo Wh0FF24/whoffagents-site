@@ -14,7 +14,7 @@ export default function LearnMore() {
       >
         {/* Hero */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+          <h1 className="type-h1 mb-6">
             Launch Your AI SaaS This Week.
           </h1>
           <p className="text-xl text-gray-400 leading-relaxed">
@@ -83,8 +83,8 @@ export default function LearnMore() {
             What actually goes wrong (so you know we&apos;ve been there)
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            Building the infrastructure for whoffagents.com taught us the specific ways these
-            integrations break. Not theory. Real production failures, real debugging hours.
+            Building AI systems at this studio taught us the specific ways these
+            integrations break. Not theory. Real failures, real debugging hours.
           </p>
 
           <h3 className="text-lg font-semibold text-white mt-8 mb-3">
@@ -139,17 +139,13 @@ export default function LearnMore() {
 
           {/* Section 4 */}
           <h2 className="text-2xl font-bold text-white mt-10 mb-4">
-            The system that runs whoffagents.com
+            Built from real integration work
           </h2>
           <p className="text-gray-400 leading-[1.8]">
-            whoffagents.com runs on this stack. Auth, billing, and Claude-powered features are
-            live in production — not in a demo, not in a staging environment.
-          </p>
-          <p className="text-gray-400 leading-[1.8]">
-            The AI SaaS Starter Kit is that stack extracted and documented so you can deploy it
-            to run yours. Every integration decision, every Stripe webhook pattern, every
-            per-plan enforcement approach — pulled from six months of production operation and
-            packaged so you skip the part where you figure it out the hard way.
+            The AI SaaS Starter Kit packages the integration decisions that eat your first
+            weeks — the Stripe webhook patterns, the per-plan enforcement approach, the
+            OAuth wiring — documented so you skip the part where you figure it out the
+            hard way.
           </p>
 
           {/* Section 5 — Features */}
@@ -305,8 +301,8 @@ export default function LearnMore() {
             You keep the files either way.
           </p>
           <p className="text-gray-400 leading-[1.8]">
-            We&apos;re not a ghost vendor. whoffagents.com runs on this stack every day.
-            We have skin in the game.
+            We&apos;re not a ghost vendor. We&apos;re an active studio shipping with these
+            tools every week, and support goes straight to the people who built the kit.
           </p>
 
           {/* Section 9 — FAQ */}
@@ -321,7 +317,7 @@ export default function LearnMore() {
               },
               {
                 q: 'Is this just a bunch of boilerplate?',
-                a: "Boilerplate is the delivery format. The value is the integrations inside it — which took months of real production use to get right. Same way a production Dockerfile is 'just a text file.' The expertise is in what's in it and why.",
+                a: "Boilerplate is the delivery format. The value is the integrations inside it — wired together and tested as a system. Same way a production Dockerfile is 'just a text file.' The expertise is in what's in it and why.",
               },
               {
                 q: "What do I need to use this?",
@@ -337,7 +333,7 @@ export default function LearnMore() {
               },
               {
                 q: 'Is this production-ready or a starter template?',
-                a: "whoffagents.com runs on this stack in production today. It's not a tutorial project or a demo — it's the working infrastructure extracted and packaged.",
+                a: "It's a starter kit built to production standards: the auth, billing, and AI integrations are wired together and tested as a system, not sketched as a tutorial. You still review and own what you deploy.",
               },
             ].map(({ q, a }) => (
               <div key={q}>
@@ -425,7 +421,7 @@ export default function LearnMore() {
 
           <hr className="border-0 border-t border-brand-border my-10" />
           <p className="text-gray-500 italic text-sm leading-[1.8] text-center">
-            Built by Atlas &mdash; the AI agent running Whoff Agents. This stack is in production today.
+            Built by Atlas &mdash; the AI agent running Whoff Agents.
           </p>
         </div>
 

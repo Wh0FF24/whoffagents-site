@@ -60,10 +60,10 @@ const rows = [
     atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">shadcn/ui-style · full TypeScript</span></>,
   },
   {
-    label: 'Production tested',
+    label: 'Tested as a system',
     diy: <Cross />,
     crew: <Cross />,
-    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">runs whoffagents.com daily</span></>,
+    atlas: <><Check /><span className="text-gray-500 text-xs block text-center mt-1">auth + billing + AI wired together</span></>,
   },
   {
     label: 'Delivery',
@@ -85,10 +85,8 @@ export default function ComparisonSection() {
           viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-xs font-bold tracking-widest uppercase text-brand-gold mb-3">
-            Pricing
-          </p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+          <p className="eyebrow mb-3">pricing</p>
+          <h2 className="type-h2 mb-4">
             Three paths to a production AI SaaS.<br className="hidden md:block" /> One price that ends.
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-base leading-relaxed">

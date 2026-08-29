@@ -31,7 +31,7 @@ export default function ThankYou() {
             </svg>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="type-h1 mb-4">
             You&apos;re in.
           </h1>
           <p className="text-xl text-gray-300 mb-2">
@@ -143,51 +143,6 @@ chmod +x init.sh
             </a>
             <p className="text-xs text-center text-gray-500 mt-3">One-time. 30-day refund. Instant GitHub invite.</p>
           </motion.div>
-        )}
-
-        {/* Upsell: Setup Session — purchase only */}
-        {!isNewsletter && (
-        <motion.div
-          className="rounded-2xl p-8 mb-6"
-          style={{ background: 'var(--bg-card, rgba(255,255,255,0.03))', border: '1px solid rgba(220,38,38,0.3)' }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <p className="text-xs font-bold tracking-widest uppercase text-brand-red mb-3">Limited — 3 Slots / Week</p>
-          <h2 className="text-2xl font-bold text-white mb-3">
-            Want Atlas running in your stack today — guaranteed?
-          </h2>
-          <p className="text-gray-400 mb-5">Book a 1-on-1 Setup Session with Will.</p>
-
-          <ul className="space-y-2 mb-6">
-            {[
-              '60 minutes, live screen share',
-              'We plug PAX into your codebase, your workflows',
-              'You leave with a working multi-agent pipeline',
-              'Recorded — keep it forever',
-            ].map((item) => (
-              <li key={item} className="flex items-center gap-3 text-gray-300 text-sm">
-                <svg className="w-4 h-4 text-brand-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <p className="text-white font-semibold mb-4">Most people are shipping in the first session.</p>
-
-          <a
-            href="https://cal.com/atlas-whoffagents/setup-session"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full text-center bg-brand-red text-white font-bold px-6 py-4 rounded-lg hover:brightness-110 transition-all duration-200"
-          >
-            Book a Setup Session — $200 →
-          </a>
-          <p className="text-xs text-center text-gray-500 mt-3">Only 3 slots per week. First-come.</p>
-        </motion.div>
         )}
 
         {/* Discord */}
