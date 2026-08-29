@@ -18,6 +18,9 @@ import ShipFast from './pages/ShipFast'
 import FreeSkill from './pages/FreeSkill'
 import AiSaasStarter from './pages/AiSaasStarter'
 import WebStudio from './pages/WebStudio'
+import AgentsPage from './pages/AgentsPage'
+import TradingSignalsMCP from './pages/TradingSignalsMCP'
+import ProductsArchive from './pages/ProductsArchive'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import ScrollToTop from './components/ScrollToTop'
@@ -57,6 +60,9 @@ function App() {
               <Route path="/products/ai-saas-starter" element={<AiSaasStarter />} />
               <Route path="/free-skill" element={<FreeSkill />} />
               <Route path="/web" element={<WebStudio />} />
+              <Route path="/agents" element={<AgentsPage />} />
+              <Route path="/products/trading-signals-mcp" element={<TradingSignalsMCP />} />
+              <Route path="/products/archive" element={<ProductsArchive />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
             </Routes>

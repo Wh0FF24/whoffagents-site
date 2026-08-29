@@ -2,64 +2,68 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-border pt-16 pb-8 px-6">
+    <footer className="border-t border-brand-border pt-16 pb-8 px-6 relative z-10">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
+        <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
-          <div>
+          <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img src="/logo.png" alt="Whoff Agents" className="h-8 w-8 rounded-md" />
-              <span className="text-sm font-bold text-white">whoff agents</span>
+              <span
+                className="text-sm font-bold text-white uppercase tracking-wide"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                whoff agents
+              </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed">
-              AI employees for home-service businesses. Built and operated by Atlas.
+              An AI-operated studio. Agents build; a human reviews and stands behind everything.
             </p>
-            <p className="text-xs text-gray-500 mt-3">
-              Veteran-owned · Built in the USA
+            <p className="mono-note mt-3">
+              provo, utah · veteran-owned
             </p>
-            <div className="mt-3">
-              <iframe
-                src="https://ghbtns.com/github-btn.html?user=Wh0FF24&repo=whoff-agents&type=star&count=true"
-                frameBorder="0"
-                scrolling="0"
-                width="90"
-                height="20"
-                title="GitHub Stars"
-                style={{ display: 'block' }}
-              />
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="eyebrow mb-4">services</h4>
+            <div className="space-y-2.5">
+              <Link to="/web" className="block text-sm text-gray-400 hover:text-white transition-colors">Websites for local businesses</Link>
+              <Link to="/agents" className="block text-sm text-gray-400 hover:text-white transition-colors">Custom AI agents</Link>
+              <a href="/#pricing" className="block text-sm text-gray-400 hover:text-white transition-colors">Website pricing</a>
             </div>
           </div>
 
-          {/* Products */}
+          {/* Developers */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Products</h4>
+            <h4 className="eyebrow mb-4">developers</h4>
             <div className="space-y-2.5">
-              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Lead Qualification Agent</Link>
-              <Link to="/web" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Web Studio</Link>
-              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Pricing</Link>
-              <Link to="/refund-policy" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Refund Guarantee</Link>
+              <Link to="/products" className="block text-sm text-gray-400 hover:text-white transition-colors">All tools</Link>
+              <Link to="/products/ship-fast-skill-pack" className="block text-sm text-gray-400 hover:text-white transition-colors">Ship Fast Skill Pack</Link>
+              <Link to="/free-skill" className="block text-sm text-gray-400 hover:text-white transition-colors">Free skill</Link>
+              <a href="https://dev.to/whoffagents" className="block text-sm text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Dev.to</a>
             </div>
           </div>
 
-          {/* Resources */}
+          {/* Company */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Resources</h4>
+            <h4 className="eyebrow mb-4">company</h4>
             <div className="space-y-2.5">
-              <Link to="/blog" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Blog</Link>
-              <a href="https://dev.to/whoffagents" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer" target="_blank" rel="noopener noreferrer">Dev.to</a>
-              <Link to="/refund-policy" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Refund Policy</Link>
-              <a href="mailto:atlas@whoffagents.com" className="block text-sm text-gray-400 hover:text-white transition-colors cursor-pointer">Contact</a>
+              <Link to="/about" className="block text-sm text-gray-400 hover:text-white transition-colors">About</Link>
+              <Link to="/blog" className="block text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
+              <Link to="/atlas/ops" className="block text-sm text-gray-400 hover:text-white transition-colors">Live ops log</Link>
+              <a href="mailto:hello@whoffagents.com" className="block text-sm text-gray-400 hover:text-white transition-colors">hello@whoffagents.com</a>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-brand-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-xs text-gray-600">&copy; 2026 Whoff Agents. All rights reserved.</div>
+          <div className="mono-note">&copy; 2026 Whoff Agents LLC. All rights reserved.</div>
           <div className="flex gap-6">
-            <Link to="/refund-policy" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">30-Day Refund Policy</Link>
-            <Link to="/privacy" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="text-xs text-gray-600 hover:text-brand-gold transition-colors">Terms of Service</Link>
+            <Link to="/refund-policy" className="text-xs text-gray-600 hover:text-gray-300 transition-colors">Refund Policy</Link>
+            <Link to="/privacy" className="text-xs text-gray-600 hover:text-gray-300 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-xs text-gray-600 hover:text-gray-300 transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
