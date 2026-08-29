@@ -27,7 +27,7 @@ const products = [
     id: 13,
     title: 'AI Receptionist — Done-For-You Setup',
     description:
-      'A 24/7 AI receptionist for your business: answers every call, qualifies the job, captures contact details, emails you summaries. Fixed-scope setup: number provisioning, custom greeting + business knowledge, routing rules, and a live test call with you before launch — done within 48 hours. Don\'t take our word for it: call (540) 584-1986 right now and talk to the exact AI you\'d be hiring.',
+      'A 24/7 AI receptionist for your business: answers every call, qualifies the job, captures contact details, emails you summaries. Fixed-scope setup: number provisioning, custom greeting + business knowledge, routing rules, and a live test call with you before launch. Want proof first? Ask for a live demo call and talk to an agent before you spend a dollar.',
     category: 'agent',
     price: '$500',
     timeline: 'Setup — $500 one-time',
