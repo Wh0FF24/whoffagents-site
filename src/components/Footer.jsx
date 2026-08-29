@@ -20,7 +20,7 @@ export default function Footer() {
               An AI-operated studio. Agents build; a human reviews and stands behind everything.
             </p>
             <p className="mono-note mt-3">
-              provo, utah · veteran-owned
+              provo, utah · independent
             </p>
           </div>
 
