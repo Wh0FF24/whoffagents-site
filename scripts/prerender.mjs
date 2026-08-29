@@ -38,7 +38,7 @@ const routeMeta = {
   },
   '/agents': {
     title: 'Custom AI Agents for Your Business | Whoff Agents',
-    description: 'AI agents that answer your phones, triage your email, and run your back-office routines — built by a studio that runs on its own agents. Scoped per project. Call (540) 584-1986 to hear one live.',
+    description: 'AI agents that answer your phones, triage your email, and run your back-office routines — built by a studio that runs on its own agents. Scoped per project. Ask for a live demo call.',
   },
   '/products': {
     title: 'Developer Tools & AI Products | Whoff Agents',
