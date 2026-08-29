@@ -138,23 +138,27 @@ export default function AgentsPage() {
            reads as equipment to a non-technical visitor, so the actual
            explanation has to live in words, on every screen size. ============ */}
       <section data-reveal className="shell pt-4 pb-2">
-        <p className="eyebrow mb-6">what it looks like · an example</p>
+        <p className="eyebrow mb-3">an example · one call, start to finish</p>
+        <p className="text-gray-400 leading-relaxed max-w-2xl mb-8">
+          Say you asked us for the simplest version: something to answer the phone when nobody
+          is there to pick it up. Here is the whole thing, from the ring to your morning coffee.
+        </p>
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {[
             {
-              t: '6:40 pm',
-              h: 'A customer calls. Everyone has gone home.',
-              s: 'Today that call goes to voicemail, or to a competitor who picked up.',
+              t: 'step 1 · 6:40 pm',
+              h: 'The phone rings after hours.',
+              s: 'Everyone has gone home. Right now that call goes to voicemail — or to whichever competitor picks up next.',
             },
             {
-              t: 'same call',
-              h: 'It answers, and handles her.',
-              s: 'Gets her name, her number, and what she needs — and books her in.',
+              t: 'step 2 · same call',
+              h: 'It picks up and takes care of the caller.',
+              s: 'Gets their name, their number, and what they need — answers what it has been told, and books them in.',
             },
             {
-              t: '7:02 am',
-              h: 'It is on your phone before your coffee.',
-              s: 'Her details, what she wants, and when she is booked. Nothing was missed.',
+              t: 'step 3 · 7:02 am',
+              h: 'You read it over coffee.',
+              s: 'Who called, what they wanted, and when they are booked. You did not lose the job and nobody stayed late.',
             },
           ].map((step, i) => (
             <div key={step.t} className="rv-item relative pt-5" style={{ '--i': i }}>
@@ -200,9 +204,15 @@ export default function AgentsPage() {
                 you a summary.
               </p>
               <ul className="text-sm text-gray-400 leading-relaxed space-y-1.5 mb-6">
-                <li>— one-time setup, no retainer attached to it</li>
-                <li>— you hear it and sign off before it goes live</li>
-                <li>— anything more involved is quoted as its own project</li>
+                <li>— the $500 is the setup, once. It is not a subscription.</li>
+                <li>
+                  — after that you pay for what it actually handles — the phone line and the
+                  calls it takes. A shop getting a handful of calls a week costs very little to
+                  run; a busy office answering all day costs more. We work it out from your real
+                  call volume and tell you the number before you switch it on.
+                </li>
+                <li>— you hear it and sign off before it goes live, and you can stop any time</li>
+                <li>— anything beyond answering the phone is quoted as its own project</li>
               </ul>
               <div className="flex flex-wrap gap-3">
                 <a

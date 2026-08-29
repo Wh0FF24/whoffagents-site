@@ -42,7 +42,7 @@ export default function WebStudio() {
                 href="#lead-form"
                 className="btn-charge inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-white bg-brand-red transition-all duration-200"
               >
-                Get your free quote <ArrowRight className="w-4 h-4" />
+                Talk to us <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="#pricing"

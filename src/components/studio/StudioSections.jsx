@@ -297,7 +297,7 @@ export function LeadForm({ source = 'web_studio_page' }) {
             disabled={status === 'loading'}
             className="btn-charge inline-flex items-center gap-2 px-8 py-3.5 rounded-lg font-bold text-white bg-brand-red transition-all duration-200 disabled:opacity-50 cursor-pointer"
           >
-            {status === 'loading' ? 'Sending...' : 'Send it — get my free quote'} <ArrowRight className="w-4 h-4" />
+            {status === 'loading' ? 'Sending...' : 'Send it to a person'} <ArrowRight className="w-4 h-4" />
           </button>
           <span className="text-sm text-gray-500">No spam. No obligation. We reply within one business day.</span>
         </div>
@@ -502,9 +502,9 @@ export function LeadFormSection({ index = '06', source }) {
     <section data-reveal id="lead-form" style={accentVars(index)} className="max-w-4xl mx-auto px-6 py-20 scroll-mt-24">
       <SectionHeader
         index={index}
-        eyebrow="get started"
-        title="Get your free quote"
-        lede="Tell us about your business. We'll call or text you within one business day — no obligation."
+        eyebrow="talk to a person"
+        title="Tell us what you need"
+        lede="No quote form to decode and no sales sequence. Say what your business does and what you want handled — a person reads it and calls or texts you back within one business day."
       />
       <div className="mt-10">
         <LeadForm source={source} />

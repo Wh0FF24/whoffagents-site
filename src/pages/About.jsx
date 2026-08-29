@@ -4,30 +4,30 @@ const timeline = [
   {
     year: '2025',
     title: 'The frustration',
-    body: "Will, a student at BYU, kept running into the same wall: AI tools that demo beautifully and break in production. Chatbots, not infrastructure. Novelties, not systems.",
+    body: "Will, a student at BYU, kept hitting the same wall: AI tools that look brilliant in a demo and fall over the moment you rely on them. Clever toys, not something you could hand a job to.",
   },
   {
     year: 'Early 2026',
     title: 'Atlas comes online',
-    body: "Atlas wasn't a product. It was a solution to a personal problem — an AI agent that could write code, manage releases, run content ops, and stay running while Will slept.",
+    body: "Atlas wasn't built to sell. It was built to solve one person's problem — an assistant that could write the code, publish the work, and keep going while Will slept.",
   },
   {
     year: 'Spring 2026',
     title: 'The Pantheon',
-    body: "One agent became many. Atlas coordinates a network — Peitho handles copy, Prometheus manages scheduling, Athena clears blockers. Each agent specialized. All crash-tolerant. The Pantheon.",
+    body: "One assistant became several, each good at one thing — writing, scheduling, clearing whatever is stuck — with Atlas handing out the work between them.",
   },
   {
     year: 'Now',
     title: 'The experiment, open',
-    body: "Whoff Agents is the Pantheon's output, packaged. Every tool here was built because Atlas needed it. Every lesson was learned the hard way — context drift, broken handoffs, 3am crashes. All of it's baked in.",
+    body: "Whoff Agents is what came out of it. Everything we sell exists because we needed it first, and everything that went wrong along the way — and plenty did, usually at 3am — is why it holds up now.",
   },
 ]
 
 const facts = [
-  { value: '95%', label: 'of operations run by Atlas' },
-  { value: '14', label: 'agents in the Pantheon' },
+  { value: '95%', label: 'of the day-to-day run by AI' },
+  { value: '14', label: 'assistants doing the work' },
   { value: '200+', label: 'files shipped in a single day' },
-  { value: '$0', label: 'VC money. Zero.' },
+  { value: '$0', label: 'outside investors — we answer to customers' },
 ]
 
 export default function About() {
@@ -51,7 +51,7 @@ export default function About() {
             makes the calls that require a human.
           </p>
           <p className="text-gray-500 text-base mt-4 leading-relaxed max-w-2xl">
-            This is what we built. And we&apos;re selling you the exact infrastructure that makes it work.
+            That&apos;s not a pitch, it&apos;s just how the company runs. We build the same thing for other businesses.
           </p>
         </motion.div>
       </section>
@@ -78,20 +78,22 @@ export default function About() {
               </p>
               <p>
                 I build websites for local businesses. I run a content operation. I&apos;m finishing a
-                master&apos;s in electrical and computer engineering. None of it scaled until I stopped
-                using AI as a tool and started building it as infrastructure — agents that run
-                overnight, coordinate with each other, and keep going when I&apos;m not watching.
+                master&apos;s in electrical and computer engineering. None of it kept up until I stopped
+                treating AI as a thing you sit and prompt, and started building assistants that
+                work overnight, hand things off to each other, and keep going when nobody is watching.
               </p>
               <div className="border-l-2 border-brand-red/60 pl-5 py-1">
                 <p className="text-white">
-                  That&apos;s what Whoff Agents is. The actual systems I built for myself,
-                  packaged so you can use them without starting from scratch.
+                  That&apos;s what Whoff Agents is. The things I built to run my own business,
+                  now built for other people&apos;s.
                 </p>
               </div>
               <p>
-                Atlas runs 95% of my day-to-day. Not perfectly. Sometimes it breaks. But I
-                learned how to make it crash-tolerant, self-recovering, and genuinely useful —
-                and those lessons are in every product here.
+                Atlas runs most of my day-to-day now. Not perfectly — things go wrong. The
+                difference is that I spent a long time learning how to build them so that when
+                something fails it picks itself back up instead of taking the rest down with it.
+                That is the whole gap between a demo that looks clever and something you can
+                actually leave running on a business.
               </p>
             </div>
           </div>
@@ -163,25 +165,27 @@ export default function About() {
           viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold mb-6">The mission</h2>
+          <h2 className="text-2xl font-bold mb-6">Who this is for</h2>
           <div className="space-y-4 text-gray-400 leading-relaxed">
             <p>
-              Most developer tools are built for developers. We&apos;re building tools for{' '}
-              <span className="text-white">builders who are done waiting on a team</span> —
-              solo founders, indie developers, and people running operations that used to require
-              five people.
+              Most of the useful AI gets sold to big companies with big budgets and someone on
+              staff to run it. We build for{' '}
+              <span className="text-white">everybody else</span> — the shop whose phone rings
+              after everyone has gone home, the office buried in email, the owner doing the same
+              paperwork every Monday night. You do not need to be technical, and you do not need
+              to know what any of it is called.
             </p>
             <p>
-              The Pantheon is proof it works. Fourteen agents. Two machines. Content, code,
-              marketing, support — all running on infrastructure you can replicate.
+              We also make the tools we use ourselves, so if you are a developer who wants the
+              same parts, those are on the shelf too. Neither of you is the afterthought.
             </p>
             <div className="border border-brand-gold/20 bg-brand-gold/5 rounded-xl p-6 mt-6">
               <p className="text-white font-medium mb-2">
-                You don&apos;t need a dev team. You don&apos;t need funding.
+                You don&apos;t need a technical person, and you don&apos;t need to learn anything new.
               </p>
               <p className="text-gray-400 text-sm">
-                You need working infrastructure that doesn&apos;t quit when you close your laptop.
-                That&apos;s what we&apos;re building here.
+                You need the work done, and someone who answers when you have a question.
+                That&apos;s the whole idea.
               </p>
             </div>
           </div>
@@ -197,16 +201,25 @@ export default function About() {
           viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold mb-3">Start with what works</h2>
+          <h2 className="text-2xl font-bold mb-3">Rather just talk to somebody?</h2>
           <p className="text-gray-400 mb-8">
-            The same starter kit Atlas was built with. Set up in 30 minutes.
+            Tell us what your business does and what you want handled. A person reads it and
+            gets back to you — no form to decode, no sales sequence.
           </p>
-          <a
-            href="/products"
-            className="inline-block bg-brand-red hover:bg-red-600 transition-colors text-white font-semibold px-8 py-3 rounded-lg"
-          >
-            See the tools →
-          </a>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <a
+              href="mailto:hello@whoffagents.com"
+              className="cta-solid btn-charge inline-block bg-brand-red transition-colors text-white font-semibold px-8 py-3 rounded-lg"
+            >
+              Email a person
+            </a>
+            <a
+              href="/agents"
+              className="inline-block border border-white/15 hover:border-white/30 transition-colors text-gray-200 font-semibold px-8 py-3 rounded-lg"
+            >
+              See what we build
+            </a>
+          </div>
         </motion.div>
       </section>
     </div>
