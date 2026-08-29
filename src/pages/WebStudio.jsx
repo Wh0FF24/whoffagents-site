@@ -70,8 +70,8 @@ export default function WebStudio() {
               <div className="fig-frame relative">
                 <img src="/art/path-websites.svg" alt="" className="w-full" aria-hidden="true" />
                 <div className="fig-caption">
-                  <span>fig. 01 / path-websites.svg</span>
-                  <span>2048×2015</span>
+                  <span>fig. 01 · site build</span>
+                  <span>whoff web studio</span>
                 </div>
               </div>
               <p className="mono-note text-center mt-2">custom-designed · no templates · yours</p>

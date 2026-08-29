@@ -20,7 +20,7 @@ const C = {
   ok: '#3ECF6E',
   amber: '#F5A11C',
   text: '#8A9099',
-  faint: '#5C636C',
+  faint: '#98A0A9',
   panel: '#0E0F12',
 }
 

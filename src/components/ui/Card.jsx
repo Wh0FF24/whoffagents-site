@@ -25,16 +25,39 @@ export default function Card({ featured = false, ticks = false, className = '', 
   )
 }
 
+/* Section accent rotation — the company palette, cycled by section number so
+   the page moves through scarlet → gold → royal → silver instead of running
+   red-on-black end to end. Ghost alphas differ per hue because the same alpha
+   reads very differently against near-black. */
+const SECTION_ACCENTS = [
+  { line: '#E5484D', ghost: 'rgba(229, 72, 77, 0.30)' }, // scarlet
+  { line: '#F5A11C', ghost: 'rgba(245, 161, 28, 0.26)' }, // gold
+  { line: '#3D8BDE', ghost: 'rgba(61, 139, 222, 0.30)' }, // royal (brand blue, lifted for the dark ground)
+  { line: '#C0C0C0', ghost: 'rgba(192, 192, 192, 0.20)' }, // silver
+]
+
+function accentFor(index) {
+  const n = parseInt(String(index), 10)
+  return SECTION_ACCENTS[(Number.isFinite(n) ? n - 1 : 0) % SECTION_ACCENTS.length]
+}
+
 /**
  * Numbered section header. With an index it gains the ghost numeral and the
  * self-soldering circuit rule; both render in their final state without JS
  * and play a one-time entrance when the reveal system (html.js + [data-reveal].in)
- * scrolls them into view. overflow-hidden clips the numeral bleed so narrow
- * viewports never get a horizontal scrollbar.
+ * scrolls them into view.
+ *
+ * .sh-clip clips HORIZONTALLY ONLY. The previous overflow-hidden also clipped
+ * vertically, which sliced the top off every ghost numeral; the numeral is
+ * meant to bleed up into the section's padding.
  */
 export function SectionHeader({ index, eyebrow, title, lede, center = false, className = '' }) {
+  const accent = accentFor(index)
   return (
-    <div className={`relative overflow-hidden ${center ? 'text-center' : ''} ${className}`}>
+    <div
+      className={`relative sh-clip ${center ? 'text-center' : ''} ${className}`}
+      style={index ? { '--sec-accent': accent.line, '--sec-ghost': accent.ghost } : undefined}
+    >
       {index && (
         <span className="ghost-index" aria-hidden="true">
           {index}
@@ -42,15 +65,18 @@ export function SectionHeader({ index, eyebrow, title, lede, center = false, cla
       )}
       <div className="relative z-10">
         <p className="eyebrow mb-4">
-          {index && <span className="text-gray-600 mr-2">{index}</span>}
+          {index && <span className="mr-2" style={{ color: accent.line }}>{index}</span>}
           {eyebrow}
         </p>
         <h2 className="type-h2 mb-4">{title}</h2>
         {lede && <p className={`text-gray-400 leading-relaxed max-w-2xl ${center ? 'mx-auto' : ''}`}>{lede}</p>}
       </div>
       {index && (
-        /* soldered rule — base trace + terminal pad in trace grey; red overlay
-           self-draws once on reveal, square junctions pop in as it passes.
+        /* soldered rule — base trace + terminal pad in trace grey; the accent
+           overlay self-draws once on reveal, square junctions pop in as it
+           passes, and a short pulse then runs the line continuously (the
+           board's trace grammar). The rule turns down at both ends, opening
+           a bracket around the section's content.
            vector-effect keeps 1px strokes 1px under preserveAspectRatio="none";
            junctions are near-zero square-cap segments so they stay SQUARE
            (a real 2x2 rect would stretch into a slab at full width). */
@@ -58,25 +84,36 @@ export function SectionHeader({ index, eyebrow, title, lede, center = false, cla
           className="solder-rule"
           aria-hidden="true"
           width="100%"
-          height="12"
-          viewBox="0 0 100 12"
+          height="20"
+          viewBox="0 0 100 20"
           preserveAspectRatio="none"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          style={{ color: accent.line }}
         >
-          <path d="M0 9 H58 V3 H92" stroke="#2A2D33" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          <path d="M0 20 V9 H58 V3 H99 V20" stroke="#2A2D33" strokeWidth="1" vectorEffect="non-scaling-stroke" />
           <path d="M92 3 h0.01" stroke="#2A2D33" strokeWidth="5" strokeLinecap="square" vectorEffect="non-scaling-stroke" />
           <path
             className="sr-draw"
-            d="M0 9 H58 V3 H89"
+            d="M0 20 V9 H58 V3 H99 V20"
             pathLength="100"
             strokeDasharray="100"
-            stroke="#E5484D"
+            stroke="currentColor"
             strokeWidth="1"
             vectorEffect="non-scaling-stroke"
           />
-          <path className="sr-j sr-j1" d="M30 9 h0.01" stroke="#E5484D" strokeWidth="3" strokeLinecap="square" vectorEffect="non-scaling-stroke" />
-          <path className="sr-j sr-j2" d="M74 3 h0.01" stroke="#E5484D" strokeWidth="3" strokeLinecap="square" vectorEffect="non-scaling-stroke" />
+          {/* continuous carrier pulse — always running, like the board traces */}
+          <path
+            className="sr-pulse"
+            d="M0 20 V9 H58 V3 H99 V20"
+            pathLength="100"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path className="sr-j sr-j1" d="M30 9 h0.01" stroke="currentColor" strokeWidth="3" strokeLinecap="square" vectorEffect="non-scaling-stroke" />
+          <path className="sr-j sr-j2" d="M74 3 h0.01" stroke="currentColor" strokeWidth="3" strokeLinecap="square" vectorEffect="non-scaling-stroke" />
         </svg>
       )}
     </div>

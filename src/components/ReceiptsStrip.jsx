@@ -99,13 +99,13 @@ export default function ReceiptsStrip() {
           if (now && k === 'cadence') noteNode = nextRun(now)
           return (
             <div key={k} className="min-w-0">
-              <div className="text-[9px] uppercase tracking-[0.2em] text-gray-600 mb-1">[{k}]</div>
+              <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">[{k}]</div>
               {href ? (
-                <a href={href} className="text-[12px] text-gray-200 hover:text-brand-red-bright transition-colors whitespace-nowrap">{vNode}</a>
+                <a href={href} className="text-[12.5px] text-gray-100 hover:text-brand-red-bright transition-colors whitespace-nowrap">{vNode}</a>
               ) : (
-                <div className="text-[12px] text-gray-200 whitespace-nowrap">{vNode}</div>
+                <div className="text-[12.5px] text-gray-100 whitespace-nowrap">{vNode}</div>
               )}
-              <div className="text-[9.5px] text-gray-600 truncate">{noteNode}</div>
+              <div className="text-[10px] text-gray-400 truncate">{noteNode}</div>
             </div>
           )
         })}

@@ -5,10 +5,18 @@
    mechanical flashes (.12s/.18s/90ms) deliberately stay literal. */
 :root{--mz:var(--ease-house,cubic-bezier(.3,.26,.38,1))}
 
-.ghost-index{position:absolute;left:-.08em;top:-.35em;z-index:0;font-family:var(--font-display);font-weight:800;font-size:clamp(6rem,13vw,10.5rem);line-height:1;color:transparent;-webkit-text-stroke:1px #E5484D42;user-select:none}
-@supports not (-webkit-text-stroke:1px red){.ghost-index{color:#FFFFFF0B}}
+.ghost-index{position:absolute;left:-.08em;top:-.35em;z-index:0;font-family:var(--font-display);font-weight:800;font-size:clamp(4.5rem,12vw,10.5rem);line-height:1;color:transparent;-webkit-text-stroke:1px var(--sec-ghost,#E5484D4D);user-select:none}
+@supports not (-webkit-text-stroke:1px red){.ghost-index{color:#FFFFFF12}}
+/* clip X only: the numeral must be free to bleed above the header (plain
+   overflow:hidden sliced its top off) while a section can still never add a
+   horizontal scrollbar */
+.sh-clip{clip-path:inset(-60vh 0 -60vh 0)}
 
 .solder-rule{display:block;margin-top:18px}
+/* continuous carrier: a short dash running the rule forever (board grammar).
+   Compositor-cheap, one per section, killed under reduced motion. */
+.sr-pulse{stroke-dasharray:5 95;opacity:.9;animation:sr-run 5.5s linear infinite}
+@keyframes sr-run{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:no-preference){
 html.js [data-reveal]:not(.in) .ghost-index{opacity:0;transform:translateY(24px)}
 html.js [data-reveal].in .ghost-index{transition:opacity var(--dur-m,.6s) var(--mz),transform var(--dur-m,.6s) var(--mz)}
@@ -22,9 +30,9 @@ html.js [data-reveal].in .sr-j2{transition-delay:.75s}
 
 .corner-ticks::before,.corner-ticks::after{transition:var(--dur-s,.3s) var(--mz)}
 .corner-ticks:hover::before,.corner-ticks:hover::after,
-.corner-ticks:focus-within::before,.corner-ticks:focus-within::after{width:38px;height:38px;border-color:#E5484D}
+.corner-ticks:focus-within::before,.corner-ticks:focus-within::after{width:38px;height:38px;border-color:var(--tick-hot,#E5484D)}
 .card-surface{transition:border-color var(--dur-s,.3s) var(--mz),box-shadow var(--dur-s,.3s) var(--mz)}
-.card-surface:not(.card-surface--featured):hover{border-color:#E5484D47;box-shadow:inset 0 0 0 1px #E5484D14}
+.card-surface:not(.card-surface--featured):hover{border-color:color-mix(in srgb,var(--tick-hot,#E5484D) 28%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tick-hot,#E5484D) 8%,transparent)}
 
 .link-trace{position:relative}
 .link-trace::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1px;background:#E5484DCC;transform:scaleX(0);transform-origin:left;transition:transform var(--dur-s,.3s) var(--mz)}
@@ -54,11 +62,12 @@ html.js [data-reveal].in .sr-j2{transition-delay:.75s}
 .fig-frame{position:relative}
 .fig-frame::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background-image:repeating-linear-gradient(90deg,#FFFFFF29 0 1px,transparent 1px 45px),repeating-linear-gradient(90deg,#FFFFFF29 0 1px,transparent 1px 9px);background-size:100% 6px,100% 3px;background-repeat:no-repeat}
 .fig-frame::after{content:'';position:absolute;right:10px;bottom:10px;width:9px;height:9px;background:linear-gradient(#FFFFFF2E,#FFFFFF2E) center/100% 1px no-repeat,linear-gradient(#FFFFFF2E,#FFFFFF2E) center/1px 100% no-repeat}
-.fig-caption{font-family:var(--font-mono);font-size:10px;display:flex;justify-content:space-between;gap:12px;color:#5C636C;border-top:1px solid #FFFFFF0F;padding-top:4px}
+.fig-caption{font-family:var(--font-mono);font-size:10.5px;display:flex;justify-content:space-between;gap:12px;color:#98A0A9;border-top:1px solid #FFFFFF0F;padding-top:4px}
 .fig-caption>:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fig-caption>:last-child{flex-shrink:0}
 
 @media (prefers-reduced-motion:reduce){
+.sr-pulse{animation:none;opacity:0}
 .corner-ticks::before,.corner-ticks::after,.card-surface,
 .link-trace::before,.link-trace::after,
 .field-armed::before,.field-armed::after,

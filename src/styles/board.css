@@ -165,3 +165,35 @@
     animation: none !important;
   }
 }
+
+/* ============================================================
+   LANE CONTROLS — the board answers the pointer.
+   Each lane group holds its own highlight traces, node and detail
+   line, so a plain :hover on the group lights the whole circuit
+   (no :has(), no JS). Overlays are pointer-events:none so only the
+   node box is the hit target.
+   ============================================================ */
+.ob-lane { cursor: pointer; }
+.ob-hl {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-s, .3s) var(--ease-house, ease);
+}
+.ob-lane-detail {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-s, .3s) var(--ease-house, ease);
+}
+.ob-node-box {
+  transition: stroke var(--dur-s, .3s) var(--ease-house, ease),
+              fill var(--dur-s, .3s) var(--ease-house, ease);
+}
+.ob-node-label { transition: fill var(--dur-s, .3s) var(--ease-house, ease); }
+.ob-lane:hover .ob-hl,
+.ob-lane:hover .ob-lane-detail { opacity: 1; }
+.ob-lane:hover .ob-node-box { stroke: currentColor; fill: #14161A; }
+.ob-lane:hover .ob-node-label { fill: #FFFFFF; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-hl, .ob-lane-detail, .ob-node-box, .ob-node-label { transition: none; }
+}

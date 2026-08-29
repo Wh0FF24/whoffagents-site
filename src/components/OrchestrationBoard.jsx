@@ -10,6 +10,7 @@
  * delays in board.css. Everything freezes complete under
  * prefers-reduced-motion. No particle libraries, no canvas loops.
  */
+import { useNavigate } from 'react-router-dom'
 import '../styles/board.css'
 
 const MONO = "'JetBrains Mono', ui-monospace, monospace"
@@ -21,21 +22,47 @@ const C = {
   ok: '#3ECF6E',
   amber: '#F5A11C',
   text: '#8A9099',
-  faint: '#5C636C',
+  faint: '#98A0A9',
   panel: '#0E0F12',
 }
 
-function Node({ x, y, w = 92, h = 34, label, sub, accent = false, blink = false, cycleLed }) {
+/* The three build lanes ARE the three business lines, so each carries its own
+   company colour: scarlet / gold / royal. Hovering a lane lights its whole
+   circuit and reveals what that line actually does; clicking goes there. */
+const LANES = [
+  {
+    n: 1, label: 'WEBSITES', sub: 'design + build', y: 45, led: 'ob-led-1',
+    tint: '#E5484D', dim: 'rgba(229,72,77,0.55)',
+    out: 'M 252 152 H 262 V 62 H 300', back: 'M 392 62 H 414 V 152 H 436',
+    detail: 'flat pricing · live in days', to: '#web-studio',
+  },
+  {
+    n: 2, label: 'AGENTS', sub: 'phones · email', y: 148, led: 'ob-led-2',
+    tint: '#F5A11C', dim: 'rgba(245,161,28,0.55)',
+    out: 'M 252 165 H 300', back: 'M 392 165 H 436',
+    detail: 'phones · inbox · sms · cron', to: '/agents',
+  },
+  {
+    n: 3, label: 'TOOLS', sub: 'skills · MCP', y: 251, led: 'ob-led-3',
+    tint: '#3D8BDE', dim: 'rgba(61,139,222,0.55)',
+    out: 'M 252 178 H 262 V 268 H 300', back: 'M 392 268 H 414 V 178 H 436',
+    detail: 'skills · MCP servers · kits', to: '/products',
+  },
+]
+
+function Node({ x, y, w = 92, h = 34, label, sub, accent = false, blink = false, cycleLed, tint, dim }) {
+  const edge = tint || C.red
   return (
     <g>
       <rect
+        className="ob-node-box"
         x={x} y={y} width={w} height={h} rx="3"
         fill={C.panel}
-        stroke={accent ? C.redDim : C.line}
+        stroke={accent ? (dim || C.redDim) : C.line}
         strokeWidth="1"
       />
       {/* corner tick */}
-      <path d={`M ${x} ${y + 8} V ${y} H ${x + 8}`} fill="none" stroke={accent ? C.red : C.faint} strokeWidth="1" />
+      <path d={`M ${x} ${y + 8} V ${y} H ${x + 8}`} fill="none" stroke={accent ? edge : C.faint} strokeWidth="1" />
       {cycleLed ? (
         /* stacked LED: green base, amber flips on while the lane works */
         <>
@@ -45,9 +72,9 @@ function Node({ x, y, w = 92, h = 34, label, sub, accent = false, blink = false,
       ) : (
         <circle cx={x + w - 10} cy={y + 10} r="2.5" fill={accent ? C.red : C.ok} className={blink ? 'status-blink' : undefined} />
       )}
-      <text x={x + 10} y={y + (sub ? 16 : 21)} fontFamily={MONO} fontSize="8.5" letterSpacing="1.5" fill="#D7DADE">{label}</text>
+      <text className="ob-node-label" x={x + 10} y={y + (sub ? 16 : 21)} fontFamily={MONO} fontSize="8.5" letterSpacing="1.5" fill="#D7DADE">{label}</text>
       {sub && (
-        <text x={x + 10} y={y + 27} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.faint}>{sub}</text>
+        <text x={x + 10} y={y + 27} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.faint}>{sub}</text>
       )}
     </g>
   )
@@ -71,6 +98,20 @@ function Trace({ d, boot, cycleClass }) {
 }
 
 export default function OrchestrationBoard() {
+  const navigate = useNavigate()
+  /* lane click → that business line. Hash targets go through Lenis when the
+     glide is running so the landing matches every other anchor on the page. */
+  const go = (to) => {
+    if (!to.startsWith('#')) {
+      navigate(to)
+      return
+    }
+    const el = document.querySelector(to)
+    if (!el) return
+    if (window.__lenis) window.__lenis.scrollTo(el)
+    else el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <div className="card-surface corner-ticks overflow-hidden" aria-hidden="true">
       {/* board chrome */}
@@ -98,11 +139,11 @@ export default function OrchestrationBoard() {
         {/* ---- traces (drawn first, under nodes) ----
              cycle order: t1 intake · t2–t4 fan-out · t5–t7 converge · t8 ship */}
         {/* intake -> atlas */}
-        <Trace d="M 96 165 H 148" boot={1} cycleClass="ob-t1" />
+        <Trace d="M 96 165 H 136" boot={1} cycleClass="ob-t1" />
         {/* atlas fan-out to three lanes */}
-        <Trace d="M 240 152 H 262 V 62 H 300" boot={2} cycleClass="ob-t2" />
-        <Trace d="M 240 165 H 300" boot={3} cycleClass="ob-t3" />
-        <Trace d="M 240 178 H 262 V 268 H 300" boot={4} cycleClass="ob-t4" />
+        <Trace d="M 252 152 H 262 V 62 H 300" boot={2} cycleClass="ob-t2" />
+        <Trace d="M 252 165 H 300" boot={3} cycleClass="ob-t3" />
+        <Trace d="M 252 178 H 262 V 268 H 300" boot={4} cycleClass="ob-t4" />
         {/* lanes -> review gate */}
         <Trace d="M 392 62 H 414 V 152 H 436" boot={5} cycleClass="ob-t5" />
         <Trace d="M 392 165 H 436" boot={6} cycleClass="ob-t6" />
@@ -117,20 +158,44 @@ export default function OrchestrationBoard() {
 
         {/* ---- nodes ---- */}
         <Node x={16} y={148} w={80} label="INTAKE" sub="your brief" />
-        {/* orchestrator — double ring, outer ring flashes as the brief lands */}
+        {/* orchestrator — double ring, outer ring flashes as the brief lands.
+            Box runs 140→248 so "orchestrator · 24/7" sits inside it; the old
+            92-wide box let that line run past its own right edge. */}
         <g>
-          <rect x={148} y={140} width={92} height={50} rx="4" fill={C.panel} stroke={C.redDim} strokeWidth="1" />
-          <rect x={144} y={136} width={100} height={58} rx="6" fill="none" stroke="rgba(229,72,77,0.22)" strokeWidth="1" />
-          <rect x={144} y={136} width={100} height={58} rx="6" fill="none" stroke={C.red} strokeWidth="1.5" className="ob-flash ob-flash-ring" />
-          <circle cx={160} cy={152} r="2.5" fill={C.red} className="node-breathe" />
-          <text x={172} y={156} fontFamily={MONO} fontSize="9" letterSpacing="2" fill="#FFFFFF">ATLAS</text>
-          <text x={158} y={172} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.text}>orchestrator · 24/7</text>
-          <text x={158} y={182} fontFamily={MONO} fontSize="6.5" letterSpacing="0.8" fill={C.faint}>routes every job</text>
+          <rect x={140} y={140} width={108} height={50} rx="4" fill={C.panel} stroke={C.redDim} strokeWidth="1" />
+          <rect x={136} y={136} width={116} height={58} rx="6" fill="none" stroke="rgba(229,72,77,0.22)" strokeWidth="1" />
+          <rect x={136} y={136} width={116} height={58} rx="6" fill="none" stroke={C.red} strokeWidth="1.5" className="ob-flash ob-flash-ring" />
+          <circle cx={152} cy={152} r="2.5" fill={C.red} className="node-breathe" />
+          <text x={164} y={156} fontFamily={MONO} fontSize="9" letterSpacing="2" fill="#FFFFFF">ATLAS</text>
+          <text x={150} y={172} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.text}>orchestrator · 24/7</text>
+          <text x={150} y={182} fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={C.faint}>routes every job</text>
         </g>
 
-        <Node x={300} y={45} label="WEBSITES" sub="design + build" accent cycleLed="ob-led-1" />
-        <Node x={300} y={148} label="AGENTS" sub="phones · email" accent cycleLed="ob-led-2" />
-        <Node x={300} y={251} label="TOOLS" sub="skills · MCP" accent cycleLed="ob-led-3" />
+        {/* the three lanes — each its own colour, each a live control:
+            hover lights its circuit end to end, click goes to that line */}
+        {LANES.map((L) => (
+          <g
+            key={L.n}
+            className="ob-lane"
+            style={{ color: L.tint }}
+            onClick={() => go(L.to)}
+          >
+            {/* highlight overlays: same geometry as the base traces, lit on hover */}
+            <path className="ob-hl" d={L.out} fill="none" stroke={L.tint} strokeWidth="1.5" />
+            <path className="ob-hl" d={L.back} fill="none" stroke={L.tint} strokeWidth="1.5" />
+            <Node
+              x={300} y={L.y} label={L.label} sub={L.sub} accent
+              cycleLed={L.led} tint={L.tint} dim={L.dim}
+            />
+            <text
+              className="ob-lane-detail"
+              x={300} y={L.y + 47}
+              fontFamily={MONO} fontSize="6.5" letterSpacing="0.6" fill={L.tint}
+            >
+              {L.detail} →
+            </text>
+          </g>
+        ))}
 
         {/* review gate — the human. THE HOLD: LED blinks amber twice,
             caption flips to PASS, then the job is released to ship. */}

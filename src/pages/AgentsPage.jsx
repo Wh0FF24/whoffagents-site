@@ -211,7 +211,7 @@ export default function AgentsPage() {
                   aria-hidden="true"
                 />
               </div>
-              <div className="fig-caption"><span>fig. 02 / hero-orchestration.svg</span><span>2022×1343</span></div>
+              <div className="fig-caption"><span>fig. 02 · how the work flows</span><span>agents · reviewed · shipped</span></div>
             </div>
           </div>
         </Card>

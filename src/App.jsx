@@ -26,6 +26,7 @@ import ProductsArchive from './pages/ProductsArchive'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import ScrollToTop from './components/ScrollToTop'
+import SignalField from './components/SignalField'
 
 function App() {
   const location = useLocation()
@@ -38,6 +39,8 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* live drafting grid — fixed behind every page, not just the hero */}
+      <SignalField />
       <div className="noise-overlay" />
       <div className="vignette-overlay" />
       <ScrollToTop />

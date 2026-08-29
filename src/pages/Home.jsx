@@ -10,7 +10,6 @@ import { useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowDown, PhoneCall, Mail, MessageSquare, CalendarClock, Terminal } from 'lucide-react'
 import OrchestrationBoard from '../components/OrchestrationBoard'
-import SignalField from '../components/SignalField'
 import TheGate from '../components/TheGate'
 import ReceiptsStrip from '../components/ReceiptsStrip'
 import Card, { SectionHeader } from '../components/ui/Card'
@@ -46,14 +45,18 @@ function MonuChars({ text, from = 0 }) {
  * Per-word masked rise via the existing [data-reveal].in mechanism under
  * html.js; fully visible statically otherwise (no-JS / prerender / print).
  */
-function StatementBreak({ lines, accentLine, note }) {
+function StatementBreak({ lines, accentLine, note, accentColor = '#E5484D' }) {
   let w = 0
   return (
     <section data-reveal className="stmt-break" aria-label={lines.join(' ')}>
       <div className="stmt-inner">
         <p className="stmt-display" aria-hidden="true">
           {lines.map((line, li) => (
-            <span key={li} className={`stmt-line${li === accentLine ? ' text-brand-red-bright' : ''}`}>
+            <span
+              key={li}
+              className="stmt-line"
+              style={li === accentLine ? { color: accentColor } : undefined}
+            >
               {line.split(' ').map((word, wi, arr) => (
                 <Fragment key={wi}>
                   <span className="stmt-w">
@@ -79,31 +82,34 @@ const paths = [
     title: 'A website that wins you customers',
     body: 'Custom-designed, live in days, flat pricing from $1,500. Found on Google, fast on phones.',
     art: '/art/path-websites.svg',
-    fig: { n: '01', file: 'path-websites.svg', dims: '2048×2015' },
+    fig: { n: '01', of: 'site build', line: 'whoff web studio' },
     href: '#web-studio',
     anchor: true,
     cta: 'See how it works',
-    accent: 'solid', // red fill
+    accent: 'solid', // scarlet — web studio
+    tint: '#E5484D',
   },
   {
     tag: 'for busy teams',
     title: 'A custom AI agent on your phones & inbox',
     body: 'Answers calls, triages email, books callbacks, runs your follow-ups. Scoped to your business.',
     art: '/art/path-agents.svg',
-    fig: { n: '02', file: 'path-agents.svg', dims: '1623×1520' },
+    fig: { n: '02', of: 'agent switchboard', line: 'custom agents' },
     href: '/agents',
     cta: 'Explore custom agents',
-    accent: 'outline', // red outline
+    accent: 'gold', // gold — custom agents
+    tint: '#F5A11C',
   },
   {
     tag: 'for developers',
     title: 'The tools we run on, packaged',
     body: 'Claude Code skills, MCP servers, and starter kits — extracted from our own daily operation.',
     art: '/art/path-devtools.svg',
-    fig: { n: '03', file: 'path-devtools.svg', dims: '1863×1043' },
+    fig: { n: '03', of: 'tooling stack', line: 'developer tools' },
     href: '/products',
     cta: 'Browse the tools',
-    accent: 'ghost', // graphite
+    accent: 'royal', // royal — developer tools
+    tint: '#3D8BDE',
   },
 ]
 
@@ -135,11 +141,11 @@ const devPicks = [
   },
 ]
 
-function PathCard({ tag, title, body, art, fig, href, anchor, cta, accent, index = 0 }) {
+function PathCard({ tag, title, body, art, fig, href, anchor, cta, accent, tint, index = 0 }) {
   const ctaCls = {
     solid: 'bg-brand-red text-white hover:brightness-110',
-    outline: 'border border-brand-red-bright/50 text-brand-red-bright hover:bg-brand-red/10',
-    ghost: 'border border-white/15 text-gray-200 hover:border-white/30',
+    gold: 'border border-brand-gold/55 text-brand-gold hover:bg-brand-gold/10',
+    royal: 'border border-[#3D8BDE]/55 text-[#3D8BDE] hover:bg-[#3D8BDE]/10',
   }[accent]
 
   const inner = (
@@ -150,8 +156,8 @@ function PathCard({ tag, title, body, art, fig, href, anchor, cta, accent, index
           <img src={art} alt="" loading="lazy" className="h-[150%] w-auto opacity-90 transition-transform duration-500 group-hover:scale-105" aria-hidden="true" />
         </div>
         <div className="fig-caption">
-          <span>fig. {fig.n} / {fig.file}</span>
-          <span>{fig.dims}</span>
+          <span>fig. {fig.n} · {fig.of}</span>
+          <span>{fig.line}</span>
         </div>
       </div>
       <div className="p-6 flex flex-col flex-1">
@@ -166,7 +172,8 @@ function PathCard({ tag, title, body, art, fig, href, anchor, cta, accent, index
   )
 
   const cls = 'card-surface corner-ticks rv-item group flex flex-col hover:-translate-y-1 transition-transform duration-300'
-  const style = { '--i': index }
+  /* --tick/--tick-hot tint this card's drafting marks to its line colour */
+  const style = { '--i': index, '--tick': `${tint}BF`, '--tick-hot': tint, '--sec-accent': tint }
   return anchor
     ? <a href={href} className={cls} style={style}>{inner}</a>
     : <Link to={href} className={cls} style={style}>{inner}</Link>
@@ -178,10 +185,6 @@ export default function Home() {
     <div className="relative">
       {/* ============ HERO — monument stack ============ */}
       <section className="relative pt-28 pb-16 px-6 overflow-hidden">
-        {/* signal field canvas (Builder Y) — behind the glow, behind content */}
-        <div className="absolute inset-0 pointer-events-none">
-          <SignalField />
-        </div>
         {/* red signal glow, top-left */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -276,6 +279,7 @@ export default function Home() {
       <StatementBreak
         lines={['Agents do the labor.', 'A person owns the judgment.']}
         accentLine={1}
+        accentColor="#E5484D"
         note="the honest shape of it · from /agents"
       />
 
@@ -378,6 +382,7 @@ export default function Home() {
       <StatementBreak
         lines={['The agents built', 'this page.']}
         accentLine={1}
+        accentColor="#F5A11C"
         note="true story · ask us how · gate: WILL"
       />
 

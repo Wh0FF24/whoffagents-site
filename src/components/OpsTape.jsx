@@ -97,10 +97,10 @@ export default function OpsTape() {
 
   return (
     <div>
-      <div className="text-[9px] uppercase tracking-[0.2em] text-gray-600 mb-1.5">[ops tape]</div>
+      <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1.5">[ops tape]</div>
       <ul
         ref={ref}
-        className="m-0 p-0 list-none text-[11px] leading-none text-gray-500"
+        className="m-0 p-0 list-none text-[11.5px] leading-none text-gray-300"
         style={{ height: LINES.length * LINE_H }}
       >
         {LINES.map((l, i) => (

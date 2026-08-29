@@ -142,13 +142,13 @@ body {
 }
 .eyebrow::before {
   content: '▸ ';
-  color: #E5484D;
+  color: var(--sec-accent, #E5484D);
 }
 .mono-note {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.02em;
-  color: #5C636C;
+  color: #98A0A9;
 }
 
 /* ---------- SURFACES — the one card primitive ---------- */
@@ -177,14 +177,14 @@ body {
 .corner-ticks::before {
   top: -1px;
   left: -1px;
-  border-top: 1px solid rgba(229, 72, 77, 0.75);
-  border-left: 1px solid rgba(229, 72, 77, 0.75);
+  border-top: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
+  border-left: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
 }
 .corner-ticks::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 1px solid rgba(229, 72, 77, 0.75);
-  border-right: 1px solid rgba(229, 72, 77, 0.75);
+  border-bottom: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
+  border-right: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
 }
 
 /* section spine — thin red rule threading down the page.
@@ -437,14 +437,14 @@ html.js [data-reveal]:not(.in) .stmt-wi {
 .stmt-note-chip::before {
   top: -1px;
   left: -1px;
-  border-top: 1px solid rgba(229, 72, 77, 0.75);
-  border-left: 1px solid rgba(229, 72, 77, 0.75);
+  border-top: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
+  border-left: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
 }
 .stmt-note-chip::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 1px solid rgba(229, 72, 77, 0.75);
-  border-right: 1px solid rgba(229, 72, 77, 0.75);
+  border-bottom: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
+  border-right: 1px solid var(--tick, rgba(229, 72, 77, 0.75));
 }
 
 /* ============================================================
@@ -466,9 +466,17 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   display: flex;
   align-items: center;
   overflow: hidden;
+  /* --gp: PINNED progress. The wrapper is 220vh with a 100vh sticky child,
+     so the scene is only stuck to the viewport while --px runs .3125→.6875
+     (top hits the viewport top → bottom hits the viewport bottom). Beats
+     written against raw --px therefore played half off-screen: the job was
+     already at the gate before the scene pinned, and the ship beat fired
+     while it scrolled away. Remap once here; every beat below is a function
+     of --gp, so the whole story starts and finishes on a stationary screen. */
+  --gp: clamp(0, (var(--px, 0) - .3125) / .375, 1);
   /* travel fractions — leg 1 (BUILD→GATE) and leg 2 (GATE→SHIP) */
-  --gf1: clamp(0, var(--px, 0) / .35, 1);
-  --gf2: clamp(0, (var(--px, 0) - .62) / .38, 1);
+  --gf1: clamp(0, var(--gp) / .26, 1);
+  --gf2: clamp(0, (var(--gp) - .64) / .22, 1);
 }
 .gate-stage-inner {
   width: 100%;
@@ -552,8 +560,8 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   left: -1px;
   width: 9px;
   height: 9px;
-  border-top: 1px solid #5C636C;
-  border-left: 1px solid #5C636C;
+  border-top: 1px solid #98A0A9;
+  border-left: 1px solid #98A0A9;
 }
 .gate-node-label {
   font-family: var(--font-mono);
@@ -566,7 +574,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.06em;
-  color: #5C636C;
+  color: #98A0A9;
   margin-top: 3px;
   white-space: nowrap;
 }
@@ -598,7 +606,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   border: 1px solid #E5484D;
   border-radius: 6px;
   pointer-events: none;
-  opacity: clamp(0, (var(--px, 0) - .3) * 6, 1);
+  opacity: clamp(0, (var(--gp) - .18) * 12, 1);
 }
 /* ship — red-tinted like the board's ship node */
 .gate-node--ship {
@@ -613,7 +621,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   background: rgba(229, 72, 77, 0.22);
   box-shadow: 0 0 18px rgba(229, 72, 77, 0.35);
   pointer-events: none;
-  opacity: clamp(0, (var(--px, 0) - .8) * 6, 1);
+  opacity: clamp(0, (var(--gp) - .80) * 12, 1);
 }
 
 /* --- the traveling job card (plateau via nested wrappers) --- */
@@ -645,7 +653,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.06em;
-  color: #5C636C;
+  color: #98A0A9;
   margin-top: 3px;
   white-space: nowrap;
 }
@@ -653,7 +661,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
 /* --- choreography windows (pure functions of --px) --- */
 /* hold window .35–.58: amber LED blink + "reviewing…" */
 .gate-hold {
-  opacity: clamp(0, min((var(--px, 0) - .35) * 12, (.58 - var(--px, 0)) * 12), 1);
+  opacity: clamp(0, min((var(--gp) - .28) * 14, (.56 - var(--gp)) * 14), 1);
 }
 /* PASS stamp — round-1 PASS grammar: green corner-ticked rect */
 .gate-stamp {
@@ -694,8 +702,8 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   top: 30px;
   left: 50%;
   translate: -50%;
-  opacity: clamp(0, (var(--px, 0) - .55) * 14, 1);
-  transform: scale(calc(.94 + clamp(0, (var(--px, 0) - .55) * 14, 1) * .06));
+  opacity: clamp(0, (var(--gp) - .54) * 14, 1);
+  transform: scale(calc(.94 + clamp(0, (var(--gp) - .54) * 14, 1) * .06));
   transition: opacity var(--dur-s) var(--ease-snap), transform var(--dur-s) var(--ease-snap);
 }
 /* tail annotation after ship */
@@ -705,7 +713,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   top: 216px;
   transform: translateX(-50%);
   white-space: nowrap;
-  opacity: clamp(0, (var(--px, 0) - .82) * 8, 1);
+  opacity: clamp(0, (var(--gp) - .88) * 14, 1);
 }
 /* full-bleed window wrappers for choreographed layers (keeps animated
    opacity separate from looping LED blink opacity) */
@@ -761,6 +769,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
     height: auto;
     padding: 5rem 0;
     --px: 1;
+    --gp: 1;
   }
   .gate-pass { transition: none; }
   html { scroll-behavior: auto; }
