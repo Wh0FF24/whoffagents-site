@@ -21,8 +21,6 @@ import WebStudio from './pages/WebStudio'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import ScrollToTop from './components/ScrollToTop'
-import ExitIntentPopup from './components/ExitIntentPopup'
-import PHLaunchBanner from './components/PHLaunchBanner'
 
 function App() {
   const location = useLocation()
@@ -32,7 +30,6 @@ function App() {
       <div className="noise-overlay" />
       <div className="vignette-overlay" />
       <ScrollToTop />
-      <PHLaunchBanner />
       <Nav />
       <main className="flex-1">
         <AnimatePresence mode="wait">
@@ -67,7 +64,6 @@ function App() {
         </AnimatePresence>
       </main>
       <Footer />
-      <ExitIntentPopup />
     </div>
   )
 }
