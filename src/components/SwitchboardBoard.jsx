@@ -108,12 +108,6 @@ export default function SwitchboardBoard() {
         </g>
 
         {/* footer receipt — same true lines as the home board */}
-        <text x={16} y={408} fontFamily={MONO} fontSize="7.5" letterSpacing="1" fill={C.faint}>
-          build {typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—'}
-        </text>
-        <text x={544} y={408} textAnchor="end" fontFamily={MONO} fontSize="7.5" letterSpacing="1" fill={C.faint}>
-          provo, ut
-        </text>
       </svg>
 
       {/* channel captions — cross-fade on the same 10s clock as the jacks.

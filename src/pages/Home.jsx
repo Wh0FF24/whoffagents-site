@@ -320,10 +320,10 @@ export default function Home() {
             </div>
           </div>
           <Card ticks className="p-8 text-center">
-            <p className="eyebrow mb-6">hear one right now</p>
+            <p className="eyebrow mb-6">hear one before you buy</p>
             <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm mx-auto">
-              Don&apos;t take our word for it. This number is answered by an AI agent —
-              the same kind we&apos;d build for you. Call it. Ask it anything.
+              Don&apos;t take our word for it. Ask for a demo and one of our agents will
+              phone you — the same kind we&apos;d build for you. Ask it anything.
             </p>
             <a
               href="#lead-form"

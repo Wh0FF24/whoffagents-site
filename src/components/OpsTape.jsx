@@ -97,7 +97,7 @@ export default function OpsTape() {
 
   return (
     <div>
-      <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1.5">[ops tape]</div>
+      <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1.5">[ what our agents did today ]</div>
       <ul
         ref={ref}
         className="m-0 p-0 list-none text-[11.5px] leading-none text-gray-300"

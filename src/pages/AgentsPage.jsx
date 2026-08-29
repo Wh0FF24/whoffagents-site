@@ -123,6 +123,50 @@ export default function AgentsPage() {
         </div>
       </section>
 
+      {/* ============ WHAT IT LOOKS LIKE — the plain-English story.
+           Deliberately NOT a schematic: the hero diagram is desktop-only and
+           reads as equipment to a non-technical visitor, so the actual
+           explanation has to live in words, on every screen size. ============ */}
+      <section data-reveal className="shell pt-4 pb-2">
+        <p className="eyebrow mb-6">what it looks like · an example</p>
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {[
+            {
+              t: '6:40 pm',
+              h: 'A customer calls. Everyone has gone home.',
+              s: 'Today that call goes to voicemail, or to a competitor who picked up.',
+            },
+            {
+              t: 'same call',
+              h: 'It answers in a real voice and handles her.',
+              s: 'Gets her name, her number, and what she needs — and books her in.',
+            },
+            {
+              t: '7:02 am',
+              h: 'It is on your phone before your coffee.',
+              s: 'Her details, what she wants, and when she is booked. Nothing was missed.',
+            },
+          ].map((step, i) => (
+            <div key={step.t} className="rv-item relative pt-5" style={{ '--i': i }}>
+              <span className="absolute top-0 left-0 right-0 h-px bg-white/10" />
+              <span
+                className="absolute -top-[2px] left-0 w-[5px] h-[5px]"
+                style={{ background: 'var(--sec-accent, #E5484D)' }}
+                aria-hidden="true"
+              />
+              <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-gray-400 mb-3">
+                {step.t}
+              </div>
+              <p className="type-h3 mb-2">{step.h}</p>
+              <p className="text-sm text-gray-400 leading-relaxed">{step.s}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mono-note mt-6">
+          the phone is just the most common one — the same idea covers email, texts, and the work that repeats every week
+        </p>
+      </section>
+
       {/* ============ IS / ISN'T — kills the "is this a device?" read ============ */}
       <section data-reveal className="shell pb-4">
         <div className="grid md:grid-cols-2 gap-5">
@@ -198,6 +242,34 @@ export default function AgentsPage() {
             </div>
           ))}
         </div>
+
+        {/* the three questions an owner asks before letting anything near
+            their customers — the websites side answers these, this page didn't */}
+        <div className="grid md:grid-cols-3 gap-5 mt-12">
+          <Card className="p-6">
+            <h3 className="type-h3 mb-2">Who looks after it?</h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              We do. It&apos;s our software on our systems — if it needs changing, you email
+              a person here and we change it. There&apos;s no ticket queue.
+            </p>
+          </Card>
+          <Card className="p-6">
+            <h3 className="type-h3 mb-2">Can you switch it off?</h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Any time, and it stops. Nothing is locked into your business, and calls go
+              back to however you handle them today.
+            </p>
+          </Card>
+          <Card className="p-6">
+            <h3 className="type-h3 mb-2">What about customer details?</h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Before anything goes live we tell you exactly what it can see and where that
+              information is kept. Our{' '}
+              <Link to="/privacy" className="text-brand-red-bright underline underline-offset-2">privacy policy</Link>
+              {' '}covers the rest.
+            </p>
+          </Card>
+        </div>
       </section>
 
       {/* ============ PROOF ============ */}
@@ -230,7 +302,7 @@ export default function AgentsPage() {
                   href="#lead-form"
                   className="btn-charge inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 text-gray-200 hover:border-white/30 transition-all"
                 >
-                  <PhoneCall className="w-4 h-4 text-brand-red-bright" /> Call the agent line
+                  <PhoneCall className="w-4 h-4 text-brand-red-bright" /> Have an agent call you
                 </a>
               </div>
             </div>
