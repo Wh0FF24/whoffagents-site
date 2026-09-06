@@ -16,6 +16,7 @@ import {
 import { buildStripeURL } from "../utils/utm";
 import { products } from "../data/products";
 import StudioShowcase from "../components/StudioShowcase";
+import StudioIdentity from "../components/StudioIdentity";
 import InquiryForm from "../components/InquiryForm";
 import "../styles/studio.css";
 
@@ -286,8 +287,8 @@ const scenarios = {
     },
   ],
 };
-export function AgentDemo({ standalone = false }) {
-  const [scenario, setScenario] = useState("Phone");
+export function AgentDemo({ standalone = false, initialScenario = "Phone" }) {
+  const [scenario, setScenario] = useState(initialScenario);
   const [step, setStep] = useState(0);
   const messages = scenarios[scenario];
   return (
@@ -691,28 +692,19 @@ export function StudioWeb() {
   );
 }
 export function StudioAgents() {
+  const [workflow, setWorkflow] = useState(0);
   return (
-    <div className="studio-page">
-      <section className="st-agents-hero st-container">
-        <Kicker>CUSTOM AI AGENTS</Kicker>
-        <h1>
-          Less “I’ll get to it.”
-          <br />
-          <span>More done.</span>
-        </h1>
-        <p>
-          Software that handles a defined job in your business.
-          <br />
-          Built around your workflow, with you in control.
-        </p>
-        <div className="st-hero-actions">
-          <Action to="/agents#lead-form">Tell us about the job</Action>
-          <Action secondary to="/agents#agent-demo">
-            Walk through an example
-          </Action>
-        </div>
-      </section>
-      <AgentDemo standalone />
+    <div className="studio-page dp-agent-page">
+      <StudioIdentity
+        kind="agents"
+        selection={workflow}
+        onSelect={setWorkflow}
+      />
+      <AgentDemo
+        standalone
+        key={workflow}
+        initialScenario={["Phone", "Email", "Repeat work"][workflow]}
+      />
       <section className="st-agent-offer st-container st-section">
         <div>
           <Kicker>START WITH ONE USEFUL THING</Kicker>
@@ -757,33 +749,22 @@ export function StudioAgents() {
     </div>
   );
 }
-export function ToolsIntro() {
+export function ToolsIntro({ selection, onSelect }) {
   return (
-    <header className="st-tools-heading st-container">
-      <Kicker>THE STUDIO TOOLBOX</Kicker>
-      <h1>
-        Skip the setup.
-        <br />
-        <span>Build the good part.</span>
-      </h1>
-      <p>
-        Developer tools from our own workbench.
-        <br />
-        Free downloads and straightforward, one-time purchases.
-      </p>
-    </header>
+    <StudioIdentity kind="tools" selection={selection} onSelect={onSelect} />
   );
 }
 export function StudioAbout() {
   return (
-    <div className="studio-page">
-      <section className="st-about st-container st-section">
-        <Kicker>A SMALL STUDIO WITH A DIFFERENT WAY OF WORKING</Kicker>
-        <h1>
-          Agents build.
+    <div className="studio-page dp-studio-page">
+      <StudioIdentity kind="studio" />
+      <section className="st-about st-container st-section" id="studio-story">
+        <Kicker>INSIDE THE STUDIO</Kicker>
+        <h2>
+          Small on purpose.
           <br />
-          <span>People care.</span>
-        </h1>
+          <span className="st-serif">Close to the work.</span>
+        </h2>
         <div className="st-about-grid">
           <div>
             <p className="st-about-lede">
@@ -803,13 +784,27 @@ export function StudioAbout() {
             </p>
             <Action>Tell us what you’re working on</Action>
           </div>
-          <div className="st-about-emblem">
-            <span>W</span>
-            <div>
-              INDEPENDENT IN SPIRIT.
-              <br />
-              ACCOUNTABLE BY DESIGN.
-            </div>
+          <div className="dp-studio-people">
+            <article>
+              <span className="dp-person-index">01 / HUMAN DIRECTION</span>
+              <h3>
+                Will<span>The person behind the work.</span>
+              </h3>
+              <p>
+                Direction, judgment, and a real point of contact. A person stays
+                accountable for every project.
+              </p>
+            </article>
+            <article>
+              <span className="dp-person-index">02 / AGENT EXECUTION</span>
+              <h3>
+                Atlas<span>The work, coordinated.</span>
+              </h3>
+              <p>
+                Research, drafts, and builds organized across the agents, with
+                human review before anything goes live.
+              </p>
+            </article>
           </div>
         </div>
       </section>

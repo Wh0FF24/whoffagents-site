@@ -30,17 +30,22 @@ The Playwright suite uses installed Chrome and automatically builds, prerenders,
 
 The current candidate is **Dimension**, an original Three.js scene. Its cube has two website faces (Spindle Creek and the private Island Airporter concept), two original illustrated capability faces, and a blue/silver studio lid. Desktop scrolling rotates the sculpture; phone visitors use direct controls in normal page flow. Reduced motion disables continuous motion and uses instant face changes. A still portfolio panel remains usable without WebGL. No client video or borrowed hero footage is included.
 
-The Three.js implementation is loaded in a separate chunk only by the home and website pages. It caps pixel density, stops rendering offscreen/in background tabs, and disposes resources on navigation. The seven showcase browser checks verify rendered pixels, scrolling, pause, reduced motion, fallback, context loss, mobile controls and the prerendered page. These checks establish behavior, not design quality.
+Each main page has a related original sculpture: the home/web cube, an agent signal core, a stack of tool modules, and a two-part studio W. The agent choices also select the illustrative transcript scenario; the tool choices filter the catalog. Supporting product, article, and policy pages share a quiet chapter frame without extra 3D.
+
+Three.js loads asynchronously only on the five main routes and shares one runtime chunk. Scenes cap pixel density, stop rendering offscreen/in background tabs, and dispose resources on navigation. Every sculpture includes a static fallback, reduced-motion support, and a pause control. The browser checks verify rendered pixels, scrolling, pause, selections, catalog integration, fallback, context loss, mobile controls, and prerendered content. These checks establish behavior, not design quality.
 
 - `src/pages/StudioPages.jsx`: shared studio pages and sections.
 - `src/pages/StudioProducts.jsx`: searchable developer catalog.
 - `src/components/StudioNav.jsx`, `StudioFooter.jsx`, `InquiryForm.jsx`: shared navigation and intake.
 - `src/components/StudioShowcase.jsx`, `cubeScene.js`: accessible project explorer and original real-time sculpture.
+- `src/components/StudioIdentity.jsx`, `identityScene.js`: agent, tools, and studio hero controls and original sculptures.
+- `src/styles/studio-identities.css`: page identities and the supporting chapter frame.
 - `src/styles/studio-showcase.css`: Dimension composition, responsive layouts and section refinements.
 - `src/styles/studio.css`: brand pairs, layouts, responsive and reduced-motion behavior.
 - `src/data/products.js`: existing catalog prices and checkout URLs.
 - `src/data/routeMeta.js`: shared client/prerender metadata for the existing 21 routes.
-- `tests/redesign.spec.js`: browser checks.
+- `tests/redesign.spec.js`, `showcase.spec.js`, `identities.spec.js`: browser checks.
+- `scripts/capture-identities.mjs <output-directory>`: desktop/mobile screenshots from the loopback dev preview on port 4173.
 
 ## Production prerequisites
 

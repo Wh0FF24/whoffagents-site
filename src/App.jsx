@@ -26,6 +26,7 @@ import TermsOfService from "./pages/TermsOfService";
 import ScrollToTop from "./components/ScrollToTop";
 import "./styles/studio.css";
 import "./styles/studio-showcase.css";
+import "./styles/studio-identities.css";
 import { routeMeta } from "./data/routeMeta";
 
 function App() {
@@ -57,7 +58,40 @@ function App() {
     <div className="studio-app">
       <ScrollToTop />
       <Nav />
-      <main id="main-content" className={corePage ? "" : "legacy-page"}>
+      <main
+        id="main-content"
+        className={corePage ? "" : "legacy-page dp-support-page"}
+        data-page-family={
+          location.pathname.startsWith("/products") ||
+          ["/free-skill", "/learn-more", "/thank-you"].includes(
+            location.pathname,
+          )
+            ? "tools"
+            : "studio"
+        }
+      >
+        {!corePage && (
+          <div className="dp-page-rail">
+            <a
+              href={
+                location.pathname.startsWith("/products") ||
+                ["/free-skill", "/learn-more", "/thank-you"].includes(
+                  location.pathname,
+                )
+                  ? "/products"
+                  : "/about"
+              }
+            >
+              {location.pathname.startsWith("/products") ||
+              ["/free-skill", "/learn-more", "/thank-you"].includes(
+                location.pathname,
+              )
+                ? "WHOFF / THE DEVELOPER COLLECTION"
+                : "WHOFF / FROM THE STUDIO"}
+            </a>
+            <span>INDEPENDENT THINKING. EXTRA DIMENSION.</span>
+          </div>
+        )}
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />

@@ -27,9 +27,12 @@ export default function StudioProducts() {
       `${p.title} ${p.description}`.toLowerCase().includes(query.toLowerCase()),
   );
   return (
-    <div className="studio-page">
-      <ToolsIntro />
-      <section className="st-tool-catalog st-container">
+    <div className="studio-page dp-tools-page">
+      <ToolsIntro
+        selection={["all", "skill", "mcp", "kit"].indexOf(filter)}
+        onSelect={(index) => setFilter(["all", "skill", "mcp", "kit"][index])}
+      />
+      <section className="st-tool-catalog st-container" id="catalog">
         <div className="st-tool-controls">
           <div aria-label="Product category">
             {[
