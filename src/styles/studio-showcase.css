@@ -1186,3 +1186,8 @@
     min-height: 725px;
   }
 }
+@media (max-width: 700px) {
+  .sr-payoff-word {
+    display: table;
+  }
+}
