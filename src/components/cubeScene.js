@@ -42,8 +42,8 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
   const silver = new THREE.MeshPhysicalMaterial({
     color: 0xc0c0c0,
     metalness: 1,
-    roughness: 0.21,
-    clearcoat: 1,
+    roughness: 0.28,
+    clearcoat: 0.5,
   });
   const blue = new THREE.MeshPhysicalMaterial({
     color: 0x003da5,
@@ -87,10 +87,10 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
       for (const z of [-1, 1]) {
         addBox(
           cube,
-          0.38,
-          0.38,
-          0.38,
-          0.065,
+          0.16,
+          0.16,
+          0.16,
+          0.045,
           silver,
           x * 1.58,
           y * 1.58,
@@ -99,9 +99,9 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
       }
   for (const a of [-1, 1])
     for (const b of [-1, 1]) {
-      addBox(cube, 2.83, 0.11, 0.11, 0.045, silver, 0, a * 1.65, b * 1.65);
-      addBox(cube, 0.11, 2.83, 0.11, 0.045, silver, a * 1.65, 0, b * 1.65);
-      addBox(cube, 0.11, 0.11, 2.83, 0.045, silver, a * 1.65, b * 1.65, 0);
+      addBox(cube, 3.04, 0.045, 0.045, 0.02, silver, 0, a * 1.58, b * 1.58);
+      addBox(cube, 0.045, 3.04, 0.045, 0.02, silver, a * 1.58, 0, b * 1.58);
+      addBox(cube, 0.045, 0.045, 3.04, 0.02, silver, a * 1.58, b * 1.58, 0);
       addBox(cube, 2.64, 0.022, 0.022, 0.009, lit, 0, a * 1.54, b * 1.54);
       addBox(cube, 0.022, 2.64, 0.022, 0.009, lit, a * 1.54, 0, b * 1.54);
     }
@@ -223,6 +223,7 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
   // A separate red-and-gold calibration arc, never gold laid over blue.
   const orbit = new THREE.Group();
   orbit.rotation.set(1.08, 0.08, -0.18);
+  orbit.position.z = -1.25;
   object.add(orbit);
   const ring = new THREE.Mesh(
     new THREE.TorusGeometry(2.56, 0.015, 8, 150, Math.PI * 1.62),
@@ -256,6 +257,7 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
   );
   halo.rotation.set(1.2, 0.3, -0.1);
   halo.position.y = -0.3;
+  halo.position.z = -2;
   scene.add(halo);
   for (let i = 0; i < 48; i++) {
     const a = (i / 48) * Math.PI * 2;
@@ -288,11 +290,15 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
       reduced || Math.abs(difference) < 0.002
         ? target
         : turn + difference * (1 - Math.exp(-dt * 7));
+    const focus =
+      Math.min(1, Math.abs(turn)) *
+      (1 - Math.min(1, Math.abs(turn - Math.round(turn)) * 2));
     cube.rotation.set(
-      0.28 + (!reduced && !paused ? pointer.y * 0.035 : 0),
-      -0.42 - (turn * Math.PI) / 2,
-      -0.1,
+      0.28 - focus * 0.16 + (!reduced && !paused ? pointer.y * 0.035 : 0),
+      -0.42 + focus * 0.3 - (turn * Math.PI) / 2,
+      -0.1 + focus * 0.065,
     );
+    cube.scale.setScalar(1.04 + focus * 0.04);
     object.position.y =
       !reduced && !paused ? Math.sin(elapsed * 0.65) * 0.055 : 0;
     object.rotation.y = !reduced && !paused ? pointer.x * 0.035 : 0;

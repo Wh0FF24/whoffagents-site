@@ -26,7 +26,7 @@
 }
 .dx-experience {
   --journey: 0;
-  height: 240svh;
+  height: 200svh;
   background: #090d17;
   color: #edf0f6;
   position: relative;
@@ -120,8 +120,8 @@
     120deg,
     #f9fbff 0%,
     #c0c0c0 32%,
-    #647791 75%,
-    #d8e3f4 100%
+    #a5b6ce 75%,
+    #edf2fa 100%
   );
   background-clip: text;
   -webkit-text-fill-color: transparent;
