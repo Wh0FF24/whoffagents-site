@@ -1,300 +1,251 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown, ArrowUpRight, Pause, Play } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Pause,
+  Play,
+} from "lucide-react";
 
-const films = [
+const dimensions = [
   {
-    name: "Breakin Circles",
-    short: "Breakin Circles",
-    file: "circles",
-    discipline: "DANCE / CULTURE / COMMUNITY",
-    line: "A studio with\nsomething to say.",
-    detail:
-      "Battle footage, poster typography, and a clear path into the circle.",
-    url: "https://breakincircles-preview.netlify.app",
-    number: "01",
+    name: "Spindle Creek",
+    type: "01 / COMMERCE",
+    detail: "A small business. A world of its own.",
+    image: "/work/spindle.webp",
+    url: "https://spindlecreek.com",
+    link: "Visit the website",
+    status: "LIVE WEBSITE",
   },
   {
-    name: "The Forge Gym",
-    short: "The Forge Gym",
-    file: "forge",
-    discipline: "STRENGTH / SPACE / COMMUNITY",
-    line: "You can feel\nthe place.",
-    detail:
-      "A real warehouse, a real community, and a design built from the details.",
-    url: "https://utahforgegym-preview.netlify.app",
-    number: "02",
+    name: "Island Airporter",
+    type: "02 / DIGITAL EXPERIENCE",
+    detail: "A clearer journey, before the journey.",
+    image: "/work/island.webp",
+    url: "https://main.d1v4o3c4563ysj.amplifyapp.com",
+    link: "Explore the concept",
+    status: "PRIVATE CONCEPT · AWAITING APPROVAL",
+  },
+  {
+    name: "Agents with purpose",
+    type: "03 / AUTOMATION",
+    detail: "From first conversation to the next step.",
+    image: "/work/agent-surface.svg",
+    url: "/agents",
+    link: "Explore AI agents",
+    status: "ILLUSTRATIVE WORKFLOW",
+  },
+  {
+    name: "Tools for the builders",
+    type: "04 / DEVELOPER TOOLS",
+    detail: "Less setup. More making things happen.",
+    image: "/work/tools-surface.svg",
+    url: "/products",
+    link: "Explore the tools",
+    status: "THE TOOL COLLECTION",
   },
 ];
 
-function AmbientFilm({ film, motionAllowed }) {
-  const player = useRef(null);
-  const pausedByVisitor = useRef(false);
-  const [playing, setPlaying] = useState(false);
-  const [failed, setFailed] = useState(false);
-  useEffect(() => {
-    const el = player.current;
-    if (!el) return;
-    if (!motionAllowed) {
-      el.pause();
-      return;
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !pausedByVisitor.current)
-          el.play().catch(() => {});
-        else el.pause();
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      el.pause();
-    };
-  }, [film.file, motionAllowed, failed]);
-  return (
-    <>
-      <div className="sr-ambient" aria-hidden="true">
-        <img
-          src={`/work/${film.file}-ambient.webp`}
-          alt=""
-          fetchPriority="high"
-        />
-        {!failed && (
-          <video
-            ref={player}
-            src={`/work/${film.file}-ambient.webm`}
-            poster={`/work/${film.file}-ambient.webp`}
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            tabIndex={-1}
-            onPlay={() => setPlaying(true)}
-            onPause={() => setPlaying(false)}
-            onError={() => {
-              setFailed(true);
-              setPlaying(false);
-            }}
-          />
-        )}
-      </div>
-      <div className="sr-ambient-caption">
-        <span>FROM OUR {film.name.toUpperCase()} CONCEPT</span>
-        {!failed && (
-          <button
-            aria-label={
-              playing ? "Pause background film" : "Play background film"
-            }
-            onClick={() => {
-              const el = player.current;
-              if (!el) return;
-              if (el.paused) {
-                pausedByVisitor.current = false;
-                el.play().catch(() => {});
-              } else {
-                pausedByVisitor.current = true;
-                el.pause();
-              }
-            }}
-          >
-            {playing ? <Pause size={14} /> : <Play size={14} />}
-            <span>{playing ? "Pause motion" : "Play motion"}</span>
-          </button>
-        )}
-      </div>
-    </>
-  );
-}
-
 export default function StudioShowcase({ web = false }) {
+  const host = useRef(null);
+  const section = useRef(null);
+  const scene = useRef(null);
+  const selectedRef = useRef(0);
   const [selected, setSelected] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const [motionAllowed, setMotionAllowed] = useState(false);
-  const [available, setAvailable] = useState(true);
-  const video = useRef(null);
-  const userPaused = useRef(false);
-  const stage = useRef(null);
-  const active = films[selected];
+  const [state, setState] = useState("loading");
+  const [paused, setPaused] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const [compact, setCompact] = useState(false);
+  const active = dimensions[selected];
+
   useEffect(() => {
+    let disposed = false;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setMotionAllowed(!media.matches);
+    const small = window.matchMedia("(max-width: 600px)");
+    const syncSize = () => setCompact(small.matches);
+    syncSize();
+    small.addEventListener("change", syncSize);
+    const sync = () => {
+      setReduced(media.matches);
+      scene.current?.setReduced(media.matches);
+    };
     sync();
     media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
-  useEffect(() => {
-    const el = video.current;
-    if (!el) return;
-    if (!motionAllowed) {
-      el.pause();
-      return;
-    }
-    // The film only runs while its work is in view; controls always remain available.
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !userPaused.current)
-          el.play().catch(() => {});
-        else el.pause();
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(stage.current);
+    import("./cubeScene.js")
+      .then(({ createCubeScene }) => {
+        if (disposed) return;
+        scene.current = createCubeScene(
+          host.current,
+          dimensions,
+          media.matches,
+          () => setState("fallback"),
+        );
+        setState(scene.current ? "ready" : "fallback");
+      })
+      .catch(() => {
+        if (!disposed) setState("fallback");
+      });
     return () => {
-      observer.disconnect();
-      el.pause();
+      disposed = true;
+      media.removeEventListener("change", sync);
+      small.removeEventListener("change", syncSize);
+      scene.current?.dispose();
+      scene.current = null;
     };
-  }, [selected, motionAllowed]);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (reduced || paused || compact || state === "fallback") return;
+      const rect = section.current.getBoundingClientRect();
+      const travel = rect.height - window.innerHeight + 80;
+      const progress = Math.max(
+        0,
+        Math.min(1, (80 - rect.top) / Math.max(1, travel)),
+      );
+      scene.current?.setTurn(selectedRef.current);
+      const index = Math.min(3, Math.round(progress * 3));
+      scene.current?.setTurn(progress * 3);
+      section.current.style.setProperty("--journey", progress);
+      if (index !== selectedRef.current) {
+        selectedRef.current = index;
+        setSelected(index);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [reduced, paused, compact, state]);
+
   function choose(index) {
-    setSelected(index);
-    setAvailable(true);
+    const next = (index + dimensions.length) % dimensions.length;
+    selectedRef.current = next;
+    setSelected(next);
+    scene.current?.setTurn(next);
   }
-  function toggle() {
-    const el = video.current;
-    if (!el) return;
-    if (el.paused) {
-      userPaused.current = false;
-      el.play().catch(() => setAvailable(false));
-    } else {
-      userPaused.current = true;
-      el.pause();
-    }
+  function toggleMotion() {
+    setPaused(!paused);
+    scene.current?.setPaused(!paused);
   }
+
   return (
-    <section className="sr-showcase">
-      <div className="sr-masthead st-container">
-        <AmbientFilm film={active} motionAllowed={motionAllowed} />
-        <div className="sr-masthead-top">
-          <span>WHOFF AGENTS / INDEPENDENT DIGITAL STUDIO</span>
-          <span>PROVO, UTAH · WORKING EVERYWHERE</span>
+    <section
+      ref={section}
+      className={`dx-experience ${reduced || state === "fallback" ? "dx-static" : ""}`}
+      aria-label="Explore the dimensions of Whoff"
+      data-scene={state}
+    >
+      <div className="dx-sticky">
+        <div className="dx-coordinate dx-coordinate-top">
+          <span>INDEPENDENT THINKING. EXTRA DIMENSION.</span>
+          <span>PROVO, UT / WORLDWIDE</span>
         </div>
-        <div className="sr-title-row">
+        <div className="dx-backdrop" aria-hidden="true">
+          <span>W / A</span>
+          <div />
+        </div>
+        <div className="dx-copy">
+          <p className="dx-eyebrow">
+            <i /> WEBSITES + INTELLIGENT SYSTEMS
+          </p>
           <h1>
-            {web ? "Your world." : "Good work."}
+            {web ? "Websites." : "Ideas."} <br />
+            Given
             <br />
-            <span>
-              {web ? "Worth " : "Hard to "}
-              <span className="sr-payoff-word">
-                {web ? "seeing." : "ignore."}
-              </span>
-            </span>
+            <span>dimension.</span>
           </h1>
-          <div className="sr-intro">
-            <p>
-              {web
-                ? "A website should feel unmistakably yours. We design and build it that way."
-                : "Websites with a point of view. AI that earns its place. We turn your next idea into something that works."}
-            </p>
-            <Link
-              to={web ? "/web#lead-form" : "/#lead-form"}
-              className="sr-project-link"
-            >
-              Start a project <ArrowUpRight size={22} />
-            </Link>
-          </div>
+          <p className="dx-intro">
+            {web
+              ? "Give people a reason to stop. Then a reason to stay. Websites made to feel unmistakably yours."
+              : "Distinctive websites. Useful AI. We build the next version of your business, one good idea at a time."}
+          </p>
+          <Link className="dx-cta" to={web ? "/web#lead-form" : "/#lead-form"}>
+            Let’s build something <ArrowUpRight size={19} />
+          </Link>
         </div>
-        <div className="sr-reel-label">
-          <span>
-            <span className="sr-line-mark" />
-            THE WORK, IN MOTION
-          </span>
-          <a href="#work">
-            Explore the studio <ArrowDown size={16} />
-          </a>
-        </div>
-      </div>
-      <div className="sr-stage-wrap st-container">
-        <div className="sr-stage" ref={stage}>
-          <div className="sr-film" key={active.file}>
-            <img
-              className="sr-film-poster"
-              src={`/work/${active.file}-poster.jpg`}
-              alt=""
-              aria-hidden="true"
-              width="1440"
-              height="900"
-              fetchPriority="high"
-            />
-            {available && (
-              <video
-                ref={video}
-                className="sr-film-video"
-                poster={`/work/${active.file}-poster.jpg`}
-                src={`/work/${active.file}-motion.webm`}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={`Silent screen recording of our ${active.name} website concept`}
-                onPlay={() => setPlaying(true)}
-                onPause={() => setPlaying(false)}
-                onError={() => {
-                  setAvailable(false);
-                  setPlaying(false);
-                }}
-              />
-            )}
-            <div className="sr-film-tools">
-              <span>DESIGN CONCEPT / PRIVATE PREVIEW</span>
-              {available && (
-                <button
-                  onClick={toggle}
-                  aria-label={
-                    playing ? "Pause project film" : "Play project film"
-                  }
-                >
-                  {playing ? <Pause size={15} /> : <Play size={15} />}
-                  <span>{playing ? "Pause" : "Play"}</span>
-                </button>
-              )}
-            </div>
+        <div className="dx-object" ref={host} aria-hidden="true" />
+        {state !== "ready" && (
+          <div className="dx-fallback" aria-hidden="true">
+            <img src={active.image} alt="" />
+            <span>{active.name}</span>
           </div>
-          <aside className="sr-project-story" key={active.name}>
-            <span className="sr-case-number">
-              {active.number}
-              <span>/ 02</span>
+        )}
+        <div className="dx-object-note" aria-hidden="true">
+          <span>WHOFF / EXPLORER</span>
+          <span>0{selected + 1} — 04</span>
+        </div>
+        <div className="dx-bottom">
+          <div className="dx-scroll">
+            <span className="dx-scroll-icon">
+              <ArrowDown size={17} />
             </span>
-            <div>
-              <span className="sr-case-type">{active.discipline}</span>
-              <h2>
-                {active.line.split("\n").map((l) => (
-                  <span key={l}>{l}</span>
-                ))}
-              </h2>
-              <p>{active.detail}</p>
-            </div>
-            <a href={active.url} target="_blank" rel="noopener noreferrer">
-              Explore the concept <ArrowUpRight size={21} />
-            </a>
-          </aside>
-        </div>
-        <div className="sr-stage-bottom">
-          <div
-            className="sr-film-selector"
-            role="group"
-            aria-label="Featured design concepts"
-          >
-            {films.map((f, i) => (
-              <button
-                key={f.file}
-                onClick={() => choose(i)}
-                aria-pressed={selected === i}
-              >
-                <span>{f.number}</span>
-                {f.short}
-                <span className="sr-selection-line" />
-              </button>
-            ))}
+            <span>
+              {reduced || compact || state === "fallback"
+                ? "CHOOSE A DIMENSION"
+                : "SCROLL TO TURN THE CUBE"}
+              <a href="#work">
+                Or go straight to the work <ArrowUpRight size={12} />
+              </a>
+            </span>
           </div>
-          <p>Built by our studio. Shown here as private concepts.</p>
+          <div className="dx-project" aria-live="polite" aria-atomic="true">
+            <span className="dx-project-type">{active.type}</span>
+            <h2>{active.name}</h2>
+            <p>{active.detail}</p>
+            {active.url.startsWith("/") ? (
+              <Link to={active.url}>
+                {active.link} <ArrowUpRight size={14} />
+              </Link>
+            ) : (
+              <a href={active.url} target="_blank" rel="noopener noreferrer">
+                {active.link} <ArrowUpRight size={14} />
+              </a>
+            )}
+            <span className="dx-project-status">{active.status}</span>
+          </div>
+          <div className="dx-controls">
+            <div className="dx-arrows">
+              <button
+                aria-label="Previous dimension"
+                onClick={() => choose(selected - 1)}
+              >
+                <ArrowLeft size={19} />
+              </button>
+              <button
+                aria-label="Next dimension"
+                onClick={() => choose(selected + 1)}
+              >
+                <ArrowRight size={19} />
+              </button>
+            </div>
+            <div
+              className="dx-dots"
+              role="group"
+              aria-label="Choose a dimension"
+            >
+              {dimensions.map((item, index) => (
+                <button
+                  key={item.name}
+                  aria-label={item.name}
+                  aria-pressed={selected === index}
+                  onClick={() => choose(index)}
+                >
+                  <span />
+                </button>
+              ))}
+            </div>
+            {state === "ready" && !reduced && (
+              <button className="dx-motion" onClick={toggleMotion}>
+                {paused ? <Play size={11} /> : <Pause size={11} />}
+                {paused ? "Resume motion" : "Pause motion"}
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="sr-signoff st-container">
-        <span>Agents do the building.</span>
-        <span className="sr-signoff-rule" />
-        <span>People own the result.</span>
-        <ArrowDown size={22} />
+        <div className="dx-progress" aria-hidden="true">
+          <span />
+        </div>
       </div>
     </section>
   );

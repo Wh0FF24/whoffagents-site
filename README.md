@@ -28,9 +28,15 @@ The Playwright suite uses installed Chrome and automatically builds, prerenders,
 
 ## Structure
 
+The current candidate is **Dimension**, an original Three.js scene. Its cube has two website faces (Spindle Creek and the private Island Airporter concept), two original illustrated capability faces, and a blue/silver studio lid. Desktop scrolling rotates the sculpture; phone visitors use direct controls in normal page flow. Reduced motion disables continuous motion and uses instant face changes. A still portfolio panel remains usable without WebGL. No client video or borrowed hero footage is included.
+
+The Three.js implementation is loaded in a separate chunk only by the home and website pages. It caps pixel density, stops rendering offscreen/in background tabs, and disposes resources on navigation. The seven showcase browser checks verify rendered pixels, scrolling, pause, reduced motion, fallback, context loss, mobile controls and the prerendered page. These checks establish behavior, not design quality.
+
 - `src/pages/StudioPages.jsx`: shared studio pages and sections.
 - `src/pages/StudioProducts.jsx`: searchable developer catalog.
 - `src/components/StudioNav.jsx`, `StudioFooter.jsx`, `InquiryForm.jsx`: shared navigation and intake.
+- `src/components/StudioShowcase.jsx`, `cubeScene.js`: accessible project explorer and original real-time sculpture.
+- `src/styles/studio-showcase.css`: Dimension composition, responsive layouts and section refinements.
 - `src/styles/studio.css`: brand pairs, layouts, responsive and reduced-motion behavior.
 - `src/data/products.js`: existing catalog prices and checkout URLs.
 - `src/data/routeMeta.js`: shared client/prerender metadata for the existing 21 routes.
