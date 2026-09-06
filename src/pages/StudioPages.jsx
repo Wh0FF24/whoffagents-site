@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { buildStripeURL } from "../utils/utm";
 import { products } from "../data/products";
+import StudioShowcase from "../components/StudioShowcase";
 import InquiryForm from "../components/InquiryForm";
 import "../styles/studio.css";
 
@@ -83,36 +84,6 @@ function BrowserFrame({ project, className = "", priority = false }) {
     </div>
   );
 }
-function HeroWork() {
-  return (
-    <div className="st-hero-art" aria-label="Examples of our website work">
-      <div className="st-art-grid" />
-      <span className="st-art-label">FROM THE STUDIO / 2026</span>
-      <BrowserFrame
-        project={work[0]}
-        className="st-hero-browser-one"
-        priority
-      />
-      <BrowserFrame
-        project={work[1]}
-        className="st-hero-browser-two"
-        priority
-      />
-      <div className="st-art-seal">
-        <span className="st-seal-star" aria-hidden="true">
-          ✳
-        </span>
-        <span>
-          Built with agents.
-          <br />
-          Finished with care.
-        </span>
-      </div>
-      <span className="st-art-bottom">REAL PROJECTS. OUR OWN WORK.</span>
-    </div>
-  );
-}
-
 export function SelectedWork() {
   const [selected, setSelected] = useState(0);
   const project = work[selected];
@@ -696,48 +667,7 @@ export function Contact({ service = "Website" }) {
 export function StudioHome() {
   return (
     <div className="studio-page">
-      <section className="st-hero st-container">
-        <div className="st-hero-copy">
-          <Kicker>INDEPENDENT STUDIO. HUMAN ACCOUNTABILITY.</Kicker>
-          <h1>
-            Good work.
-            <br />
-            <span>
-              Built
-              <br className="st-mobile-break" /> differently.
-            </span>
-          </h1>
-          <p>
-            Websites with character. AI that takes work off your plate. Useful
-            tools, built by agents and finished by people.
-          </p>
-          <div className="st-hero-actions">
-            <Action>Start a project</Action>
-            <Action secondary to="/#work">
-              Explore our work
-            </Action>
-          </div>
-          <div className="st-hero-note">
-            <span className="st-small-cross">✳</span>
-            <span>
-              SMALL STUDIO, PROVO, UTAH.
-              <br />
-              PERSONALLY INVESTED IN WHAT WE SHIP.
-            </span>
-          </div>
-        </div>
-        <HeroWork />
-      </section>
-      <div className="st-principles">
-        <div className="st-container">
-          <span>Thoughtfully designed.</span>
-          <span className="st-principle-star">✳</span>
-          <span>Built to be useful.</span>
-          <span className="st-principle-star">✳</span>
-          <span>A person behind every project.</span>
-          <span className="st-principle-star">✳</span>
-        </div>
-      </div>
+      <StudioShowcase />
       <Services />
       <SelectedWork />
       <AgentDemo />
@@ -751,39 +681,7 @@ export function StudioHome() {
 export function StudioWeb() {
   return (
     <div className="studio-page">
-      <section className="st-hero st-container st-web-hero">
-        <div className="st-hero-copy">
-          <Kicker>WHOFF WEB STUDIO</Kicker>
-          <h1>
-            Your business.
-            <br />
-            <span>
-              Looking
-              <br />
-              its best.
-            </span>
-          </h1>
-          <p>
-            A website with your character and a clear job to do. Custom design,
-            thoughtful details, and a working first version in days.
-          </p>
-          <div className="st-hero-actions">
-            <Action to="/web#lead-form">Talk about your website</Action>
-            <Action secondary to="/web#pricing">
-              See the pricing
-            </Action>
-          </div>
-          <div className="st-web-facts">
-            <span>
-              <strong>$1,500</strong>builds start here
-            </span>
-            <span>
-              <strong>Yours.</strong>domain, content, code
-            </span>
-          </div>
-        </div>
-        <HeroWork />
-      </section>
+      <StudioShowcase web />
       <SelectedWork />
       <Process />
       <Pricing full />

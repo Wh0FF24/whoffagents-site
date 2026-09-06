@@ -25,6 +25,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ScrollToTop from "./components/ScrollToTop";
 import "./styles/studio.css";
+import "./styles/studio-showcase.css";
 import { routeMeta } from "./data/routeMeta";
 
 function App() {
