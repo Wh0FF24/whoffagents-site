@@ -16,7 +16,7 @@ const films = [
   },
   {
     name: "The Forge Gym",
-    short: "Utah Forge",
+    short: "The Forge Gym",
     file: "forge",
     discipline: "STRENGTH / SPACE / COMMUNITY",
     line: "You can feel\nthe place.",
@@ -26,6 +26,87 @@ const films = [
     number: "02",
   },
 ];
+
+function AmbientFilm({ film, motionAllowed }) {
+  const player = useRef(null);
+  const pausedByVisitor = useRef(false);
+  const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    const el = player.current;
+    if (!el) return;
+    if (!motionAllowed) {
+      el.pause();
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !pausedByVisitor.current)
+          el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      el.pause();
+    };
+  }, [film.file, motionAllowed, failed]);
+  return (
+    <>
+      <div className="sr-ambient" aria-hidden="true">
+        <img
+          src={`/work/${film.file}-ambient.webp`}
+          alt=""
+          fetchPriority="high"
+        />
+        {!failed && (
+          <video
+            ref={player}
+            src={`/work/${film.file}-ambient.webm`}
+            poster={`/work/${film.file}-ambient.webp`}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            tabIndex={-1}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+            onError={() => {
+              setFailed(true);
+              setPlaying(false);
+            }}
+          />
+        )}
+      </div>
+      <div className="sr-ambient-caption">
+        <span>FROM OUR {film.name.toUpperCase()} CONCEPT</span>
+        {!failed && (
+          <button
+            aria-label={
+              playing ? "Pause background film" : "Play background film"
+            }
+            onClick={() => {
+              const el = player.current;
+              if (!el) return;
+              if (el.paused) {
+                pausedByVisitor.current = false;
+                el.play().catch(() => {});
+              } else {
+                pausedByVisitor.current = true;
+                el.pause();
+              }
+            }}
+          >
+            {playing ? <Pause size={14} /> : <Play size={14} />}
+            <span>{playing ? "Pause motion" : "Play motion"}</span>
+          </button>
+        )}
+      </div>
+    </>
+  );
+}
 
 export default function StudioShowcase({ web = false }) {
   const [selected, setSelected] = useState(0);
@@ -83,6 +164,7 @@ export default function StudioShowcase({ web = false }) {
   return (
     <section className="sr-showcase">
       <div className="sr-masthead st-container">
+        <AmbientFilm film={active} motionAllowed={motionAllowed} />
         <div className="sr-masthead-top">
           <span>WHOFF AGENTS / INDEPENDENT DIGITAL STUDIO</span>
           <span>PROVO, UTAH · WORKING EVERYWHERE</span>
@@ -91,7 +173,12 @@ export default function StudioShowcase({ web = false }) {
           <h1>
             {web ? "Your world." : "Good work."}
             <br />
-            <span>{web ? "Worth seeing." : "Hard to ignore."}</span>
+            <span>
+              {web ? "Worth " : "Hard to "}
+              <span className="sr-payoff-word">
+                {web ? "seeing." : "ignore."}
+              </span>
+            </span>
           </h1>
           <div className="sr-intro">
             <p>
@@ -123,7 +210,8 @@ export default function StudioShowcase({ web = false }) {
             <img
               className="sr-film-poster"
               src={`/work/${active.file}-poster.jpg`}
-              alt={`${active.name} website concept by Whoff Agents`}
+              alt=""
+              aria-hidden="true"
               width="1440"
               height="900"
               fetchPriority="high"
@@ -184,6 +272,7 @@ export default function StudioShowcase({ web = false }) {
         <div className="sr-stage-bottom">
           <div
             className="sr-film-selector"
+            role="group"
             aria-label="Featured design concepts"
           >
             {films.map((f, i) => (

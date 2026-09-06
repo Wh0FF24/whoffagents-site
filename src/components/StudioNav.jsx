@@ -15,7 +15,7 @@ export function StudioLogo() {
         <path fill="#003DA5" d="M18 0h18v36H18z" />
         <path
           fill="none"
-          stroke="#FFB81C"
+          stroke="#E1BD70"
           strokeWidth="3"
           d="m5 10 5 17 8-13"
         />
