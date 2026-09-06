@@ -220,54 +220,47 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
   );
   logo.position.z = 1.59;
   lid.add(logo);
-  // A separate red-and-gold calibration arc, never gold laid over blue.
+  // One centered orbital plane. Every line, tick and accent shares its transform,
+  // so the guides stay registered as the object moves or a face turns toward us.
   const orbit = new THREE.Group();
-  orbit.rotation.set(1.08, 0.08, -0.18);
-  orbit.position.z = -1.25;
+  orbit.rotation.set(0.32, -0.12, -0.18);
   object.add(orbit);
+  const orbitRadius = 2.83;
   const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(2.56, 0.015, 8, 150, Math.PI * 1.62),
-    silver,
+    new THREE.TorusGeometry(orbitRadius, 0.008, 6, 180),
+    new THREE.MeshBasicMaterial({
+      color: 0x9daec7,
+      transparent: true,
+      opacity: 0.62,
+      depthWrite: false,
+    }),
   );
   orbit.add(ring);
   const sleeve = new THREE.Mesh(
-    new THREE.TorusGeometry(2.56, 0.036, 8, 32, 0.4),
+    new THREE.TorusGeometry(orbitRadius, 0.026, 8, 32, 0.4),
     red,
   );
   sleeve.rotation.z = 0.7;
   orbit.add(sleeve);
   const inlay = new THREE.Mesh(
-    new THREE.TorusGeometry(2.56, 0.012, 8, 28, 0.32),
+    new THREE.TorusGeometry(orbitRadius, 0.01, 8, 28, 0.32),
     gold,
   );
   inlay.rotation.z = 0.74;
-  inlay.position.z = 0.032;
+  inlay.position.z = 0.027;
   orbit.add(inlay);
   const marker = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 8), silver);
-  marker.position.set(2.56, 0, 0);
+  marker.position.set(orbitRadius, 0, 0);
   orbit.add(marker);
-  // A large elliptical measurement halo and a small set of ticks give the object a physical scale.
-  const halo = new THREE.Mesh(
-    new THREE.TorusGeometry(3.2, 0.006, 4, 160),
-    new THREE.MeshBasicMaterial({
-      color: 0x46628a,
-      transparent: true,
-      opacity: 0.4,
-    }),
-  );
-  halo.rotation.set(1.2, 0.3, -0.1);
-  halo.position.y = -0.3;
-  halo.position.z = -2;
-  scene.add(halo);
-  for (let i = 0; i < 48; i++) {
-    const a = (i / 48) * Math.PI * 2;
+  for (let i = 0; i < 36; i++) {
+    const a = (i / 36) * Math.PI * 2;
     const tick = new THREE.Mesh(
-      new THREE.BoxGeometry(i % 4 === 0 ? 0.075 : 0.035, 0.008, 0.008),
-      new THREE.MeshBasicMaterial({ color: i % 4 === 0 ? 0x7891b6 : 0x32445f }),
+      new THREE.BoxGeometry(i % 6 === 0 ? 0.09 : 0.035, 0.008, 0.008),
+      new THREE.MeshBasicMaterial({ color: i % 6 === 0 ? 0xc0c0c0 : 0x627590 }),
     );
-    tick.position.set(Math.cos(a) * 3.2, Math.sin(a) * 3.2, 0);
+    tick.position.set(Math.cos(a) * orbitRadius, Math.sin(a) * orbitRadius, 0);
     tick.rotation.z = a;
-    halo.add(tick);
+    orbit.add(tick);
   }
   function resize() {
     const w = host.clientWidth,
@@ -302,8 +295,6 @@ export function createCubeScene(host, projects, initialReduced, onLost) {
     object.position.y =
       !reduced && !paused ? Math.sin(elapsed * 0.65) * 0.055 : 0;
     object.rotation.y = !reduced && !paused ? pointer.x * 0.035 : 0;
-    orbit.rotation.z =
-      -0.18 + (!reduced && !paused ? Math.sin(elapsed * 0.2) * 0.08 : 0);
     renderer.render(scene, camera);
     host.dataset.turn = turn.toFixed(3);
     host.dataset.drawCalls = String(renderer.info.render.calls);

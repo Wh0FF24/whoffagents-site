@@ -66,12 +66,12 @@
 }
 .dx-backdrop > span {
   position: absolute;
-  right: 4.5%;
-  top: 20%;
-  font: 500 clamp(160px, 23vw, 360px) / 1 var(--st-body);
-  letter-spacing: -0.1em;
-  color: transparent;
-  -webkit-text-stroke: 1px #b7c9e211;
+  right: 5.5%;
+  top: 3%;
+  font: 500 clamp(160px, 23vw, 340px) / 1 var(--st-body);
+  letter-spacing: -0.055em;
+  color: #a5b6ce08;
+  -webkit-text-stroke: 1px #9fb6d15c;
   white-space: nowrap;
 }
 .dx-backdrop > div {
