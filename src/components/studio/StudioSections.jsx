@@ -7,6 +7,7 @@
  * Luke's outreach pipeline depends on them. Do not rename anything here.
  */
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Zap, CheckCircle2, CalendarClock, Search, Check, ArrowRight,
   Smartphone, ServerCog, PhoneCall,
@@ -301,6 +302,11 @@ export function LeadForm({ source = 'web_studio_page' }) {
           </button>
           <span className="text-sm text-gray-500">No spam. No obligation. We reply within one business day.</span>
         </div>
+        <p className="mt-3 text-xs text-gray-500">
+          By submitting, you agree to be contacted by phone, text, or email about your project.
+          Message and data rates may apply; reply STOP to opt out of texts at any time. See our{' '}
+          <Link to="/privacy" className="underline hover:text-gray-300 transition-colors">privacy policy</Link>.
+        </p>
         {status === 'error' && (
           <p className="mt-3 text-sm text-brand-red-bright">
             Something went wrong sending that — try again, or email{' '}
