@@ -216,54 +216,60 @@ export function createIdentityScene(host, kind, initialReduced, onLost) {
       numeral.position.set(-1.54, 0, 1.21);
     });
   } else {
-    root.rotation.set(0.08, -0.25, -0.06);
-    const paths = [
-      [
-        [-2, 1, 0],
-        [-1.6, 0.05, 0.15],
-        [-1.08, -1.18, 0.1],
-        [-0.6, -0.45, 0.02],
-        [0, 0.53, 0],
-      ],
-      [
-        [0, 0.53, 0],
-        [0.6, -0.45, 0.02],
-        [1.08, -1.18, 0.1],
-        [1.6, 0.05, 0.15],
-        [2, 1, 0],
-      ],
+    root.rotation.set(0.16, -0.25, -0.025);
+    // Two machined halves: a broad face, crisp bevel, and inset paired metal.
+    const outline = [
+      [-2.2, 1.25],
+      [-1.6, 1.25],
+      [-1.02, -0.57],
+      [-0.34, 0.8],
+      [0, 0.8],
+      [0, -0.2],
+      [-0.69, -1.3],
+      [-1.35, -1.3],
     ];
-    paths.forEach((points, i) => {
+    [0, 1].forEach((i) => {
       const part = new THREE.Group();
       root.add(part);
       pieces.push(part);
-      tube(points, 0.24, i ? blue : red, part);
-      tube(
-        points.map(([x, y, z]) => [x, y, z + 0.227]),
-        0.035,
-        i ? silver : gold,
+      const sign = i ? -1 : 1;
+      const points = outline.map(([x, y]) => new THREE.Vector2(x * sign, y));
+      const shape = new THREE.Shape(points);
+      const enamel = (i ? blue : red).clone();
+      enamel.metalness = 0.8;
+      enamel.roughness = 0.28;
+      enamel.clearcoat = 0.25;
+      mesh(
+        new THREE.ExtrudeGeometry(shape, {
+          depth: 0.45,
+          bevelEnabled: true,
+          bevelThickness: 0.055,
+          bevelSize: 0.055,
+          bevelSegments: 4,
+          steps: 1,
+        }),
+        enamel,
         part,
       );
-      for (const point of [points[0], points.at(-1)]) {
-        const cap = mesh(
-          new THREE.SphereGeometry(0.24, 24, 16),
-          i ? blue : red,
+      // A narrow inlay follows the angular V; it is embedded in the face.
+      const inlay = [
+        [-1.92, 1.08],
+        [-1.08, -1.06],
+        [-0.13, 0.56],
+      ];
+      for (let j = 0; j < inlay.length - 1; j++) {
+        const [ax, ay] = inlay[j],
+          [bx, by] = inlay[j + 1];
+        const length = Math.hypot(bx - ax, by - ay);
+        const strip = mesh(
+          new THREE.BoxGeometry(length, 0.028, 0.012),
+          i ? silver : gold,
           part,
         );
-        cap.position.set(...point);
+        strip.position.set(((ax + bx) * sign) / 2, (ay + by) / 2, 0.509);
+        strip.rotation.z = Math.atan2(by - ay, (bx - ax) * sign);
       }
     });
-    const orbit = mesh(
-      new THREE.TorusGeometry(2.78, 0.009, 6, 150),
-      new THREE.MeshBasicMaterial({
-        color: 0x6b7f98,
-        transparent: true,
-        opacity: 0.45,
-        depthWrite: false,
-      }),
-    );
-    orbit.rotation.set(0.48, 0.1, -0.15);
-    orbit.position.z = -0.45;
   }
   let dead = false,
     lost = false,

@@ -145,17 +145,15 @@ function ArtFallback({ kind }) {
           ))}
         </g>
       ) : (
-        <g
-          fill="none"
-          strokeWidth="38"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        >
-          <path d="M70 105 158 295 250 150" stroke="#c8102e" />
-          <path d="m250 150 92 145 88-190" stroke="#003da5" />
-          <g strokeWidth="5">
-            <path d="M70 105 158 295 250 150" stroke="#e1bd70" />
-            <path d="m250 150 92 145 88-190" stroke="#c0c0c0" />
+        <g strokeLinejoin="miter">
+          <path d="M48 90h56l58 174 62-131h26v85l-67 99h-55Z" fill="#a60c26" />
+          <path
+            d="M452 90h-56l-58 174-62-131h-26v85l67 99h55Z"
+            fill="#003da5"
+          />
+          <g fill="none" strokeWidth="2">
+            <path d="m74 106 87 188 77-145" stroke="#e1bd70" />
+            <path d="m426 106-87 188-77-145" stroke="#c0c0c0" />
           </g>
         </g>
       )}

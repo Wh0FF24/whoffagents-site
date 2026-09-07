@@ -1,0 +1,84 @@
+/* A continuous material language below the sculptures. All decoration paints
+   behind content, is clipped to its own field, and cannot intercept input. */
+.studio-page > :where(section:not(.dp-hero):not(.dx-experience)),
+.dp-support-page,
+.st-footer {
+  --field-line: #315f9d48;
+  --field-blue: #003da517;
+  --field-warm: #e1bd701c;
+  position: relative;
+  isolation: isolate;
+  background-image:
+    radial-gradient(ellipse at 100% 30%, var(--field-blue), transparent 62%),
+    radial-gradient(ellipse at 0 85%, var(--field-warm), transparent 56%);
+}
+.studio-page > section:not(.dp-hero):not(.dx-experience)::after,
+.dp-support-page::after,
+.st-footer::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--field-line);
+  mask-image: url("/art/contour-field.svg");
+  mask-repeat: no-repeat;
+  mask-size: min(1100px, 95vw) auto;
+  mask-position: right -190px top calc(45% + var(--field-offset, 0px));
+}
+.studio-page > section:nth-of-type(even)::after {
+  mask-position: left -230px top calc(60% - var(--field-offset, 0px));
+  transform: scaleX(-1);
+}
+.studio-page > .st-work,
+.studio-page > .st-agent-section,
+.dp-support-page,
+.st-footer {
+  --field-line: #b1cefa35;
+  --field-blue: #003da539;
+  --field-warm: #c0c0c00c;
+}
+.studio-page > .st-contact {
+  --field-line: #f2d79740;
+  --field-blue: #6b00183d;
+  --field-warm: #e1bd7038;
+}
+.dp-tools-page > section:not(.dp-hero),
+.dp-support-page[data-page-family="tools"] {
+  --field-line: #a7803c42;
+  --field-blue: #c8102e0c;
+  --field-warm: #e1bd702c;
+}
+.dp-support-page[data-page-family="tools"] {
+  --field-line: #e1bd7036;
+  --field-blue: #c8102e22;
+}
+.st-agent-section::before {
+  content: none;
+}
+.st-project-image .st-browser {
+  box-shadow:
+    0 28px 65px #02071366,
+    0 0 0 1px #b9cbea22;
+}
+.st-price-card,
+.dp-studio-people article {
+  box-shadow: 0 18px 44px #1425410b;
+}
+.dp-studio .dp-monogram {
+  opacity: 0.42;
+}
+@media (max-width: 600px) {
+  .studio-page > section:not(.dp-hero):not(.dx-experience)::after,
+  .dp-support-page::after,
+  .st-footer::after {
+    mask-size: 760px auto;
+    mask-position: right -390px top calc(45% + var(--field-offset, 0px));
+    opacity: 0.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-app {
+    --field-offset: 0px;
+  }
+}

@@ -32,6 +32,8 @@ The current candidate is **Dimension**, an original Three.js scene. Its cube has
 
 Each main page has a related original sculpture: the home/web cube, an agent signal core, a stack of tool modules, and a two-part studio W. The agent choices also select the illustrative transcript scenario; the tool choices filter the catalog. Supporting product, article, and policy pages share a quiet chapter frame without extra 3D.
 
+The studio W uses beveled extruded faces with gold/silver inlays. Below the heroes, an original folded wireframe surface and paired ambient lighting continue through sections and supporting pages. This decoration stays behind content and adds no canvas. Its small scroll response stops under reduced motion, with no continuous idle animation. `scripts/generate-contour.mjs` reproduces the local SVG field.
+
 Three.js loads asynchronously only on the five main routes and shares one runtime chunk. Scenes cap pixel density, stop rendering offscreen/in background tabs, and dispose resources on navigation. Every sculpture includes a static fallback, reduced-motion support, and a pause control. The browser checks verify rendered pixels, scrolling, pause, selections, catalog integration, fallback, context loss, mobile controls, and prerendered content. These checks establish behavior, not design quality.
 
 - `src/pages/StudioPages.jsx`: shared studio pages and sections.
@@ -40,12 +42,14 @@ Three.js loads asynchronously only on the five main routes and shares one runtim
 - `src/components/StudioShowcase.jsx`, `cubeScene.js`: accessible project explorer and original real-time sculpture.
 - `src/components/StudioIdentity.jsx`, `identityScene.js`: agent, tools, and studio hero controls and original sculptures.
 - `src/styles/studio-identities.css`: page identities and the supporting chapter frame.
+- `src/components/StudioAtmosphere.jsx`, `src/styles/studio-atmosphere.css`: shared background depth and scroll response.
 - `src/styles/studio-showcase.css`: Dimension composition, responsive layouts and section refinements.
 - `src/styles/studio.css`: brand pairs, layouts, responsive and reduced-motion behavior.
 - `src/data/products.js`: existing catalog prices and checkout URLs.
 - `src/data/routeMeta.js`: shared client/prerender metadata for the existing 21 routes.
 - `tests/redesign.spec.js`, `showcase.spec.js`, `identities.spec.js`: browser checks.
 - `scripts/capture-identities.mjs <output-directory>`: desktop/mobile screenshots from the loopback dev preview on port 4173.
+- `scripts/capture-atmosphere.mjs <output-directory>`: below-hero screenshots from the same preview.
 
 ## Production prerequisites
 

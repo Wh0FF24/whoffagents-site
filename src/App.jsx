@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import StudioAtmosphere from "./components/StudioAtmosphere";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
@@ -27,6 +28,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import "./styles/studio.css";
 import "./styles/studio-showcase.css";
 import "./styles/studio-identities.css";
+import "./styles/studio-atmosphere.css";
 import { routeMeta } from "./data/routeMeta";
 
 function App() {
@@ -56,6 +58,7 @@ function App() {
 
   return (
     <div className="studio-app">
+      <StudioAtmosphere />
       <ScrollToTop />
       <Nav />
       <main
