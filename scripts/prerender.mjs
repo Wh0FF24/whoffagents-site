@@ -56,7 +56,7 @@ const routeMeta = {
   },
   '/web': {
     title: 'Web Design in Provo, Utah | Whoff Web Studio',
-    description: 'Custom web design for Utah County businesses. Mobile-first, 95+ Google speed scores, flat pricing from $1,500, live in days — not months. 30-day money-back guarantee.',
+    description: 'Custom web design for Utah County businesses. Mobile-first, built for speed, flat pricing from $1,500, live in days — not months. 30-day money-back guarantee.',
   },
   '/agents': {
     title: 'Custom AI Agents for Your Business | Whoff Agents',
