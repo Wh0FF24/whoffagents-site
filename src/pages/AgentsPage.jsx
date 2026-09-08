@@ -184,8 +184,12 @@ export default function AgentsPage() {
       {/* ============ THE PRICED ENTRY POINT.
            This product is real, fixed-scope and purchasable — it was sitting in
            the developer catalogue behind a nav item called "Dev Tools", which is
-           the last place a business owner would look. It is also the only price
-           on this page, and "no price anywhere" reads as "expensive". ============ */}
+           the last place a business owner would look. "No price anywhere" reads
+           as "expensive", so the $500 setup is stated outright — but the setup is
+           not the whole cost, so the monthly service fee and the metered usage are
+           stated next to it rather than discovered later. Usage rides on the
+           customer's own account at cost; we never absorb a per-customer
+           subscription (Will, 2026-09-07). Mirrors /receptionist. ============ */}
       <section data-reveal className="shell pt-8 pb-2">
         <Card featured ticks className="p-6 md:p-9">
           <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-8 items-center">
@@ -204,15 +208,38 @@ export default function AgentsPage() {
                 you a summary.
               </p>
               <ul className="text-sm text-gray-400 leading-relaxed space-y-1.5 mb-6">
-                <li>— the $500 is the setup, once. It is not a subscription.</li>
                 <li>
-                  — after that you pay for what it actually handles — the phone line and the
-                  calls it takes. A shop getting a handful of calls a week costs very little to
-                  run; a busy office answering all day costs more. We work it out from your real
-                  call volume and tell you the number before you switch it on.
+                  — <span className="text-gray-200">setup — $500, once.</span> That is the
+                  build, not a subscription. It is the one figure we can put in writing
+                  without knowing your business.
+                </li>
+                <li>
+                  — <span className="text-gray-200">a monthly service fee — quoted for you.</span>{' '}
+                  Keeping it configured, updated when your business changes, and watched while it
+                  runs. We do not print a number here because we would be inventing it before
+                  knowing the job. Tell us the job and you get the figure before you commit.
+                </li>
+                <li>
+                  — <span className="text-gray-200">the usage, passed through at cost.</span>{' '}
+                  Phone minutes and the AI itself are metered by the minute. That bill sits on
+                  your own account — one we open in your name, or a subscription you already
+                  have — and you pay the provider what the provider charges. We take no cut of
+                  it and we never fold it into a plan of ours.
                 </li>
                 <li>— you hear it and sign off before it goes live, and you can stop any time</li>
-                <li>— anything beyond answering the phone is quoted as its own project</li>
+                <li>
+                  — anything beyond answering the phone — email, texts, calendars, records,
+                  the repeat work — is a full assistant and is quoted as its own project, in
+                  the same three parts. The model usage still rides on your own account or
+                  your own existing subscription; we never absorb a subscription per customer
+                  and take the spread.
+                </li>
+                <li>
+                  — the full breakdown is on the{' '}
+                  <Link to="/receptionist" className="underline underline-offset-2">
+                    receptionist page
+                  </Link>
+                </li>
               </ul>
               <div className="flex flex-wrap gap-3">
                 <a
@@ -232,9 +259,16 @@ export default function AgentsPage() {
             <div className="hidden lg:block">
               <p className="mono-note leading-relaxed">
                 everything else on this page — email, texts, calendars, records, the
-                repeat work — is quoted per project, because what it costs depends
-                entirely on what you want it to do. tell us the job and we&apos;ll send
-                the number before you commit to anything.
+                repeat work — is a full assistant, and it is quoted as its own project.
+                same shape as above: a one-time build, a monthly service fee, and the
+                metered model usage on your own account or your own existing
+                subscription. we never absorb a per-customer subscription into a flat
+                number and take the spread.
+              </p>
+              <p className="mono-note leading-relaxed mt-4">
+                for scale: an assistant like this costs us roughly $10&ndash;40 a month in
+                metered model usage at our own volume. yours depends on how much work you
+                hand it, which is exactly why we will not sell you a flat number for it.
               </p>
             </div>
           </div>
@@ -250,7 +284,10 @@ export default function AgentsPage() {
               <li>Software we build for your business — and run for you.</li>
               <li>It works with the tools and services you already use.</li>
               <li>You see exactly what it does and approve it before it goes live.</li>
-              <li>One flat project price, agreed before we build.</li>
+              <li>
+                One flat build price, agreed before we build — with the monthly service
+                fee and the metered usage itemised in the same quote.
+              </li>
             </ul>
           </Card>
           <Card className="p-6">
