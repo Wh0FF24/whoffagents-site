@@ -287,3 +287,6 @@
     font-size: 6px;
   }
 }
+/* The web studio uses the same restrained red/gold action treatment as Home. */
+.lp-copy > button{border-radius:0;border:1px solid #c8102e;background:#a80e29;color:#f4dfb3;padding:16px 21px}
+@media(hover:hover){.lp-copy > button:hover{background:#c8102e;border-color:#e1bd70;opacity:1}}

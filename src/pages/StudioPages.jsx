@@ -27,7 +27,7 @@ const work = [
     type: "A quilting studio, brought to life.",
     image: "/work/spindle.webp",
     href: "https://spindlecreek.com",
-    label: "Website project",
+    label: "Family project \u00b7 not a paying client",
     tags: ["Custom design", "Inquiries", "Illustration"],
     detail:
       "A warm, illustrated home for longarm quilting, classes, and retreats. A clear path from discovering the studio to getting in touch.",
@@ -583,7 +583,7 @@ export function FAQ({ agent = false }) {
     : [
         [
           "How soon could my site be ready?",
-          "For most Redesign and Redesign Pro projects, the first working version is ready in under a week once we have your content. Custom platforms are scoped individually.",
+          "For Redesign and Redesign Pro, we aim to have a first working version in your hands within a week of receiving your content. Custom platforms are scoped individually.",
         ],
         [
           "Do I have to write all the content?",

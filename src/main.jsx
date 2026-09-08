@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import posthog from "posthog-js";
 import "./index.css";
 import App from "./App.jsx";
 import { captureUTMs } from "./utils/utm";
@@ -10,18 +9,29 @@ captureUTMs();
 
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
 if (POSTHOG_KEY && import.meta.env.VITE_PRIVATE_PREVIEW === "false") {
-  posthog.init(POSTHOG_KEY, {
-    api_host: "https://us.i.posthog.com",
-    person_profiles: "identified_only",
-    capture_pageview: true,
-    capture_pageleave: true,
-  });
+  import("posthog-js").then(({ default: posthog }) =>
+    posthog.init(POSTHOG_KEY, {
+      api_host: "https://us.i.posthog.com",
+      person_profiles: "identified_only",
+      capture_pageview: true,
+      capture_pageleave: true,
+    }),
+  );
 }
 
-createRoot(document.getElementById("root")).render(
+const app = (
   <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );
+
+// Keep the prerendered first paint in place while React attaches interactions.
+// Query-only design comparisons have no matching static document.
+const root = document.getElementById("root");
+if (root.hasChildNodes() && !new URLSearchParams(window.location.search).has("concept")) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}

@@ -40,6 +40,7 @@ for (const [route, control] of identities) {
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(route);
+    await page.keyboard.press("Shift");
     await expect(page.locator(".dp-hero")).toHaveAttribute(
       "data-scene",
       "ready",
@@ -89,6 +90,8 @@ test("sculpture animation pauses, selection still works, and context loss preser
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/agents");
+  await page.keyboard.press("Shift");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dp-hero")).toHaveAttribute("data-scene", "ready");
   const canvas = page.locator(".dp-canvas canvas");
   const moving = await canvas.screenshot();
@@ -121,12 +124,14 @@ test("sculpture animation pauses, selection still works, and context loss preser
     .locator(".st-desktop-nav")
     .getByRole("link", { name: "Developer tools", exact: true })
     .click();
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dp-hero")).toHaveAttribute("data-scene", "ready");
   await expect(page.locator("canvas")).toHaveCount(1);
   await page
     .locator(".st-desktop-nav")
     .getByRole("link", { name: "The studio", exact: true })
     .click();
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dp-hero")).toHaveAttribute("data-scene", "ready");
   await expect(page.locator("canvas")).toHaveCount(1);
   expect(errors).toEqual([]);
@@ -141,6 +146,7 @@ test("all three identities remain usable without WebGL", async ({ page }) => {
   });
   for (const [route, control] of identities) {
     await page.goto(route);
+    await page.keyboard.press("Shift");
     await expect(page.locator(".dp-hero")).toHaveAttribute(
       "data-scene",
       "fallback",
@@ -162,7 +168,8 @@ test("new hero content is prerendered without JavaScript", async ({
   for (const [route] of identities) {
     // Vite preview rewrites extensionless URLs to the SPA root; inspect the
     // actual per-route HTML artifact that the production host serves.
-    await page.goto(`http://127.0.0.1:4174${route}/index.html`);
+    await page.goto(`${test.info().project.use.baseURL}${route}/index.html`);
+    await page.keyboard.press("Shift");
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator(".dp-fallback")).toBeVisible();
     await expect(page.locator(".dp-cta")).toBeVisible();
@@ -180,6 +187,7 @@ test("supporting routes retain readable chapter frames at mobile and desktop wid
       (r) => !core.includes(r),
     )) {
       await page.goto(route);
+      await page.keyboard.press("Shift");
       await page.evaluate(() => document.fonts.ready);
       await expect(page.locator(".dp-page-rail")).toBeVisible();
       await expect(page.locator("h1")).toHaveCount(1);

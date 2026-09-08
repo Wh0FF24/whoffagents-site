@@ -70,3 +70,11 @@ Will supplied `updated.svg` as the official company logo. `public/brand/whoff-of
 The approved cube remains the default. Open `/web?concept=layers` (or `/?concept=layers`) for the separate layered portfolio candidate: a compact stack opens into large project panels as visitors scroll. Numbered controls and previous/next buttons select projects directly. Mobile and reduced-motion visitors get a normal-flow presentation; a static screenshot preserves the links if WebGL fails. Will has not selected this alternative for production.
 
 `src/components/StudioLayers.jsx`, `layerScene.js`, and `src/styles/studio-layers.css` implement the alternative. Both presentations share `src/data/showcaseProjects.js`. `tests/layers.spec.js` adds four checks to the existing 24; the complete 28-test suite passed. Run `node scripts/capture-layers.mjs <output-directory>` against the local dev preview to capture the comparison.
+
+## Home and Websites now have distinct entrances
+
+The current local design uses the cube on `/` and the layered portfolio by default on `/web`. Clicking the company logo returns to the home overview. Websites uses dedicated web-studio copy and continues into project details, process, full pricing, and website FAQs. `/web?concept=cube` retains the older comparison; `?concept=layers` remains supported. This supersedes the earlier comparison-only description above. Production approval is still required.
+
+## Approved page direction: pyramid Home, layered Websites
+
+Will selected a pyramid for the home screen and layered panels for Websites. `/` now uses StudioPyramid with an original Three.js three-sided pyramid, separating faces, paired metal finishes, pause/reduced-motion handling, and a static SVG fallback. `/web` retains StudioLayers. The cube remains available only with `?concept=cube`. This supersedes the earlier Home/cube description; production approval is still separate. Focused pyramid tests cover rendered opening, navigation, mobile accessibility, and context loss.

@@ -6,7 +6,7 @@ export const dimensions = [
     image: "/work/spindle.webp",
     url: "https://spindlecreek.com",
     link: "Visit the website",
-    status: "LIVE WEBSITE",
+    status: "FAMILY PROJECT \u00b7 NOT A PAYING CLIENT",
   },
   {
     name: "Island Airporter",

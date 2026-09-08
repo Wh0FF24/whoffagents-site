@@ -19,7 +19,7 @@
   }
 }
 .studio-page
-  > :where(section:not(.dp-hero):not(.dx-experience):not(.lp-experience)),
+  > :where(section:not(.dp-hero):not(.dx-experience):not(.lp-experience):not(.py-hero)),
 .dp-support-page,
 .st-footer {
   --field-line: #315f9d48;
@@ -32,7 +32,7 @@
     radial-gradient(ellipse at 0 85%, var(--field-warm), transparent 56%);
 }
 .studio-page
-  > section:not(.dp-hero):not(.dx-experience):not(.lp-experience)::after,
+  > section:not(.dp-hero):not(.dx-experience):not(.lp-experience):not(.py-hero)::after,
 .dp-support-page::after,
 .st-footer::after {
   content: "";
@@ -90,7 +90,7 @@
 }
 @media (max-width: 600px) {
   .studio-page
-    > section:not(.dp-hero):not(.dx-experience):not(.lp-experience)::after,
+    > section:not(.dp-hero):not(.dx-experience):not(.lp-experience):not(.py-hero)::after,
   .dp-support-page::after,
   .st-footer::after {
     mask-size: 760px auto;

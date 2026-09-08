@@ -1,3 +1,4 @@
+import { deferScene } from "../utils/deferScene";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -10,14 +11,16 @@ import {
 } from "lucide-react";
 import { dimensions } from "../data/showcaseProjects";
 import StudioShowcase from "./StudioShowcase";
+import StudioPyramid from "./StudioPyramid";
 import "../styles/studio-layers.css";
 
 export default function ShowcaseChoice({ web = false }) {
   const { search } = useLocation();
-  return new URLSearchParams(search).get("concept") === "layers" ? (
+  const concept = new URLSearchParams(search).get("concept");
+  return concept === "layers" || (web && concept !== "cube") ? (
     <StudioLayers web={web} />
   ) : (
-    <StudioShowcase web={web} />
+    concept === "cube" ? <StudioShowcase web={web} /> : <StudioPyramid />
   );
 }
 
@@ -32,6 +35,9 @@ function StudioLayers({ web }) {
     [paused, setPaused] = useState(false);
   const activeIndex = Math.max(0, Math.min(3, Math.round(progress) - 1));
   const active = dimensions[activeIndex];
+  useEffect(() => {
+    scene.current?.setPaused(paused);
+  }, [paused, state]);
   useEffect(() => {
     let dead = false;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)"),
@@ -49,22 +55,25 @@ function StudioLayers({ web }) {
     sync();
     reduced.addEventListener("change", sync);
     compact.addEventListener("change", sync);
-    import("./layerScene")
-      .then(({ createLayerScene }) => {
-        if (dead) return;
-        scene.current = createLayerScene(
-          host.current,
-          dimensions,
-          reduced.matches,
-          () => setState("fallback"),
-        );
-        scene.current?.setProgress(progressRef.current, true);
-        setState(scene.current ? "ready" : "fallback");
-      })
-      .catch(() => {
-        if (!dead) setState("fallback");
-      });
+    const cancelLoad = deferScene(() =>
+      import("./layerScene")
+        .then(({ createLayerScene }) => {
+          if (dead) return;
+          scene.current = createLayerScene(
+            host.current,
+            dimensions,
+            reduced.matches,
+            () => setState("fallback"),
+          );
+          scene.current?.setProgress(progressRef.current, true);
+          setState(scene.current ? "ready" : "fallback");
+        })
+        .catch(() => {
+          if (!dead) setState("fallback");
+        }),
+    );
     return () => {
+      cancelLoad();
       dead = true;
       reduced.removeEventListener("change", sync);
       compact.removeEventListener("change", sync);
@@ -123,9 +132,9 @@ function StudioLayers({ web }) {
     >
       <div className="lp-stage">
         <div className="lp-top">
-          <span>WHOFF / OPEN DIMENSIONS</span>
-          <Link to={web ? "/web" : "/"}>
-            Compare the cube <ArrowUpRight size={13} />
+          <span>{web ? "WHOFF / WEB STUDIO" : "WHOFF / OPEN DIMENSIONS"}</span>
+          <Link to="/">
+            Explore the studio <ArrowUpRight size={13} />
           </Link>
         </div>
         <div
@@ -141,11 +150,11 @@ function StudioLayers({ web }) {
                 }
           }
         >
-          <p>ONE STUDIO. MORE POSSIBILITIES.</p>
+          <p>{web ? "CUSTOM WEBSITES. DISTINCT BY DESIGN." : "ONE STUDIO. MORE POSSIBILITIES."}</p>
           <h1>
-            Ideas.
+            {web ? "Your world." : "Ideas."}
             <br />
-            Opened up.
+            {web ? "On the web." : "Opened up."}
           </h1>
           <p className="lp-intro">
             Websites, useful AI, and the tools behind them. Explore what we

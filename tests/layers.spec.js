@@ -6,6 +6,7 @@ test("layered journey opens the stack and brings each project forward with the c
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/web?concept=layers");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -35,8 +36,9 @@ test("layered journey opens the stack and brings each project forward with the c
   await expect(page.locator(".lp-caption small")).toContainText(
     "AWAITING APPROVAL",
   );
-  await page.getByRole("link", { name: "Compare the cube" }).click();
-  await expect(page.locator(".dx-experience")).toHaveAttribute(
+  await page.getByRole("link", { name: "Explore the studio" }).click();
+  await page.keyboard.press("Shift");
+  await expect(page.locator(".py-hero")).toHaveAttribute(
     "data-scene",
     "ready",
   );
@@ -48,6 +50,7 @@ test("scroll advances the panels and pause holds the selected journey", async ({
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/web?concept=layers");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -81,6 +84,7 @@ test("layer controls work with reduced motion and without WebGL", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?concept=layers");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -125,6 +129,7 @@ test("prototype fits small and large screens and has accessible controls", async
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/web?concept=layers");
+    await page.keyboard.press("Shift");
     await expect(page.locator(".lp-experience")).toHaveAttribute(
       "data-scene",
       "ready",
@@ -147,4 +152,21 @@ test("prototype fits small and large screens and has accessible controls", async
       })),
     ).toEqual([]);
   }
+});
+
+
+test("Websites and logo navigation lead to distinct page identities", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".py-hero")).toHaveCount(1);
+  const homeTitle = await page.locator("h1").innerText();
+  await page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link", { name: "Websites", exact: true }).click();
+  await expect(page).toHaveURL(/\/web$/);
+  await expect(page.locator(".lp-experience")).toHaveCount(1);
+  await expect(page.locator(".py-hero")).toHaveCount(0);
+  await expect(page.locator("h1")).toContainText("Your world.");
+  expect(await page.locator("h1").innerText()).not.toBe(homeTitle);
+  await page.getByRole("banner").getByRole("link", { name: "Whoff Agents home", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.locator(".py-hero")).toHaveCount(1);
+  await expect(page.locator(".lp-experience")).toHaveCount(0);
 });
