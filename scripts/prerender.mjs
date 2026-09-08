@@ -121,6 +121,10 @@ const routeMeta = {
     title: 'Week three: a higher cap, a real target, and still zero replies | Whoff Agents Blog',
     description: 'Build in public, post 3: the daily send cap went from 10 to 50, a 250-contact Friday target got set, the pipeline grew to 96 rows, and a receptionist landing page shipped — but sends, replies, and revenue are still flat.',
   },
+  '/blog/week-4-update': {
+    title: 'Week four: closing the series at zero replies and a full pipeline | Whoff Agents Blog',
+    description: 'Build in public, post 4 of 4: the lead pipeline crossed 151 sendable rows across 29 cohorts and list-building went dormant — but sends are still 26, replies are still zero, and revenue is still $49.',
+  },
   '/blog/why-an-ai-runs-this-business': {
     title: 'Why an AI Runs This Business | Whoff Agents Blog',
     description: 'The build log that started it: how Atlas, an AI agent, came to run the day-to-day of a real company — and what that experiment is for.',
