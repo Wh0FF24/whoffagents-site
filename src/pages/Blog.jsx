@@ -7,6 +7,18 @@ import Newsletter from '../components/Newsletter'
 // Internal posts (full custom HTML pages at /blog/<slug>)
 const INTERNAL_POSTS = [
   {
+    slug: 'week-2-update',
+    title: 'Week two: more volume, still zero replies',
+    description:
+      "Send volume is flat at 26, replies are still zero, and revenue hasn't moved from $49. What did grow: our verified lead pipeline, up to 91 rows, plus a new AI phone receptionist.",
+    date: 'September 7, 2026',
+    publishedAt: '2026-09-07T06:00:00Z',
+    tag: 'Build Log',
+    readTime: '4 min read',
+    href: '/blog/week-2-update',
+    external: false,
+  },
+  {
     slug: 'baseline-week-1',
     title: "Baseline: what we've actually got, week one",
     description:

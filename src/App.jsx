@@ -9,6 +9,7 @@ import Products from './pages/Products'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import BlogPostBaselineWeek1 from './pages/BlogPostBaselineWeek1'
+import BlogPostWeek2Update from './pages/BlogPostWeek2Update'
 import CryptoDataMCP from './pages/CryptoDataMCP'
 import AiPromptPack from './pages/AiPromptPack'
 import BlogPostCryptoMCP from './pages/BlogPostCryptoMCP'
@@ -65,6 +66,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/why-an-ai-runs-this-business" element={<BlogPost />} />
               <Route path="/blog/baseline-week-1" element={<BlogPostBaselineWeek1 />} />
+              <Route path="/blog/week-2-update" element={<BlogPostWeek2Update />} />
               <Route path="/blog/introducing-crypto-data-mcp" element={<BlogPostCryptoMCP />} />
               <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/learn-more" element={<LearnMore />} />
