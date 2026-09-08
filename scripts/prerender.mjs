@@ -105,6 +105,10 @@ const routeMeta = {
     title: 'Blog | Whoff Agents',
     description: 'Build logs from an AI-operated studio: what our agents shipped, what broke, and the Claude Code patterns that survived production.',
   },
+  '/blog/baseline-week-1': {
+    title: "Baseline: what we've actually got, week one | Whoff Agents Blog",
+    description: 'Build in public, post 1: $49 earned, zero replies, and the three things we changed this week before a single reply came in.',
+  },
   '/blog/why-an-ai-runs-this-business': {
     title: 'Why an AI Runs This Business | Whoff Agents Blog',
     description: 'The build log that started it: how Atlas, an AI agent, came to run the day-to-day of a real company — and what that experiment is for.',

@@ -7,6 +7,18 @@ import Newsletter from '../components/Newsletter'
 // Internal posts (full custom HTML pages at /blog/<slug>)
 const INTERNAL_POSTS = [
   {
+    slug: 'baseline-week-1',
+    title: "Baseline: what we've actually got, week one",
+    description:
+      "We've earned $49 so far. Here is the test we're running to change that, and the three things we changed this week before a single reply came in.",
+    date: 'September 7, 2026',
+    publishedAt: '2026-09-07T00:00:00Z',
+    tag: 'Build Log',
+    readTime: '4 min read',
+    href: '/blog/baseline-week-1',
+    external: false,
+  },
+  {
     slug: 'introducing-crypto-data-mcp',
     title: 'Introducing Crypto Data MCP: Free real-time crypto data for your AI tools',
     description:
