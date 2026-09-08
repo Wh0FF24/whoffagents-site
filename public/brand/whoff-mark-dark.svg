@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 440" width="768" height="440"><rect width="768" height="440" fill="#0A1230"/><g transform="translate(20 20) scale(1)"><g id="wa-mark">
   <path d="M0 0 L76 0 L206 243 L333 0 L406 0 L206 380 Z" fill="#A6192E"/>
   <path d="M398 2 L474 2 L552 186 L652 2 L728 2 L550 346 Z" fill="#0047BA"/>
-  <path d="M380 112 L400 112 L256 398 L236 398 Z" fill="#E8B84A"/>
-  <path d="M295 276 L470 276 L470 296 L295 296 Z" fill="#E8B84A"/>
-  <path d="M374 122 L406 122 L552 398 L520 398 Z" fill="#B9C2CC"/>
+  <path d="M376 62 L408 62 L242 396 L210 396 Z" fill="#E8B84A"/>
+  <path d="M276 274 L438 274 L438 306 L276 306 Z" fill="#E8B84A"/>
+  <path d="M402 98 L436 98 L556 396 L522 396 Z" fill="#B9C2CC"/>
 </g></g></svg>
