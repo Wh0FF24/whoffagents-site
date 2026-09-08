@@ -1,3 +1,4 @@
+import { deferScene } from "../utils/deferScene";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -33,6 +34,9 @@ function StudioLayers({ web }) {
   const activeIndex = Math.max(0, Math.min(3, Math.round(progress) - 1));
   const active = dimensions[activeIndex];
   useEffect(() => {
+    scene.current?.setPaused(paused);
+  }, [paused, state]);
+  useEffect(() => {
     let dead = false;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)"),
       compact = matchMedia("(max-width: 700px), (max-height: 650px)");
@@ -49,22 +53,25 @@ function StudioLayers({ web }) {
     sync();
     reduced.addEventListener("change", sync);
     compact.addEventListener("change", sync);
-    import("./layerScene")
-      .then(({ createLayerScene }) => {
-        if (dead) return;
-        scene.current = createLayerScene(
-          host.current,
-          dimensions,
-          reduced.matches,
-          () => setState("fallback"),
-        );
-        scene.current?.setProgress(progressRef.current, true);
-        setState(scene.current ? "ready" : "fallback");
-      })
-      .catch(() => {
-        if (!dead) setState("fallback");
-      });
+    const cancelLoad = deferScene(() =>
+      import("./layerScene")
+        .then(({ createLayerScene }) => {
+          if (dead) return;
+          scene.current = createLayerScene(
+            host.current,
+            dimensions,
+            reduced.matches,
+            () => setState("fallback"),
+          );
+          scene.current?.setProgress(progressRef.current, true);
+          setState(scene.current ? "ready" : "fallback");
+        })
+        .catch(() => {
+          if (!dead) setState("fallback");
+        }),
+    );
     return () => {
+      cancelLoad();
       dead = true;
       reduced.removeEventListener("change", sync);
       compact.removeEventListener("change", sync);

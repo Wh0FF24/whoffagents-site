@@ -1,3 +1,4 @@
+import { routeMeta } from "./src/data/routeMeta.js";
 import { execSync } from "node:child_process";
 import process from "node:process";
 import { defineConfig, loadEnv } from "vite";
@@ -31,6 +32,17 @@ export default defineConfig(({ mode }) => ({
     tailwindcss(),
     {
       name: "private-preview-indexing",
+      configurePreviewServer(server) {
+        // Serve the same per-route HTML the production host receives.
+        server.middlewares.use((req, _res, next) => {
+          const url = new URL(req.url, "http://localhost");
+          const route = url.pathname.replace(/\/$/, "");
+          if (route && Object.hasOwn(routeMeta, route)) {
+            req.url = `${route}/index.html${url.search}`;
+          }
+          next();
+        });
+      },
       transformIndexHtml() {
         return loadEnv(mode, process.cwd()).VITE_PRIVATE_PREVIEW !== "false"
           ? [

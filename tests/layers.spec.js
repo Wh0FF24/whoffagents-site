@@ -6,6 +6,7 @@ test("layered journey opens the stack and brings each project forward with the c
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/web?concept=layers");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -36,6 +37,7 @@ test("layered journey opens the stack and brings each project forward with the c
     "AWAITING APPROVAL",
   );
   await page.getByRole("link", { name: "Compare the cube" }).click();
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dx-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -48,6 +50,7 @@ test("scroll advances the panels and pause holds the selected journey", async ({
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/web?concept=layers");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -81,6 +84,7 @@ test("layer controls work with reduced motion and without WebGL", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?concept=layers");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -125,6 +129,7 @@ test("prototype fits small and large screens and has accessible controls", async
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/web?concept=layers");
+    await page.keyboard.press("Shift");
     await expect(page.locator(".lp-experience")).toHaveAttribute(
       "data-scene",
       "ready",

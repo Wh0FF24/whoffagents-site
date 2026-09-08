@@ -1,3 +1,4 @@
+import { deferScene } from "../utils/deferScene";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowDown, ArrowUpRight, Pause, Play } from "lucide-react";
@@ -170,6 +171,9 @@ export default function StudioIdentity({ kind, selection, onSelect }) {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
+    scene.current?.setPaused(paused);
+  }, [paused, status]);
+  useEffect(() => {
     let disposed = false;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
@@ -178,22 +182,25 @@ export default function StudioIdentity({ kind, selection, onSelect }) {
     };
     sync();
     media.addEventListener("change", sync);
-    import("./identityScene.js")
-      .then(({ createIdentityScene }) => {
-        if (disposed) return;
-        scene.current = createIdentityScene(
-          host.current,
-          kind,
-          media.matches,
-          () => setStatus("fallback"),
-        );
-        scene.current?.select(selectedRef.current);
-        setStatus(scene.current ? "ready" : "fallback");
-      })
-      .catch(() => {
-        if (!disposed) setStatus("fallback");
-      });
+    const cancelLoad = deferScene(() =>
+      import("./identityScene.js")
+        .then(({ createIdentityScene }) => {
+          if (disposed) return;
+          scene.current = createIdentityScene(
+            host.current,
+            kind,
+            media.matches,
+            () => setStatus("fallback"),
+          );
+          scene.current?.select(selectedRef.current);
+          setStatus(scene.current ? "ready" : "fallback");
+        })
+        .catch(() => {
+          if (!disposed) setStatus("fallback");
+        }),
+    );
     return () => {
+      cancelLoad();
       disposed = true;
       media.removeEventListener("change", sync);
       scene.current?.dispose();

@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 async function ready(page) {
-  await page.goto("/");
+  await page.goto("/?concept=cube");
+  await page.keyboard.press("Shift");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dx-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -113,7 +115,8 @@ test("WebGL unavailable and context loss both leave usable project browsing", as
       return /webgl/.test(type) ? null : original.call(this, type, ...args);
     };
   });
-  await page.goto("/");
+  await page.goto("/?concept=cube");
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dx-experience")).toHaveAttribute(
     "data-scene",
     "fallback",
@@ -156,6 +159,7 @@ test("context loss and route changes cleanly replace the renderer", async ({
     .getByRole("banner")
     .getByRole("link", { name: "Whoff Agents home", exact: true })
     .click();
+  await page.keyboard.press("Shift");
   await expect(page.locator(".dx-experience")).toHaveAttribute(
     "data-scene",
     "ready",
@@ -191,7 +195,8 @@ test("prerendered page has meaningful content without JavaScript", async ({
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:4174/");
+  await page.goto(`${test.info().project.use.baseURL}/`);
+  await page.keyboard.press("Shift");
   await expect(page.locator("h1")).toContainText("dimension.");
   await expect(page.locator(".dx-fallback img")).toBeVisible();
   await expect(page.locator(".dx-project > a")).toHaveAttribute(
@@ -199,4 +204,36 @@ test("prerendered page has meaningful content without JavaScript", async ({
     "https://spindlecreek.com",
   );
   await context.close();
+});
+
+test("Three.js stays out of initial HTML and scripts; interaction loads the scene", async ({
+  page,
+}) => {
+  const sceneChunk =
+    /(?:RoomEnvironment|cubeScene|identityScene|layerScene)-[^/]+\.js/;
+  for (const [route, selector] of [
+    ["/?concept=cube", ".dx-experience"],
+    ["/web", ".dx-experience"],
+    ["/agents", ".dp-hero"],
+    ["/products", ".dp-hero"],
+  ]) {
+    const scripts = [];
+    const track = (request) => {
+      if (request.resourceType() === "script") scripts.push(request.url());
+    };
+    page.on("request", track);
+    const response = await page.goto(route);
+    expect(await response.text()).not.toMatch(sceneChunk);
+    await page.waitForLoadState("networkidle");
+    expect(scripts.filter((url) => sceneChunk.test(url))).toEqual([]);
+    await expect(page.locator(selector)).toHaveAttribute(
+      "data-scene",
+      "loading",
+    );
+    await expect(page.locator("h1")).toBeVisible();
+    await page.keyboard.press("Shift");
+    await expect(page.locator(selector)).toHaveAttribute("data-scene", "ready");
+    expect(scripts.some((url) => sceneChunk.test(url))).toBe(true);
+    page.off("request", track);
+  }
 });

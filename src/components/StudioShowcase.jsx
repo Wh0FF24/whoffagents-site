@@ -1,3 +1,4 @@
+import { deferScene } from "../utils/deferScene";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -24,6 +25,9 @@ export default function StudioShowcase({ web = false }) {
   const active = dimensions[selected];
 
   useEffect(() => {
+    scene.current?.setPaused(paused);
+  }, [paused, state]);
+  useEffect(() => {
     let disposed = false;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const small = window.matchMedia("(max-width: 600px)");
@@ -36,21 +40,25 @@ export default function StudioShowcase({ web = false }) {
     };
     sync();
     media.addEventListener("change", sync);
-    import("./cubeScene.js")
-      .then(({ createCubeScene }) => {
-        if (disposed) return;
-        scene.current = createCubeScene(
-          host.current,
-          dimensions,
-          media.matches,
-          () => setState("fallback"),
-        );
-        setState(scene.current ? "ready" : "fallback");
-      })
-      .catch(() => {
-        if (!disposed) setState("fallback");
-      });
+    const cancelLoad = deferScene(() =>
+      import("./cubeScene.js")
+        .then(({ createCubeScene }) => {
+          if (disposed) return;
+          scene.current = createCubeScene(
+            host.current,
+            dimensions,
+            media.matches,
+            () => setState("fallback"),
+          );
+          scene.current?.setTurn(selectedRef.current);
+          setState(scene.current ? "ready" : "fallback");
+        })
+        .catch(() => {
+          if (!disposed) setState("fallback");
+        }),
+    );
     return () => {
+      cancelLoad();
       disposed = true;
       media.removeEventListener("change", sync);
       small.removeEventListener("change", syncSize);
@@ -130,7 +138,7 @@ export default function StudioShowcase({ web = false }) {
         <div className="dx-object" ref={host} aria-hidden="true" />
         {state !== "ready" && (
           <div className="dx-fallback" aria-hidden="true">
-            <img src={active.image} alt="" />
+            <img src={active.image} alt="" fetchPriority="high" />
             <span>{active.name}</span>
           </div>
         )}

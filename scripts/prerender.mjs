@@ -91,7 +91,12 @@ await build({
 })
 
 // --- 2. Read client build template ---
+// Inline the shared 27 KB-gzip stylesheet so the static poster can paint without
+// a render-blocking network round trip. Client-side route changes reuse it.
 const template = fs.readFileSync(path.join(rootDir, 'dist/index.html'), 'utf-8')
+  .replace(/<link[^>]+rel="stylesheet"[^>]+href="(\/assets\/[^" ]+\.css)"[^>]*>/g,
+    (_tag, asset) => `<style>${fs.readFileSync(path.join(rootDir, 'dist', asset.slice(1)), 'utf-8')}</style>`)
+
 
 // --- 3. Load render function (file:// URL so Windows dev machines work too) ---
 const ssrEntry = path.join(serverOutDir, 'entry-server.js')
