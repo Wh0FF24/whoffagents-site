@@ -1,7 +1,7 @@
-# Whoff Agents brand palette (locked 2026-09-07, Will)
-- VMI crimson  #A6192E  (left V, primary accent)
-- Royal blue   #0047BA  (right V; Will chose Grok's brighter blue over official BYU navy #002E5D because navy sinks on dark grounds; alt #0062B8)
-- Gold         #E8B84A  (A, left leg / crossbar half)
-- Silver       #B9C2CC  (A, right leg / crossbar half)
+# Whoff Agents brand palette (locked 2026-09-07, Will; colors from Will's corrected SVG)
+- VMI crimson  #970921  (left V)
+- Royal blue   #0442AE  (right V; a darker rim #0B40A4 exists in the traced geometry)
+- Gold         #B78A4F  (A left leg + crossbar)
+- Silver       #ADADB2  (A right leg)
 - Ground dark  #0A1230 ; ground light #F3F5F8 ; ink #0F141A
-System: primary mark = Grok "Option 1" geometry (tight edit #4), wordmark = geometric sans from Grok's stacked set, stacked variant = Grok #2, favicon = primary W with crossbar only.
+Master: Ops/brand/wa-mark-v5.svg = the official-tool conversion of Grok image 1 with Will's color fix (geometry untouched). Wordmark: Inter Medium outlines from Grok (grok/IuloV.svg). All assets in this folder derive from those two files.
