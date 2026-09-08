@@ -1,0 +1,45 @@
+/* Home art direction: an editorial grid around one finely finished object. */
+.py-hero{position:relative;isolation:isolate;background:#080d16;color:#eef0f3}
+.py-stage{position:relative;display:grid;grid-template-columns:1fr 1.1fr;grid-template-rows:1fr auto;align-items:center;min-height:calc(100svh - 86px);padding:48px 5% 28px;isolation:isolate;background:radial-gradient(ellipse at 78% 35%,#003da519,transparent 54%),#080d16;overflow:clip}
+.py-stage::before{content:'';position:absolute;left:5%;right:5%;top:25px;height:1px;background:linear-gradient(90deg,#c0c0c033,transparent);pointer-events:none}
+.py-heading{position:relative;z-index:2;padding-bottom:20px}
+.py-heading>p:first-child{font:10px/1.5 var(--font-mono);letter-spacing:.13em;color:#b5bbc5;margin:0 0 28px;display:flex;align-items:center;gap:12px}
+.py-heading>p:first-child::before{content:'';width:18px;height:3px;background:#003da5;border-right:6px solid #c0c0c0}
+.py-hero .py-heading h1{font:500 clamp(58px,6.4vw,104px)/.99 var(--st-body);letter-spacing:-.065em;margin:0 0 30px;color:#f0f1f2}
+.py-heading h1 em{font-family:Georgia,serif;font-weight:400;letter-spacing:-.055em;color:#c0c0c0}
+.py-heading>p:not(:first-child){font:14px/1.8 var(--st-body);color:#aeb8c7;max-width:400px;margin:0 0 32px}
+.py-primary{display:inline-flex;align-items:center;gap:34px;color:#f4dfb3;background:#a80e29;border:1px solid #c8102e;padding:17px 20px;font-size:13px;font-weight:600;text-decoration:none}
+.py-primary svg{border-left:1px solid #e1bd7040;box-sizing:content-box;padding-left:18px}
+.py-scroll-note{display:flex;align-items:center;gap:10px;margin-top:34px;color:#8795a8;font:9px var(--font-mono);letter-spacing:.12em}
+.py-sculpture{height:540px;min-width:0;position:relative}
+.py-canvas{position:absolute;inset:0 0 42px}
+.py-canvas canvas{display:block}
+.py-poster{position:absolute;inset:0;width:100%;height:90%}
+.py-object-note{position:absolute;right:0;top:10px;font:9px var(--font-mono);letter-spacing:.1em;color:#8190a6}
+.py-controls{position:absolute;left:15%;right:0;bottom:0;display:flex;align-items:center;justify-content:flex-end;gap:20px}
+.py-controls button{display:inline-flex;align-items:center;gap:9px;padding:10px 0;background:transparent;color:#a8b4c5;border:0;border-bottom:1px solid #c0c0c033;border-radius:0;font:10px var(--st-body);cursor:pointer}
+.py-directions{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:35px;border-top:1px solid #c0c0c02e}
+.py-directions a{position:relative;color:#e0e5ec;text-decoration:none;padding:23px 28px 10px;border-right:1px solid #c0c0c01c;--pair:#c0c0c0;--pair-fill:#003da5}
+.py-directions a:first-child{padding-left:0}.py-directions a:last-child{border-right:0;--pair:#e1bd70;--pair-fill:#c8102e}
+.py-directions a::before{content:'';position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--pair);transform:scaleX(0);transform-origin:left;transition:transform 240ms ease}
+.py-directions span{font:9px var(--font-mono);letter-spacing:.12em;color:#8190a6}
+.py-hero .py-directions h2{font:500 22px var(--st-body);letter-spacing:-.04em;margin:12px 0 7px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.py-directions h2 svg{color:var(--pair);padding:7px;border:1px solid #c0c0c02e;border-radius:50%;box-sizing:content-box}
+.py-directions p{font:12px/1.6 var(--st-body);color:#919eb1;margin:0}
+@media(hover:hover){.py-directions a:hover::before{transform:scaleX(1)}.py-directions a:hover h2 svg{background:var(--pair-fill);border-color:var(--pair)}.py-primary:hover{background:#c8102e;border-color:#e1bd70;color:#fff0cf}.py-controls button:hover{color:#f0f1f2;border-bottom-color:#c0c0c0}}
+@media(min-width:801px) and (min-height:700px) and (prefers-reduced-motion:no-preference){.py-hero{height:240svh}.py-stage{position:sticky;top:86px;height:calc(100svh - 86px);min-height:0;box-sizing:border-box;grid-template-rows:minmax(0,1fr) auto;padding-top:42px}.py-sculpture{height:100%;min-height:0}.py-directions{margin-top:18px}}
+@media(max-width:1100px){.py-hero .py-heading h1{font-size:clamp(52px,6.4vw,80px)}.py-heading>p:not(:first-child){font-size:13px}.py-directions a{padding-left:18px;padding-right:18px}.py-hero .py-directions h2{font-size:19px}}
+@media(max-width:800px){.py-stage{grid-template-columns:1fr;padding:55px 6% 30px}.py-heading{padding-bottom:0}.py-hero .py-heading h1{font-size:clamp(55px,10vw,80px)}.py-sculpture{height:410px;margin-top:20px}.py-scroll-note{display:none}.py-controls{left:0;justify-content:center}.py-object-note{top:0}.py-directions{margin-top:30px}.py-hero .py-directions h2{font-size:17px}.py-directions p{font-size:11px}.py-directions h2 svg{width:14px;height:14px;padding:5px}}
+@media(max-width:500px){.py-directions{grid-template-columns:1fr}.py-directions a,.py-directions a:first-child{padding:20px 0;border-right:0;border-bottom:1px solid #c0c0c026}.py-directions span{float:left;margin:8px 16px 0 0}.py-hero .py-directions h2{font-size:22px;margin:0 0 8px}.py-directions p{margin-left:36px;font-size:12px}.py-sculpture{height:350px}.py-hero .py-heading h1{font-size:clamp(48px,11.5vw,65px)}}
+@media(prefers-reduced-motion:reduce){.py-directions a::before{transition:none}}
+.py-service-picker{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 15px}
+.py-service-picker button{padding:9px 11px;font:11px var(--st-body);border:1px solid #c0c0c040;background:transparent;color:#b8c2d1;cursor:pointer}
+.py-service-picker button[aria-pressed="true"]{background:#003da5;color:#e5e7eb;border-color:#c0c0c0}
+.py-service-picker button:last-child[aria-pressed="true"]{background:#a80e29;color:#f4dfb3;border-color:#e1bd70}
+.py-service-detail{max-width:390px;min-height:145px}.py-service-detail>p{font:13px/1.7 var(--st-body);color:#abb8ca;margin:0 0 18px}
+.py-directions a[data-selected="true"]::before{transform:scaleX(1)}
+.py-service-picker button:hover{border-color:#c0c0c0;color:#fff}
+.py-canvas{pointer-events:auto}
+.py-hero .py-heading h1{font-size:clamp(54px,5.6vw,90px)}
+.py-scroll-note{margin-top:19px}
+@media(min-width:801px) and (max-height:800px){.py-heading>p:first-child{margin-bottom:15px}.py-hero .py-heading h1{font-size:60px;margin-bottom:18px}.py-heading>p:not(:first-child){margin-bottom:12px}.py-service-picker{margin-top:12px}.py-scroll-note{display:none}}

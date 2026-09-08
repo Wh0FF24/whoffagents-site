@@ -10,3 +10,6 @@ test*-*.png
 
 # Local Netlify folder
 .netlify
+test-results/
+playwright-report/
+test-results-*/

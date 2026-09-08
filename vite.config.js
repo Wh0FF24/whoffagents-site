@@ -1,7 +1,9 @@
-import { execSync } from 'node:child_process'
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { routeMeta } from "./src/data/routeMeta.js";
+import { execSync } from "node:child_process";
+import process from "node:process";
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 /**
  * Real recent commit subjects for the ops tape. Conventional-commit
@@ -13,23 +15,51 @@ import tailwindcss from '@tailwindcss/vite'
  */
 function getOpsLines() {
   try {
-    return execSync('git log -12 --format=%s', { encoding: 'utf8' })
-      .split('\n')
+    return execSync("git log -12 --format=%s", { encoding: "utf8" })
+      .split("\n")
       .map((s) => s.trim())
       .filter((s) => /^(feat|fix|perf|style|docs|chore):/.test(s))
       .filter((s) => !/honest|fabricat|purge|remove/i.test(s))
-      .slice(0, 4)
+      .slice(0, 4);
   } catch {
-    return []
+    return [];
   }
 }
 
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    tailwindcss(),
+    {
+      name: "private-preview-indexing",
+      configurePreviewServer(server) {
+        // Serve the same per-route HTML the production host receives.
+        server.middlewares.use((req, _res, next) => {
+          const url = new URL(req.url, "http://localhost");
+          const route = url.pathname.replace(/\/$/, "");
+          if (route && Object.hasOwn(routeMeta, route)) {
+            req.url = `${route}/index.html${url.search}`;
+          }
+          next();
+        });
+      },
+      transformIndexHtml() {
+        return loadEnv(mode, process.cwd()).VITE_PRIVATE_PREVIEW === "true"
+          ? [
+              {
+                tag: "meta",
+                attrs: { name: "robots", content: "noindex, nofollow" },
+                injectTo: "head",
+              },
+            ]
+          : [];
+      },
+    },
+  ],
   define: {
     // Stamped into the UI "receipts" — always the real build date.
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
     // Real git log subjects for the ops tape — filtered above.
     __OPS_LINES__: JSON.stringify(getOpsLines()),
   },
-})
+}));

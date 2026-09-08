@@ -173,11 +173,15 @@ body {
   --color-brand-red-bright: #E5484D;
 }
 
-/* ---------- SURFACES — the one card primitive ---------- */
+/* ---------- SURFACES — the one card primitive ----------
+   Radius comes from the card family token; children compute theirs from
+   it. See styles/concentric.css. */
 .card-surface {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.012));
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
+  --radius: var(--radius-card);
+  --pad: 24px;
+  border-radius: var(--radius);
 }
 .card-surface--featured {
   /* follows its section's accent (--sec-accent), red outside a scoped section */
@@ -570,7 +574,8 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   position: relative;
   background: #0E0F12;
   border: 1px solid #2A2D33;
-  border-radius: 3px;
+  --radius: var(--radius-node);
+  border-radius: var(--radius);
   padding: 10px 14px 9px;
   min-width: 132px;
 }
@@ -623,7 +628,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   position: absolute;
   inset: -5px;
   border: 1px solid rgba(229, 72, 77, 0.22);
-  border-radius: 6px;
+  border-radius: var(--radius-node-ring);
   pointer-events: none;
 }
 /* bright ring overlay — ignites as the job arrives for review */
@@ -631,7 +636,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
   position: absolute;
   inset: -5px;
   border: 1px solid #E5484D;
-  border-radius: 6px;
+  border-radius: var(--radius-node-ring);
   pointer-events: none;
   opacity: clamp(0, (var(--gp) - .18) * 12, 1);
 }
@@ -644,7 +649,7 @@ html.js [data-reveal]:not(.in) .stmt-wi {
 .gate-ship-flash {
   position: absolute;
   inset: 0;
-  border-radius: 3px;
+  border-radius: var(--radius-node);
   background: rgba(229, 72, 77, 0.22);
   box-shadow: 0 0 18px rgba(229, 72, 77, 0.35);
   pointer-events: none;
