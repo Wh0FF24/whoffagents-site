@@ -23,6 +23,7 @@ import FreeSkill from './pages/FreeSkill'
 import AiSaasStarter from './pages/AiSaasStarter'
 import WebStudio from './pages/WebStudio'
 import AgentsPage from './pages/AgentsPage'
+import Receptionist from './pages/Receptionist'
 import TradingSignalsMCP from './pages/TradingSignalsMCP'
 import ProductsArchive from './pages/ProductsArchive'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -78,6 +79,7 @@ function App() {
               <Route path="/free-skill" element={<FreeSkill />} />
               <Route path="/web" element={<WebStudio />} />
               <Route path="/agents" element={<AgentsPage />} />
+              <Route path="/receptionist" element={<Receptionist />} />
               <Route path="/products/trading-signals-mcp" element={<TradingSignalsMCP />} />
               <Route path="/products/archive" element={<ProductsArchive />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />

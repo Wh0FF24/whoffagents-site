@@ -62,6 +62,10 @@ const routeMeta = {
     title: 'Custom AI Agents for Your Business | Whoff Agents',
     description: 'Custom AI built for your business: it answers your phone in a real voice, handles your email, and runs the repeat work. No hardware, nothing to install. Any business, any job — ask for a live demo call.',
   },
+  '/receptionist': {
+    title: 'AI Phone Receptionist for Your Business | Whoff Agents',
+    description: 'An AI that answers your business line in a real voice, takes the caller’s details, and emails you the summary. $500 one-time setup, a monthly service fee quoted for your business, and the metered usage passed through at cost on your own account. Call +1 385-318-0061 and hear it.',
+  },
   '/products': {
     title: 'Developer Tools & AI Products | Whoff Agents',
     description: 'Claude Code skills, MCP servers, and starter kits extracted from a working AI-operated studio — plus a done-for-you AI receptionist. One-time prices, 30-day refunds.',
