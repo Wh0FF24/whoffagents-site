@@ -54,7 +54,7 @@ export default function WebStudio() {
             <div className="flex flex-wrap gap-8 anim-rise anim-d4">
               {[
                 { n: '95+', l: 'google speed score' },
-                { n: '< 7 days', l: 'to first live version' },
+                { n: '< 7 days', l: 'target: first live version' },
                 { n: '$1,500', l: 'flat, to start' },
               ].map(({ n, l }) => (
                 <div key={l}>
