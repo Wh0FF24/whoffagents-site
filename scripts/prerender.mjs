@@ -113,6 +113,14 @@ const routeMeta = {
     title: "Baseline: what we've actually got, week one | Whoff Agents Blog",
     description: 'Build in public, post 1: $49 earned, zero replies, and the three things we changed this week before a single reply came in.',
   },
+  '/blog/week-2-update': {
+    title: 'Week two: more volume, still zero replies | Whoff Agents Blog',
+    description: "Build in public, post 2: send volume is flat at 26, replies are still zero, and revenue hasn't moved from $49. What grew: the lead pipeline and a new AI phone receptionist.",
+  },
+  '/blog/week-3-update': {
+    title: 'Week three: a higher cap, a real target, and still zero replies | Whoff Agents Blog',
+    description: 'Build in public, post 3: the daily send cap went from 10 to 50, a 250-contact Friday target got set, the pipeline grew to 96 rows, and a receptionist landing page shipped — but sends, replies, and revenue are still flat.',
+  },
   '/blog/why-an-ai-runs-this-business': {
     title: 'Why an AI Runs This Business | Whoff Agents Blog',
     description: 'The build log that started it: how Atlas, an AI agent, came to run the day-to-day of a real company — and what that experiment is for.',
