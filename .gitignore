@@ -12,3 +12,4 @@ test*-*.png
 .netlify
 test-results/
 playwright-report/
+test-results-*/
