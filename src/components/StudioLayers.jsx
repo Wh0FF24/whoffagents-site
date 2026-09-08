@@ -1,5 +1,5 @@
 import { deferScene } from "../utils/deferScene";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   ArrowDown,
@@ -38,7 +38,7 @@ function StudioLayers({ web }) {
   useEffect(() => {
     scene.current?.setPaused(paused);
   }, [paused, state]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     let dead = false;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)"),
       compact = matchMedia("(max-width: 700px), (max-height: 650px)");

@@ -244,48 +244,104 @@
 .lp-static .lp-foot {
   margin-top: 25px;
 }
+/*
+ * Below 700px, StudioLayers always ends up in "static" mode — the same
+ * effect that reads matchMedia("(max-width: 700px)") is what sets
+ * `.lp-static` — but only after hydration, one paint after the prerendered
+ * HTML already painted the sticky/scrolly (non-static) geometry. That
+ * box-model jump (`.lp-stage` sticky + 100svh-tall -> relative + auto-height
+ * flow) is what dragged `.lp-halo` and `.lp-copy` across the screen for a
+ * mobile CLS of 0.55. Mirroring the same geometry here, unconditional on
+ * viewport width alone, makes the first-painted (prerendered) markup already
+ * match what JS would apply, so there is nothing left to reflow once
+ * hydration catches up. The `.lp-static`-prefixed rules above stay: they
+ * still drive the other trigger for static mode (prefers-reduced-motion, or
+ * short viewports on wide screens) that this width query doesn't cover.
+ */
 @media (max-width: 700px) {
-  .lp-stage {
-    padding: 25px 22px;
+  /*
+   * `.lp-experience` prefix (rather than bare `.lp-stage`, `.lp-copy`, etc.)
+   * is deliberate: it ties these rules' specificity with the pre-hydration
+   * `.lp-static X` rules above so, once React adds `.lp-static` after
+   * mount, the cascade keeps this file's later (mobile) declaration instead
+   * of falling back to the non-mobile one — which would reintroduce the
+   * exact reflow this media query exists to prevent.
+   */
+  .lp-experience {
+    height: auto;
   }
-  .lp-top {
+  .lp-experience .lp-stage {
+    position: relative;
+    top: 0;
+    height: auto;
+    min-height: 0;
+    padding: 25px 22px 30px;
+  }
+  .lp-experience .lp-top {
     font-size: 7px;
   }
-  .lp-static .lp-copy h1 {
+  .lp-experience .lp-copy {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 45px;
+  }
+  .lp-experience .lp-copy h1 {
     font-size: 54px;
   }
-  .lp-static .lp-copy h1 br {
+  .lp-experience .lp-copy h1 br {
     display: block;
   }
-  .lp-static .lp-canvas {
+  .lp-experience .lp-copy > button {
+    display: none;
+  }
+  .lp-experience .lp-canvas {
+    position: relative;
+    inset: auto;
     height: 350px;
     margin: 0 -50px;
   }
-  .lp-bottom {
+  .lp-experience .lp-fallback {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 350px;
+  }
+  .lp-experience[data-scene="fallback"] .lp-canvas {
+    display: none;
+  }
+  .lp-experience .lp-bottom,
+  .lp-experience .lp-foot {
+    position: relative;
+    inset: auto;
+  }
+  .lp-experience .lp-bottom {
     flex-direction: column;
     align-items: stretch;
     gap: 25px;
   }
-  .lp-caption {
+  .lp-experience .lp-caption {
     min-width: 0;
   }
-  .lp-navigation {
+  .lp-experience .lp-navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
   }
-  .lp-tabs {
+  .lp-experience .lp-tabs {
     margin: 0;
     gap: 4px;
   }
-  .lp-tabs button {
+  .lp-experience .lp-tabs button {
     width: 31px;
   }
-  .lp-caption h2 {
+  .lp-experience .lp-caption h2 {
     font-size: 29px;
   }
-  .lp-foot {
+  .lp-experience .lp-foot {
+    margin-top: 25px;
     font-size: 6px;
   }
 }
