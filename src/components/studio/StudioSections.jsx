@@ -33,7 +33,7 @@ export const studioFeatures = [
   {
     icon: Zap,
     title: 'Fast, every time',
-    desc: "Built lean — no bloated page builders. 95+ on Google's speed test, because a slow site loses people before they see what you sell.",
+    desc: "Built lean — no bloated page builders, no unnecessary JavaScript — because a slow site loses people before they see what you sell.",
   },
   {
     icon: CalendarClock,
@@ -60,7 +60,7 @@ export const studioTiers = [
     desc: 'A clean, fast site that gets you found and looks legit.',
     features: [
       'Custom design (no templates)',
-      'Mobile-first, 95+ Google speed scores',
+      'Mobile-first, built for speed',
       'Show up right on Google (titles, local results, link previews)',
       'Up to 5 pages',
     ],
