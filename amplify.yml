@@ -9,8 +9,9 @@ frontend:
         - npm install
     build:
       commands:
-        - npm run build
-        - node scripts/prerender.mjs
+        # VITE_PRIVATE_PREVIEW defaults to preview mode (noindex, 'NOT LIVE'
+        # badge, simulated form sends). Production must set it to false.
+        - VITE_PRIVATE_PREVIEW=false npm run build
   artifacts:
     baseDirectory: dist
     files:

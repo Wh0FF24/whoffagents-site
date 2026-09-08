@@ -135,7 +135,7 @@ export const studioSteps = [
 export const studioFaqs = [
   {
     q: 'How long does it actually take?',
-    a: "We target a first working version within a week for Redesign and Redesign Pro projects — that's what we build to. Larger Platform builds are scoped individually. “Live in days” means the site — collecting your content from you is usually the slowest part, so we hand you a 15-minute checklist and take it from there.",
+    a: "For Redesign and Redesign Pro, we aim to have a first working version in your hands within a week of receiving your content. Larger Platform builds are scoped individually. “Live in days” means the site — collecting your content from you is usually the slowest part, so we hand you a 15-minute checklist and take it from there.",
   },
   {
     q: 'I already have a website. Does that help or hurt?',
