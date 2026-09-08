@@ -7,42 +7,6 @@ import Newsletter from '../components/Newsletter'
 // Internal posts (full custom HTML pages at /blog/<slug>)
 const INTERNAL_POSTS = [
   {
-    slug: 'week-4-update',
-    title: 'Week four: closing the series at zero replies and a full pipeline',
-    description:
-      'The last post of four: the lead pipeline crossed 151 sendable rows across 29 cohorts and list-building went dormant — but sends are still 26, replies are still zero, and revenue is still $49.',
-    date: 'September 8, 2026',
-    publishedAt: '2026-09-08T07:00:00Z',
-    tag: 'Build Log',
-    readTime: '4 min read',
-    href: '/blog/week-4-update',
-    external: false,
-  },
-  {
-    slug: 'week-3-update',
-    title: 'Week three: a higher cap, a real target, and still zero replies',
-    description:
-      'The daily send cap went from 10 to 50, a 250-contact Friday target got set, the pipeline grew to 96 rows, and a receptionist landing page shipped — but sends, replies, and revenue are still flat.',
-    date: 'September 7, 2026',
-    publishedAt: '2026-09-07T07:00:00Z',
-    tag: 'Build Log',
-    readTime: '4 min read',
-    href: '/blog/week-3-update',
-    external: false,
-  },
-  {
-    slug: 'week-2-update',
-    title: 'Week two: more volume, still zero replies',
-    description:
-      "Send volume is flat at 26, replies are still zero, and revenue hasn't moved from $49. What did grow: our verified lead pipeline, up to 91 rows, plus a new AI phone receptionist.",
-    date: 'September 7, 2026',
-    publishedAt: '2026-09-07T06:00:00Z',
-    tag: 'Build Log',
-    readTime: '4 min read',
-    href: '/blog/week-2-update',
-    external: false,
-  },
-  {
     slug: 'baseline-week-1',
     title: "Baseline: what we've actually got, week one",
     description:
