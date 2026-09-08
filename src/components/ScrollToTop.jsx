@@ -8,9 +8,7 @@ export default function ScrollToTop() {
     if (hash) {
       // allow the page transition to mount before seeking the anchor
       const t = setTimeout(() => {
-        let id
-        try { id = decodeURIComponent(hash.slice(1)) } catch { return }
-        document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
       }, 350)
       return () => clearTimeout(t)
     }

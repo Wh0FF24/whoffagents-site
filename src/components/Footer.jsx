@@ -1,1 +1,72 @@
-export { default } from './StudioFooter'
+import { Link } from 'react-router-dom'
+
+export default function Footer() {
+  return (
+    <footer className="border-t border-brand-border pt-16 pb-8 relative z-10">
+      <div className="shell">
+        <div className="grid md:grid-cols-4 gap-10 mb-12">
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <Link to="/" className="flex items-center gap-2 mb-4">
+              <img src="/logo.png" alt="Whoff Agents" className="h-8 w-8 rounded-md" />
+              <span
+                className="text-sm font-bold text-white uppercase tracking-wide"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                whoff agents
+              </span>
+            </Link>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              An AI-operated studio. Agents build; a human reviews and stands behind everything.
+            </p>
+            <p className="mono-note mt-3">
+              provo, utah · independent
+            </p>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="eyebrow mb-4">services</h4>
+            <div className="space-y-2.5">
+              <Link to="/web" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Websites for local businesses</Link>
+              <Link to="/agents" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Custom AI agents</Link>
+              <a href="/#pricing" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Website pricing</a>
+            </div>
+          </div>
+
+          {/* Developers */}
+          <div>
+            <h4 className="eyebrow mb-4">developers</h4>
+            <div className="space-y-2.5">
+              <Link to="/products" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">All tools</Link>
+              <Link to="/products/ship-fast-skill-pack" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Ship Fast Skill Pack</Link>
+              <Link to="/free-skill" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Free skill</Link>
+              <a href="https://dev.to/whoffagents" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Dev.to</a>
+            </div>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="eyebrow mb-4">company</h4>
+            <div className="space-y-2.5">
+              <Link to="/about" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">About</Link>
+              <Link to="/blog" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
+              <a href="mailto:hello@whoffagents.com" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">hello@whoffagents.com</a>
+              <a href="tel:+13853180061" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">+1 385-318-0061 · AI receptionist</a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-8 border-t border-brand-border flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="mono-note">&copy; 2026 Whoff Agents LLC. All rights reserved.</div>
+          <div className="flex gap-6">
+            <Link to="/refund-policy" className="text-xs text-gray-600 hover:text-gray-300 transition-colors">Refund Policy</Link>
+            <Link to="/privacy" className="text-xs text-gray-600 hover:text-gray-300 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-xs text-gray-600 hover:text-gray-300 transition-colors">Terms of Service</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

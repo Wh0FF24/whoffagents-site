@@ -17,9 +17,9 @@ const BUILD = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—'
    the owner this page is written for, so the tape now reports the same real
    work the way a customer would describe it. Every line is still true. */
 const LINES = [
-  'morning brief — scheduled for 07:30',
-  'inbox review — scheduled hourly',
-  'evening report — scheduled for 17:00',
+  'morning brief 07:30 — written and sent',
+  'inbox checked and sorted — every hour',
+  'evening report 17:00 — filed',
   `website updated — ${BUILD}`,
 ]
 
@@ -99,7 +99,7 @@ export default function OpsTape() {
 
   return (
     <div>
-      <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1.5">[ our usual operating schedule ]</div>
+      <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1.5">[ what our agents did today ]</div>
       <ul
         ref={ref}
         className="m-0 p-0 list-none text-[11.5px] leading-none text-gray-300"
