@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>True Plumbing, Heating and Air — Get a Quote</title>
+<style>
+  :root {
+    --brand: #1976b8;
+    --brand-dark: #125685;
+    --accent: #e8f4fb;
+    --text: #1c2a33;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+    background: #fff;
+  }
+  header {
+    background: var(--brand);
+    color: #fff;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  header .logo-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  header .brand-name {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  header .brand-sub {
+    font-size: 12px;
+    opacity: .9;
+  }
+  .hero {
+    padding: 28px 20px 20px;
+    background: linear-gradient(180deg, var(--accent), #fff);
+  }
+  .hero h1 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 0 0 8px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: #465863;
+    margin: 0 0 20px;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .badge {
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid #d5e6f0;
+    color: var(--brand-dark);
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  form {
+    background: #fff;
+    border: 1px solid #e1eaf0;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 18px rgba(20, 60, 90, 0.08);
+  }
+  form h2 {
+    margin: 0 0 14px;
+    font-size: 17px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 12px 0 6px;
+  }
+  input, select {
+    width: 100%;
+    padding: 13px 12px;
+    font-size: 16px;
+    border: 1px solid #cbd7de;
+    border-radius: 10px;
+    background: #fbfdfe;
+  }
+  input:focus, select:focus {
+    outline: 2px solid var(--brand);
+    border-color: var(--brand);
+  }
+  button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--brand);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  button[type="submit"]:active {
+    background: var(--brand-dark);
+  }
+  .success {
+    display: none;
+    text-align: center;
+    padding: 30px 16px;
+  }
+  .success.show {
+    display: block;
+  }
+  .success .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #1e9e5a;
+    color: #fff;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .success h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+  }
+  .success p {
+    font-size: 14px;
+    color: #465863;
+    margin: 0;
+  }
+  footer {
+    padding: 24px 20px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: #8a9aa5;
+  }
+  .mockup-flag {
+    background: #fff6db;
+    color: #7a5b00;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="mockup-flag">Mockup demo — no data is stored or sent. Built by Whoff Agents.</div>
+
+<header>
+  <div class="logo-badge">TP</div>
+  <div>
+    <div class="brand-name">True Plumbing, Heating and Air</div>
+    <div class="brand-sub">West Jordan, UT</div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Get a plumbing or HVAC quote in under a minute</h1>
+  <p>Tell us what's going on and the best number to reach you — no call required to get started.</p>
+  <div class="badge-row">
+    <span class="badge">Licensed &amp; insured</span>
+    <span class="badge">Same-day service</span>
+    <span class="badge">Family owned</span>
+  </div>
+
+  <form id="quote-form">
+    <h2>Request a free quote</h2>
+
+    <label for="name">Your name</label>
+    <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+
+    <label for="phone">Phone number</label>
+    <input type="tel" id="phone" name="phone" placeholder="(801) 555-0123" required>
+
+    <label for="service">What do you need?</label>
+    <select id="service" name="service" required>
+      <option value="" disabled selected>Select a service</option>
+      <option value="plumbing-repair">Plumbing repair</option>
+      <option value="heating">Heating service</option>
+      <option value="air-conditioning">Air conditioning</option>
+      <option value="other">Something else</option>
+    </select>
+
+    <button type="submit">Request My Quote</button>
+  </form>
+
+  <div class="success" id="success-state">
+    <div class="check">&#10003;</div>
+    <h2>Got it, thanks!</h2>
+    <p>This is a mockup — on the real site, True Plumbing's team would text you back shortly to confirm details.</p>
+  </div>
+</div>
+
+<footer>
+  This is an unaffiliated mockup created by Whoff Agents to demonstrate a mobile quote flow. Nothing here is live or connected to True Plumbing's actual systems.
+</footer>
+
+<script>
+  document.getElementById('quote-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('success-state').classList.add('show');
+  });
+</script>
+
+</body>
+</html>

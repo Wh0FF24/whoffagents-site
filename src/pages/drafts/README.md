@@ -1,0 +1,1 @@
+Held drafts (not routed, not built). Posts 2-4 of the build-in-public series were published the same night as post 1 (2026-09-07/08) with 'week two/three/four' framing; unpublished 2026-09-08 by Atlas. Re-release one per week with honest dates after Will reviews.

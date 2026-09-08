@@ -7,6 +7,7 @@
  * Luke's outreach pipeline depends on them. Do not rename anything here.
  */
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Zap, CheckCircle2, CalendarClock, Search, Check, ArrowRight,
   Smartphone, ServerCog, PhoneCall,
@@ -32,7 +33,7 @@ export const studioFeatures = [
   {
     icon: Zap,
     title: 'Fast, every time',
-    desc: "Built lean — no bloated page builders. 95+ on Google's speed test, because a slow site loses people before they see what you sell.",
+    desc: "Built lean — no bloated page builders, no unnecessary JavaScript — because a slow site loses people before they see what you sell.",
   },
   {
     icon: CalendarClock,
@@ -59,7 +60,7 @@ export const studioTiers = [
     desc: 'A clean, fast site that gets you found and looks legit.',
     features: [
       'Custom design (no templates)',
-      'Mobile-first, 95+ Google speed scores',
+      'Mobile-first, built for speed',
       'Show up right on Google (titles, local results, link previews)',
       'Up to 5 pages',
     ],
@@ -134,7 +135,7 @@ export const studioSteps = [
 export const studioFaqs = [
   {
     q: 'How long does it actually take?',
-    a: "For Redesign and Redesign Pro, we aim to have a first working version in your hands within a week of receiving your content. Larger Platform builds are scoped individually. “Live in days” means the site — collecting your content from you is usually the slowest part, so we hand you a 15-minute checklist and take it from there.",
+    a: "We target a first working version within a week for Redesign and Redesign Pro projects — that's what we build to. Larger Platform builds are scoped individually. “Live in days” means the site — collecting your content from you is usually the slowest part, so we hand you a 15-minute checklist and take it from there.",
   },
   {
     q: 'I already have a website. Does that help or hurt?',
@@ -301,6 +302,11 @@ export function LeadForm({ source = 'web_studio_page' }) {
           </button>
           <span className="text-sm text-gray-500">No spam. No obligation. We reply within one business day.</span>
         </div>
+        <p className="mt-3 text-xs text-gray-500">
+          By submitting, you agree to be contacted by phone, text, or email about your project.
+          Message and data rates may apply; reply STOP to opt out of texts at any time. See our{' '}
+          <Link to="/privacy" className="underline hover:text-gray-300 transition-colors">privacy policy</Link>.
+        </p>
         {status === 'error' && (
           <p className="mt-3 text-sm text-brand-red-bright">
             Something went wrong sending that — try again, or email{' '}
