@@ -20,7 +20,7 @@ import StudioIdentity from "../components/StudioIdentity";
 import InquiryForm from "../components/InquiryForm";
 import "../styles/studio.css";
 
-const PREVIEW = import.meta.env.VITE_PRIVATE_PREVIEW !== "false";
+const PREVIEW = import.meta.env.VITE_PRIVATE_PREVIEW === "true";
 const work = [
   {
     title: "Spindle Creek",
@@ -548,8 +548,10 @@ export function Pricing({ full = false }) {
         </div>
         {!full && (
           <p className="st-pricing-footnote">
-            Looking for an AI assistant? Phone answering setup is $500, plus
-            usage. Other projects are scoped individually.{" "}
+            Looking for an AI assistant? Phone answering is $500 to set up
+            once, plus a monthly service fee quoted for your business and the
+            metered phone and AI usage passed through at cost on your own
+            account. Other projects are scoped individually.{" "}
             <Link to="/agents">
               Explore AI agents <ArrowUpRight size={14} />
             </Link>
@@ -572,8 +574,8 @@ export function FAQ({ agent = false }) {
           "We design an explicit fallback: admit the gap, take a message, or hand the decision back to you. You test real situations before it reaches your customers.",
         ],
         [
-          "Is there a monthly subscription?",
-          "The phone-answering setup is $500 once. Phone and AI usage are ongoing and depend on volume. We estimate them with you before launch. Other work is quoted to its scope.",
+          "What does it cost, all in?",
+          "Three parts, and we say all three up front. The phone-answering setup is $500 once — that is the build, not a subscription. A monthly service fee is quoted for your business rather than printed here, because we would be inventing the number before knowing the job. The phone minutes and the AI usage are metered and passed through at cost on your own account — we take no cut of them. Anything beyond answering the phone is a full assistant, quoted as its own project in the same three parts.",
         ],
         [
           "Can I try it before it goes live?",
@@ -723,10 +725,36 @@ export function StudioAgents() {
           <strong>
             $500<small>once</small>
           </strong>
+          <ul className="st-agent-price-parts">
+            <li>
+              <strong>Setup — $500, once.</strong> The build, not a
+              subscription. The one figure we can put in writing without knowing
+              your business.
+            </li>
+            <li>
+              <strong>A monthly service fee — quoted for you.</strong>{" "}
+              Keeping it configured, updated as your business changes, and
+              watched while it runs. We do not print a number here because we
+              would be inventing it before knowing the job.
+            </li>
+            <li>
+              <strong>The usage, passed through at cost.</strong> Phone minutes
+              and the AI itself are metered. That bill sits on your own account
+              — one we open in your name, or a subscription you already have
+              — and you pay the provider what the provider charges. We take
+              no cut and never fold it into a plan of ours.
+            </li>
+            <li>
+              Anything beyond answering the phone is a full assistant, quoted as
+              its own project in the same three parts.
+            </li>
+          </ul>
           <p>
-            Plus the phone line and actual AI usage.
-            <br />
-            We estimate ongoing costs before you switch it on.
+            The full breakdown is on the{" "}
+            <Link className="st-text-link" to="/receptionist">
+              receptionist page
+            </Link>
+            .
           </p>
           <Action to="/agents#lead-form">Ask about phone answering</Action>
           <p>

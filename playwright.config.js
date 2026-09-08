@@ -19,6 +19,10 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   webServer: process.env.PLAYWRIGHT_EXTERNAL_SERVER ? undefined : {
+    // Pinned to preview mode. Preview is opt-in since the cutover, and
+    // .env.local is gitignored — without this an unconfigured checkout would
+    // build the LIVE transport and the inquiry test would post a real lead.
+    env: { VITE_PRIVATE_PREVIEW: "true" },
     command:
       `npm run build && npm run preview -- --host 127.0.0.1 --port ${port} --strictPort`,
     url: `http://127.0.0.1:${port}`,

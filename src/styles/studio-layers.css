@@ -58,7 +58,8 @@
   color: #f5d995;
   border: 0;
   padding: 15px 23px;
-  border-radius: 30px;
+  --radius: var(--radius-pill);
+  border-radius: var(--radius);
   font: 12px var(--st-body);
   margin-top: 17px;
 }
@@ -168,7 +169,8 @@
   background: #12213a;
   padding: 10px;
   font: 9px var(--st-body);
-  border-radius: 22px;
+  --radius: var(--radius-pill-sm);
+  border-radius: var(--radius);
 }
 .lp-foot {
   position: absolute;

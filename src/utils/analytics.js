@@ -10,7 +10,7 @@ export function track(eventName, props = {}) {
   }
   if (
     import.meta.env.VITE_POSTHOG_KEY &&
-    import.meta.env.VITE_PRIVATE_PREVIEW === "false"
+    import.meta.env.VITE_PRIVATE_PREVIEW !== "true"
   ) {
     import("posthog-js").then(({ default: posthog }) => {
       posthog.capture(PH_NAME[eventName] ?? eventName, props);

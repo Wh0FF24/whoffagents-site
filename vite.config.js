@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => ({
         });
       },
       transformIndexHtml() {
-        return loadEnv(mode, process.cwd()).VITE_PRIVATE_PREVIEW !== "false"
+        return loadEnv(mode, process.cwd()).VITE_PRIVATE_PREVIEW === "true"
           ? [
               {
                 tag: "meta",

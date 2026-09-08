@@ -15,6 +15,11 @@ export const routeMeta = {
     description:
       "Custom AI built for your business: it answers your phone in a real voice, handles your email, and runs the repeat work. No hardware, nothing to install. Phone intake, email drafts, and routine workflows, tested with you before launch.",
   },
+  "/receptionist": {
+    title: "AI Phone Receptionist for Your Business | Whoff Agents",
+    description:
+      "An AI that answers your business line in a real voice, takes the caller’s details, and emails you the summary. $500 one-time setup, a monthly service fee quoted for your business, and the metered usage passed through at cost on your own account. Call +1 385-318-0061 and hear it.",
+  },
   "/products": {
     title: "Developer Tools & AI Products | Whoff Agents",
     description:
@@ -67,6 +72,11 @@ export const routeMeta = {
     title: "Blog | Whoff Agents",
     description:
       "Build logs from an AI-operated studio: what our agents shipped, what broke, and the Claude Code patterns that survived production.",
+  },
+  "/blog/baseline-week-1": {
+    title: "Baseline: what we’ve actually got, week one | Whoff Agents Blog",
+    description:
+      "Build in public, post 1: $49 earned, zero replies, and the three things we changed this week before a single reply came in.",
   },
   "/blog/why-an-ai-runs-this-business": {
     title: "Why an AI Runs This Business | Whoff Agents Blog",

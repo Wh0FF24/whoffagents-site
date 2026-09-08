@@ -12,6 +12,10 @@ export default function StudioFooter() {
           <p>
             An independent, AI-operated studio.
             <br />A person behind every project.
+            <br />
+            <a className="st-footer-phone" href="tel:+13853180061">
+              +1 385-318-0061 · AI receptionist
+            </a>
           </p>
           <a href="mailto:hello@whoffagents.com">
             Say hello
@@ -23,6 +27,7 @@ export default function StudioFooter() {
             <span>WHAT WE DO</span>
             <Link to="/web">Websites</Link>
             <Link to="/agents">AI agents</Link>
+            <Link to="/receptionist">AI receptionist</Link>
             <Link to="/products">Developer tools</Link>
           </div>
           <div>

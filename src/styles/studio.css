@@ -340,7 +340,9 @@ a {
   border: 1px solid #b0b1b2;
   box-shadow: 0 15px 35px #00163833;
   overflow: hidden;
-  border-radius: 5px;
+  --radius: var(--radius-frame-sm);
+  --pad: 0px;
+  border-radius: var(--radius);
 }
 .st-browser-bar {
   height: 27px;
@@ -750,7 +752,8 @@ a {
   align-self: flex-end;
   background: #e5e8ed;
   padding: 11px 14px;
-  border-radius: 8px 8px 0 8px;
+  --radius: var(--radius-bubble);
+  border-radius: var(--radius) var(--radius) 0 var(--radius);
   animation: st-message-in 0.25s both;
 }
 .st-message > span {
@@ -769,7 +772,7 @@ a {
   align-self: flex-start;
   background: var(--st-blue);
   color: #fff;
-  border-radius: 8px 8px 8px 0;
+  border-radius: var(--radius) var(--radius) var(--radius) 0;
 }
 .st-message-agent > span {
   color: #d1dcee;

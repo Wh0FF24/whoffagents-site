@@ -12,7 +12,7 @@ npm ci
 npm run dev -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
-Preview mode is the default, including when no env file exists. Only explicitly setting VITE_PRIVATE_PREVIEW=false enables the production transport. Preview mode labels the page, injects noindex, disables PostHog initialization, and simulates inquiry submissions without sending. Localhost binding is the privacy boundary; noindex alone is not access control.
+Preview mode is OPT-IN: it is on only when VITE_PRIVATE_PREVIEW is exactly `true`, which `.env.local` sets for local work and `playwright.config.js` sets for the test run. Any other value, including no env file at all, builds the live production transport — which is what the Amplify build produces, since Amplify carries no VITE_PRIVATE_PREVIEW variable and the old preview-by-default gate would have shipped a noindexed site with a dead form. Preview mode labels the page, injects noindex, disables PostHog initialization, and simulates inquiry submissions without sending. Localhost binding is the privacy boundary; noindex alone is not access control.
 
 ## Stack and checks
 
@@ -54,7 +54,7 @@ Three.js loads asynchronously only on the five main routes and shares one runtim
 ## Production prerequisites
 
 1. Will's design approval and public portfolio permission, especially for the unpublished Island Airporter build.
-2. Wire and verify lead delivery. `VITE_CONTACT_ENDPOINT` currently expects a same-origin JSON endpoint that returns `{ "accepted": true }` after confirmed acceptance. No endpoint is implemented or configured here. Missing configuration gives an honest error and mailto fallback.
+2. Lead delivery is wired. With no `VITE_CONTACT_ENDPOINT` set, a live build posts the inquiry to the Netlify lead form production already uses (`form-name=lead`, main's field names) with `mode: 'no-cors'`; the response is opaque, so the form reports "Sent", not "confirmed received". Setting `VITE_CONTACT_ENDPOINT` to a same-origin path switches to the stricter JSON transport, which only reports success on a 2xx carrying `{ "accepted": true }`.
 3. Preserve the existing Luke lead pipeline: `https://whoff-web-studio.netlify.app/`, `form-name=lead`, and the field names documented in `src/components/studio/StudioSections.jsx`. A backend adapter must preserve this contract; the new form schema is not a drop-in replacement.
 4. Any real voice demo needs a dedicated, approved integration. The present transcript is explicitly illustrative. Never expose Atlas's private personal-forward number or Iris's separate personal line.
 5. Production smoke test and indexing/configuration review. Never treat turning off `VITE_PRIVATE_PREVIEW` as sufficient release preparation.

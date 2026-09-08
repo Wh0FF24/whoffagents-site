@@ -88,11 +88,17 @@ test("reduced motion renders a stable still but keeps every dimension accessible
   await page.emulateMedia({ reducedMotion: "reduce" });
   await ready(page);
   await page.waitForTimeout(500);
-  const canvas = page.locator(".dx-object canvas");
-  const before = await canvas.screenshot();
+  // "Stable still" means the render loop stopped, which is what the scene
+  // publishes: draw calls and turn stop moving. A PNG of a WebGL canvas is
+  // not byte-stable across readbacks even when nothing has been re-rendered,
+  // so comparing screenshots tests the capture, not the scene.
+  const stats = () =>
+    page
+      .locator(".dx-object")
+      .evaluate((el) => `${el.dataset.drawCalls}|${el.dataset.turn}`);
+  const before = await stats();
   await page.waitForTimeout(250);
-  const after = await canvas.screenshot();
-  expect(before.equals(after)).toBe(true);
+  expect(await stats()).toBe(before);
   await expect(
     page.getByRole("button", { name: "Pause motion", exact: true }),
   ).toHaveCount(0);
@@ -103,7 +109,8 @@ test("reduced motion renders a stable still but keeps every dimension accessible
     "data-turn",
     "1.000",
   );
-  expect(before.equals(await canvas.screenshot())).toBe(false);
+  // Choosing a dimension still re-renders — the still is stable, not frozen.
+  expect(await stats()).not.toBe(before);
 });
 
 test("WebGL unavailable and context loss both leave usable project browsing", async ({
@@ -160,11 +167,11 @@ test("context loss and route changes cleanly replace the renderer", async ({
     .getByRole("link", { name: "Whoff Agents home", exact: true })
     .click();
   await page.keyboard.press("Shift");
-  await expect(page.locator(".dx-experience")).toHaveAttribute(
-    "data-scene",
-    "ready",
-  );
-  await expect(page.locator(".dx-object canvas")).toHaveCount(1);
+  // "/" with no ?concept is the pyramid hero — the route change has to hand
+  // the renderer over to it cleanly.
+  await expect(page.locator(".py-hero")).toHaveAttribute("data-scene", "ready");
+  await expect(page.locator(".py-canvas canvas")).toHaveCount(1);
+  await expect(page.locator(".dx-object canvas")).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
@@ -196,13 +203,19 @@ test("prerendered page has meaningful content without JavaScript", async ({
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto(`${test.info().project.use.baseURL}/`);
-  await page.keyboard.press("Shift");
-  await expect(page.locator("h1")).toContainText("dimension.");
-  await expect(page.locator(".dx-fallback img")).toBeVisible();
-  await expect(page.locator(".dx-project > a")).toHaveAttribute(
+  // "/" prerenders the pyramid hero: real heading, the static poster that
+  // stands in for the scene, and the three service routes as plain links.
+  await expect(page.locator("h1")).toContainText("kind of studio.");
+  await expect(page.locator(".py-poster")).toBeVisible();
+  await expect(page.locator(".py-directions a").first()).toHaveAttribute(
     "href",
-    "https://spindlecreek.com",
+    "/web",
   );
+  await expect(
+    page.getByRole("link", { name: /spindlecreek/i }).or(
+      page.locator('a[href="https://spindlecreek.com"]'),
+    ).first(),
+  ).toHaveAttribute("href", "https://spindlecreek.com");
   await context.close();
 });
 

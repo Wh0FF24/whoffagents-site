@@ -2,12 +2,21 @@
  * InquiryForm — the site's one inquiry intake.
  *
  * Two modes, decided at build time:
- *  - VITE_PRIVATE_PREVIEW is not explicitly 'false' → local simulation. Nothing leaves the
+ *  - VITE_PRIVATE_PREVIEW === 'true' → local simulation. Nothing leaves the
  *    browser, and the form says so both before and after submitting. It never
- *    claims a lead was received.
- *  - explicitly 'false' → POST JSON to VITE_CONTACT_ENDPOINT, which must be a
- *    same-origin path. With no valid endpoint configured the form says so
- *    honestly and offers a mailto fallback rather than faking a success.
+ *    claims a lead was received. Preview is OPT-IN: .env.local sets it for local
+ *    work, and a production build (no env file) is always live. The gate used to
+ *    default to preview, which would have shipped a dead form and a noindex site
+ *    to production, because Amplify has no VITE_PRIVATE_PREVIEW variable set.
+ *  - otherwise → the live transport, in this order:
+ *      1. VITE_CONTACT_ENDPOINT, if it is a same-origin path: POST JSON and only
+ *         report success when the server answers 2xx with { accepted: true }.
+ *      2. Otherwise the Netlify lead form that production already delivers
+ *         through. The endpoint, form-name and field names below are
+ *         LOAD-BEARING — the outreach pipeline reads them. Do not rename them.
+ *         Netlify forms are cross-origin, so the POST is no-cors and the
+ *         response is opaque: a completed request is reported as sent, not as
+ *         confirmed-received, and the copy says so.
  *
  * No provider keys, no analytics on the payload, no storage, and nothing the
  * visitor typed is ever logged.
@@ -36,8 +45,11 @@ const CONTACT_METHODS = [
 const FALLBACK_EMAIL = "hello@whoffagents.com";
 const REQUEST_TIMEOUT_MS = 12000;
 
-const IS_PREVIEW = import.meta.env.VITE_PRIVATE_PREVIEW !== "false";
+const IS_PREVIEW = import.meta.env.VITE_PRIVATE_PREVIEW === "true";
 const RAW_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT;
+
+// Production lead delivery — same endpoint and field names main ships today.
+const FORM_ACTION = "https://whoff-web-studio.netlify.app/";
 
 /**
  * Same-origin path only: must start with a single "/" and contain no
@@ -117,17 +129,56 @@ export default function InquiryForm({ initialService = "Website" }) {
       return;
     }
 
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    // No same-origin JSON endpoint configured: use the Netlify lead form that
+    // production already delivers through.
     if (!ENDPOINT) {
+      try {
+        await fetch(FORM_ACTION, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            "form-name": "lead",
+            "bot-field": "",
+            business_name: business.trim(),
+            name: name.trim(),
+            phone: usePhone ? phone.trim() : "",
+            email: usePhone ? "" : email.trim(),
+            current_website: "",
+            needs: `[${service}] ${needs.trim()}
+
+Preferred reply: ${contactMethod}`,
+          }).toString(),
+          signal: controller.signal,
+        });
+      } catch (error) {
+        const timedOut = error?.name === "AbortError";
+        finish({
+          tone: "error",
+          message: timedOut
+            ? `That request timed out before it went through. Your details are still here. Please email ${FALLBACK_EMAIL} to check before submitting again.`
+            : `We could not send that just now — your details are still here, so you can try again. If it keeps failing, email ${FALLBACK_EMAIL}.`,
+          showMailto: true,
+        });
+        return;
+      } finally {
+        clearTimeout(timer);
+      }
+
+      setName("");
+      setBusiness("");
+      setEmail("");
+      setPhone("");
+      setNeeds("");
       finish({
-        tone: "error",
-        message: `This form has no delivery address configured, so your message was not sent. Please email ${FALLBACK_EMAIL} instead.`,
-        showMailto: true,
+        tone: "success",
+        message: `Sent. We reply within one business day — if you do not hear back, email ${FALLBACK_EMAIL}.`,
       });
       return;
     }
-
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
       const response = await fetch(ENDPOINT, {
@@ -352,7 +403,9 @@ export default function InquiryForm({ initialService = "Website" }) {
       </button>
 
       <p className="iq-help" id={helpId}>
-        We use these details to respond to your inquiry.{" "}
+        By submitting, you agree to be contacted by phone, text, or email about
+        your project. Message and data rates may apply; reply STOP to opt out of
+        texts at any time. We use these details to respond to your inquiry.{" "}
         <Link className="iq-privacy-link" to="/privacy">
           Privacy
         </Link>

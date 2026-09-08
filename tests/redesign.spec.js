@@ -145,3 +145,84 @@ test("all existing routes, titles and download stay available without JS errors"
     );
   expect(errors).toEqual([]);
 });
+
+// Pages that came from main during the cutover merge: no 3D scene, so they
+// get their own pass rather than being bolted onto the scene-aware loop.
+for (const width of [390, 1440]) {
+  test(`merged content routes fit ${width}px and have no serious accessibility violations`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ["/receptionist", "/blog/baseline-week-1", "/blog"]) {
+      await page.goto(route);
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.evaluate(() => document.fonts.ready);
+      await expect(page.locator("h1")).toHaveCount(1);
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true);
+      const results = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze();
+      expect(
+        results.violations.map((v) => ({
+          id: v.id,
+          impact: v.impact,
+          nodes: v.nodes.map((n) => n.target),
+        })),
+      ).toEqual([]);
+    }
+  });
+}
+
+test("the receptionist line and the published post are reachable from the chrome", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const footer = page.getByRole("contentinfo");
+  await expect(footer.getByRole("link", { name: /385-318-0061/ })).toHaveAttribute(
+    "href",
+    "tel:+13853180061",
+  );
+  await expect(
+    footer.getByRole("link", { name: "AI receptionist", exact: true }),
+  ).toHaveAttribute("href", "/receptionist");
+  await expect(
+    footer.getByRole("link", { name: "Notes & articles", exact: true }),
+  ).toHaveAttribute("href", "/blog");
+  await page
+    .getByRole("banner")
+    .getByRole("link", { name: "AI receptionist", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/receptionist$/);
+});
+
+test("both lead forms carry the consent line, and the drafts stay unpublished", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/agents#lead-form");
+  await expect(page.locator("form.iq-form")).toContainText(
+    "reply STOP to opt out of texts",
+  );
+  await page.goto("/receptionist");
+  await expect(page.locator("#lead-form form")).toContainText(
+    "reply STOP to opt out of texts",
+  );
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("/blog/baseline-week-1");
+  for (const slug of ["week-2-update", "week-3-update", "week-4-update"]) {
+    // Unpublished: no route, no prerendered page, no sitemap entry. The SPA
+    // catch-all rewrite means the host answers 200 with the app shell for any
+    // unknown path, so what is asserted is that the app has nothing to show
+    // there — not a status code the rewrite does not produce.
+    expect(sitemap).not.toContain(slug);
+    await page.goto(`/blog/${slug}`);
+    await expect(page.locator("#main-content")).toContainText(
+      "That page isn’t here.",
+    );
+  }
+});

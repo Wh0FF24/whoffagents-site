@@ -18,6 +18,7 @@ export default function StudioNav() {
   const links = [
     ["/web", "Websites"],
     ["/agents", "AI agents"],
+    ["/receptionist", "AI receptionist"],
     ["/products", "Developer tools"],
     ["/about", "The studio"],
   ];

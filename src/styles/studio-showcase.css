@@ -18,7 +18,8 @@
   border-color: #424c60;
 }
 .st-nav-cta {
-  border-radius: 30px;
+  --radius: var(--radius-pill);
+  border-radius: var(--radius);
   border-bottom: 0;
   color: #f2d997;
   background: #a90f29;
@@ -136,7 +137,8 @@
   display: inline-flex;
   align-items: center;
   gap: 25px;
-  border-radius: 30px;
+  --radius: var(--radius-pill);
+  border-radius: var(--radius);
   color: #f5d995;
   background: #a90f29;
   border: 1px solid #c8102e;
@@ -171,7 +173,9 @@
   right: 9%;
   top: 24%;
   border: 12px solid #8493a7;
-  border-radius: 18px;
+  --radius: var(--radius-frame);
+  --pad: 12px;
+  border-radius: var(--radius);
   transform: rotate(-8deg);
   background: #003da5;
   color: #d4dce8;
@@ -228,7 +232,8 @@
   width: 42px;
   height: 58px;
   border: 1px solid #51617b;
-  border-radius: 25px;
+  --radius: var(--radius-chip);
+  border-radius: var(--radius);
   color: #c0c0c0;
 }
 .dx-scroll a {
@@ -446,7 +451,10 @@
   transform: none;
   border: 0;
   box-shadow: none;
-  border-radius: 0;
+  /* frameless in the showcase — the whole family squares off together, so
+     the chrome bar and the screenshot inside follow (concentric.css) */
+  --radius: 0px;
+  border-radius: var(--radius);
 }
 .st-project-image:hover .st-browser {
   transform: none;

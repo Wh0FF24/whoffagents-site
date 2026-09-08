@@ -1,0 +1,167 @@
+/* ============================================================
+   CONCENTRIC CORNER RADIUS
+   Ops/demo-factory/DESIGN-NOTES.md, "Concentric Corner Radius".
+
+   A nested element shares its parent's centre of curvature when
+
+       inner radius = outer radius - the distance between them
+
+   so every rounded child computes its radius from the container's
+   --radius token and the gap that separates them (padding, or a border
+   acting as padding). max(0px, ...) is part of the rule, not a guard: a
+   child inset further than its parent's radius is CORRECTLY square. That
+   is why the controls inside a 14px card with 24px padding come out
+   square — it is the answer the formula gives, and it lands on the sharp
+   inner geometry the studio pages already use everywhere else.
+
+   ONE TOKEN PER CONTAINER FAMILY. Every radius in the redesign is either
+   a token below or a calc() from one; the container files publish
+   --radius and --pad, this file computes the children.
+
+   Families:
+     card    .card-surface / <Card> — the one card primitive. Rounded,
+             with rounded children: buttons, inputs, media, inner panels.
+             (index.css)
+     panel   the studio's cut-corner surfaces — the /agents price block
+             and the tool card. One major corner, three minor.
+             (studio-identities.css)
+     frame   media frames — the WebGL-off poster and the browser chrome.
+             (studio-showcase.css, studio.css)
+     pill    action pills. A pill is a SHAPE, not a concentric child: its
+             radius is half its height, so it is tokenised and excluded
+             from the formula rather than fed through it.
+
+   Families that are square by design (radius 0), and therefore have
+   square children under the same formula — named so the omission reads as
+   a decision, not an oversight: the studio nav and its mobile sheet,
+   .st-price-card pricing tiers, .st-faq-list disclosures, .st-care,
+   the .iq-* form controls, and the footer CTAs.
+
+   The 3D scenes are <canvas> elements with no border-radius of their own;
+   nothing in this file selects them.
+   ============================================================ */
+
+:root {
+  /* container-family tokens */
+  --radius-card: 14px;
+  --radius-panel: 24px;
+  --radius-frame: 18px;
+  --radius-frame-sm: 5px;
+  --radius-pill: 30px;
+  --radius-pill-sm: 22px;
+  --radius-chip: 25px;
+  --radius-bubble: 8px;
+  --radius-node: 3px;
+  /* a ring drawn 5px outside a node keeps its centre of curvature by
+     ADDING the gap — the same formula, run outward */
+  --radius-node-ring: calc(var(--radius-node) + 5px);
+
+  /* the panel family's three minor corners are a sixth of its major one */
+  --radius-panel-minor: calc(var(--radius-panel) / 6);
+  /* a panel nested one border + one hairline in from another */
+  --radius-panel-inset: 2px;
+}
+
+/* ---------- card family ----------
+   .card-surface publishes --radius and --pad (index.css). Tailwind
+   supplies the padding as a class, so the class is what sets --pad —
+   the same number, read from the same place the browser reads it.
+   Default is 24px (p-6), the padding most cards carry. */
+.card-surface.p-4 {
+  --pad: 16px;
+}
+.card-surface.p-5 {
+  --pad: 20px;
+}
+.card-surface.p-6 {
+  --pad: 24px;
+}
+.card-surface.p-8 {
+  --pad: 32px;
+}
+.card-surface.p-10 {
+  --pad: 40px;
+}
+@media (min-width: 768px) {
+  .card-surface.md\:p-8 {
+    --pad: 32px;
+  }
+  .card-surface.md\:p-9 {
+    --pad: 36px;
+  }
+  .card-surface.md\:p-10 {
+    --pad: 40px;
+  }
+}
+
+/* Every rounded child of a card, one level in. Pills keep their shape. */
+.card-surface
+  > :where(
+    [class~="rounded-md"],
+    [class~="rounded-lg"],
+    [class~="rounded-xl"],
+    [class~="rounded-2xl"]
+  ) {
+  border-radius: max(0px, calc(var(--radius) - var(--pad)));
+}
+
+/* Media filling a card edge to edge is inset by 0, so it keeps the card's
+   own radius on the corners it touches. */
+.card-surface.overflow-hidden > img,
+.card-surface.overflow-hidden > video {
+  border-radius: var(--radius);
+}
+
+/* ---------- panel family ----------
+   Both surfaces publish --radius in studio-identities.css. The tool
+   card's header strip is flush with the card (inset 0), so it carries the
+   card's radius on the two corners it actually touches. */
+.dp-tools-page .st-tool-card > .st-tool-card-top {
+  border-top-left-radius: max(0px, calc(var(--radius) - var(--pad)));
+  border-top-right-radius: max(0px, calc(var(--radius) - var(--pad)));
+}
+/* Anything inside the /agents price block is inset by its 30px padding,
+   which is past the panel's radius — square, by the formula. */
+.dp-agent-page .st-agent-price > :where(ul, p, a, .st-button, strong) {
+  border-radius: max(0px, calc(var(--radius) - var(--pad)));
+}
+
+/* ---------- frame family ----------
+   The poster's 12px border is the distance between frame and image; the
+   browser chrome's bar and screenshot are both flush with the frame. */
+.dx-fallback > img {
+  border-radius: max(0px, calc(var(--radius) - var(--pad)));
+}
+.st-browser > .st-browser-bar {
+  border-top-left-radius: max(0px, calc(var(--radius) - var(--pad)));
+  border-top-right-radius: max(0px, calc(var(--radius) - var(--pad)));
+}
+.st-browser > img {
+  border-bottom-left-radius: max(0px, calc(var(--radius) - var(--pad)));
+  border-bottom-right-radius: max(0px, calc(var(--radius) - var(--pad)));
+}
+
+/* ---------- the three-part pricing list on /agents ----------
+   Sits inside the panel family, so it inherits the square inner corners
+   above; this is only its type and rhythm. */
+.st-agent-price-parts {
+  list-style: none;
+  margin: 16px 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.st-agent-price-parts strong {
+  font-weight: 650;
+}
+
+/* the AI receptionist line under the footer address block */
+.st-footer-phone {
+  color: #c9ced6;
+}
+.st-footer-phone:hover {
+  color: #fff;
+}

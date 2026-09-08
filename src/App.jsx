@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BlogPostBaselineWeek1 from "./pages/BlogPostBaselineWeek1";
 import CryptoDataMCP from "./pages/CryptoDataMCP";
 import AiPromptPack from "./pages/AiPromptPack";
 import BlogPostCryptoMCP from "./pages/BlogPostCryptoMCP";
@@ -20,6 +21,7 @@ import FreeSkill from "./pages/FreeSkill";
 import AiSaasStarter from "./pages/AiSaasStarter";
 import WebStudio from "./pages/WebStudio";
 import AgentsPage from "./pages/AgentsPage";
+import Receptionist from "./pages/Receptionist";
 import TradingSignalsMCP from "./pages/TradingSignalsMCP";
 import ProductsArchive from "./pages/ProductsArchive";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -29,6 +31,7 @@ import "./styles/studio.css";
 import "./styles/studio-showcase.css";
 import "./styles/studio-identities.css";
 import "./styles/studio-atmosphere.css";
+import "./styles/concentric.css";
 import { routeMeta } from "./data/routeMeta";
 
 function App() {
@@ -42,7 +45,7 @@ function App() {
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical)
       canonical.href = `https://whoffagents.com${location.pathname === "/" ? "" : location.pathname}`;
-    if (import.meta.env.VITE_PRIVATE_PREVIEW !== "false") {
+    if (import.meta.env.VITE_PRIVATE_PREVIEW === "true") {
       let robots = document.querySelector('meta[name="robots"]');
       if (!robots) {
         robots = document.createElement("meta");
@@ -106,6 +109,10 @@ function App() {
             element={<BlogPost />}
           />
           <Route
+            path="/blog/baseline-week-1"
+            element={<BlogPostBaselineWeek1 />}
+          />
+          <Route
             path="/blog/introducing-crypto-data-mcp"
             element={<BlogPostCryptoMCP />}
           />
@@ -119,6 +126,7 @@ function App() {
           <Route path="/free-skill" element={<FreeSkill />} />
           <Route path="/web" element={<WebStudio />} />
           <Route path="/agents" element={<AgentsPage />} />
+          <Route path="/receptionist" element={<Receptionist />} />
           <Route
             path="/products/trading-signals-mcp"
             element={<TradingSignalsMCP />}
@@ -140,7 +148,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-      {import.meta.env.VITE_PRIVATE_PREVIEW !== "false" && (
+      {import.meta.env.VITE_PRIVATE_PREVIEW === "true" && (
         <div className="st-preview-badge">
           PRIVATE DESIGN PREVIEW · NOT LIVE
         </div>

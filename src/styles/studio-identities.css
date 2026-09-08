@@ -83,7 +83,8 @@
   gap: 28px;
   align-items: center;
   padding: 15px 22px;
-  border-radius: 30px;
+  --radius: var(--radius-pill);
+  border-radius: var(--radius);
   background: #a90f29;
   color: #f5d995;
   font-size: 12px;
@@ -306,7 +307,11 @@
   border: 1px solid #b3bed0;
   border-top: 4px solid #003da5;
   background: #e6ebf3;
-  border-radius: 4px 24px 4px 4px;
+  --radius: var(--radius-panel);
+  --radius-minor: var(--radius-panel-minor);
+  --pad: 30px;
+  border-radius: var(--radius-minor) var(--radius) var(--radius-minor)
+    var(--radius-minor);
 }
 /* Modular catalog, warm paired metals. Existing prices, filters and checkout links stay intact. */
 .dp-tools-page .st-tool-catalog {
@@ -327,7 +332,11 @@
 .dp-tools-page .st-tool-card {
   background: #fffefa;
   border: 1px solid #d3ccbf;
-  border-radius: 3px 22px 3px 3px;
+  --radius: calc(var(--radius-panel) - var(--radius-panel-inset));
+  --radius-minor: calc(var(--radius-panel-minor) - 1px);
+  --pad: 0px;
+  border-radius: var(--radius-minor) var(--radius) var(--radius-minor)
+    var(--radius-minor);
   box-shadow: 0 5px 0 #e5e0d7;
   transition:
     transform 0.2s,

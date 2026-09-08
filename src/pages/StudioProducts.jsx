@@ -164,7 +164,7 @@ export default function StudioProducts() {
           className="st-text-link"
           href="https://whoffagents.beehiiv.com/subscribe"
           onClick={() => {
-            if (import.meta.env.VITE_PRIVATE_PREVIEW === "false") {
+            if (import.meta.env.VITE_PRIVATE_PREVIEW !== "true") {
               track("Newsletter-Click", { destination: "beehiiv_hosted" });
             }
           }}

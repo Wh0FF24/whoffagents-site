@@ -8,7 +8,7 @@ import { captureUTMs } from "./utils/utm";
 captureUTMs();
 
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
-if (POSTHOG_KEY && import.meta.env.VITE_PRIVATE_PREVIEW === "false") {
+if (POSTHOG_KEY && import.meta.env.VITE_PRIVATE_PREVIEW !== "true") {
   import("posthog-js").then(({ default: posthog }) =>
     posthog.init(POSTHOG_KEY, {
       api_host: "https://us.i.posthog.com",
