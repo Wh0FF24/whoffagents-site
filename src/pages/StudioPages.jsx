@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { buildStripeURL } from "../utils/utm";
 import { products } from "../data/products";
-import StudioShowcase from "../components/StudioShowcase";
+import StudioShowcase from "../components/StudioLayers";
 import StudioIdentity from "../components/StudioIdentity";
 import InquiryForm from "../components/InquiryForm";
 import "../styles/studio.css";

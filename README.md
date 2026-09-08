@@ -64,3 +64,9 @@ Blue pairs with silver; red pairs with gold. Do not include Will's last name in 
 ## Official logo
 
 Will supplied `updated.svg` as the official company logo. `public/brand/whoff-official-original.svg` preserves that file byte-for-byte. `whoff-logo.svg` and `whoff-mark.svg` retain its original vector paths and colors, with the background removed and the viewBox cropped for placement. The header/footer use the supplied wordmark; the favicon, studio fallback, and 3D sculpture use its symbol. Do not substitute the former invented W.
+
+## Layered portfolio comparison
+
+The approved cube remains the default. Open `/web?concept=layers` (or `/?concept=layers`) for the separate layered portfolio candidate: a compact stack opens into large project panels as visitors scroll. Numbered controls and previous/next buttons select projects directly. Mobile and reduced-motion visitors get a normal-flow presentation; a static screenshot preserves the links if WebGL fails. Will has not selected this alternative for production.
+
+`src/components/StudioLayers.jsx`, `layerScene.js`, and `src/styles/studio-layers.css` implement the alternative. Both presentations share `src/data/showcaseProjects.js`. `tests/layers.spec.js` adds four checks to the existing 24; the complete 28-test suite passed. Run `node scripts/capture-layers.mjs <output-directory>` against the local dev preview to capture the comparison.

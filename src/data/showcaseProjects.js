@@ -1,0 +1,38 @@
+export const dimensions = [
+  {
+    name: "Spindle Creek",
+    type: "01 / COMMERCE",
+    detail: "A small business. A world of its own.",
+    image: "/work/spindle.webp",
+    url: "https://spindlecreek.com",
+    link: "Visit the website",
+    status: "LIVE WEBSITE",
+  },
+  {
+    name: "Island Airporter",
+    type: "02 / DIGITAL EXPERIENCE",
+    detail: "A clearer journey, before the journey.",
+    image: "/work/island.webp",
+    url: "https://main.d1v4o3c4563ysj.amplifyapp.com",
+    link: "Explore the concept",
+    status: "PRIVATE CONCEPT · AWAITING APPROVAL",
+  },
+  {
+    name: "Agents with purpose",
+    type: "03 / AUTOMATION",
+    detail: "From first conversation to the next step.",
+    image: "/work/agent-surface.svg",
+    url: "/agents",
+    link: "Explore AI agents",
+    status: "ILLUSTRATIVE WORKFLOW",
+  },
+  {
+    name: "Tools for the builders",
+    type: "04 / DEVELOPER TOOLS",
+    detail: "Less setup. More making things happen.",
+    image: "/work/tools-surface.svg",
+    url: "/products",
+    link: "Explore the tools",
+    status: "THE TOOL COLLECTION",
+  },
+];
