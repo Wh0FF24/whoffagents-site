@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
+import officialMark from "../../public/brand/whoff-mark.svg?raw";
 
 // Three related objects, constructed here for the studio. No remote models or textures.
 export function createIdentityScene(host, kind, initialReduced, onLost) {
@@ -216,59 +218,41 @@ export function createIdentityScene(host, kind, initialReduced, onLost) {
       numeral.position.set(-1.54, 0, 1.21);
     });
   } else {
-    root.rotation.set(0.16, -0.25, -0.025);
-    // Two machined halves: a broad face, crisp bevel, and inset paired metal.
-    const outline = [
-      [-2.2, 1.25],
-      [-1.6, 1.25],
-      [-1.02, -0.57],
-      [-0.34, 0.8],
-      [0, 0.8],
-      [0, -0.2],
-      [-0.69, -1.3],
-      [-1.35, -1.3],
-    ];
-    [0, 1].forEach((i) => {
+    root.rotation.set(0.1, -0.25, -0.025);
+    // Extrude the supplied logo paths, preserving the actual interlocking W/A.
+    const parsed = new SVGLoader().parse(officialMark);
+    for (let i = 0; i < 2; i++) {
       const part = new THREE.Group();
       root.add(part);
       pieces.push(part);
-      const sign = i ? -1 : 1;
-      const points = outline.map(([x, y]) => new THREE.Vector2(x * sign, y));
-      const shape = new THREE.Shape(points);
-      const enamel = (i ? blue : red).clone();
-      enamel.metalness = 0.8;
-      enamel.roughness = 0.28;
-      enamel.clearcoat = 0.25;
-      mesh(
-        new THREE.ExtrudeGeometry(shape, {
-          depth: 0.45,
-          bevelEnabled: true,
-          bevelThickness: 0.055,
-          bevelSize: 0.055,
-          bevelSegments: 4,
-          steps: 1,
-        }),
-        enamel,
-        part,
-      );
-      // A narrow inlay follows the angular V; it is embedded in the face.
-      const inlay = [
-        [-1.92, 1.08],
-        [-1.08, -1.06],
-        [-0.13, 0.56],
-      ];
-      for (let j = 0; j < inlay.length - 1; j++) {
-        const [ax, ay] = inlay[j],
-          [bx, by] = inlay[j + 1];
-        const length = Math.hypot(bx - ax, by - ay);
-        const strip = mesh(
-          new THREE.BoxGeometry(length, 0.028, 0.012),
-          i ? silver : gold,
-          part,
+    }
+    parsed.paths.forEach((path) => {
+      const fill = path.userData.style.fill;
+      const warm = fill === "rgb(151,9,33)" || fill === "rgb(183,138,79)";
+      const surface = new THREE.Group();
+      surface.scale.set(0.009, -0.009, 0.009);
+      surface.position.set(-376 * 0.009, 412 * 0.009, -0.15);
+      pieces[warm ? 0 : 1].add(surface);
+      const material = new THREE.MeshStandardMaterial({
+        color: path.color,
+        metalness: 0.5,
+        roughness: 0.32,
+      });
+      SVGLoader.createShapes(path).forEach((shape) => {
+        mesh(
+          new THREE.ExtrudeGeometry(shape, {
+            depth: 25,
+            bevelEnabled: true,
+            bevelThickness: 1.2,
+            bevelSize: 0.6,
+            bevelSegments: 2,
+            steps: 1,
+            curveSegments: 6,
+          }),
+          material,
+          surface,
         );
-        strip.position.set(((ax + bx) * sign) / 2, (ay + by) / 2, 0.509);
-        strip.rotation.z = Math.atan2(by - ay, (bx - ax) * sign);
-      }
+      });
     });
   }
   let dead = false,

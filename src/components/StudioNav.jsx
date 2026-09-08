@@ -3,33 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 export function StudioLogo() {
   return (
-    <>
-      <svg
-        className="st-logo-mark"
-        width="36"
-        height="36"
-        viewBox="0 0 36 36"
-        aria-hidden="true"
-      >
-        <path fill="#C8102E" d="M0 0h18v36H0z" />
-        <path fill="#003DA5" d="M18 0h18v36H18z" />
-        <path
-          fill="none"
-          stroke="#E1BD70"
-          strokeWidth="3"
-          d="m5 10 5 17 8-13"
-        />
-        <path
-          fill="none"
-          stroke="#C0C0C0"
-          strokeWidth="3"
-          d="m18 14 8 13 5-17"
-        />
-      </svg>
-      <span className="st-wordmark">
-        whoff<span>agents</span>
-      </span>
-    </>
+    <img
+      className="st-official-logo"
+      src="/brand/whoff-logo.svg"
+      width="1065"
+      height="315"
+      alt=""
+    />
   );
 }
 export default function StudioNav() {

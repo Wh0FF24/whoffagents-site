@@ -30,9 +30,9 @@ The Playwright suite uses installed Chrome and automatically builds, prerenders,
 
 The current candidate is **Dimension**, an original Three.js scene. Its cube has two website faces (Spindle Creek and the private Island Airporter concept), two original illustrated capability faces, and a blue/silver studio lid. Desktop scrolling rotates the sculpture; phone visitors use direct controls in normal page flow. Reduced motion disables continuous motion and uses instant face changes. A still portfolio panel remains usable without WebGL. No client video or borrowed hero footage is included.
 
-Each main page has a related original sculpture: the home/web cube, an agent signal core, a stack of tool modules, and a two-part studio W. The agent choices also select the illustrative transcript scenario; the tool choices filter the catalog. Supporting product, article, and policy pages share a quiet chapter frame without extra 3D.
+Each main page has a related original sculpture: the home/web cube, an agent signal core, a stack of tool modules, and the official interlocking W/A mark. The agent choices also select the illustrative transcript scenario; the tool choices filter the catalog. Supporting product, article, and policy pages share a quiet chapter frame without extra 3D.
 
-The studio W uses beveled extruded faces with gold/silver inlays. Below the heroes, an original folded wireframe surface and paired ambient lighting continue through sections and supporting pages. This decoration stays behind content and adds no canvas. Its small scroll response stops under reduced motion, with no continuous idle animation. `scripts/generate-contour.mjs` reproduces the local SVG field.
+The studio sculpture extrudes the official SVG paths, retaining the red/blue W and gold/silver A. Below the heroes, an original folded wireframe surface and paired ambient lighting continue through sections and supporting pages. This decoration stays behind content and adds no canvas. Its small scroll response stops under reduced motion, with no continuous idle animation. `scripts/generate-contour.mjs` reproduces the local SVG field.
 
 Three.js loads asynchronously only on the five main routes and shares one runtime chunk. Scenes cap pixel density, stop rendering offscreen/in background tabs, and dispose resources on navigation. Every sculpture includes a static fallback, reduced-motion support, and a pause control. The browser checks verify rendered pixels, scrolling, pause, selections, catalog integration, fallback, context loss, mobile controls, and prerendered content. These checks establish behavior, not design quality.
 
@@ -60,3 +60,7 @@ Three.js loads asynchronously only on the five main routes and shares one runtim
 5. Production smoke test and indexing/configuration review. Never treat turning off `VITE_PRIVATE_PREVIEW` as sufficient release preparation.
 
 Blue pairs with silver; red pairs with gold. Do not include Will's last name in public content.
+
+## Official logo
+
+Will supplied `updated.svg` as the official company logo. `public/brand/whoff-official-original.svg` preserves that file byte-for-byte. `whoff-logo.svg` and `whoff-mark.svg` retain its original vector paths and colors, with the background removed and the viewBox cropped for placement. The header/footer use the supplied wordmark; the favicon, studio fallback, and 3D sculpture use its symbol. Do not substitute the former invented W.

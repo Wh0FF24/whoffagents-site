@@ -1,5 +1,23 @@
 /* A continuous material language below the sculptures. All decoration paints
    behind content, is clipped to its own field, and cannot intercept input. */
+.st-official-logo {
+  display: block;
+  width: 190px;
+  height: auto;
+}
+.st-footer .st-official-logo {
+  width: 235px;
+}
+@media (max-width: 600px) {
+  .st-header .st-official-logo {
+    width: 142px;
+  }
+}
+@media (max-width: 370px) {
+  .st-header .st-official-logo {
+    width: 120px;
+  }
+}
 .studio-page > :where(section:not(.dp-hero):not(.dx-experience)),
 .dp-support-page,
 .st-footer {

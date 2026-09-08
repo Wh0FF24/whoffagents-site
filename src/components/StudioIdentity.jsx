@@ -111,6 +111,16 @@ const identities = {
 };
 
 function ArtFallback({ kind }) {
+  if (kind === "studio")
+    return (
+      <img
+        className="dp-fallback"
+        src="/brand/whoff-mark.svg"
+        alt=""
+        aria-hidden="true"
+        style={{ objectFit: "contain", padding: "40px" }}
+      />
+    );
   return (
     <svg viewBox="0 0 500 400" className="dp-fallback" aria-hidden="true">
       {kind === "agents" ? (
@@ -126,7 +136,7 @@ function ArtFallback({ kind }) {
             />
           ))}
         </g>
-      ) : kind === "tools" ? (
+      ) : (
         <g fill="#881127" stroke="#e1bd70" strokeWidth="2">
           {[0, 1, 2].map((i) => (
             <g key={i} transform={`translate(${70 + i * 18},${75 + i * 86})`}>
@@ -143,18 +153,6 @@ function ArtFallback({ kind }) {
               </text>
             </g>
           ))}
-        </g>
-      ) : (
-        <g strokeLinejoin="miter">
-          <path d="M48 90h56l58 174 62-131h26v85l-67 99h-55Z" fill="#a60c26" />
-          <path
-            d="M452 90h-56l-58 174-62-131h-26v85l67 99h55Z"
-            fill="#003da5"
-          />
-          <g fill="none" strokeWidth="2">
-            <path d="m74 106 87 188 77-145" stroke="#e1bd70" />
-            <path d="m426 106-87 188-77-145" stroke="#c0c0c0" />
-          </g>
         </g>
       )}
     </svg>
