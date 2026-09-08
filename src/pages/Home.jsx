@@ -327,17 +327,18 @@ export default function Home() {
           <Card ticks className="p-8 text-center">
             <p className="eyebrow mb-6">hear one before you buy</p>
             <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm mx-auto">
-              Don&apos;t take our word for it. Ask for a demo and one of our agents will
-              phone you — the same kind we&apos;d build for you. Ask it anything.
+              Don&apos;t take our word for it. Call our line and talk to the AI receptionist
+              that answers for us — the same kind we&apos;d build for you. It takes your
+              name and what you need; Atlas emails you back within the hour.
             </p>
             <a
-              href="#lead-form"
+              href="tel:+13853180061"
               className="inline-flex items-center gap-3 px-6 py-4 rounded-lg bg-black/40 border border-white/10 hover:border-brand-red-bright/50 transition-all font-mono text-lg text-white"
             >
               <PhoneCall className="w-5 h-5 text-brand-red-bright" />
-              Request a live demo call
+              +1 385-318-0061
             </a>
-            <p className="mono-note mt-4">tell us in the form — an agent will phone you</p>
+            <p className="mono-note mt-4">an AI answers — say so if you want a human, and we&apos;ll email</p>
           </Card>
         </div>
       </section>

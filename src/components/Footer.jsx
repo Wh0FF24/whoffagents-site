@@ -52,6 +52,7 @@ export default function Footer() {
               <Link to="/about" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">About</Link>
               <Link to="/blog" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
               <a href="mailto:hello@whoffagents.com" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">hello@whoffagents.com</a>
+              <a href="tel:+13853180061" className="link-trace block w-fit text-sm text-gray-400 hover:text-white transition-colors">+1 385-318-0061 · AI receptionist</a>
             </div>
           </div>
         </div>
