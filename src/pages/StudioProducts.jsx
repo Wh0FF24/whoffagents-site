@@ -14,7 +14,7 @@ const summaries = {
   4: "Turn a draft into a structured article with search intent and useful metadata.",
   5: "Connect webhooks and multi-step workflows to the tools your agent can use.",
   9: "Check MCP servers for unsafe patterns and configuration problems.",
-  10: "The advanced MCP scanner with broader checks and priority signatures.",
+  10: "The same MCP Security Scanner, priced higher to support ongoing development. No extra features gated behind it.",
   11: "Work through eight questions to shape a clearer product offer.",
 };
 export default function StudioProducts() {
