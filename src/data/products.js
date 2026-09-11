@@ -90,7 +90,7 @@ export const products = [
     id: 9,
     title: "MCP Security Scanner",
     description:
-      "Scan any MCP server for unsafe patterns, insecure defaults, and common misconfigurations. One-command scan, JSON output. Free tier covers the basics; Pro adds the advanced ruleset.",
+      "Scan any MCP server for unsafe patterns, insecure defaults, and common misconfigurations. One-command scan, JSON output. Open source on GitHub; this is a packaged, ready-to-run copy.",
     category: "mcp",
     price: "$49",
     timeline: "Scanner — $49",
@@ -100,7 +100,7 @@ export const products = [
     id: 10,
     title: "MCP Security Scanner Pro",
     description:
-      "The Pro tier of MCP Security Scanner — full ruleset, priority signatures, and integration-ready reports. Same install, richer findings. For teams scanning at scale.",
+      "The same MCP Security Scanner as above, same scan and same output — no extra features are gated behind this tier. Priced higher for teams who want to support ongoing development.",
     category: "mcp",
     price: "$149",
     timeline: "Pro Tier — $149",
