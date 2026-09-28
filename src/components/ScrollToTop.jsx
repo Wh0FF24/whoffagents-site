@@ -14,7 +14,10 @@ export default function ScrollToTop() {
       }, 350)
       return () => clearTimeout(t)
     }
-    window.scrollTo(0, 0)
+    // Instant, not the page's smooth scroll-behavior: a glide to the top
+    // would still be under way when the new page's ScrollTrigger refreshes,
+    // and it restores the mid-glide position.
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   }, [pathname, hash])
 
   return null

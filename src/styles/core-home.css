@@ -37,9 +37,10 @@ html.lenis { scroll-behavior: auto; }
 /* ---------------------------------------------------------------- stage */
 
 .ch-layer {
-  --cx: 50vw;
-  --cy: 50vh;
-  --cr: 25vh;
+  /* Until the director writes them: its intro pose (see --d0 below). */
+  --cx: 50cqw;
+  --cy: 47cqh;
+  --cr: calc(var(--d0) / 2);
   --hold: 1;
   position: fixed;
   inset: 0;
@@ -56,7 +57,9 @@ html.lenis { scroll-behavior: auto; }
 /* Before the director runs (first paint, no JavaScript), mirror its intro
    framing in CSS: center (50%, 47%), diameter --d0. Poster box = 2.5 d,
    instrument box = 2 d. Container units measure the layer itself, which
-   excludes a classic scrollbar, as the director's measurements do. */
+   excludes a classic scrollbar, as the director's measurements do. The
+   director then keeps these exact boxes (inline px) and moves them by
+   transform only, so taking over shifts nothing. */
 .ch-layer { container-type: size; --d0: min(54cqh, calc((53cqh - 128px) / .69), 50cqw); }
 .ch-layer:not(.is-directed) .ch-poster { left: calc(50% - var(--d0) * 1.25); top: calc(47% - var(--d0) * 1.25); width: calc(var(--d0) * 2.5); height: calc(var(--d0) * 2.5); }
 .ch-layer:not(.is-directed) .ch-hud { left: calc(50% - var(--d0)); top: calc(47% - var(--d0)); width: calc(var(--d0) * 2); height: calc(var(--d0) * 2); }

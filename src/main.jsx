@@ -7,6 +7,14 @@ import { captureUTMs } from "./utils/utm";
 
 captureUTMs();
 
+// /route/ is served the same prerendered page as /route, but routing and page
+// metadata key on the bare path. Drop the slash before React reads the
+// location, so hydration matches that page.
+const { pathname, search, hash } = window.location;
+if (pathname.length > 1 && pathname.endsWith("/")) {
+  window.history.replaceState(window.history.state, "", (pathname.replace(/\/+$/, "") || "/") + search + hash);
+}
+
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
 if (POSTHOG_KEY && import.meta.env.VITE_PRIVATE_PREVIEW !== "true") {
   import("posthog-js").then(({ default: posthog }) =>

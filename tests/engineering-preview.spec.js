@@ -747,3 +747,52 @@ test('public company facts and research maturity stay accurately qualified', asy
   await expect(page.locator('main')).toContainText('In development');
   await expect(page.locator('main')).toContainText('protection effectiveness has not been established');
 });
+
+test('a trailing slash opens the page itself, with its own title and canonical', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  for (const route of ['/capabilities', '/research/persona-fleet', '/studio/about', '/about']) {
+    await page.goto(`${route}/`);
+    await expect(page).toHaveURL(new RegExp(`${route}$`));
+    await expect(page).toHaveTitle(routeMeta[route].title);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://whoffagents.com${route}`);
+  }
+  expect(errors, 'errors while hydrating slash URLs').toEqual([]);
+});
+
+test('header and footer links open the next page at its top', async ({ page }) => {
+  for (const [width, height] of [[1440, 900], [390, 844]]) {
+    await page.setViewportSize({ width, height });
+    for (const [from, to] of [['/about', '/capabilities'], ['/capabilities', '/research'], ['/research/persona-fleet', '/about'], ['/web', '/']]) {
+      await page.goto(from);
+      await page.waitForTimeout(1500);
+      await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight * 0.45, behavior: 'instant' }));
+      await page.waitForTimeout(600);
+      const clicked = await page.evaluate((href) => {
+        const link = [...document.querySelectorAll('header a, footer a')].find((a) => a.getAttribute('href') === href);
+        link?.click();
+        return Boolean(link);
+      }, to);
+      expect(clicked, `a header or footer link to ${to}`).toBe(true);
+      await expect(page).toHaveURL(new RegExp(`${to === '/' ? '' : to}/?$`));
+      await page.waitForTimeout(2500);
+      expect(await page.evaluate(() => Math.round(window.scrollY)), `${from} -> ${to} at ${width}px`).toBeLessThanOrEqual(5);
+    }
+  }
+});
+
+test('the homepage settles without layout shift', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__shift = 0;
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) if (!entry.hadRecentInput) window.__shift += entry.value;
+    }).observe({ type: 'layout-shift', buffered: true });
+  });
+  for (const [width, height, limit] of [[1440, 900, 0.01], [1920, 1080, 0.01], [390, 844, 0.02]]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+    await page.waitForTimeout(3000);
+    expect(await page.evaluate(() => window.__shift), `layout shift at ${width}x${height}`).toBeLessThan(limit);
+  }
+});

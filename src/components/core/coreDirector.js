@@ -36,6 +36,26 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   let idleId;
   let loadTimer;
 
+  // The HUD and poster keep the exact boxes first paint gave them
+  // (core-home.css) and are placed by transform alone. Moving them into
+  // other boxes would count as a layout shift even where nothing visibly
+  // moves. unit is the core diameter each box was drawn for.
+  const frames = new Map();
+  [[hud, 2], [poster, 2.5]].forEach(([element, span]) => {
+    if (!element) return;
+    const style = getComputedStyle(element);
+    const size = parseFloat(style.width) || 1000;
+    const left = parseFloat(style.left) || 0;
+    const top = parseFloat(style.top) || 0;
+    Object.assign(element.style, { left: `${left}px`, top: `${top}px`, width: `${size}px`, height: `${size}px` });
+    frames.set(element, { x: left + size / 2, y: top + size / 2, unit: size / span });
+  });
+  const place = (element, x, y, d) => {
+    const frame = frames.get(element);
+    if (!frame) return;
+    element.style.transform = `translate3d(${(x - frame.x).toFixed(1)}px, ${(y - frame.y).toFixed(1)}px, 0) scale(${(d / frame.unit).toFixed(4)})`;
+  };
+
   function measure() {
     const before = `${view.width}x${view.height}`;
     view.width = Math.max(1, stage.clientWidth || window.innerWidth);
@@ -249,8 +269,8 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     layer.style.setProperty('--hold', hold.toFixed(3));
     layer.style.setProperty('--local', local.toFixed(3));
     layer.style.setProperty('--settled', (1 - smooth(0.03, 0.1, away)).toFixed(3));
-    hud.style.transform = `translate3d(${(shown.x - 500).toFixed(1)}px, ${(shown.y - 500).toFixed(1)}px, 0) scale(${(current.d / 500).toFixed(4)})`;
-    if (poster) poster.style.transform = `translate3d(${(shown.x - 500).toFixed(1)}px, ${(shown.y - 500).toFixed(1)}px, 0) scale(${(current.d / 400).toFixed(4)})`;
+    place(hud, shown.x, shown.y, current.d);
+    place(poster, shown.x, shown.y, current.d);
 
     // It fades only as it crosses the top edge (judged by where it naturally
     // sits, not the momentary clamp above), so it never dims while fully on
@@ -493,6 +513,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       scene?.dispose();
       scene = null;
       layer.classList.remove('is-directed');
+      frames.forEach((frame, element) => ['left', 'top', 'width', 'height', 'transform'].forEach((key) => element.style.removeProperty(key)));
     },
   };
 }
