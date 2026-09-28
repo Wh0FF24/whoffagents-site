@@ -40,14 +40,17 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   // (core-home.css) and are placed by transform alone. Moving them into
   // other boxes would count as a layout shift even where nothing visibly
   // moves. unit is the core diameter each box was drawn for. The boxes are
-  // redrawn only when the intro core's size changes by more than a tenth
-  // (a rotation, a much larger window), so they are never scaled far past
-  // the size they were drawn at.
+  // redrawn when the intro core grows by more than a tenth or shrinks by more
+  // than a third (a rotation, a much larger window), so they are never
+  // scaled far from the size they were drawn at; a phone's toolbar sliding
+  // in and out does not redraw them. A redraw re-places them at once, so no
+  // frame shows a new box with the old transform.
   const frames = new Map();
   let frozenAt = 0;
+  let drawn = null;
   function freeze(introD) {
     const size0 = Math.max(1, introD);
-    if (frozenAt && Math.abs(size0 / frozenAt - 1) <= 0.1) return;
+    if (frozenAt && size0 / frozenAt <= 1.1 && size0 / frozenAt >= 0.65) return;
     frozenAt = size0;
     [[hud, 2], [poster, 2.5]].forEach(([element, span]) => {
       if (!element) return;
@@ -59,12 +62,16 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       Object.assign(element.style, { left: `${left}px`, top: `${top}px`, width: `${size}px`, height: `${size}px` });
       frames.set(element, { x: left + size / 2, y: top + size / 2, unit: size / span });
     });
+    if (drawn) {
+      place(hud, drawn.x, drawn.y, drawn.d);
+      place(poster, drawn.x, drawn.y, drawn.d);
+    }
   }
-  const place = (element, x, y, d) => {
+  function place(element, x, y, d) {
     const frame = frames.get(element);
     if (!frame) return;
     element.style.transform = `translate3d(${(x - frame.x).toFixed(1)}px, ${(y - frame.y).toFixed(1)}px, 0) scale(${(d / frame.unit).toFixed(4)})`;
-  };
+  }
 
   function measure() {
     const before = `${view.width}x${view.height}`;
@@ -280,8 +287,9 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     layer.style.setProperty('--hold', hold.toFixed(3));
     layer.style.setProperty('--local', local.toFixed(3));
     layer.style.setProperty('--settled', (1 - smooth(0.03, 0.1, away)).toFixed(3));
-    place(hud, shown.x, shown.y, current.d);
-    place(poster, shown.x, shown.y, current.d);
+    drawn = { x: shown.x, y: shown.y, d: current.d };
+    place(hud, drawn.x, drawn.y, drawn.d);
+    place(poster, drawn.x, drawn.y, drawn.d);
 
     // It fades only as it crosses the top edge (judged by where it naturally
     // sits, not the momentary clamp above), so it never dims while fully on
@@ -526,6 +534,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       layer.classList.remove('is-directed');
       frames.forEach((frame, element) => ['left', 'top', 'width', 'height', 'transform'].forEach((key) => element.style.removeProperty(key)));
       frozenAt = 0;
+      drawn = null;
     },
   };
 }

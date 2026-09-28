@@ -9,8 +9,8 @@ captureUTMs();
 
 // /route/ is served the same prerendered page as /route, but routing and page
 // metadata key on the bare path. Drop the slash before React reads the
-// location, so hydration matches that page. Leading slashes collapse too:
-// "//route" would otherwise be read as a host.
+// location, so hydration matches that page. Leading slashes are reduced to
+// one as well: "//route" would otherwise be read as a host.
 const { pathname, search, hash } = window.location;
 if (pathname.length > 1 && (pathname.endsWith("/") || pathname.startsWith("//"))) {
   try {

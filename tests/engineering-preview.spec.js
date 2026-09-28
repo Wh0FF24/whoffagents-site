@@ -818,3 +818,37 @@ test('the instruments are redrawn for the new screen after a rotation', async ({
     expect(Math.abs((await scale()) - 1), `HUD drawn near its display size at ${width}x${height}`).toBeLessThan(0.1);
   }
 });
+
+test('a redraw of the instruments never shows them out of place for a frame', async ({ page }) => {
+  // Installed before the page's scripts, so it runs first in every frame and
+  // sees what the previous frame painted.
+  await page.addInitScript(() => {
+    window.__worst = 0;
+    window.__boxes = new Set();
+    window.__sampling = false;
+    const sample = () => {
+      const hud = document.querySelector('.ch-hud');
+      const layer = document.querySelector('.ch-layer');
+      if (window.__sampling && hud && layer) {
+        const style = getComputedStyle(layer);
+        const rect = hud.getBoundingClientRect();
+        window.__worst = Math.max(window.__worst, Math.abs(rect.top + rect.height / 2 - parseFloat(style.getPropertyValue('--cy'))), Math.abs(rect.height - 4 * parseFloat(style.getPropertyValue('--cr'))));
+        window.__boxes.add(hud.style.width);
+      }
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
+  await page.setViewportSize({ width: 390, height: 664 });
+  await page.goto('/');
+  await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+  await page.locator('#capabilities').evaluate((element) => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY, behavior: 'instant' }));
+  await page.waitForTimeout(1800);
+  await page.evaluate(() => { window.__sampling = true; });
+  // A toolbar-sized change that grows the intro core past the redraw threshold.
+  await page.setViewportSize({ width: 390, height: 745 });
+  await page.waitForTimeout(1500);
+  const { worst, boxes } = await page.evaluate(() => { window.__sampling = false; return { worst: window.__worst, boxes: window.__boxes.size }; });
+  expect(boxes, 'the boxes were redrawn').toBeGreaterThan(1);
+  expect(worst, 'worst frame offset between instruments and core (px)').toBeLessThan(2);
+});
