@@ -210,7 +210,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     const layout = layoutFor(view.layoutWidth, view.layoutHeight);
     // Phones: past the intro the core sinks into the background, dimmed,
     // and the copy scrolls over it.
-    const sink = layout === 'phone' ? smooth(0.15, 0.85, float) : 0;
+    const sink = layout === 'phone' ? smooth(0.1, 0.6, float) : 0;
     const goal = target(float);
     // Lightning needs the page to be genuinely still, not merely inside a chapter.
     const scrollDelta = window.scrollY - lastScroll;
@@ -282,8 +282,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     if (index === lastIndex && layout !== 'phone') {
       const guard = sections[lastIndex]?.querySelector('.ch-kicker');
       if (guard) {
-        const reachBelow = layoutFor(view.layoutWidth, view.layoutHeight) === 'phone' ? 2.05 : 1.6;
-        const limit = guard.getBoundingClientRect().top - 14 - radius * reachBelow;
+        const limit = guard.getBoundingClientRect().top - 14 - radius * 1.6;
         if (shown.y > limit) shown = { ...shown, y: limit };
       }
     }
@@ -299,18 +298,21 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
 
     // It fades only as it crosses the top edge (judged by where it naturally
     // sits, not the momentary clamp above), so it never dims while fully on
-    // screen, and drawing stops once it is gone.
+    // screen, and drawing stops once it is gone. Phones: once sunk behind
+    // the copy it also fades away as the footer rises into it (gone before
+    // the footer reaches its middle), so the footer never cuts through it.
+    const footerTop = lastBound ? lastBound.top + lastBound.height - window.scrollY : Infinity;
     const exit = smooth(-radius * 1.15, radius * 0.5, current.y - rise);
-    const shade = exit * (1 - SUNK * sink);
+    const leaving = layout === 'phone' ? smooth(current.y - rise + current.d * 0.45, current.y - rise + current.d, footerTop) : 1;
+    const shade = exit * (1 - SUNK * sink) * leaving;
     if (Math.abs(shade - exitOpacity) > 0.004 || (shade === 0) !== (exitOpacity === 0) || (shade >= 0.999) !== (exitOpacity >= 0.999)) {
       exitOpacity = shade;
       layer.style.opacity = shade >= 0.999 ? '' : shade.toFixed(3);
     }
-    const offstage = exit < 0.01 || (lastBound && window.scrollY > lastBound.top + lastBound.height);
+    const offstage = exit < 0.01 || leaving < 0.05 || (lastBound && window.scrollY > lastBound.top + lastBound.height);
     layer.dataset.offstage = offstage ? 'true' : 'false';
     // The footer scrolls in over the fixed controls: the rail steps aside and
     // the motion control rides above the footer so it is never covered.
-    const footerTop = lastBound ? lastBound.top + lastBound.height - window.scrollY : Infinity;
     layer.dataset.footer = footerTop < view.height / 2 + 140 ? 'near' : 'far';
     const motionControl = controls?.querySelector('.ch-motion');
     if (motionControl) {

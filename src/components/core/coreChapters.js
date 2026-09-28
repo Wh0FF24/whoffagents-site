@@ -57,8 +57,9 @@ const PHONE = {
 export function phoneIntro(width, height, viewportWidth = width) {
   const title = 1.02 * Math.min(44, Math.max(34, 0.1 * viewportWidth));
   const above = 152 + title;
-  const below = 14 + title + (viewportWidth < 368 ? 152 : 102) + Math.max(26, 0.04 * height);
-  const d = Math.max(0.3 * width, Math.min(0.84 * width, 0.44 * height, height - above - below));
+  const foot = viewportWidth < 300 ? 172 : viewportWidth < 368 ? 152 : 102;
+  const below = 14 + title + foot + Math.max(26, 0.04 * height);
+  const d = Math.max(40, Math.min(0.84 * width, 0.44 * height, height - above - below));
   const y = Math.max(above + d / 2, Math.min(0.47 * height, height - below - d / 2));
   return { d, y };
 }

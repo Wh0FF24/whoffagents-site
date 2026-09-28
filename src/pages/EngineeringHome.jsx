@@ -336,9 +336,9 @@ export default function EngineeringHome() {
       </section>
 
       {mounted && !reduced && (
-        <button type="button" className="ch-motion" aria-pressed={paused} onClick={togglePaused}>
+        <button type="button" className="ch-motion" aria-pressed={paused} aria-label={paused ? 'Resume motion' : 'Pause motion'} onClick={togglePaused}>
           {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
-          {paused ? 'Resume motion' : 'Pause motion'}
+          <span className="ch-motion-text">{paused ? 'Resume motion' : 'Pause motion'}</span>
         </button>
       )}
     </div>

@@ -331,7 +331,7 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
     --title-h: calc(1.02 * clamp(34px, 10vw, 44px));
     --above: calc(152px + var(--title-h));
     --below: calc(14px + var(--title-h) + var(--foot-h) + max(26px, 4cqh));
-    --d0: max(30cqw, min(84cqw, 44cqh, 100cqh - var(--above) - var(--below)));
+    --d0: max(40px, min(84cqw, 44cqh, 100cqh - var(--above) - var(--below)));
     --y0: clamp(var(--above) + var(--d0) / 2, 47cqh, 100cqh - var(--below) - var(--d0) / 2);
   }
   .ch {
@@ -340,11 +340,12 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
     --title-h: calc(1.02 * clamp(34px, 10vw, 44px));
     --above: calc(152px + var(--title-h));
     --below: calc(14px + var(--title-h) + var(--foot-h) + max(26px, 4svh));
-    --core-d: max(30vw, min(84vw, 44dvh, 100dvh - var(--above) - var(--below)));
+    --core-d: max(40px, min(84vw, 44dvh, 100dvh - var(--above) - var(--below)));
     --core-y: clamp(var(--above) + var(--core-d) / 2, 47dvh, 100dvh - var(--below) - var(--core-d) / 2);
   }
   .wf-corehome-app > .wf-header .wf-nav { padding-inline: 24px; }
-  .ch-chapter { min-height: 0; padding: 64px var(--ch-gutter) 72px; justify-content: flex-start; }
+  /* 104px: a chapter reached by a link lands with its label below the fixed header. */
+  .ch-chapter { min-height: 0; padding: 104px var(--ch-gutter) 72px; justify-content: flex-start; }
   .ch-layer:not([data-chapter='core']) .ch-shade { display: none; }
   .ch-panel, .ch-side--right .ch-panel { max-width: 640px; margin: 0 auto; }
   .ch-heading { font-size: clamp(30px, 8.6vw, 38px); }
@@ -371,7 +372,7 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
   .ch-actions { gap: 6px 22px; justify-content: center; }
 
   .ch-method { min-height: 0; padding: 0; }
-  .ch-method-sticky { position: relative; min-height: 0; padding: 64px var(--ch-gutter) 72px; justify-content: flex-start; gap: 26px; }
+  .ch-method-sticky { position: relative; min-height: 0; padding: 104px var(--ch-gutter) 72px; justify-content: flex-start; gap: 26px; }
   .ch-method-lead, .ch-method-principle, .ch-loop-list, .ch-figure-note { box-sizing: border-box; width: 100%; max-width: 640px; margin-inline: auto; }
   .ch-loop-labels { display: none; }
   .ch-loop-list { position: static; width: 100%; height: auto; overflow: visible; clip-path: none; white-space: normal; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; border-top: 1px solid var(--ch-line); }
@@ -394,12 +395,21 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
 
   .ch-rail { display: none; }
   .ch-motion { top: 90px; right: 12px; bottom: auto; min-height: 30px; padding: 0 11px; font-size: 9px; background: #000000d1; border: 1px solid #ffffff1f; border-radius: 999px; }
+  /* Once the core has sunk behind the copy the control shrinks to its icon,
+     so it covers as little of the text scrolling past as possible. */
+  .ch-layer:not([data-chapter='core']) ~ .ch-motion { min-width: 30px; padding: 0; justify-content: center; }
+  .ch-layer:not([data-chapter='core']) ~ .ch-motion .ch-motion-text { display: none; }
   .hud-degrees { display: none; }
 }
 
 @media (max-width: 367px) {
   .ch { --foot-h: 152px; }
   .ch-intro-foot .ch-actions { flex-direction: column; }
+}
+
+/* Under 300px the tagline takes three lines. */
+@media (max-width: 299px) {
+  .ch { --foot-h: 172px; }
 }
 
 @media (max-height: 760px) and (min-width: 760px) {

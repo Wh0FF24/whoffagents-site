@@ -18,7 +18,7 @@ const VIEWPORTS = [
   { name: 'narrow desk', width: 1100, height: 900, rail: true },
   { name: 'tablet', width: 1024, height: 768 },
   { name: 'portrait tab', width: 768, height: 1024, hasTouch: true },
-  { name: 'phone', width: 390, height: 844, isMobile: true, hasTouch: true },
+  { name: 'phone', width: 390, height: 664, isMobile: true, hasTouch: true },
   { name: 'phone landsc', width: 844, height: 390, isMobile: true, hasTouch: true },
 ];
 
@@ -38,7 +38,7 @@ function installSampler() {
     return true;
   };
   // Every visible line of copy counts. (In the stacked layout, phones and
-  // portrait tablets, the core rides in a slot in the page and covers none.)
+  // portrait tablets, the core sinks behind the copy with its pulses dark.)
   const copyBoxes = () => {
     const boxes = [];
     const walker = document.createTreeWalker(document.querySelector('.ch'), NodeFilter.SHOW_TEXT);
