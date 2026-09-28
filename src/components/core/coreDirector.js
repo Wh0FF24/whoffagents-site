@@ -39,17 +39,27 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   // The HUD and poster keep the exact boxes first paint gave them
   // (core-home.css) and are placed by transform alone. Moving them into
   // other boxes would count as a layout shift even where nothing visibly
-  // moves. unit is the core diameter each box was drawn for.
+  // moves. unit is the core diameter each box was drawn for. The boxes are
+  // redrawn only when the intro core's size changes by more than a tenth
+  // (a rotation, a much larger window), so they are never scaled far past
+  // the size they were drawn at.
   const frames = new Map();
-  [[hud, 2], [poster, 2.5]].forEach(([element, span]) => {
-    if (!element) return;
-    const style = getComputedStyle(element);
-    const size = parseFloat(style.width) || 1000;
-    const left = parseFloat(style.left) || 0;
-    const top = parseFloat(style.top) || 0;
-    Object.assign(element.style, { left: `${left}px`, top: `${top}px`, width: `${size}px`, height: `${size}px` });
-    frames.set(element, { x: left + size / 2, y: top + size / 2, unit: size / span });
-  });
+  let frozenAt = 0;
+  function freeze(introD) {
+    const size0 = Math.max(1, introD);
+    if (frozenAt && Math.abs(size0 / frozenAt - 1) <= 0.1) return;
+    frozenAt = size0;
+    [[hud, 2], [poster, 2.5]].forEach(([element, span]) => {
+      if (!element) return;
+      ['left', 'top', 'width', 'height'].forEach((key) => element.style.removeProperty(key));
+      const style = getComputedStyle(element);
+      const size = parseFloat(style.width) || 1000;
+      const left = parseFloat(style.left) || 0;
+      const top = parseFloat(style.top) || 0;
+      Object.assign(element.style, { left: `${left}px`, top: `${top}px`, width: `${size}px`, height: `${size}px` });
+      frames.set(element, { x: left + size / 2, y: top + size / 2, unit: size / span });
+    });
+  }
   const place = (element, x, y, d) => {
     const frame = frames.get(element);
     if (!frame) return;
@@ -64,6 +74,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     view.layoutWidth = window.innerWidth || view.width;
     view.layoutHeight = window.innerHeight || view.height;
     finalPose = stateFor(CHAPTER_IDS[CHAPTER_IDS.length - 1], view.width, view.height, view.layoutWidth, view.layoutHeight);
+    freeze(stateFor(CHAPTER_IDS[0], view.width, view.height, view.layoutWidth, view.layoutHeight).d);
     bounds.length = 0;
     sections.forEach((section) => {
       const rect = section.getBoundingClientRect();
@@ -514,6 +525,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       scene = null;
       layer.classList.remove('is-directed');
       frames.forEach((frame, element) => ['left', 'top', 'width', 'height', 'transform'].forEach((key) => element.style.removeProperty(key)));
+      frozenAt = 0;
     },
   };
 }

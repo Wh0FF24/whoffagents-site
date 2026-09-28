@@ -796,3 +796,25 @@ test('the homepage settles without layout shift', async ({ page }) => {
     expect(await page.evaluate(() => window.__shift), `layout shift at ${width}x${height}`).toBeLessThan(limit);
   }
 });
+
+test('a doubled leading slash still opens the page', async ({ page, baseURL }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto(`${baseURL}//capabilities/`);
+  await expect(page).toHaveURL(/:\d+\/capabilities$/);
+  await expect(page).toHaveTitle(routeMeta['/capabilities'].title);
+  expect(errors.filter((message) => /cannot be created|replaceState/i.test(message)), 'history errors').toEqual([]);
+});
+
+test('the instruments are redrawn for the new screen after a rotation', async ({ page }) => {
+  const scale = () => page.evaluate(() => Number(/scale\(([\d.]+)\)/.exec(document.querySelector('.ch-hud').style.transform)?.[1]));
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.goto('/');
+  await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+  await page.waitForTimeout(1200);
+  for (const [width, height] of [[390, 844], [844, 390]]) {
+    await page.setViewportSize({ width, height });
+    await page.waitForTimeout(1800);
+    expect(Math.abs((await scale()) - 1), `HUD drawn near its display size at ${width}x${height}`).toBeLessThan(0.1);
+  }
+});

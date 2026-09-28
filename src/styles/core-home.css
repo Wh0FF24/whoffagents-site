@@ -53,16 +53,17 @@ html.lenis { scroll-behavior: auto; }
 .ch-canvas { opacity: 0; transition: opacity 1.1s ease; }
 .ch-layer[data-scene='ready'] .ch-canvas { opacity: 1; }
 .ch-layer[data-offstage='true'] { visibility: hidden; }
-.ch-poster { position: absolute; left: 0; top: 0; width: 1000px; height: 1000px; will-change: transform; transition: opacity 1s ease; }
+.ch-poster { position: absolute; will-change: transform; transition: opacity 1s ease; }
 /* Before the director runs (first paint, no JavaScript), mirror its intro
    framing in CSS: center (50%, 47%), diameter --d0. Poster box = 2.5 d,
    instrument box = 2 d. Container units measure the layer itself, which
    excludes a classic scrollbar, as the director's measurements do. The
-   director then keeps these exact boxes (inline px) and moves them by
-   transform only, so taking over shifts nothing. */
+   director then keeps these exact boxes (inline px, redrawn when the
+   screen changes size a lot) and moves them by transform only, so taking
+   over shifts nothing. */
 .ch-layer { container-type: size; --d0: min(54cqh, calc((53cqh - 128px) / .69), 50cqw); }
-.ch-layer:not(.is-directed) .ch-poster { left: calc(50% - var(--d0) * 1.25); top: calc(47% - var(--d0) * 1.25); width: calc(var(--d0) * 2.5); height: calc(var(--d0) * 2.5); }
-.ch-layer:not(.is-directed) .ch-hud { left: calc(50% - var(--d0)); top: calc(47% - var(--d0)); width: calc(var(--d0) * 2); height: calc(var(--d0) * 2); }
+.ch-layer .ch-poster { left: calc(50% - var(--d0) * 1.25); top: calc(47% - var(--d0) * 1.25); width: calc(var(--d0) * 2.5); height: calc(var(--d0) * 2.5); }
+.ch-layer .ch-hud { left: calc(50% - var(--d0)); top: calc(47% - var(--d0)); width: calc(var(--d0) * 2); height: calc(var(--d0) * 2); }
 .ch-poster img { width: 100%; height: 100%; display: block; }
 .ch-layer[data-scene='ready'] .ch-poster { opacity: 0; }
 .ch-dots { z-index: 1; }
@@ -71,7 +72,7 @@ html.lenis { scroll-behavior: auto; }
 
 /* ------------------------------------------------------------------ HUD */
 
-.ch-hud { position: absolute; left: 0; top: 0; z-index: 2; width: 1000px; height: 1000px; will-change: transform; }
+.ch-hud { position: absolute; z-index: 2; will-change: transform; }
 .hud-layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transition: opacity .8s ease; }
 .hud-tick { stroke: var(--ch-silver); stroke-width: .2; opacity: .48; }
 .hud-tick--major { stroke: #e3e5e8; stroke-width: .32; opacity: .9; }

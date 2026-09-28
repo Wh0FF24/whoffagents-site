@@ -9,10 +9,15 @@ captureUTMs();
 
 // /route/ is served the same prerendered page as /route, but routing and page
 // metadata key on the bare path. Drop the slash before React reads the
-// location, so hydration matches that page.
+// location, so hydration matches that page. Leading slashes collapse too:
+// "//route" would otherwise be read as a host.
 const { pathname, search, hash } = window.location;
-if (pathname.length > 1 && pathname.endsWith("/")) {
-  window.history.replaceState(window.history.state, "", (pathname.replace(/\/+$/, "") || "/") + search + hash);
+if (pathname.length > 1 && (pathname.endsWith("/") || pathname.startsWith("//"))) {
+  try {
+    window.history.replaceState(window.history.state, "", `/${pathname.replace(/^\/+|\/+$/g, "")}${search}${hash}`);
+  } catch {
+    // Leave an address the history API refuses as it is.
+  }
 }
 
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
