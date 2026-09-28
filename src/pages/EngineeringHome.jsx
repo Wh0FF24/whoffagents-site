@@ -191,6 +191,14 @@ export default function EngineeringHome() {
 
       <ChapterRail store={store.current} onJump={jump} />
 
+      {/* First in the tab order after the rail: reachable before the page end, where it steps aside with the core. */}
+      {mounted && !reduced && (
+        <button type="button" className="ch-motion" aria-pressed={paused} aria-label={paused ? 'Resume motion' : 'Pause motion'} onClick={togglePaused}>
+          {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
+          <span className="ch-motion-text">{paused ? 'Resume motion' : 'Pause motion'}</span>
+        </button>
+      )}
+
       <section className="ch-chapter ch-intro" id="core" data-chapter-section="core" aria-labelledby="ch-title">
         <Kicker>Whoff Agents LLC · AI‑native engineering</Kicker>
         <h1 className="ch-title" id="ch-title">
@@ -335,12 +343,6 @@ export default function EngineeringHome() {
         </div>
       </section>
 
-      {mounted && !reduced && (
-        <button type="button" className="ch-motion" aria-pressed={paused} aria-label={paused ? 'Resume motion' : 'Pause motion'} onClick={togglePaused}>
-          {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
-          <span className="ch-motion-text">{paused ? 'Resume motion' : 'Pause motion'}</span>
-        </button>
-      )}
     </div>
   );
 }

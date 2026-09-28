@@ -227,7 +227,7 @@ test('a fast flick through the contact chapter never pulls the core ring over it
 
 test('on tall screens the core leaves or stays whole, and the motion control is never under the footer', async ({ page }) => {
   // 1080 x 1920: the page ends before the contact chapter can come to rest.
-  for (const [width, height, ending] of [[1920, 1080, 'leaves'], [1920, 1200, 'leaves'], [2560, 1440, 'leaves'], [1024, 1366, 'leaves'], [834, 1194, 'leaves'], [1080, 1920, 'leaves']]) {
+  for (const [width, height, ending] of [[1920, 1080, 'leaves'], [1920, 1200, 'leaves'], [2560, 1440, 'leaves'], [1024, 1366, 'sunk'], [834, 1194, 'sunk'], [1080, 1920, 'sunk']]) {
     await page.setViewportSize({ width, height });
     await page.goto('/');
     const control = page.locator('.ch-motion');
@@ -243,7 +243,17 @@ test('on tall screens the core leaves or stays whole, and the motion control is 
       return getComputedStyle(button).visibility === 'hidden' || button.getBoundingClientRect().bottom <= footer.top;
     }), `${width}x${height}`).toBe(true);
     await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
-    if (ending === 'leaves') {
+    if (ending === 'sunk') {
+      // Portrait screens stack like phones: the footer carries the sunk core
+      // up, so at the end it is either gone or whole and clear of the footer.
+      await expect.poll(() => page.evaluate((sunk) => {
+        const layer = document.querySelector('.ch-layer');
+        const style = getComputedStyle(layer);
+        const sphere = parseFloat(style.getPropertyValue('--cy')) + parseFloat(style.getPropertyValue('--cr'));
+        const footer = document.getElementById('contact').getBoundingClientRect().bottom;
+        return layer.dataset.offstage === 'true' || (Number(style.opacity) <= sunk + 0.01 && footer >= sphere);
+      }, SUNK), `${width}x${height}`).toBe(true);
+    } else if (ending === 'leaves') {
       // At the very end the core has gone and the controls with it.
       await expect(page.locator('.ch-layer')).toHaveAttribute('data-offstage', 'true', { timeout: 8000 });
       await expect(page.locator('.ch-rail')).toHaveCSS('visibility', 'hidden');
@@ -282,7 +292,17 @@ test('the core is at its resting strength whenever the contact chapter comes to 
     // Side-by-side layouts keep room for the contact chapter to reach its resting place; stacked ones may end first.
     if (!stacked(width, height)) expect(await page.evaluate(() => Math.abs(document.getElementById('contact').getBoundingClientRect().top)), `${width}x${height} reaches rest`).toBeLessThan(2);
     if (stacked(width, height)) {
-      await expect.poll(async () => Number(await page.evaluate(() => getComputedStyle(document.querySelector('.ch-layer')).opacity)), `${width}x${height}`).toBeLessThanOrEqual(SUNK + 0.01);
+      // Sunk, unless the footer has already reached the core's sphere (0.575 d below its centre).
+      await expect.poll(async () => {
+        const state = await page.evaluate(() => {
+          const layer = document.querySelector('.ch-layer');
+          const style = getComputedStyle(layer);
+          const cy = parseFloat(style.getPropertyValue('--cy'));
+          const d = parseFloat(style.getPropertyValue('--cr')) * 2;
+          return { opacity: Number(style.opacity), clear: document.getElementById('contact').getBoundingClientRect().bottom >= cy + d * 0.62 };
+        });
+        return state.clear ? Math.abs(state.opacity - SUNK) < 0.01 : state.opacity <= SUNK + 0.01;
+      }, `${width}x${height}`).toBe(true);
     } else {
       await expect.poll(() => page.evaluate(() => getComputedStyle(document.querySelector('.ch-layer')).opacity), `${width}x${height}`).toBe('1');
     }
@@ -531,19 +551,14 @@ test('the core only fades while crossing the top edge, and the page ends with it
         window.scrollTo({ top: y, behavior: 'instant' });
         await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         const style = getComputedStyle(layer);
-        rows.push({ opacity: Number(style.opacity), top: parseFloat(style.getPropertyValue('--cy')) - parseFloat(style.getPropertyValue('--cr')), offstage: layer.dataset.offstage, footer: document.getElementById('contact').getBoundingClientRect().bottom / window.innerHeight });
+        rows.push({ opacity: Number(style.opacity), top: parseFloat(style.getPropertyValue('--cy')) - parseFloat(style.getPropertyValue('--cr')), offstage: layer.dataset.offstage });
         if (y >= max) break;
       }
       return rows;
     });
     const size = `${width}x${height}`;
     const rest = stacked(width, height) ? SUNK : 1;
-    for (const row of walk) {
-      if (row.opacity >= rest - 0.01) continue;
-      // Stacked layouts also let the sunk core fade as the footer comes up.
-      if (stacked(width, height) && row.footer < 0.85) continue;
-      expect(row.top, `${size}: dimmed while fully on screen`).toBeLessThan(0);
-    }
+    for (const row of walk) if (row.opacity < rest - 0.01) expect(row.top, `${size}: dimmed while fully on screen`).toBeLessThan(0);
     const end = walk.at(-1);
     if (end.opacity > rest / 2) {
       expect(Math.abs(end.opacity - rest), `${size}: page end`).toBeLessThan(0.01);
@@ -634,7 +649,7 @@ test('with classic scrollbars, first paint and the layout choice match the scrip
         const layer = document.querySelector('.ch-layer');
         const style = getComputedStyle(layer);
         const script = parseFloat(style.opacity) <= 0.3;
-        return { script, css: getComputedStyle(document.getElementById('capabilities')).paddingTop === '104px' };
+        return { script, css: getComputedStyle(document.querySelector('.ch-intro .ch-kicker')).top === '122px' };
       });
       expect(agree.script, `${width}x${height}`).toBe(agree.css);
       await live.close();
@@ -926,12 +941,16 @@ test('on phones the core sinks behind the copy after the intro, without gaps bet
   }
 });
 
-test('on phones a link to a chapter lands with its label below the header', async ({ page }) => {
-  for (const [width, height] of [[390, 664], [768, 1024]]) {
-    await page.setViewportSize({ width, height });
+test('on phones a link to a chapter lands with its label below the header', async ({ browser, baseURL }) => {
+  for (const [width, height, touch] of [[390, 664, false], [768, 1024, false], [390, 664, true]]) {
+    const context = await browser.newContext({ baseURL, viewport: { width, height }, hasTouch: touch, isMobile: touch });
+    await context.route('**/*', (route) => (route.request().method() === 'POST' ? route.abort() : route.continue()));
+    const page = await context.newPage();
     await page.goto('/');
     await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
-    await page.getByRole('link', { name: 'Explore the core' }).click();
+    const link = page.getByRole('link', { name: 'Explore the core' });
+    if (touch) await link.tap();
+    else await link.click();
     await page.waitForTimeout(2600);
     const clearance = () => page.evaluate((id) => document.querySelector(`#${id} .ch-kicker`).getBoundingClientRect().top - document.querySelector('.wf-header').getBoundingClientRect().bottom, 'capabilities');
     expect(await clearance(), `Explore the core at ${width}x${height}`).toBeGreaterThanOrEqual(0);
@@ -939,5 +958,6 @@ test('on phones a link to a chapter lands with its label below the header', asyn
     await page.waitForTimeout(1800);
     const contact = await page.evaluate(() => document.querySelector('#contact .ch-kicker').getBoundingClientRect().top - document.querySelector('.wf-header').getBoundingClientRect().bottom);
     expect(contact, `/#contact at ${width}x${height}`).toBeGreaterThanOrEqual(0);
+    await context.close();
   }
 });

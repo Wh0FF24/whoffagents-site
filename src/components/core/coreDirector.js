@@ -273,7 +273,8 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       if (!exitMode || Math.abs(exitRoom - exitMode.room) > 48) exitMode = { room: exitRoom, lift: exitRoom > finalPose.y - finalPose.d / 2 };
       if (exitMode.lift && exitRoom < fullExit) riseRate = fullExit / Math.max(1, exitRoom);
     }
-    const rise = tail * riseRate;
+    // (Phones leave with the footer instead; see below.)
+    const rise = layout === 'phone' ? 0 : tail * riseRate;
     let shown = rise ? { ...current, y: current.y - rise } : current;
     const radius = current.d / 2;
     // However fast the arrival, the core's instruments stay above the final
@@ -284,6 +285,23 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       if (guard) {
         const limit = guard.getBoundingClientRect().top - 14 - radius * 1.6;
         if (shown.y > limit) shown = { ...shown, y: limit };
+      }
+    }
+    // Phones: the footer carries the sunk core up ahead of it, its sphere
+    // (0.575 d below the centre) kept clear, instead of rising through it.
+    // If the core still fits whole above the footer where the page ends, it
+    // ends there; otherwise it rises just fast enough to have left over the
+    // top edge exactly at the page end, never stopping half cut off.
+    const footerTop = lastBound ? lastBound.top + lastBound.height - window.scrollY : Infinity;
+    if (layout === 'phone') {
+      const clearance = current.d * 0.62;
+      const start = shown.y + clearance;
+      if (footerTop < start) {
+        const room = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - window.scrollY);
+        const footerEnd = footerTop - room;
+        const end = footerEnd - clearance >= radius ? footerEnd - clearance : -radius * 1.2;
+        const rate = start > footerEnd ? Math.max(1, (shown.y - end) / (start - footerEnd)) : 1;
+        shown = { ...shown, y: shown.y - (start - footerTop) * rate };
       }
     }
     layer.style.setProperty('--cx', `${shown.x.toFixed(1)}px`);
@@ -298,18 +316,15 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
 
     // It fades only as it crosses the top edge (judged by where it naturally
     // sits, not the momentary clamp above), so it never dims while fully on
-    // screen, and drawing stops once it is gone. Phones: once sunk behind
-    // the copy it also fades away as the footer rises into it (gone before
-    // the footer reaches its middle), so the footer never cuts through it.
-    const footerTop = lastBound ? lastBound.top + lastBound.height - window.scrollY : Infinity;
-    const exit = smooth(-radius * 1.15, radius * 0.5, current.y - rise);
-    const leaving = layout === 'phone' ? smooth(current.y - rise + current.d * 0.45, current.y - rise + current.d, footerTop) : 1;
-    const shade = exit * (1 - SUNK * sink) * leaving;
+    // screen, and drawing stops once it is gone. (On phones, where the
+    // footer carries it, judged by where it is carried to.)
+    const exit = smooth(-radius * 1.15, radius * 0.5, layout === 'phone' ? shown.y : current.y - rise);
+    const shade = exit * (1 - SUNK * sink);
     if (Math.abs(shade - exitOpacity) > 0.004 || (shade === 0) !== (exitOpacity === 0) || (shade >= 0.999) !== (exitOpacity >= 0.999)) {
       exitOpacity = shade;
       layer.style.opacity = shade >= 0.999 ? '' : shade.toFixed(3);
     }
-    const offstage = exit < 0.01 || leaving < 0.05 || (lastBound && window.scrollY > lastBound.top + lastBound.height);
+    const offstage = exit < 0.01 || (lastBound && window.scrollY > lastBound.top + lastBound.height);
     layer.dataset.offstage = offstage ? 'true' : 'false';
     // The footer scrolls in over the fixed controls: the rail steps aside and
     // the motion control rides above the footer so it is never covered.

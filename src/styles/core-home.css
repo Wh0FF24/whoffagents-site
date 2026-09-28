@@ -407,8 +407,8 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
   .ch-intro-foot .ch-actions { flex-direction: column; }
 }
 
-/* Under 300px the tagline takes three lines. */
-@media (max-width: 299px) {
+/* Under 290px the tagline takes three lines. */
+@media (max-width: 289px) {
   .ch { --foot-h: 172px; }
 }
 
