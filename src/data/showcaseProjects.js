@@ -13,9 +13,9 @@ export const dimensions = [
     type: "02 / DIGITAL EXPERIENCE",
     detail: "A clearer journey, before the journey.",
     image: "/work/island.webp",
-    url: "https://main.d1v4o3c4563ysj.amplifyapp.com",
-    link: "Explore the concept",
-    status: "PRIVATE CONCEPT · AWAITING APPROVAL",
+    url: "https://www.islandairporter.com",
+    link: "Visit the website",
+    status: "CLIENT PROJECT · WEBSITE & BOOKING EXPERIENCE",
   },
   {
     name: "Agents with purpose",

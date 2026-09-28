@@ -1,14 +1,14 @@
 export const routeMeta = {
   "/": {
     title:
-      "Whoff Agents | Web Design, AI Agents & Developer Tools — Provo, Utah",
+      "Whoff Agents LLC | AI-native engineering",
     description:
-      "An AI-operated studio in Provo, Utah. Custom web design for local businesses — live in days, flat pricing from $1,500 — plus custom AI agents and developer tools. Agents build; a human reviews everything.",
+      "Useful software, automation and autonomous systems. Whoff Agents LLC combines human direction, AI-native engineering and applied research to turn ideas into working systems.",
   },
   "/web": {
-    title: "Web Design in Provo, Utah | Whoff Web Studio",
+    title: "Web Design & Applications | Whoff Agents",
     description:
-      "Custom web design for Utah County businesses. Custom design, clear pricing from $1,500 plus care, and a working first version in days. Built by agents and reviewed by people.",
+      "Custom websites and applications, clear pricing from $1,500 plus care, and a working first version in days. Built by agents and reviewed by people.",
   },
   "/agents": {
     title: "Custom AI Agents for Your Business | Whoff Agents",
@@ -89,9 +89,9 @@ export const routeMeta = {
       "Build log: shipping a real-time crypto data MCP server for Claude Code, and what we learned doing it.",
   },
   "/about": {
-    title: "About | Whoff Agents",
+    title: "Company | Whoff Agents LLC",
     description:
-      "The story behind Whoff Agents: an AI-operated studio in Provo, Utah where agents do the building and a human reviews everything that ships.",
+      "An independent, AI-native engineering company. Meet the people, the principles and the work behind Whoff Agents LLC.",
   },
   "/atlas/ops": {
     title: "Atlas Ops — Live Operating Log | Whoff Agents",
@@ -117,5 +117,29 @@ export const routeMeta = {
     title: "Terms of Service | Whoff Agents",
     description:
       "The terms governing use of whoffagents.com and Whoff Agents LLC products and services.",
+  },
+  "/capabilities": {
+    title: "Engineering capabilities | Whoff Agents LLC",
+    description: "Software engineering, AI agents, systems integration and verification. Useful capabilities grounded in specific work and human technical ownership.",
+  },
+  "/research": {
+    title: "Research & development | Whoff Agents LLC",
+    description: "Our work in autonomy, continuity, cellular privacy and systems engineering. Explore the questions, prototypes and experiments behind Whoff Agents.",
+  },
+  "/research/persona-fleet": {
+    title: "Persona Fleet | Whoff Agents LLC",
+    description: "Persona Fleet is a cellular privacy and cyber-deception research program in development. Explore the problem, intended outcome and approach to evaluation.",
+  },
+  "/contact": {
+    title: "Contact | Whoff Agents LLC",
+    description: "Talk with Will about an engineering problem, research collaboration or project. Contact Whoff Agents LLC at will@whoffagents.com.",
+  },
+  "/studio": {
+    title: "Websites, AI services & developer tools | Whoff Agents",
+    description: "Explore our existing website services, AI assistants, developer tools and project portfolio.",
+  },
+  "/studio/about": {
+    title: "The studio | Whoff Agents",
+    description: "Human direction and agent execution. The studio approach behind Whoff Agents' websites, AI services and developer tools.",
   },
 };

@@ -1,6 +1,15 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+// Preview regressions must never contact a write endpoint.
+test.beforeEach(async ({ context }) => {
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST"
+      ? route.abort("blockedbyclient")
+      : route.continue(),
+  );
+});
+
 test("layered journey opens the stack and brings each project forward with the correct link", async ({
   page,
 }) => {
@@ -31,10 +40,11 @@ test("layered journey opens the stack and brings each project forward with the c
   await expect(page.locator(".lp-caption h2")).toHaveText("Island Airporter");
   await expect(page.locator(".lp-caption a")).toHaveAttribute(
     "href",
-    "https://main.d1v4o3c4563ysj.amplifyapp.com",
+    "https://www.islandairporter.com",
   );
+  await expect(page.locator(".lp-caption a")).toContainText("Visit the website");
   await expect(page.locator(".lp-caption small")).toContainText(
-    "AWAITING APPROVAL",
+    "CLIENT PROJECT · WEBSITE & BOOKING EXPERIENCE",
   );
   await page.getByRole("link", { name: "Explore the studio" }).click();
   await page.keyboard.press("Shift");
@@ -83,7 +93,7 @@ test("layer controls work with reduced motion and without WebGL", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/?concept=layers");
+  await page.goto("/studio?concept=layers");
   await page.keyboard.press("Shift");
   await expect(page.locator(".lp-experience")).toHaveAttribute(
     "data-scene",
@@ -156,9 +166,10 @@ test("prototype fits small and large screens and has accessible controls", async
 
 
 test("Websites and logo navigation lead to distinct page identities", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/studio");
   await expect(page.locator(".py-hero")).toHaveCount(1);
   const homeTitle = await page.locator("h1").innerText();
+  await page.locator(".wf-services-menu > summary").click();
   await page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link", { name: "Websites", exact: true }).click();
   await expect(page).toHaveURL(/\/web$/);
   await expect(page.locator(".lp-experience")).toHaveCount(1);
@@ -167,6 +178,8 @@ test("Websites and logo navigation lead to distinct page identities", async ({ p
   expect(await page.locator("h1").innerText()).not.toBe(homeTitle);
   await page.getByRole("banner").getByRole("link", { name: "Whoff Agents home", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.locator(".py-hero")).toHaveCount(1);
+  await expect(page.locator("h1")).toHaveCount(1);
+  expect(await page.locator("h1").innerText()).not.toBe(homeTitle);
+  await expect(page.locator(".py-hero")).toHaveCount(0);
   await expect(page.locator(".lp-experience")).toHaveCount(0);
 });

@@ -5,6 +5,7 @@ const PH_NAME = {
 };
 
 export function track(eventName, props = {}) {
+  if (import.meta.env.VITE_PRIVATE_PREVIEW === "true") return;
   if (typeof window !== "undefined" && typeof window.plausible === "function") {
     window.plausible(eventName, { props });
   }

@@ -6,7 +6,7 @@
  *
  * Station-clock upgrade: SSR (and the pre-hydration static page) renders
  * exactly the strings below. After mount, the [base] cell becomes a live
- * Provo wall clock (America/Denver, correct for any visitor timezone) and
+ * Mountain Time clock (correct for any visitor timezone) and
  * the [cadence] note becomes an honest countdown to the next real cron run
  * (am-brief 07:30 / pm-report 17:00 MT). Fixed-height mono lines — no CLS.
  */
@@ -18,7 +18,7 @@ const receipts = [
   { k: 'last updated', v: typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—', note: 'agents built · human reviewed' },
   { k: 'every day', v: 'morning brief 07:30', note: 'evening report 17:00' },
   { k: 'agents on duty', v: 'phones · email · builds', note: 'ask us for a live demo call', href: '#lead-form' },
-  { k: 'where we are', v: 'provo, utah', note: 'independent · $0 VC' },
+  { k: 'ops clock', v: 'mountain time', note: 'independent · $0 VC' },
 ]
 
 const AM_BRIEF = 7 * 60 + 30 // 07:30 MT — the real morning cron
@@ -91,9 +91,9 @@ export default function ReceiptsStrip() {
         {receipts.map(({ k, v, note, href }) => {
           let vNode = v
           let noteNode = note
-          if (now && k === 'where we are') {
+          if (now && k === 'ops clock') {
             vNode = (
-              <>provo {now.h}<Colon />{now.m}<Colon />{now.s} MT</>
+              <>{now.h}<Colon />{now.m}<Colon />{now.s} MT</>
             )
           }
           if (now && k === 'every day') noteNode = nextRun(now)

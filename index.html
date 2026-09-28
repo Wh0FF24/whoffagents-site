@@ -4,21 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/brand/whoff-mark.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Whoff Agents | Websites, AI Agents & Developer Tools — Provo, Utah</title>
-    <meta name="description" content="An AI-operated studio in Provo, Utah. Custom websites for local businesses live in days from $1,500, custom AI agents for phones and email, and developer tools — agents build, a human reviews everything." />
-    <meta property="og:title" content="Whoff Agents — Agents Build It. A Human Signs Off." />
-    <meta property="og:description" content="Websites for local businesses live in days, custom AI agents, and developer tools — from an AI-operated studio in Provo, Utah." />
-    <meta property="og:image" content="https://whoffagents.com/og-image.png" />
+    <title>Whoff Agents LLC | AI-native engineering</title>
+    <meta name="description" content="Whoff Agents LLC builds useful software, autonomous systems, and research-driven technology. Human direction, practical engineering, and room to explore." />
+    <meta property="og:title" content="Whoff Agents LLC | AI-native engineering" />
+    <meta property="og:description" content="Useful software, autonomous systems, and research-driven technology. Human direction, practical engineering, and room to explore." />
+    <meta property="og:image" content="https://whoffagents.com/og-engineering.png" />
     <meta property="og:url" content="https://whoffagents.com" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Whoff Agents" />
+    <meta property="og:site_name" content="Whoff Agents LLC" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Whoff Agents — Agents Build It. A Human Signs Off." />
-    <meta name="twitter:description" content="Websites for local businesses live in days, custom AI agents, and developer tools — from an AI-operated studio in Provo, Utah." />
-    <meta name="twitter:image" content="https://whoffagents.com/og-image.png" />
+    <meta name="twitter:title" content="Whoff Agents LLC | AI-native engineering" />
+    <meta name="twitter:description" content="Useful software, autonomous systems, and research-driven technology. Human direction, practical engineering, and room to explore." />
+    <meta name="twitter:image" content="https://whoffagents.com/og-engineering.png" />
     <link rel="canonical" href="https://whoffagents.com" />
     <!-- Fonts are self-hosted (see /fonts) — no runtime CDN requests. -->
     <link rel="preload" href="/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      // Homepage boot sequence: hold the intro copy until the core animates it in.
+      try {
+        if (location.pathname === "/" && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("core-boot");
+      } catch (error) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

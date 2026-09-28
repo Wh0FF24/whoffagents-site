@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import { EngineeringNav as Nav, EngineeringFooter as Footer } from "./components/EngineeringShell";
 import StudioAtmosphere from "./components/StudioAtmosphere";
 import Home from "./pages/Home";
+import EngineeringHome from "./pages/EngineeringHome";
+import { Capabilities, Research, PersonaFleet, Company, Contact } from "./pages/EngineeringPages";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -32,6 +33,8 @@ import "./styles/studio-showcase.css";
 import "./styles/studio-identities.css";
 import "./styles/studio-atmosphere.css";
 import "./styles/concentric.css";
+import "./styles/whoff-engineering.css";
+import "./styles/whoff-night.css";
 import { routeMeta } from "./data/routeMeta";
 
 function App() {
@@ -42,6 +45,18 @@ function App() {
     document.title = meta?.title || "Page not found | Whoff Agents";
     const description = document.querySelector('meta[name="description"]');
     if (description && meta) description.content = meta.description;
+    if (meta) {
+      for (const [selector, value] of Object.entries({
+        'meta[property="og:title"]': meta.title,
+        'meta[property="og:description"]': meta.description,
+        'meta[property="og:url"]': `https://whoffagents.com${location.pathname === "/" ? "" : location.pathname}`,
+        'meta[name="twitter:title"]': meta.title,
+        'meta[name="twitter:description"]': meta.description,
+      })) {
+        const tag = document.querySelector(selector);
+        if (tag) tag.content = value;
+      }
+    }
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical)
       canonical.href = `https://whoffagents.com${location.pathname === "/" ? "" : location.pathname}`;
@@ -55,13 +70,15 @@ function App() {
       robots.content = "noindex, nofollow";
     }
   }, [location.pathname]);
-  const corePage = ["/", "/web", "/agents", "/products", "/about"].includes(
+  const engineeringPage = ["/", "/capabilities", "/research", "/research/persona-fleet", "/about", "/contact"].includes(location.pathname);
+  const immersiveHome = location.pathname === "/";
+  const corePage = ["/", "/web", "/agents", "/products", "/about", "/studio", "/studio/about", "/capabilities", "/research", "/research/persona-fleet", "/contact"].includes(
     location.pathname,
   );
 
   return (
-    <div className="studio-app">
-      <StudioAtmosphere />
+    <div className={`${engineeringPage ? "studio-app wf-app wf-front-dark" : "studio-app wf-legacy wf-front-dark"}${immersiveHome ? " wf-corehome-app" : ""}`}>
+      {!engineeringPage && <StudioAtmosphere />}
       <ScrollToTop />
       <Nav />
       <main
@@ -99,7 +116,13 @@ function App() {
           </div>
         )}
         <Routes location={location}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<EngineeringHome />} />
+          <Route path="/studio" element={<Home />} />
+          <Route path="/studio/about" element={<About />} />
+          <Route path="/capabilities" element={<Capabilities />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/research/persona-fleet" element={<PersonaFleet />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/crypto-data-mcp" element={<CryptoDataMCP />} />
           <Route path="/products/ai-prompt-pack" element={<AiPromptPack />} />
@@ -118,7 +141,7 @@ function App() {
           />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/learn-more" element={<LearnMore />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<Company />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/atlas/ops" element={<AtlasOps />} />
           <Route path="/products/ship-fast-skill-pack" element={<ShipFast />} />
@@ -140,7 +163,7 @@ function App() {
               <section className="st-container st-section">
                 <h1>That page isn’t here.</h1>
                 <p>
-                  <a href="/">Back to the studio →</a>
+                  <a href="/">Back to Whoff Agents →</a>
                 </p>
               </section>
             }
@@ -149,8 +172,8 @@ function App() {
       </main>
       <Footer />
       {import.meta.env.VITE_PRIVATE_PREVIEW === "true" && (
-        <div className="st-preview-badge">
-          PRIVATE DESIGN PREVIEW · NOT LIVE
+        <div className="wf-preview-label">
+          DESIGN PREVIEW · FORMS DO NOT SEND
         </div>
       )}
     </div>

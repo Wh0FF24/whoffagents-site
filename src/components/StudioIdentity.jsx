@@ -82,9 +82,9 @@ const identities = {
     monogram: "W/A",
     title: ["Agents build.", "People care."],
     intro:
-      "A small studio in Provo, Utah. Human direction and agent execution, working together on something worth putting into the world.",
+      "The studio at Whoff Agents LLC. Human direction and agent execution, working together on something worth putting into the world.",
     cta: "Meet the way we work",
-    href: "/about#studio-story",
+    href: "/studio/about#studio-story",
     anchor: "#studio-story",
     anchorText: "Inside the studio",
     note: "HUMAN DIRECTION / AGENT EXECUTION / SHARED PURPOSE",

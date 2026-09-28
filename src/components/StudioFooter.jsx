@@ -45,7 +45,7 @@ export default function StudioFooter() {
           <div>
             <span>WHERE WE ARE</span>
             <p>
-              Provo, Utah
+              Caret, Virginia
               <br />
               Independent. Human-reviewed.
             </p>

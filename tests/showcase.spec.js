@@ -1,7 +1,16 @@
 import { test, expect } from "@playwright/test";
 
+// Preview regressions must never contact a write endpoint.
+test.beforeEach(async ({ context }) => {
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST"
+      ? route.abort("blockedbyclient")
+      : route.continue(),
+  );
+});
+
 async function ready(page) {
-  await page.goto("/?concept=cube");
+  await page.goto("/studio?concept=cube");
   await page.keyboard.press("Shift");
   await page.keyboard.press("Shift");
   await expect(page.locator(".dx-experience")).toHaveAttribute(
@@ -38,9 +47,10 @@ test("real WebGL pixels change with project controls, and links match the visibl
   await expect(page.locator(".dx-project h2")).toHaveText("Island Airporter");
   await expect(page.locator(".dx-project > a")).toHaveAttribute(
     "href",
-    "https://main.d1v4o3c4563ysj.amplifyapp.com",
+    "https://www.islandairporter.com",
   );
-  await expect(page.locator(".dx-project")).toContainText("AWAITING APPROVAL");
+  await expect(page.locator(".dx-project > a")).toContainText("Visit the website");
+  await expect(page.locator(".dx-project")).toContainText("CLIENT PROJECT · WEBSITE & BOOKING EXPERIENCE");
   await page
     .getByRole("button", { name: "Tools for the builders", exact: true })
     .focus();
@@ -122,7 +132,7 @@ test("WebGL unavailable and context loss both leave usable project browsing", as
       return /webgl/.test(type) ? null : original.call(this, type, ...args);
     };
   });
-  await page.goto("/?concept=cube");
+  await page.goto("/studio?concept=cube");
   await page.keyboard.press("Shift");
   await expect(page.locator(".dx-experience")).toHaveAttribute(
     "data-scene",
@@ -138,7 +148,7 @@ test("WebGL unavailable and context loss both leave usable project browsing", as
   );
   await expect(page.locator(".dx-project > a")).toHaveAttribute(
     "href",
-    "https://main.d1v4o3c4563ysj.amplifyapp.com",
+    "https://www.islandairporter.com",
   );
 });
 
@@ -157,17 +167,19 @@ test("context loss and route changes cleanly replace the renderer", async ({
     "data-scene",
     "fallback",
   );
+  await page.locator(".wf-services-menu > summary").click();
   await page
-    .locator(".st-desktop-nav")
+    .getByRole("navigation", { name: "Main navigation", exact: true })
     .getByRole("link", { name: "AI agents", exact: true })
     .click();
   await expect(page.locator(".dx-object canvas")).toHaveCount(0);
+  await page.locator(".wf-services-menu > summary").click();
   await page
-    .getByRole("banner")
-    .getByRole("link", { name: "Whoff Agents home", exact: true })
+    .getByRole("navigation", { name: "Main navigation", exact: true })
+    .getByRole("link", { name: "The studio", exact: true })
     .click();
   await page.keyboard.press("Shift");
-  // "/" with no ?concept is the pyramid hero — the route change has to hand
+  // "/studio" with no ?concept is the pyramid hero — the route change has to hand
   // the renderer over to it cleanly.
   await expect(page.locator(".py-hero")).toHaveAttribute("data-scene", "ready");
   await expect(page.locator(".py-canvas canvas")).toHaveCount(1);
@@ -201,9 +213,12 @@ test("prerendered page has meaningful content without JavaScript", async ({
   browser,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST" ? route.abort("blockedbyclient") : route.continue(),
+  );
   const page = await context.newPage();
-  await page.goto(`${test.info().project.use.baseURL}/`);
-  // "/" prerenders the pyramid hero: real heading, the static poster that
+  await page.goto(`${test.info().project.use.baseURL}/studio`);
+  // "/studio" prerenders the pyramid hero: real heading, the static poster that
   // stands in for the scene, and the three service routes as plain links.
   await expect(page.locator("h1")).toContainText("kind of studio.");
   await expect(page.locator(".py-poster")).toBeVisible();
@@ -225,7 +240,7 @@ test("Three.js stays out of initial HTML and scripts; interaction loads the scen
   const sceneChunk =
     /(?:RoomEnvironment|cubeScene|identityScene|layerScene)-[^/]+\.js/;
   for (const [route, selector] of [
-    ["/?concept=cube", ".dx-experience"],
+    ["/studio?concept=cube", ".dx-experience"],
     ["/web", ".lp-experience"],
     ["/agents", ".dp-hero"],
     ["/products", ".dp-hero"],

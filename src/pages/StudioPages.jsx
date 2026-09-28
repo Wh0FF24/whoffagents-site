@@ -36,11 +36,11 @@ const work = [
     title: "Island Airporter",
     type: "The journey starts before the airport.",
     image: "/work/island.webp",
-    href: "https://main.d1v4o3c4563ysj.amplifyapp.com",
-    label: "Build preview · awaiting approval",
+    href: "https://www.islandairporter.com",
+    label: "Client project · Website & booking experience",
     tags: ["Booking experience", "Mobile design", "Custom software"],
     detail:
-      "A coastal identity and a simpler booking experience for an island shuttle service. An active website build, shown here as a private preview.",
+      "A coastal identity and a simpler booking experience for an island shuttle service. Website design and custom booking software, built by Whoff Agents.",
   },
 ];
 export function Kicker({ children, number }) {
@@ -51,7 +51,7 @@ export function Kicker({ children, number }) {
     </div>
   );
 }
-export function Action({ children, to = "/#lead-form", secondary = false }) {
+export function Action({ children, to = "/studio#lead-form", secondary = false }) {
   return (
     <Link
       className={`st-button ${secondary ? "st-button-secondary" : ""}`}
@@ -163,7 +163,7 @@ export function SelectedWork() {
               rel="noopener noreferrer"
               className="st-text-link"
             >
-              Explore the {selected === 1 ? "preview" : "website"}
+              Visit the website
               <ArrowUpRight size={19} />
             </a>
           </div>
@@ -657,7 +657,7 @@ export function Contact({ service = "Website" }) {
             <span className="st-cross" aria-hidden="true">
               +
             </span>
-            Based in Provo, Utah.
+            Principal office: Caret, Virginia.
             <br />
             Working wherever you are.
           </div>
@@ -796,7 +796,7 @@ export function StudioAbout() {
         <div className="st-about-grid">
           <div>
             <p className="st-about-lede">
-              Whoff Agents is an independent studio in Provo, Utah. We make
+              The Whoff Agents studio builds websites, AI services, and developer tools. We make
               websites, build custom AI assistants, and package useful tools for
               developers.
             </p>

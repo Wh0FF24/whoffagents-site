@@ -133,7 +133,7 @@ function StudioLayers({ web }) {
       <div className="lp-stage">
         <div className="lp-top">
           <span>{web ? "WHOFF / WEB STUDIO" : "WHOFF / OPEN DIMENSIONS"}</span>
-          <Link to="/">
+          <Link to="/studio">
             Explore the studio <ArrowUpRight size={13} />
           </Link>
         </div>

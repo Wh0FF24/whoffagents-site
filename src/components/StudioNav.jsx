@@ -53,7 +53,7 @@ export default function StudioNav() {
             to={
               ["/web", "/agents"].includes(pathname)
                 ? `${pathname}#lead-form`
-                : "/#lead-form"
+                : "/studio#lead-form"
             }
           >
             Let’s talk
@@ -86,7 +86,7 @@ export default function StudioNav() {
               <ArrowUpRight size={18} />
             </Link>
           ))}
-          <Link to="/#lead-form" onClick={() => setOpen(false)}>
+          <Link to="/studio#lead-form" onClick={() => setOpen(false)}>
             Start a project
             <ArrowUpRight size={18} />
           </Link>

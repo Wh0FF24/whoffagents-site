@@ -110,7 +110,7 @@ export default function StudioShowcase({ web = false }) {
       <div className="dx-sticky">
         <div className="dx-coordinate dx-coordinate-top">
           <span>INDEPENDENT THINKING. EXTRA DIMENSION.</span>
-          <span>PROVO, UT / WORLDWIDE</span>
+          <span>INDEPENDENT / WORKING EVERYWHERE</span>
         </div>
         <div className="dx-backdrop" aria-hidden="true">
           <span>W / A</span>
@@ -131,7 +131,7 @@ export default function StudioShowcase({ web = false }) {
               ? "Give people a reason to stop. Then a reason to stay. Websites made to feel unmistakably yours."
               : "Distinctive websites. Useful AI. We build the next version of your business, one good idea at a time."}
           </p>
-          <Link className="dx-cta" to={web ? "/web#lead-form" : "/#lead-form"}>
+          <Link className="dx-cta" to={web ? "/web#lead-form" : "/studio#lead-form"}>
             Let’s build something <ArrowUpRight size={19} />
           </Link>
         </div>

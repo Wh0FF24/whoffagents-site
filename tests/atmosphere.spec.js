@@ -1,9 +1,18 @@
 import { test, expect } from "@playwright/test";
 
+// Preview regressions must never contact a write endpoint.
+test.beforeEach(async ({ context }) => {
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST"
+      ? route.abort("blockedbyclient")
+      : route.continue(),
+  );
+});
+
 test("background field follows scrolling and freezes when reduced motion is requested", async ({
   page,
 }) => {
-  await page.goto("/about");
+  await page.goto("/studio/about");
   const offset = () =>
     page.evaluate(() =>
       document.documentElement.style.getPropertyValue("--field-offset"),
@@ -30,11 +39,11 @@ test("shared fields stay behind content on every page family without adding canv
 }) => {
   expect((await request.get("/art/contour-field.svg")).ok()).toBe(true);
   for (const [route, selector] of [
-    ["/", "#services"],
+    ["/studio", "#services"],
     ["/web", "#work"],
     ["/agents", "#agent-demo"],
     ["/products", "#catalog"],
-    ["/about", "#studio-story"],
+    ["/studio/about", "#studio-story"],
     ["/privacy", ".dp-support-page"],
   ]) {
     await page.goto(route);

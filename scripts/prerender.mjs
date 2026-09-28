@@ -49,6 +49,7 @@ function getOpsLines() {
 }
 
 const SITE = 'https://whoffagents.com'
+const escapeAttribute = (value) => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
 
 
 const routes = Object.keys(routeMeta)
@@ -110,23 +111,27 @@ for (const route of routes) {
   try {
     const appHtml = render(route)
     const meta = routeMeta[route]
+    const title = escapeAttribute(meta.title)
+    const description = escapeAttribute(meta.description)
     const canonical = route === '/' ? SITE : `${SITE}${route}`
 
     const html = template
       .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
-      .replace(/<title>[^<]*<\/title>/, `<title>${meta.title}</title>`)
+      .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
       .replace(
         /<meta name="description" content="[^"]*"/,
-        `<meta name="description" content="${meta.description}"`
+        `<meta name="description" content="${description}"`
       )
       .replace(
         /<meta property="og:title" content="[^"]*"/,
-        `<meta property="og:title" content="${meta.title}"`
+        `<meta property="og:title" content="${title}"`
       )
       .replace(
         /<meta property="og:description" content="[^"]*"/,
-        `<meta property="og:description" content="${meta.description}"`
+        `<meta property="og:description" content="${description}"`
       )
+      .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${title}"`)
+      .replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${description}"`)
       .replace(
         /<meta property="og:url" content="[^"]*"/,
         `<meta property="og:url" content="${canonical}"`
@@ -158,7 +163,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${sitemapRoutes
   .map((r) => {
     const loc = r === '/' ? `${SITE}/` : `${SITE}${r}`
-    const priority = r === '/' ? '1.0' : r === '/web' || r === '/agents' || r === '/products' ? '0.9' : '0.7'
+    const priority = r === '/' ? '1.0' : ['/capabilities', '/research', '/about'].includes(r) ? '0.9' : '0.7'
     return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${priority}</priority>\n  </url>`
   })
   .join('\n')}

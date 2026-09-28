@@ -224,7 +224,7 @@ export default function OrchestrationBoard() {
           morning brief 07:30 · evening report 17:00 · updated {typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '—'}
         </text>
         <text x={544} y={318} textAnchor="end" fontFamily={MONO} fontSize="7.5" letterSpacing="1" fill={C.faint}>
-          provo, ut
+          whoff agents
         </text>
       </svg>
     </div>

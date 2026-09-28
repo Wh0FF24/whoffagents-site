@@ -162,7 +162,7 @@ export const studioFaqs = [
 /* ---------------- lead form ---------------- */
 
 export function LeadForm({ source = 'web_studio_page' }) {
-  const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const [status, setStatus] = useState('idle') // idle | loading | success | error | preview
   const [fields, setFields] = useState({
     business_name: '',
     name: '',
@@ -176,6 +176,10 @@ export function LeadForm({ source = 'web_studio_page' }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (import.meta.env.VITE_PRIVATE_PREVIEW === 'true') {
+      setStatus('preview')
+      return
+    }
     setStatus('loading')
     const body = new URLSearchParams({ 'form-name': 'lead', 'bot-field': '', ...fields })
     try {
@@ -190,6 +194,17 @@ export function LeadForm({ source = 'web_studio_page' }) {
     } catch {
       setStatus('error')
     }
+  }
+
+  if (status === 'preview') {
+    return (
+      <Card ticks className="p-10 text-center">
+        <div role="status">
+          <h3 className="type-h3 text-2xl mb-3">Preview complete. Nothing was sent.</h3>
+          <p className="text-gray-400">This design preview keeps your inquiry on this device.</p>
+        </div>
+      </Card>
+    )
   }
 
   if (status === 'success') {
@@ -213,6 +228,9 @@ export function LeadForm({ source = 'web_studio_page' }) {
   return (
     <Card ticks className="p-6 md:p-10">
       <form onSubmit={handleSubmit}>
+        {import.meta.env.VITE_PRIVATE_PREVIEW === 'true' && (
+          <p className="text-sm text-gray-400 mb-6">Design preview: this form does not send an inquiry.</p>
+        )}
         {/* Honeypot */}
         <p className="hidden" aria-hidden="true">
           <label>
@@ -463,7 +481,7 @@ export function StudioWhyUs({ index = '04' }) {
               Every site is checked and finished by a person before it ever reaches you.{' '}
               <span className="text-white font-medium">You&apos;re not getting a template, and you&apos;re not getting a black box.</span>{' '}
               You&apos;re getting a fast, honest process and a website that&apos;s actually yours —
-              built by a small studio in Provo, not outsourced overseas.
+              built by the Whoff Agents studio, with a person responsible for the result.
             </p>
             <p>
               No fake reviews. No filler pages. No stock photos of people who don&apos;t work here.

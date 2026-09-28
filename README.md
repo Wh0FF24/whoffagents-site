@@ -1,6 +1,6 @@
 # Whoff Agents
 
-Websites, custom AI agents, and developer tools from an independent studio in Provo, Utah.
+Whoff Agents LLC: AI-native engineering. Software, AI agents, systems integration, and research, plus the studio's websites, receptionist, and developer tools.
 
 ## Local redesign preview
 

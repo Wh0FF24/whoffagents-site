@@ -1,6 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { routeMeta } from "../src/data/routeMeta.js";
 
+// Preview regressions must never contact a write endpoint.
+test.beforeEach(async ({ context }) => {
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST"
+      ? route.abort("blockedbyclient")
+      : route.continue(),
+  );
+});
+
 async function maxPixelDelta(page, first, second) {
   // Chrome can round a few antialiased pixels by one RGB level between
   // captures of a stopped WebGL canvas. Compare pixels, not PNG bytes.
@@ -32,7 +41,7 @@ async function maxPixelDelta(page, first, second) {
 const identities = [
   ["/agents", "02 / Email"],
   ["/products", "03 / Kits"],
-  ["/about", "Human direction"],
+  ["/studio/about", "Human direction"],
 ];
 for (const [route, control] of identities) {
   test(`${route} has a stable reduced-motion sculpture with working choices`, async ({
@@ -77,7 +86,7 @@ for (const [route, control] of identities) {
       await expect(page.locator(".st-demo-messages")).toContainText(
         "estimate we discussed",
       );
-    if (route === "/about")
+    if (route === "/studio/about")
       await expect(page.locator(".dp-caption")).toContainText(
         "Will sets the direction",
       );
@@ -120,19 +129,21 @@ test("sculpture animation pauses, selection still works, and context loss preser
     "fallback",
   );
   await expect(page.locator(".dp-fallback")).toBeVisible();
+  await page.locator(".wf-services-menu > summary").click();
   await page
-    .locator(".st-desktop-nav")
+    .getByRole("navigation", { name: "Main navigation", exact: true })
     .getByRole("link", { name: "Developer tools", exact: true })
     .click();
   await page.keyboard.press("Shift");
   await expect(page.locator(".dp-hero")).toHaveAttribute("data-scene", "ready");
   await expect(page.locator("canvas")).toHaveCount(1);
+  await page.locator(".wf-services-menu > summary").click();
   await page
-    .locator(".st-desktop-nav")
+    .getByRole("navigation", { name: "Main navigation", exact: true })
     .getByRole("link", { name: "The studio", exact: true })
     .click();
   await page.keyboard.press("Shift");
-  await expect(page.locator(".dp-hero")).toHaveAttribute("data-scene", "ready");
+  await expect(page.locator(".py-hero")).toHaveAttribute("data-scene", "ready");
   await expect(page.locator("canvas")).toHaveCount(1);
   expect(errors).toEqual([]);
 });
@@ -164,6 +175,9 @@ test("new hero content is prerendered without JavaScript", async ({
   browser,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST" ? route.abort("blockedbyclient") : route.continue(),
+  );
   const page = await context.newPage();
   for (const [route] of identities) {
     // Vite preview rewrites extensionless URLs to the SPA root; inspect the
@@ -180,7 +194,7 @@ test("new hero content is prerendered without JavaScript", async ({
 test("supporting routes retain readable chapter frames at mobile and desktop widths", async ({
   page,
 }) => {
-  const core = ["/", "/web", "/agents", "/products", "/about"];
+  const core = ["/", "/web", "/agents", "/products", "/about", "/studio", "/studio/about", "/capabilities", "/research", "/research/persona-fleet", "/contact"];
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of Object.keys(routeMeta).filter(

@@ -2,12 +2,21 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { routeMeta } from "../src/data/routeMeta.js";
 
+// Preview regressions must never contact a write endpoint.
+test.beforeEach(async ({ context }) => {
+  await context.route("**/*", (route) =>
+    route.request().method() === "POST"
+      ? route.abort("blockedbyclient")
+      : route.continue(),
+  );
+});
+
 for (const width of [320, 390, 768, 1440]) {
   test(`core routes fit ${width}px and have no serious accessibility violations`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 });
-    for (const route of ["/", "/web", "/agents", "/products", "/about"]) {
+    for (const route of ["/studio", "/web", "/agents", "/products", "/studio/about"]) {
       await page.goto(route);
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.keyboard.press("Shift");
@@ -44,13 +53,14 @@ for (const width of [320, 390, 768, 1440]) {
 test("project keyboard tabs, transcript, care plans and FAQ work", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/studio");
   await page.getByRole("tab", { name: /Spindle Creek/ }).focus();
   await page.keyboard.press("ArrowRight");
   await expect(
     page.getByRole("tab", { name: /Island Airporter/ }),
   ).toHaveAttribute("aria-selected", "true");
-  await expect(page.getByRole("tabpanel")).toContainText("awaiting approval");
+  await expect(page.getByRole("tabpanel")).toContainText("Client project · Website & booking experience");
+  await expect(page.getByRole("tabpanel").getByRole("link", { name: "Visit the website" })).toHaveAttribute("href", "https://www.islandairporter.com");
   await page.getByRole("button", { name: "Next step" }).click();
   await expect(page.locator(".st-demo-messages")).toContainText(
     "AI assistant for the shop",
@@ -80,6 +90,7 @@ test("preview inquiry is accessible and sends no request", async ({ page }) => {
   });
   await page.goto("/agents#lead-form");
   const form = page.locator("form.iq-form");
+  await expect(form.locator(".iq-preview-note")).toContainText("Submitting sends nothing");
   await expect(
     form.getByRole("radio", { name: "AI agent", exact: true }),
   ).toBeChecked();
@@ -192,8 +203,9 @@ test("the receptionist line and the published post are reachable from the chrome
   await expect(
     footer.getByRole("link", { name: "Notes & articles", exact: true }),
   ).toHaveAttribute("href", "/blog");
+  await page.locator(".wf-services-menu > summary").click();
   await page
-    .getByRole("banner")
+    .getByRole("navigation", { name: "Main navigation", exact: true })
     .getByRole("link", { name: "AI receptionist", exact: true })
     .click();
   await expect(page).toHaveURL(/\/receptionist$/);
