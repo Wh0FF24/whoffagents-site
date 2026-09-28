@@ -251,7 +251,8 @@ test('on tall screens the core leaves or stays whole, and the motion control is 
         const style = getComputedStyle(layer);
         const sphere = parseFloat(style.getPropertyValue('--cy')) + parseFloat(style.getPropertyValue('--cr'));
         const footer = document.getElementById('contact').getBoundingClientRect().bottom;
-        return layer.dataset.offstage === 'true' || (Number(style.opacity) <= sunk + 0.01 && footer >= sphere);
+        const top = parseFloat(style.getPropertyValue('--cy')) - parseFloat(style.getPropertyValue('--cr'));
+        return layer.dataset.offstage === 'true' || (Math.abs(Number(style.opacity) - sunk) < 0.01 && footer >= sphere && top >= -1);
       }, SUNK), `${width}x${height}`).toBe(true);
     } else if (ending === 'leaves') {
       // At the very end the core has gone and the controls with it.
@@ -959,5 +960,38 @@ test('on phones a link to a chapter lands with its label below the header', asyn
     const contact = await page.evaluate(() => document.querySelector('#contact .ch-kicker').getBoundingClientRect().top - document.querySelector('.wf-header').getBoundingClientRect().bottom);
     expect(contact, `/#contact at ${width}x${height}`).toBeGreaterThanOrEqual(0);
     await context.close();
+  }
+});
+
+test('the homepage still renders where Element.checkVisibility is missing (Safari before 17.4)', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.addInitScript(() => { delete Element.prototype.checkVisibility; });
+  for (const [width, height] of [[390, 664], [1440, 900]]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+    await page.locator('#capabilities').evaluate((element) => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY, behavior: 'instant' }));
+    await expect(page.locator('.ch-layer')).toHaveAttribute('data-chapter', 'capabilities');
+  }
+  expect(errors, 'page errors').toEqual([]);
+});
+
+test('on portrait tablets a toolbar sliding at the page end does not flip how the core ends', async ({ page }) => {
+  for (const [width, height] of [[810, 1080], [834, 1112], [768, 1024]]) {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+    await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+    await page.waitForTimeout(600);
+    const before = await page.locator('.ch-layer').getAttribute('data-offstage');
+    for (const change of [-56, 0, -56, 0]) {
+      await page.setViewportSize({ width, height: height + change });
+      await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+      await page.waitForTimeout(500);
+      expect(await page.locator('.ch-layer').getAttribute('data-offstage'), `${width}x${height} with the toolbar ${change ? 'in' : 'out'}`).toBe(before);
+    }
   }
 });

@@ -29,6 +29,16 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   let exitOpacity = 1;
   let exitMode = null;
   const NO_ZONES = [];
+  // Whether a fixed control is showing. Element.checkVisibility arrived in
+  // Safari 17.4; older browsers read the control's own computed style.
+  const showing = (element) => {
+    if (element.checkVisibility) return element.checkVisibility({ opacityProperty: true, visibilityProperty: true });
+    const style = getComputedStyle(element);
+    return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0;
+  };
+  // The phone ending (whole above the footer, or gone at the page end), held
+  // through small height changes such as a browser toolbar sliding.
+  let phoneEnding = null;
   // How far the core dims once it has sunk behind the copy (phones).
   const SUNK = 0.74;
   let stillFor = 0;
@@ -145,7 +155,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     // The fixed controls too, padded more: a filament's curve can pass close
     // to them even where its straight path does not.
     controls?.querySelectorAll('.ch-rail, .ch-motion').forEach((element) => {
-      if (!element.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return;
+      if (!showing(element)) return;
       const rect = element.getBoundingClientRect();
       if (rect.width) zones.push({ left: rect.left - 64, top: rect.top - 64, right: rect.right + 64, bottom: rect.bottom + 64 });
     });
@@ -299,7 +309,12 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       if (footerTop < start) {
         const room = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - window.scrollY);
         const footerEnd = footerTop - room;
-        const end = footerEnd - clearance >= radius ? footerEnd - clearance : -radius * 1.2;
+        // Spare room for a whole ending; the choice holds unless it moves by
+        // more than a toolbar (80px), so the core cannot flip between whole
+        // and gone as a browser's toolbar slides at the page end.
+        const spare = footerEnd - clearance - radius;
+        if (!phoneEnding || Math.abs(spare - phoneEnding.spare) > 80) phoneEnding = { whole: spare >= 0, spare };
+        const end = phoneEnding.whole ? footerEnd - clearance : -radius * 1.2;
         const rate = start > footerEnd ? Math.max(1, (shown.y - end) / (start - footerEnd)) : 1;
         shown = { ...shown, y: shown.y - (start - footerTop) * rate };
       }
@@ -386,7 +401,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   function fixedControls() {
     const zones = [];
     controls?.querySelectorAll('.ch-rail, .ch-motion').forEach((element) => {
-      if (!element.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return;
+      if (!showing(element)) return;
       const rect = element.getBoundingClientRect();
       if (rect.width) zones.push({ left: rect.left - 28, top: rect.top - 20, right: rect.right + 28, bottom: rect.bottom + 20 });
     });

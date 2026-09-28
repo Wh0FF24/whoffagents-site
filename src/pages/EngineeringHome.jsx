@@ -112,19 +112,28 @@ export default function EngineeringHome() {
   useEffect(() => {
     let cancelled = false;
     const sections = [...root.current.querySelectorAll('[data-chapter-section]')];
-    const instance = createCoreDirector({
-      layer: layer.current,
-      stage: stage.current,
-      hud: hud.current,
-      poster: poster.current,
-      sections,
-      reduced: getMotion(),
-      onChapter: (index) => {
-        store.current.set(index);
-        motion.current?.chapter(index);
-      },
-      onFrame: (frame) => motion.current?.frame(frame),
-    });
+    let instance;
+    try {
+      instance = createCoreDirector({
+        layer: layer.current,
+        stage: stage.current,
+        hud: hud.current,
+        poster: poster.current,
+        sections,
+        reduced: getMotion(),
+        onChapter: (index) => {
+          store.current.set(index);
+          motion.current?.chapter(index);
+        },
+        onFrame: (frame) => motion.current?.frame(frame),
+      });
+    } catch {
+      // The core is a flourish: if it cannot start (an unsupported browser),
+      // the page keeps its static first paint and the poster.
+      if (layer.current) layer.current.dataset.scene = 'fallback';
+      document.documentElement.classList.remove('core-boot');
+      return undefined;
+    }
     director.current = instance;
     import('../components/core/coreMotion')
       .then(({ createCoreMotion }) => createCoreMotion({
