@@ -37,14 +37,9 @@ function installSampler() {
     }
     return true;
   };
+  // Every visible line of copy counts. (In the stacked layout, phones and
+  // portrait tablets, the core rides in a slot in the page and covers none.)
   const copyBoxes = () => {
-    const layer = document.querySelector('.ch-layer');
-    const style = getComputedStyle(layer);
-    // In the stacked layout (phones, portrait tablets; the same test as the
-    // CSS) the core's band covers copy that has scrolled under it.
-    const stacked = window.innerWidth < 760 || (window.innerWidth < 1100 && window.innerHeight >= window.innerWidth);
-    const band = stacked && layer.dataset.chapter !== 'core'
-      ? parseFloat(style.getPropertyValue('--cy')) + parseFloat(style.getPropertyValue('--cr')) * 2 : -Infinity;
     const boxes = [];
     const walker = document.createTreeWalker(document.querySelector('.ch'), NodeFilter.SHOW_TEXT);
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -55,7 +50,7 @@ function installSampler() {
       const range = document.createRange();
       range.selectNodeContents(node);
       for (const rect of range.getClientRects()) {
-        const box = { label: text.slice(0, 30), left: rect.left, right: rect.right, top: Math.max(rect.top, band), bottom: rect.bottom };
+        const box = { label: text.slice(0, 30), left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
         if (box.right > box.left && box.bottom > box.top && box.bottom > 0 && box.top < window.innerHeight) boxes.push(box);
       }
     }

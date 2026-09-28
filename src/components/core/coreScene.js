@@ -1101,9 +1101,11 @@ export function createCoreScene(host, options = {}) {
   // so audits can test them against the copy exactly (see scripts/audit-lightning.mjs).
   let debugFrame = 0;
   function exposeGeometry(state) {
+    // Screen coordinates, wherever the stage sits on the page.
+    const origin = canvas.getBoundingClientRect();
     const project = (point) => {
       tmpA.copy(point).project(camera);
-      return [(tmpA.x + 1) / 2 * size.width, (1 - tmpA.y) / 2 * size.height];
+      return [origin.left + (tmpA.x + 1) / 2 * size.width, origin.top + (1 - tmpA.y) / 2 * size.height];
     };
     const strikes = [];
     tendrils.forEach((tendril) => {

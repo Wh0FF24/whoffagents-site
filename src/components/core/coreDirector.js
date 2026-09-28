@@ -29,6 +29,8 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   let exitOpacity = 1;
   let exitMode = null;
   const NO_ZONES = [];
+  // How far the core dims once it has sunk behind the copy (phones).
+  const SUNK = 0.74;
   let stillFor = 0;
   let keyPaging = 0;
   let dpr = 1;
@@ -74,12 +76,12 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   }
 
   function measure() {
+    view.layoutWidth = window.innerWidth || stage.clientWidth || 1;
+    view.layoutHeight = window.innerHeight || stage.clientHeight || 1;
     const before = `${view.width}x${view.height}`;
     view.width = Math.max(1, stage.clientWidth || window.innerWidth);
     view.height = Math.max(1, stage.clientHeight || window.innerHeight);
     if (`${view.width}x${view.height}` !== before) exitMode = null;
-    view.layoutWidth = window.innerWidth || view.width;
-    view.layoutHeight = window.innerHeight || view.height;
     finalPose = stateFor(CHAPTER_IDS[CHAPTER_IDS.length - 1], view.width, view.height, view.layoutWidth, view.layoutHeight);
     freeze(stateFor(CHAPTER_IDS[0], view.width, view.height, view.layoutWidth, view.layoutHeight).d);
     bounds.length = 0;
@@ -205,6 +207,10 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
 
   function update(dt, animate) {
     const { float, local, tail = 0 } = progress();
+    const layout = layoutFor(view.layoutWidth, view.layoutHeight);
+    // Phones: past the intro the core sinks into the background, dimmed,
+    // and the copy scrolls over it.
+    const sink = layout === 'phone' ? smooth(0.15, 0.85, float) : 0;
     const goal = target(float);
     // Lightning needs the page to be genuinely still, not merely inside a chapter.
     const scrollDelta = window.scrollY - lastScroll;
@@ -273,7 +279,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     // However fast the arrival, the core's instruments stay above the final
     // chapter's first line (smoothing would otherwise let them trail into it).
     const lastIndex = CHAPTER_IDS.length - 1;
-    if (index === lastIndex) {
+    if (index === lastIndex && layout !== 'phone') {
       const guard = sections[lastIndex]?.querySelector('.ch-kicker');
       if (guard) {
         const reachBelow = layoutFor(view.layoutWidth, view.layoutHeight) === 'phone' ? 2.05 : 1.6;
@@ -295,9 +301,10 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     // sits, not the momentary clamp above), so it never dims while fully on
     // screen, and drawing stops once it is gone.
     const exit = smooth(-radius * 1.15, radius * 0.5, current.y - rise);
-    if (Math.abs(exit - exitOpacity) > 0.004 || (exit === 0) !== (exitOpacity === 0) || (exit >= 0.999) !== (exitOpacity >= 0.999)) {
-      exitOpacity = exit;
-      layer.style.opacity = exit >= 0.999 ? '' : exit.toFixed(3);
+    const shade = exit * (1 - SUNK * sink);
+    if (Math.abs(shade - exitOpacity) > 0.004 || (shade === 0) !== (exitOpacity === 0) || (shade >= 0.999) !== (exitOpacity >= 0.999)) {
+      exitOpacity = shade;
+      layer.style.opacity = shade >= 0.999 ? '' : shade.toFixed(3);
     }
     const offstage = exit < 0.01 || (lastBound && window.scrollY > lastBound.top + lastBound.height);
     layer.dataset.offstage = offstage ? 'true' : 'false';
@@ -318,7 +325,6 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     // chapter that allows it (the chapter's own value, not the eased one).
     // Phones, and screens too short for copy and core side by side (a phone
     // on its side), get neither lightning nor bright filament pulses.
-    const layout = layoutFor(view.layoutWidth, view.layoutHeight);
     const cramped = view.layoutHeight < 520;
     const striking = animate && layout !== 'phone' && !cramped && stillFor > 0.45 && hold > 0.5 && away < 0.08 && goal.strike > 0.01;
     // Copy on screen that lightning and bright pulses must not cross, measured
@@ -337,8 +343,9 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
         grow: boot.grow,
         tendril: current.tendril,
         tendrilGoal: goal.tendril,
-        // Filament pulses also wait for the page to settle.
-        calm: cramped ? 0 : animate ? smooth(0.2, 0.7, stillFor) : 1,
+        // Filament pulses also wait for the page to settle, and stay dark
+        // once the core has sunk behind the copy.
+        calm: cramped || sink > 0.5 ? 0 : animate ? smooth(0.2, 0.7, stillFor) : 1,
         strike: striking ? goal.strike : 0,
         copyKeepOut,
         echo: current.echo,
@@ -347,9 +354,9 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
         spin: current.spin,
         targets,
         anchorWeight: hold,
-        // Phones stack copy above and below the core: keep filaments level
-        // on the intro and out of the lower screen everywhere else.
-        side: layout === 'phone' ? (index === 0 ? 'level' : 'bottom') : stateFor(CHAPTER_IDS[index], view.width, view.height, view.layoutWidth, view.layoutHeight).side,
+        // Phones: keep filaments level, around the intro's copy and behind
+        // the chapters' copy alike.
+        side: layout === 'phone' ? 'level' : stateFor(CHAPTER_IDS[index], view.width, view.height, view.layoutWidth, view.layoutHeight).side,
         keepOut: fixedControls(),
         still: !animate,
       });

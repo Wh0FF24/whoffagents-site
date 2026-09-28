@@ -21,18 +21,6 @@ const TABLET = {
   contact: { x: 0.5, y: 0.27, d: 0.26 },
 };
 
-// Phone: after the intro the core rides in a band across the top 40% of
-// the screen (center .2H, radius <= .1H, instruments reach 2 radii) and the
-// chapters scroll underneath it. core-home.css mirrors these numbers.
-// d is a fraction of width, capped at `cap` of height.
-const PHONE = {
-  core: { x: 0.5, y: 0.47, d: 0.84, cap: 0.44 },
-  capabilities: { x: 0.5, y: 0.2, d: 0.46, cap: 0.2 },
-  method: { x: 0.5, y: 0.2, d: 0.46, cap: 0.2 },
-  research: { x: 0.5, y: 0.2, d: 0.46, cap: 0.2 },
-  company: { x: 0.5, y: 0.2, d: 0.46, cap: 0.2 },
-  contact: { x: 0.5, y: 0.2, d: 0.46, cap: 0.2 },
-};
 
 // The working loop drawn around the core in the method chapter.
 export const LOOP_STAGES = [
@@ -46,6 +34,34 @@ export const LOOP_STAGES = [
 ];
 
 export const STATE_KEYS = ['yaw', 'pitch', 'roll', 'spin', 'tendril', 'strike', 'echo', 'web', 'sparks'];
+
+// Phone: after the intro the core sinks into the background, centred behind
+// the copy, which scrolls over it (the director dims it). d is a fraction of
+// width, capped at `cap` of height.
+const PHONE = {
+  core: { x: 0.5, y: 0.47, d: 0.84, cap: 0.44 },
+  capabilities: { x: 0.5, y: 0.5, d: 0.9, cap: 0.46 },
+  method: { x: 0.5, y: 0.5, d: 0.9, cap: 0.46 },
+  research: { x: 0.5, y: 0.5, d: 0.9, cap: 0.46 },
+  company: { x: 0.5, y: 0.5, d: 0.9, cap: 0.46 },
+  contact: { x: 0.5, y: 0.5, d: 0.9, cap: 0.46 },
+};
+
+// The phone intro, top to bottom (core-home.css): the kicker (ending 136px
+// down), the headline's first line, the core, the second line, then the
+// tagline and actions anchored to the bottom. On a short screen, such as a
+// phone browser with its toolbars showing, the core shrinks and moves down
+// so none of them overlap. Taller screens keep the plain pose (center at
+// .47 H, diameter min(.84 W, .44 H)). `viewportWidth` is the CSS viewport
+// width (vw and the media queries); width/height are the stage's.
+export function phoneIntro(width, height, viewportWidth = width) {
+  const title = 1.02 * Math.min(44, Math.max(34, 0.1 * viewportWidth));
+  const above = 152 + title;
+  const below = 14 + title + (viewportWidth < 368 ? 152 : 102) + Math.max(26, 0.04 * height);
+  const d = Math.max(0.3 * width, Math.min(0.84 * width, 0.44 * height, height - above - below));
+  const y = Math.max(above + d / 2, Math.min(0.47 * height, height - below - d / 2));
+  return { d, y };
+}
 
 // Portrait tablets stack like phones: side-by-side copy would sit behind the
 // core. core-home.css uses the same test in its phone media query.
@@ -67,10 +83,12 @@ export function stateFor(id, width, height, layoutWidth = width, layoutHeight = 
   // The intro's instrument frame (0.69 d below center) must clear the
   // headline copy and calls to action along the bottom of the screen.
   if (id === 'core' && layout !== 'phone') diameter = Math.min(diameter, ((1 - place.y) * height - 128) / 0.69);
+  let y = place.y * height;
+  if (id === 'core' && layout === 'phone') ({ d: diameter, y } = phoneIntro(width, height, layoutWidth));
   return {
     ...base,
     x: place.x * width,
-    y: place.y * height,
+    y,
     d: diameter,
     // Decoys and filaments crowd a narrow screen; keep them calmer there.
     echo: base.echo * (layout === 'phone' ? 0.85 : 1),

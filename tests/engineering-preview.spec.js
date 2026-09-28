@@ -4,6 +4,10 @@ import AxeBuilder from '@axe-core/playwright';
 import { routeMeta } from '../src/data/routeMeta.js';
 
 const engineeringRoutes = ['/', '/capabilities', '/research', '/research/persona-fleet', '/about', '/contact'];
+// Phones and portrait tablets (the stacked layout): past the intro the core
+// rests sunk into the background, behind the copy, at this strength.
+const stacked = (width, height) => width < 760 || (width < 1100 && height >= width);
+const SUNK = 0.26;
 
 test.beforeEach(async ({ page }) => {
   // Fail any external write closed, even if a preview guard regresses.
@@ -143,6 +147,7 @@ test('every chapter is readable at each size and the core never pushes the page 
 
 test('the core leaves with the last chapter instead of sitting behind its copy', async ({ page }) => {
   for (const [width, height] of [[1440, 900], [390, 844]]) {
+    const phone = width < 760;
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
@@ -151,12 +156,15 @@ test('the core leaves with the last chapter instead of sitting behind its copy',
         top: element.getBoundingClientRect().top + window.scrollY + Math.max(0, element.offsetHeight - window.innerHeight) + offset,
         behavior: 'instant',
       }), extra);
-      await expect.poll(() => page.evaluate(() => {
-        const layer = getComputedStyle(document.querySelector('.ch-layer'));
+      await expect.poll(() => page.evaluate((sunk) => {
+        const element = document.querySelector('.ch-layer');
+        const layer = getComputedStyle(element);
+        // Phones: the core has sunk into the background, dimmed, behind the copy.
+        if (sunk) return element.dataset.offstage === 'true' || parseFloat(layer.opacity) <= 0.3;
         const links = document.querySelector('.ch-contact-links').getBoundingClientRect();
         const coreBottom = parseFloat(layer.getPropertyValue('--cy')) + parseFloat(layer.getPropertyValue('--cr'));
         return coreBottom < links.top || links.bottom < 0;
-      }), `${width}px, ${extra}px past the contact chapter`).toBe(true);
+      }, phone), `${width}px, ${extra}px past the contact chapter`).toBe(true);
     }
     // At the very end the core is gone: drawing stops.
     await expect(page.locator('.ch-layer')).toHaveAttribute('data-offstage', 'true');
@@ -219,7 +227,7 @@ test('a fast flick through the contact chapter never pulls the core ring over it
 
 test('on tall screens the core leaves or stays whole, and the motion control is never under the footer', async ({ page }) => {
   // 1080 x 1920: the page ends before the contact chapter can come to rest.
-  for (const [width, height, ending] of [[1920, 1080, 'leaves'], [1920, 1200, 'leaves'], [2560, 1440, 'leaves'], [1024, 1366, 'leaves'], [834, 1194, 'leaves'], [1080, 1920, 'stays']]) {
+  for (const [width, height, ending] of [[1920, 1080, 'leaves'], [1920, 1200, 'leaves'], [2560, 1440, 'leaves'], [1024, 1366, 'sunk'], [834, 1194, 'sunk'], [1080, 1920, 'sunk']]) {
     await page.setViewportSize({ width, height });
     await page.goto('/');
     const control = page.locator('.ch-motion');
@@ -235,7 +243,14 @@ test('on tall screens the core leaves or stays whole, and the motion control is 
       return getComputedStyle(button).visibility === 'hidden' || button.getBoundingClientRect().bottom <= footer.top;
     }), `${width}x${height}`).toBe(true);
     await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
-    if (ending === 'leaves') {
+    if (ending === 'sunk') {
+      // Portrait tablets stack like phones: at the end the core is either gone
+      // or still sunk, dimmed, behind the copy.
+      await expect.poll(() => page.evaluate(() => {
+        const layer = document.querySelector('.ch-layer');
+        return layer.dataset.offstage === 'true' || parseFloat(getComputedStyle(layer).opacity) <= 0.3;
+      }), `${width}x${height}`).toBe(true);
+    } else if (ending === 'leaves') {
       // At the very end the core has gone and the controls with it.
       await expect(page.locator('.ch-layer')).toHaveAttribute('data-offstage', 'true', { timeout: 8000 });
       await expect(page.locator('.ch-rail')).toHaveCSS('visibility', 'hidden');
@@ -264,15 +279,17 @@ test('on tall screens the core leaves or stays whole, and the motion control is 
   }
 });
 
-test('the core is at full strength whenever the contact chapter comes to rest', async ({ page }) => {
+test('the core is at its resting strength whenever the contact chapter comes to rest', async ({ page }) => {
   for (const [width, height] of [[1440, 900], [2560, 1440], [390, 844], [768, 1024], [834, 1194], [912, 1368], [1000, 1300], [1024, 1366]]) {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
     await page.locator('#contact').evaluate((element) => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY, behavior: 'instant' }));
     await expect(page.locator('.ch-layer')).toHaveAttribute('data-chapter', 'contact');
-    expect(await page.evaluate(() => Math.abs(document.getElementById('contact').getBoundingClientRect().top)), `${width}x${height} reaches rest`).toBeLessThan(2);
-    await expect.poll(() => page.evaluate(() => getComputedStyle(document.querySelector('.ch-layer')).opacity), `${width}x${height}`).toBe('1');
+    // Side-by-side layouts keep room for the contact chapter to reach its resting place; stacked ones may end first.
+    if (!stacked(width, height)) expect(await page.evaluate(() => Math.abs(document.getElementById('contact').getBoundingClientRect().top)), `${width}x${height} reaches rest`).toBeLessThan(2);
+    const rest = stacked(width, height) ? SUNK : 1;
+    await expect.poll(async () => Math.abs(Number(await page.evaluate(() => getComputedStyle(document.querySelector('.ch-layer')).opacity)) - rest), `${width}x${height}`).toBeLessThan(0.01);
   }
 });
 
@@ -338,7 +355,7 @@ test('the loop labels show only while the core rests in the method chapter', asy
   await expect(labels).toHaveCSS('opacity', '0');
 });
 
-test('portrait tablets stack the copy below the core', async ({ page }) => {
+test('portrait tablets let the copy scroll over the sunken core', async ({ page }) => {
   for (const [width, height] of [[768, 1024], [1024, 1366]]) {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -346,12 +363,14 @@ test('portrait tablets stack the copy below the core', async ({ page }) => {
     for (const chapter of ['capabilities', 'method', 'research', 'company', 'contact']) {
       await page.locator(`#${chapter}`).evaluate((element) => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY, behavior: 'instant' }));
       await expect(page.locator('.ch-layer')).toHaveAttribute('data-chapter', chapter);
-      const clearance = await page.evaluate((id) => {
+      const state = await page.evaluate((id) => {
         const layer = getComputedStyle(document.querySelector('.ch-layer'));
-        const band = parseFloat(layer.getPropertyValue('--cy')) + parseFloat(layer.getPropertyValue('--cr')) * 2;
-        return document.querySelector(`#${id} .ch-kicker`).getBoundingClientRect().top - band;
+        const section = getComputedStyle(document.getElementById(id));
+        return { opacity: Number(layer.opacity), behind: Number(layer.zIndex) < Number(section.zIndex), kicker: document.querySelector(`#${id} .ch-kicker`).getBoundingClientRect().top };
       }, chapter);
-      expect(clearance, `${chapter} at ${width}x${height}`).toBeGreaterThanOrEqual(0);
+      expect(Math.abs(state.opacity - SUNK), `${chapter} at ${width}x${height}: sunk`).toBeLessThan(0.01);
+      expect(state.behind, `${chapter} at ${width}x${height}: behind the copy`).toBe(true);
+      expect(state.kicker, `${chapter} at ${width}x${height}: heading on screen`).toBeGreaterThanOrEqual(0);
     }
   }
 });
@@ -520,10 +539,11 @@ test('the core only fades while crossing the top edge, and the page ends with it
       return rows;
     });
     const size = `${width}x${height}`;
-    for (const row of walk) if (row.opacity < 0.99) expect(row.top, `${size}: dimmed while fully on screen`).toBeLessThan(0);
+    const rest = stacked(width, height) ? SUNK : 1;
+    for (const row of walk) if (row.opacity < rest - 0.01) expect(row.top, `${size}: dimmed while fully on screen`).toBeLessThan(0);
     const end = walk.at(-1);
-    if (end.opacity > 0.5) {
-      expect(end.opacity, `${size}: page end`).toBe(1);
+    if (end.opacity > rest / 2) {
+      expect(Math.abs(end.opacity - rest), `${size}: page end`).toBeLessThan(0.01);
       expect(end.top, `${size}: whole at the page end`).toBeGreaterThanOrEqual(0);
     } else {
       // Gone: below the 1% cut-off, hidden, and no longer drawn.
@@ -604,14 +624,14 @@ test('with classic scrollbars, first paint and the layout choice match the scrip
       for (const key of ['poster', 'hud']) {
         before[key].forEach((value, index) => expect(Math.abs(value - after[key][index]), `${key} at ${width}x${height}`).toBeLessThan(1));
       }
-      // Script (core in the top band) and CSS (band layer raised) agree on the stacked layout.
+      // Script (core sunk into the background) and CSS (chapters keep no room for it) agree on the stacked layout.
       await page.locator('#capabilities').evaluate((element) => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY, behavior: 'instant' }));
       await expect(page.locator('.ch-layer')).toHaveAttribute('data-chapter', 'capabilities');
       const agree = await page.evaluate(() => {
         const layer = document.querySelector('.ch-layer');
         const style = getComputedStyle(layer);
-        const script = Math.abs(parseFloat(style.getPropertyValue('--cy')) / layer.clientHeight - 0.2) < 0.02;
-        return { script, css: style.zIndex === '3' };
+        const script = parseFloat(style.opacity) <= 0.3;
+        return { script, css: getComputedStyle(document.getElementById('capabilities')).paddingTop === '64px' };
       });
       expect(agree.script, `${width}x${height}`).toBe(agree.css);
       await live.close();
@@ -832,7 +852,8 @@ test('a redraw of the instruments never shows them out of place for a frame', as
       if (window.__sampling && hud && layer) {
         const style = getComputedStyle(layer);
         const rect = hud.getBoundingClientRect();
-        window.__worst = Math.max(window.__worst, Math.abs(rect.top + rect.height / 2 - parseFloat(style.getPropertyValue('--cy'))), Math.abs(rect.height - 4 * parseFloat(style.getPropertyValue('--cr'))));
+        const origin = layer.getBoundingClientRect().top;
+        window.__worst = Math.max(window.__worst, Math.abs(rect.top + rect.height / 2 - origin - parseFloat(style.getPropertyValue('--cy'))), Math.abs(rect.height - 4 * parseFloat(style.getPropertyValue('--cr'))));
         window.__boxes.add(hud.style.width);
       }
       requestAnimationFrame(sample);
@@ -851,4 +872,53 @@ test('a redraw of the instruments never shows them out of place for a frame', as
   const { worst, boxes } = await page.evaluate(() => { window.__sampling = false; return { worst: window.__worst, boxes: window.__boxes.size }; });
   expect(boxes, 'the boxes were redrawn').toBeGreaterThan(1);
   expect(worst, 'worst frame offset between instruments and core (px)').toBeLessThan(2);
+});
+
+test('the phone intro stacks without overlaps at real browser heights', async ({ page }) => {
+  // Visible areas of phone browsers with their toolbars showing.
+  for (const [width, height] of [[390, 664], [375, 548], [360, 640], [414, 715], [390, 844]]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+    await page.waitForTimeout(3500);
+    const gaps = await page.evaluate(() => {
+      const box = (selector) => document.querySelector(selector).getBoundingClientRect();
+      const hud = box('.ch-hud');
+      const core = { top: hud.top + hud.height / 4, bottom: hud.bottom - hud.height / 4 };
+      const [kicker, first, second, foot] = ['.ch-intro .ch-kicker', '.ch-title-a', '.ch-title-b', '.ch-intro-foot'].map(box);
+      return [first.top - kicker.bottom, core.top - first.bottom, second.top - core.bottom, foot.top - second.bottom];
+    });
+    for (const gap of gaps) expect(gap, `intro stacking at ${width}x${height}: ${gaps.map(Math.round).join(', ')}`).toBeGreaterThanOrEqual(-1);
+  }
+});
+
+test('on phones the core sinks behind the copy after the intro, without gaps between chapters', async ({ page }) => {
+  for (const [width, height] of [[390, 664], [768, 1024]]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+    // The intro shows the core at full strength.
+    await page.waitForTimeout(3000);
+    expect(await page.evaluate(() => getComputedStyle(document.querySelector('.ch-layer')).opacity), `intro at ${width}x${height}`).toBe('1');
+    for (const id of ['capabilities', 'method', 'research', 'company', 'contact']) {
+      await page.locator(`#${id} .ch-heading`).evaluate((heading) => window.scrollTo({ top: heading.getBoundingClientRect().top + window.scrollY - 200, behavior: 'instant' }));
+      await expect(page.locator('.ch-layer')).toHaveAttribute('data-chapter', id);
+      const state = await page.evaluate(() => {
+        const layer = document.querySelector('.ch-layer');
+        const style = getComputedStyle(layer);
+        return { opacity: parseFloat(style.opacity), fixed: style.position === 'fixed', below: Number(style.zIndex) < Number(getComputedStyle(document.querySelector('.ch-chapter')).zIndex) };
+      });
+      expect(state.opacity, `${id} at ${width}x${height}`).toBeLessThanOrEqual(0.3);
+      expect(state.fixed, `${id} at ${width}x${height}`).toBe(true);
+      expect(state.below, `${id} copy over the core at ${width}x${height}`).toBe(true);
+    }
+    // Chapters follow each other closely: no screen-sized empty stretches.
+    const gaps = await page.evaluate(() => ['capabilities', 'method', 'research', 'company', 'contact'].map((id, index, ids) => {
+      const kicker = document.querySelector(`#${id} .ch-kicker`).getBoundingClientRect();
+      const previous = document.getElementById(index ? ids[index - 1] : 'core');
+      const content = [...previous.querySelectorAll('.ch-panel, .ch-loop-list, .ch-intro-foot, .ch-figure-note')].map((element) => element.getBoundingClientRect().bottom);
+      return kicker.top - Math.max(...content);
+    }));
+    for (const gap of gaps) expect(gap, `gap before a chapter at ${width}x${height}: ${gaps.map(Math.round).join(', ')}`).toBeLessThan(200);
+  }
 });

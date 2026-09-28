@@ -112,6 +112,10 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
     director.boot.assemble = 0;
     director.boot.grow = 0;
     director.wake();
+    // Hold the kicker's final width while it decodes: on phones it is
+    // centred, and a growing line would shift sideways.
+    kicker.style.minWidth = `${kicker.getBoundingClientRect().width}px`;
+    cleanups.push(() => kicker.style.removeProperty('min-width'));
     context.add(() => {
       bootTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
       bootTimeline
@@ -124,7 +128,7 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
         .from('.hud-cross', { opacity: 0, duration: 0.5 }, 1.3)
         .to(director.boot, { grow: 1, duration: 1.3, ease: 'expo.out' }, 1.35)
         .add(() => { field.pulse(); pulseDots(); stepTicks(30, 0.6, 1100); }, 1.4)
-        .fromTo(kicker, { opacity: 0 }, { opacity: 1, duration: 1.1, scrambleText: { text: kickerText, chars: '01/<>#+', revealDelay: 0.25, speed: 0.55 } }, 0.55)
+        .fromTo(kicker, { opacity: 0 }, { opacity: 1, duration: 1.1, scrambleText: { text: kickerText, chars: '01/<>#+', revealDelay: 0.25, speed: 0.55 }, onComplete: () => kicker.style.removeProperty('min-width') }, 0.55)
         .from(titleSplit.chars, { opacity: 0, yPercent: 60, filter: 'blur(8px)', duration: 0.9, stagger: { each: 0.028, from: 'start' }, ease: 'expo.out' }, 1.05)
         .from('.ch-intro .ch-reveal', { opacity: 0, y: 18, duration: 0.9, stagger: 0.1, ease: 'expo.out' }, 1.65)
         .from(document.querySelector('.wf-header') || [], { opacity: 0, y: -12, duration: 0.8, ease: 'power2.out' }, 1.6)

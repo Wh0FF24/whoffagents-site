@@ -39,7 +39,7 @@ html.lenis { scroll-behavior: auto; }
 .ch-layer {
   /* Until the director writes them: its intro pose (see --d0 below). */
   --cx: 50cqw;
-  --cy: 47cqh;
+  --cy: var(--y0);
   --cr: calc(var(--d0) / 2);
   --hold: 1;
   position: fixed;
@@ -61,9 +61,9 @@ html.lenis { scroll-behavior: auto; }
    director then keeps these exact boxes (inline px, redrawn when the
    screen changes size a lot) and moves them by transform only, so taking
    over shifts nothing. */
-.ch-layer { container-type: size; --d0: min(54cqh, calc((53cqh - 128px) / .69), 50cqw); }
-.ch-layer .ch-poster { left: calc(50% - var(--d0) * 1.25); top: calc(47% - var(--d0) * 1.25); width: calc(var(--d0) * 2.5); height: calc(var(--d0) * 2.5); }
-.ch-layer .ch-hud { left: calc(50% - var(--d0)); top: calc(47% - var(--d0)); width: calc(var(--d0) * 2); height: calc(var(--d0) * 2); }
+.ch-layer { container-type: size; --d0: min(54cqh, calc((53cqh - 128px) / .69), 50cqw); --y0: 47cqh; }
+.ch-layer .ch-poster { left: calc(50% - var(--d0) * 1.25); top: calc(var(--y0) - var(--d0) * 1.25); width: calc(var(--d0) * 2.5); height: calc(var(--d0) * 2.5); }
+.ch-layer .ch-hud { left: calc(50% - var(--d0)); top: calc(var(--y0) - var(--d0)); width: calc(var(--d0) * 2); height: calc(var(--d0) * 2); }
 .ch-poster img { width: 100%; height: 100%; display: block; }
 .ch-layer[data-scene='ready'] .ch-poster { opacity: 0; }
 .ch-dots { z-index: 1; }
@@ -320,19 +320,31 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
 /* -------------------------------------------------------------- phone */
 
 @media (max-width: 759px), (max-width: 1099px) and (orientation: portrait) {
-  .ch-layer { --d0: min(84cqw, 44cqh); }
-  .ch { --ch-gutter: 24px; --core-r: min(42vw, 22vh); --core-r: min(42vw, 22dvh); }
-  .wf-corehome-app > .wf-header .wf-nav { padding-inline: 24px; }
-  .ch-chapter { min-height: 0; padding: calc(40vh + 22px) var(--ch-gutter) 72px; padding-top: calc(40dvh + 22px); justify-content: flex-start; }
-  /* After the intro the core rides in a band across the top 40% of the
-     screen; copy scrolls underneath it instead of over the core. */
-  .ch-layer:not([data-chapter='core']) {
-    z-index: 3;
-    pointer-events: auto;
-    clip-path: inset(0 0 calc(100% - var(--cy) - var(--cr) * 2) 0);
-    -webkit-mask-image: linear-gradient(#000 calc(var(--cy) + var(--cr) * 2 - 16px), #0000 calc(var(--cy) + var(--cr) * 2));
-    mask-image: linear-gradient(#000 calc(var(--cy) + var(--cr) * 2 - 16px), #0000 calc(var(--cy) + var(--cr) * 2));
+  /* Phones: past the intro the one core sinks into the background, dimmed
+     (the director), and the chapters scroll over it; nothing is kept clear
+     for it, so there are no empty stretches between chapters.
+     The intro stacks kicker, first line, core, second line, then the
+     tagline and actions; on short screens the core shrinks and moves down
+     so none overlap. Mirrors phoneIntro() in coreChapters.js: once for the
+     fixed layer (container units) and once for the page (viewport units). */
+  .ch-layer {
+    --title-h: calc(1.02 * clamp(34px, 10vw, 44px));
+    --above: calc(152px + var(--title-h));
+    --below: calc(14px + var(--title-h) + var(--foot-h) + max(26px, 4cqh));
+    --d0: max(30cqw, min(84cqw, 44cqh, 100cqh - var(--above) - var(--below)));
+    --y0: clamp(var(--above) + var(--d0) / 2, 47cqh, 100cqh - var(--below) - var(--d0) / 2);
   }
+  .ch {
+    --ch-gutter: 24px;
+    --foot-h: 102px;
+    --title-h: calc(1.02 * clamp(34px, 10vw, 44px));
+    --above: calc(152px + var(--title-h));
+    --below: calc(14px + var(--title-h) + var(--foot-h) + max(26px, 4svh));
+    --core-d: max(30vw, min(84vw, 44dvh, 100dvh - var(--above) - var(--below)));
+    --core-y: clamp(var(--above) + var(--core-d) / 2, 47dvh, 100dvh - var(--below) - var(--core-d) / 2);
+  }
+  .wf-corehome-app > .wf-header .wf-nav { padding-inline: 24px; }
+  .ch-chapter { min-height: 0; padding: 64px var(--ch-gutter) 72px; justify-content: flex-start; }
   .ch-layer:not([data-chapter='core']) .ch-shade { display: none; }
   .ch-panel, .ch-side--right .ch-panel { max-width: 640px; margin: 0 auto; }
   .ch-heading { font-size: clamp(30px, 8.6vw, 38px); }
@@ -340,22 +352,26 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
 
   .ch-intro { min-height: 100svh; padding: 0; }
   .ch-intro .ch-kicker { top: 122px; left: 0; right: 0; max-width: none; justify-content: center; font-size: 8.5px; }
-  .ch-intro .ch-kicker-text { white-space: nowrap; }
+  .ch-intro .ch-kicker-text { display: inline-block; white-space: nowrap; text-align: left; }
   .ch-shade { display: block; position: absolute; left: 0; right: 0; bottom: 0; top: calc(var(--cy) + var(--cr) * 1.2); z-index: 3; background: linear-gradient(#0000, #000000b8 80px, #000000d1); }
   .ch-layer[data-chapter='core'] .ch-shade { opacity: .35; }
   .ch-chapter :is(.ch-heading, .ch-lede, .ch-kicker, .ch-list, .ch-facts, .ch-principle, .ch-method-principle p, .ch-contact-meta, .ch-title, .ch-loop-list) { text-shadow: 0 0 10px #000, 0 0 18px #000, 0 0 2px #000; }
   .ch-program, .ch-person { background: #03050ae0; }
   .ch-title { font-size: clamp(34px, 10vw, 44px); line-height: 1.02; }
   .ch-title-line { left: 0; right: 0; width: auto; max-width: none; text-align: center; transform: none; }
-  .ch-title-a { top: auto; bottom: calc(100% - 47vh + var(--core-r) + 6px); bottom: calc(100% - 47dvh + var(--core-r) + 6px); }
-  .ch-title-b { top: calc(47vh + var(--core-r) + 2px); top: calc(47dvh + var(--core-r) + 2px); }
-  .ch-intro-foot { bottom: max(26px, 4svh); }
+  .ch-title-a { top: auto; bottom: calc(100% - var(--core-y) + var(--core-d) / 2 + 6px); }
+  .ch-title-b { top: calc(var(--core-y) + var(--core-d) / 2 + 2px); }
+  /* One row of actions from 368px up, two rows below: a fixed --foot-h. */
+  .ch-intro-foot { bottom: max(26px, 4svh); width: min(700px, calc(100vw - 32px)); }
+  .ch-intro-foot .ch-actions { flex-wrap: nowrap; gap: 6px 16px; }
+  .ch-intro-foot .ch-button { gap: 14px; padding: 0 16px; }
+  .ch-intro-foot .ch-textlink { gap: 12px; }
   .ch-intro-foot .ch-lede { font-size: 13px; max-width: 320px; margin-bottom: 10px; }
   .ch-intro-readout { display: none; }
   .ch-actions { gap: 6px 22px; justify-content: center; }
 
   .ch-method { min-height: 0; padding: 0; }
-  .ch-method-sticky { position: relative; min-height: 0; padding: calc(40vh + 22px) var(--ch-gutter) 72px; padding-top: calc(40dvh + 22px); justify-content: flex-start; gap: 26px; }
+  .ch-method-sticky { position: relative; min-height: 0; padding: 64px var(--ch-gutter) 72px; justify-content: flex-start; gap: 26px; }
   .ch-method-lead, .ch-method-principle, .ch-loop-list, .ch-figure-note { box-sizing: border-box; width: 100%; max-width: 640px; margin-inline: auto; }
   .ch-loop-labels { display: none; }
   .ch-loop-list { position: static; width: 100%; height: auto; overflow: visible; clip-path: none; white-space: normal; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; border-top: 1px solid var(--ch-line); }
@@ -379,6 +395,11 @@ html.core-boot :is(.ch-intro .ch-kicker, .ch-title, .ch-intro .ch-reveal, .wf-co
   .ch-rail { display: none; }
   .ch-motion { top: 90px; right: 12px; bottom: auto; min-height: 30px; padding: 0 11px; font-size: 9px; background: #000000d1; border: 1px solid #ffffff1f; border-radius: 999px; }
   .hud-degrees { display: none; }
+}
+
+@media (max-width: 367px) {
+  .ch { --foot-h: 152px; }
+  .ch-intro-foot .ch-actions { flex-direction: column; }
 }
 
 @media (max-height: 760px) and (min-width: 760px) {
