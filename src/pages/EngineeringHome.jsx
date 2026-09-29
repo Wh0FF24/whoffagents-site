@@ -127,9 +127,10 @@ export default function EngineeringHome() {
         },
         onFrame: (frame) => motion.current?.frame(frame),
       });
-    } catch {
+    } catch (error) {
       // The core is a flourish: if it cannot start (an unsupported browser),
       // the page keeps its static first paint and the poster.
+      console.error('Whoff core could not start; showing the static page.', error);
       if (layer.current) layer.current.dataset.scene = 'fallback';
       document.documentElement.classList.remove('core-boot');
       return undefined;
@@ -172,6 +173,9 @@ export default function EngineeringHome() {
   function togglePaused() {
     const next = !paused;
     setPaused(next);
+    // The instruments' own CSS motion stops here too, so pausing works even
+    // when the scene or the motion module could not start.
+    layer.current?.classList.toggle('is-paused', next);
     director.current?.setPaused(next);
     motion.current?.setPaused(next);
   }

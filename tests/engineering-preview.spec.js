@@ -995,3 +995,32 @@ test('on portrait tablets a toolbar sliding at the page end does not flip how th
     }
   }
 });
+
+test('if the core cannot start, the page stays static, pause still stops the instruments, and nothing is left running', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  // Fail the director's first update: the page must keep its static state.
+  await page.addInitScript(() => {
+    const original = CSSStyleDeclaration.prototype.setProperty;
+    CSSStyleDeclaration.prototype.setProperty = function setProperty(name, ...rest) {
+      if (name === '--cx') throw new Error('simulated start-up failure');
+      return original.call(this, name, ...rest);
+    };
+  });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.ch-layer')).toHaveAttribute('data-scene', 'fallback');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  const pause = page.getByRole('button', { name: 'Pause motion' });
+  if (await pause.count()) {
+    await pause.click();
+    await expect(page.locator('.ch-layer')).toHaveClass(/is-paused/);
+    expect(await page.evaluate(() => getComputedStyle(document.querySelector('.hud-arcs')).animationPlayState)).toBe('paused');
+  }
+  // Leave the homepage and scroll: no director is left listening.
+  await page.getByRole('link', { name: 'Capabilities' }).first().click();
+  await expect(page).toHaveURL(/\/capabilities$/);
+  for (let step = 0; step < 8; step += 1) await page.mouse.wheel(0, 400);
+  await page.waitForTimeout(600);
+  expect(errors.filter((message) => !/simulated start-up failure/.test(message)), 'errors after leaving the page').toEqual([]);
+});

@@ -508,8 +508,34 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     }
   }
 
-  measure();
-  update(0, false);
+  // Everything the director attaches, removed on dispose, or at once if it
+  // cannot start (the page then keeps its static state).
+  function teardown() {
+    dead = true;
+    if (rafId) cancelAnimationFrame(rafId);
+    if (resizeFrame) cancelAnimationFrame(resizeFrame);
+    if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+    if (loadTimer !== undefined) window.clearTimeout(loadTimer);
+    resizeObserver.disconnect();
+    window.removeEventListener('scroll', onScroll);
+    intents.forEach((type) => window.removeEventListener(type, onIntent, { capture: true }));
+    window.removeEventListener('pointermove', onPointer);
+    document.removeEventListener('visibilitychange', onVisibility);
+    scene?.dispose();
+    scene = null;
+    layer.classList.remove('is-directed');
+    frames.forEach((frame, element) => ['left', 'top', 'width', 'height', 'transform'].forEach((key) => element.style.removeProperty(key)));
+    frozenAt = 0;
+    drawn = null;
+  }
+
+  try {
+    measure();
+    update(0, false);
+  } catch (error) {
+    teardown();
+    throw error;
+  }
   layer.classList.add('is-directed');
   if ('requestIdleCallback' in window) idleId = window.requestIdleCallback(loadScene, { timeout: 700 });
   else loadTimer = window.setTimeout(loadScene, 60);
@@ -558,22 +584,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       schedule();
     },
     dispose() {
-      dead = true;
-      if (rafId) cancelAnimationFrame(rafId);
-      if (resizeFrame) cancelAnimationFrame(resizeFrame);
-      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
-      if (loadTimer !== undefined) window.clearTimeout(loadTimer);
-      resizeObserver.disconnect();
-      window.removeEventListener('scroll', onScroll);
-      intents.forEach((type) => window.removeEventListener(type, onIntent, { capture: true }));
-      window.removeEventListener('pointermove', onPointer);
-      document.removeEventListener('visibilitychange', onVisibility);
-      scene?.dispose();
-      scene = null;
-      layer.classList.remove('is-directed');
-      frames.forEach((frame, element) => ['left', 'top', 'width', 'height', 'transform'].forEach((key) => element.style.removeProperty(key)));
-      frozenAt = 0;
-      drawn = null;
+      teardown();
     },
   };
 }
