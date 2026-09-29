@@ -61,6 +61,17 @@ test("project keyboard tabs, transcript, care plans and FAQ work", async ({
   ).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("tabpanel")).toContainText("Client project · Website & booking experience");
   await expect(page.getByRole("tabpanel").getByRole("link", { name: "Visit the website" })).toHaveAttribute("href", "https://www.islandairporter.com");
+  await page.keyboard.press("ArrowRight");
+  await expect(
+    page.getByRole("tab", { name: /The Forge Gym/ }),
+  ).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tabpanel")).toContainText("Client project · Website & hosting");
+  await expect(page.getByRole("tabpanel").getByRole("link", { name: "Visit the website" })).toHaveAttribute("href", "https://www.utahforgegym.com");
+  // The arrows wrap round.
+  await page.keyboard.press("ArrowRight");
+  await expect(
+    page.getByRole("tab", { name: /Spindle Creek/ }),
+  ).toHaveAttribute("aria-selected", "true");
   await page.getByRole("button", { name: "Next step" }).click();
   await expect(page.locator(".st-demo-messages")).toContainText(
     "AI assistant for the shop",

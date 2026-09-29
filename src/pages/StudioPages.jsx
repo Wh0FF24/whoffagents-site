@@ -20,7 +20,6 @@ import StudioIdentity from "../components/StudioIdentity";
 import InquiryForm from "../components/InquiryForm";
 import "../styles/studio.css";
 
-const PREVIEW = import.meta.env.VITE_PRIVATE_PREVIEW === "true";
 const work = [
   {
     title: "Spindle Creek",
@@ -41,6 +40,16 @@ const work = [
     tags: ["Booking experience", "Mobile design", "Custom software"],
     detail:
       "A coastal identity and a simpler booking experience for an island shuttle service. Website design and custom booking software, built by Whoff Agents.",
+  },
+  {
+    title: "The Forge Gym",
+    type: "Serious strength, open around the clock.",
+    image: "/work/forge.webp",
+    href: "https://www.utahforgegym.com",
+    label: "Client project · Website & hosting",
+    tags: ["Custom design", "Mobile design", "Search setup"],
+    detail:
+      "A bold, straight-talking site for a 24/7 warehouse strength gym: memberships, equipment, and coaching, with a clear path to a free first workout. Designed, built, and hosted by Whoff Agents.",
   },
 ];
 export function Kicker({ children, number }) {
@@ -124,8 +133,15 @@ export function SelectedWork() {
                   ["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)
                 ) {
                   e.preventDefault();
+                  const last = work.length - 1;
                   const n =
-                    e.key === "Home" ? 0 : e.key === "End" ? 1 : 1 - selected;
+                    e.key === "Home"
+                      ? 0
+                      : e.key === "End"
+                        ? last
+                        : e.key === "ArrowRight"
+                          ? (selected + 1) % work.length
+                          : (selected + last) % work.length;
                   setSelected(n);
                   document.getElementById(`work-tab-${n}`)?.focus();
                 }
@@ -168,12 +184,6 @@ export function SelectedWork() {
             </a>
           </div>
         </div>
-        {PREVIEW && (
-          <p className="st-review-note">
-            Private review: portfolio permissions will be confirmed before these
-            projects appear on the public site.
-          </p>
-        )}
       </div>
     </section>
   );
