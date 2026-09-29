@@ -1012,15 +1012,78 @@ test('if the core cannot start, the page stays static, pause still stops the ins
   await expect(page.locator('.ch-layer')).toHaveAttribute('data-scene', 'fallback');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   const pause = page.getByRole('button', { name: 'Pause motion' });
-  if (await pause.count()) {
-    await pause.click();
-    await expect(page.locator('.ch-layer')).toHaveClass(/is-paused/);
-    expect(await page.evaluate(() => getComputedStyle(document.querySelector('.hud-arcs')).animationPlayState)).toBe('paused');
-  }
+  await expect(pause).toHaveCount(1);
+  await pause.click();
+  await expect(page.locator('.ch-layer')).toHaveClass(/is-paused/);
+  expect(await page.evaluate(() => getComputedStyle(document.querySelector('.hud-arcs')).animationPlayState)).toBe('paused');
   // Leave the homepage and scroll: no director is left listening.
   await page.getByRole('link', { name: 'Capabilities' }).first().click();
   await expect(page).toHaveURL(/\/capabilities$/);
   for (let step = 0; step < 8; step += 1) await page.mouse.wheel(0, 400);
   await page.waitForTimeout(600);
-  expect(errors.filter((message) => !/simulated start-up failure/.test(message)), 'errors after leaving the page').toEqual([]);
+  // The start-up failure itself is caught and logged, so any page error here
+  // means a director was left running.
+  expect(errors, 'errors after leaving the page').toEqual([]);
+});
+
+test('pausing before the motion module arrives keeps everything paused once it does', async ({ page }) => {
+  // Hold the motion module back so the visitor can pause first.
+  await page.route(/coreMotion-[^/]*\.js$/, async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+    await route.continue();
+  });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+  await expect(page.locator('html'), 'the motion module is still held back').toHaveClass(/core-boot/);
+  await page.getByRole('button', { name: 'Pause motion' }).click();
+  await expect(page.getByRole('button', { name: 'Resume motion' })).toHaveCount(1);
+  // The module removes core-boot as it starts.
+  await expect(page.locator('html')).not.toHaveClass(/core-boot/, { timeout: 10000 });
+  // Watch the instruments for longer than one tick-ring step (2.1s): nothing
+  // may animate, including a flourish set off by the pause itself.
+  const moved = await page.evaluate(async () => {
+    const counts = { ticks: 0, dots: 0 };
+    const observer = new MutationObserver((records) => records.forEach(({ target }) => {
+      if (target.matches('.hud-ticks')) counts.ticks += 1;
+      else if (target.matches('.hud-dot')) counts.dots += 1;
+    }));
+    observer.observe(document.querySelector('.ch-hud'), { attributes: true, subtree: true, attributeFilter: ['style'] });
+    await new Promise((resolve) => setTimeout(resolve, 2600));
+    observer.disconnect();
+    return counts;
+  });
+  expect(moved, 'the tick ring and dots stay still while paused').toEqual({ ticks: 0, dots: 0 });
+  await expect(page.locator('.ch-layer')).toHaveClass(/is-paused/);
+  expect(await page.evaluate(() => getComputedStyle(document.querySelector('.ch-program-meta i')).animationPlayState)).toBe('paused');
+});
+
+test('a core that fails after starting stops once and leaves the static page', async ({ page }) => {
+  const errors = [];
+  const stopped = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error' && /Whoff core stopped/.test(message.text())) stopped.push(message.text());
+  });
+  // Let the director run a few dozen frames, then fail every update.
+  await page.addInitScript(() => {
+    let calls = 0;
+    const original = CSSStyleDeclaration.prototype.setProperty;
+    CSSStyleDeclaration.prototype.setProperty = function setProperty(name, ...rest) {
+      if (name === '--cx' && ++calls > 30) throw new Error('simulated late failure');
+      return original.call(this, name, ...rest);
+    };
+  });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
+  for (let step = 0; step < 6; step += 1) await page.mouse.wheel(0, 400);
+  await expect(page.locator('.ch-layer')).toHaveAttribute('data-scene', 'fallback', { timeout: 10000 });
+  await expect(page.locator('.ch-layer')).not.toHaveClass(/is-directed/);
+  // Keep scrolling: nothing is left throwing.
+  for (let step = 0; step < 8; step += 1) await page.mouse.wheel(0, 400);
+  await page.waitForTimeout(800);
+  expect(errors, 'page errors').toEqual([]);
+  expect(stopped, 'the core reports stopping once').toHaveLength(1);
+  await expect(page.getByRole('heading', { level: 1 })).toBeAttached();
 });

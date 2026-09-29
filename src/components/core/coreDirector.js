@@ -430,7 +430,17 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
       time += dt;
       adaptQuality(dt);
     }
-    update(dt, animate);
+    try {
+      update(dt, animate);
+    } catch (error) {
+      // A failure mid-flight stops the core cleanly; the page keeps its
+      // static state instead of throwing on every frame.
+      console.error('Whoff core stopped; showing the static page.', error);
+      teardown();
+      layer.dataset.scene = 'fallback';
+      onStatus?.('fallback');
+      return;
+    }
     if (animate && !document.hidden && layer.dataset.offstage !== 'true') schedule();
     else lastStamp = 0;
   }
@@ -545,7 +555,8 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     get scene() { return scene; },
     get state() { return current; },
     get chapter() { return chapterIndex; },
-    refresh() { resize(); },
+    // Nothing is measured or placed again once the director has stopped.
+    refresh() { if (!dead) resize(); },
     wake() { schedule(); },
     // Run from another frame clock (the smooth-scroll ticker), after it has
     // moved the page, so the core and the copy are placed from the same scroll

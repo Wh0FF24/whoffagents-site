@@ -71,6 +71,9 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
   const ticks = hud.querySelector('.hud-ticks');
   let tickAngle = 0;
   let tickTimer = null;
+  // Set before the boot sequence is jumped to its end, so pausing never
+  // starts a flourish of its own.
+  let paused = false;
   const stepTicks = (amount, bounce = 0.55, duration = 700) => {
     tickAngle += amount;
     anime.animate(ticks, { rotate: tickAngle, ease: anime.spring({ bounce, duration }) });
@@ -127,7 +130,7 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
         .from('.hud-bracket', { scale: 1.35, opacity: 0, transformOrigin: '50% 50%', duration: 0.9, ease: 'expo.out' }, 1.25)
         .from('.hud-cross', { opacity: 0, duration: 0.5 }, 1.3)
         .to(director.boot, { grow: 1, duration: 1.3, ease: 'expo.out' }, 1.35)
-        .add(() => { field.pulse(); pulseDots(); stepTicks(30, 0.6, 1100); }, 1.4)
+        .add(() => { if (paused) return; field.pulse(); pulseDots(); stepTicks(30, 0.6, 1100); }, 1.4)
         .fromTo(kicker, { opacity: 0 }, { opacity: 1, duration: 1.1, scrambleText: { text: kickerText, chars: '01/<>#+', revealDelay: 0.25, speed: 0.55 }, onComplete: () => kicker.style.removeProperty('min-width') }, 0.55)
         .from(titleSplit.chars, { opacity: 0, yPercent: 60, filter: 'blur(8px)', duration: 0.9, stagger: { each: 0.028, from: 'start' }, ease: 'expo.out' }, 1.05)
         .from('.ch-intro .ch-reveal', { opacity: 0, y: 18, duration: 0.9, stagger: 0.1, ease: 'expo.out' }, 1.65)
@@ -200,7 +203,7 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
   }
 
   function chapter() {
-    if (reduced || bootTimeline?.isActive()) return;
+    if (reduced || paused || bootTimeline?.isActive()) return;
     field.pulse();
     pulseDots();
     stepTicks(45, 0.5, 1200);
@@ -221,9 +224,10 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
       if (lenis) lenis.scrollTo(target, { duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4) });
       else document.querySelector(target)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
     },
-    setPaused(paused) {
+    setPaused(value) {
       // Only the continuous instruments stop; reveals still finish so no
       // content is left hidden.
+      paused = value;
       if (paused) {
         bootTimeline?.progress(1);
         tickTimer?.pause();

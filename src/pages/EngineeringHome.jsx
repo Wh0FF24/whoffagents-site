@@ -98,6 +98,8 @@ export default function EngineeringHome() {
   if (!store.current) store.current = createChapterStore();
   const reduced = useSyncExternalStore(subscribeMotion, getMotion, getServerMotion);
   const [paused, setPaused] = useState(false);
+  // For the motion module, which may arrive after the visitor has paused.
+  const pausedNow = useRef(false);
   const [jump, setJump] = useState(null);
   // False in the server HTML and during hydration: the pause control only
   // means something once the scripts are running.
@@ -151,6 +153,7 @@ export default function EngineeringHome() {
           return;
         }
         motion.current = created;
+        if (pausedNow.current) created.setPaused(true);
         setJump(() => (target) => created.scrollTo(target));
         instance.wake();
       })
@@ -173,6 +176,7 @@ export default function EngineeringHome() {
   function togglePaused() {
     const next = !paused;
     setPaused(next);
+    pausedNow.current = next;
     // The instruments' own CSS motion stops here too, so pausing works even
     // when the scene or the motion module could not start.
     layer.current?.classList.toggle('is-paused', next);

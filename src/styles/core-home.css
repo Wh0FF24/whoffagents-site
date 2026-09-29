@@ -248,6 +248,7 @@ html.lenis { scroll-behavior: auto; }
 .ch-program-meta--blue i { background: var(--ch-royal); box-shadow: 0 0 10px #2d66e4; }
 .ch-program-standard { margin-top: 3px; font: 400 10px/1.5 'JetBrains Mono', monospace !important; letter-spacing: .06em; color: #e6e8ec !important; }
 @keyframes ch-blink { 50% { opacity: .35; } }
+.ch:has(> .ch-layer.is-paused) .ch-program-meta i { animation-play-state: paused; }
 .ch-figure-note { position: absolute; left: var(--ch-gutter); bottom: 28px; margin: 0; font: 400 9px/1.4 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-dim); }
 
 /* 04 · company */
