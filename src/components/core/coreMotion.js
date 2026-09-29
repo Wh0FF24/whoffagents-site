@@ -74,16 +74,25 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
   // Set before the boot sequence is jumped to its end, so pausing never
   // starts a flourish of its own.
   let paused = false;
+  // The latest ring step, dot pulse and bracket pulse. Pausing freezes any
+  // still in flight where they are; resuming carries them on.
+  let ringStep = null;
+  let dotPulse = null;
+  let bracketPulse = null;
+  let frozen = [];
+  // An anime.js animation or a GSAP tween that is still moving.
+  const inFlight = (animation) => Boolean(animation)
+    && (typeof animation.isActive === 'function' ? animation.isActive() : !animation.paused && !animation.completed);
   const stepTicks = (amount, bounce = 0.55, duration = 700) => {
     tickAngle += amount;
-    anime.animate(ticks, { rotate: tickAngle, ease: anime.spring({ bounce, duration }) });
+    ringStep = anime.animate(ticks, { rotate: tickAngle, ease: anime.spring({ bounce, duration }) });
   };
   if (!reduced) {
     tickTimer = anime.createTimer({ duration: 2100, loop: true, onLoop: () => stepTicks(5) });
     cleanups.push(() => tickTimer.pause());
   }
   const pulseDots = () => {
-    anime.animate(hud.querySelectorAll('.hud-dot'), {
+    dotPulse = anime.animate(hud.querySelectorAll('.hud-dot'), {
       opacity: [{ to: 1, duration: 180 }, { to: 0.35, duration: 700 }],
       scale: [{ to: 2.2, duration: 180 }, { to: 1, duration: 700 }],
       delay: anime.stagger(9, { from: 'center' }),
@@ -139,9 +148,16 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
       if (!firstVisit) bootTimeline.timeScale(2.2);
     });
     html.classList.remove('core-boot');
-    const hurry = () => bootTimeline?.isActive() && bootTimeline.timeScale(5);
-    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((type) => window.addEventListener(type, hurry, { passive: true, once: true }));
-    cleanups.push(() => ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((type) => window.removeEventListener(type, hurry)));
+    // Any sign of moving on speeds the boot up, except reaching for the
+    // motion control: a pause must not rush the boot into its flourish.
+    const hurryOn = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    const hurry = (event) => {
+      if (event.target instanceof Element && event.target.closest('.ch-motion')) return;
+      if (bootTimeline?.isActive()) bootTimeline.timeScale(5);
+      hurryOn.forEach((type) => window.removeEventListener(type, hurry));
+    };
+    hurryOn.forEach((type) => window.addEventListener(type, hurry, { passive: true }));
+    cleanups.push(() => hurryOn.forEach((type) => window.removeEventListener(type, hurry)));
   } else {
     html.classList.remove('core-boot');
   }
@@ -207,7 +223,7 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
     field.pulse();
     pulseDots();
     stepTicks(45, 0.5, 1200);
-    gsap.fromTo(hud.querySelectorAll('.hud-bracket'), { scale: 1.22, opacity: 0 }, { scale: 1, opacity: 1, transformOrigin: '50% 50%', duration: 0.9, ease: 'expo.out', overwrite: true });
+    bracketPulse = gsap.fromTo(hud.querySelectorAll('.hud-bracket'), { scale: 1.22, opacity: 0 }, { scale: 1, opacity: 1, transformOrigin: '50% 50%', duration: 0.9, ease: 'expo.out', overwrite: true });
   }
 
   let disposed = false;
@@ -225,15 +241,22 @@ export async function createCoreMotion({ root, layer, hud, dotsCanvas, director,
       else document.querySelector(target)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
     },
     setPaused(value) {
-      // Only the continuous instruments stop; reveals still finish so no
-      // content is left hidden.
+      // The instruments stop, and flourishes already in flight freeze where
+      // they are; reveals still finish so no content is left hidden.
+      if (value === paused) return;
       paused = value;
       if (paused) {
         bootTimeline?.progress(1);
         tickTimer?.pause();
+        frozen = [ringStep, dotPulse, bracketPulse].filter(inFlight);
+        frozen.forEach((animation) => animation.pause());
+        field.setPaused(true);
         layer.classList.add('is-paused');
       } else {
         tickTimer?.play();
+        frozen.forEach((animation) => animation.resume());
+        frozen = [];
+        field.setPaused(false);
         layer.classList.remove('is-paused');
       }
     },

@@ -1058,32 +1058,175 @@ test('pausing before the motion module arrives keeps everything paused once it d
   expect(await page.evaluate(() => getComputedStyle(document.querySelector('.ch-program-meta i')).animationPlayState)).toBe('paused');
 });
 
-test('a core that fails after starting stops once and leaves the static page', async ({ page }) => {
+test('a core that fails after starting stops once and returns to its first paint', async ({ page }) => {
   const errors = [];
   const stopped = [];
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
     if (message.type() === 'error' && /Whoff core stopped/.test(message.text())) stopped.push(message.text());
   });
-  // Let the director run a few dozen frames, then fail every update.
+  // Every update fails once the test arms it.
   await page.addInitScript(() => {
-    let calls = 0;
     const original = CSSStyleDeclaration.prototype.setProperty;
     CSSStyleDeclaration.prototype.setProperty = function setProperty(name, ...rest) {
-      if (name === '--cx' && ++calls > 30) throw new Error('simulated late failure');
+      if (name === '--cx' && window.__failCore) throw new Error('simulated late failure');
       return original.call(this, name, ...rest);
     };
   });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
-  await expect(page.locator('.ch-layer')).toHaveClass(/is-directed/);
-  for (let step = 0; step < 6; step += 1) await page.mouse.wheel(0, 400);
-  await expect(page.locator('.ch-layer')).toHaveAttribute('data-scene', 'fallback', { timeout: 10000 });
-  await expect(page.locator('.ch-layer')).not.toHaveClass(/is-directed/);
-  // Keep scrolling: nothing is left throwing.
-  for (let step = 0; step < 8; step += 1) await page.mouse.wheel(0, 400);
-  await page.waitForTimeout(800);
+  const layer = page.locator('.ch-layer');
+  await expect(layer).toHaveClass(/is-directed/);
+  // Fail at the page end, where the rail has stepped aside and the motion
+  // control rides above the footer.
+  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+  await expect(layer).toHaveAttribute('data-footer', 'near');
+  await page.evaluate(() => { window.__failCore = true; });
+  await page.mouse.wheel(0, -240);
+  await expect(layer).toHaveAttribute('data-scene', 'fallback', { timeout: 10000 });
+  await expect(layer).not.toHaveClass(/is-directed/);
+  // Nothing the frames wrote is left behind.
+  expect(await layer.evaluate((element) => ({
+    opacity: element.style.opacity,
+    cx: element.style.getPropertyValue('--cx'),
+    offstage: element.dataset.offstage ?? null,
+    footer: element.dataset.footer ?? null,
+    chapter: element.dataset.chapter,
+    lift: document.querySelector('.ch-motion').style.translate,
+  }))).toEqual({ opacity: '', cx: '', offstage: null, footer: null, chapter: 'core', lift: '' });
+  // Scroll back to the top: nothing is left throwing, and the core and the
+  // controls show.
+  for (let step = 0; step < 8; step += 1) await page.mouse.wheel(0, -500);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page.waitForTimeout(600);
+  expect(await page.evaluate(() => ['.ch-layer', '.ch-rail', '.ch-motion'].map((selector) => getComputedStyle(document.querySelector(selector)).visibility))).toEqual(['visible', 'visible', 'visible']);
   expect(errors, 'page errors').toEqual([]);
   expect(stopped, 'the core reports stopping once').toHaveLength(1);
-  await expect(page.getByRole('heading', { level: 1 })).toBeAttached();
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+});
+
+test('a core that has stopped is not measured or placed again', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  // Hold the motion module back so it arrives after the director has stopped,
+  // then asks it to refresh once fonts are ready.
+  await page.route(/coreMotion-[^/]*\.js$/, async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await route.continue();
+  });
+  // The first frame after start-up fails.
+  await page.addInitScript(() => {
+    let calls = 0;
+    const original = CSSStyleDeclaration.prototype.setProperty;
+    CSSStyleDeclaration.prototype.setProperty = function setProperty(name, ...rest) {
+      if (name === '--cx' && ++calls === 2) throw new Error('simulated failure after start');
+      return original.call(this, name, ...rest);
+    };
+  });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.ch-layer')).toHaveAttribute('data-scene', 'fallback');
+  await expect(page.locator('html')).not.toHaveClass(/core-boot/, { timeout: 10000 });
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(500);
+  const inline = await page.evaluate(() => ['.ch-hud', '.ch-poster'].map((selector) => {
+    const element = document.querySelector(selector);
+    return ['left', 'top', 'width', 'height', 'transform'].map((key) => element.style.getPropertyValue(key)).join('');
+  }));
+  expect(inline, 'no boxes placed after the stop').toEqual(['', '']);
+  await expect(page.locator('.ch-layer')).not.toHaveClass(/is-directed/);
+  expect(errors, 'page errors').toEqual([]);
+});
+
+test('a pause pressed during the boot neither rushes it nor lets a flourish run on', async ({ page }) => {
+  // Record every write to the tick ring and the dots, and when the boot starts.
+  await page.addInitScript(() => {
+    const watch = (window.__hud = { writes: [], start: 0 });
+    const hook = () => {
+      const hud = document.querySelector('.ch-hud');
+      if (!hud) {
+        requestAnimationFrame(hook);
+        return;
+      }
+      new MutationObserver((records) => records.forEach(({ target }) => {
+        if (target.matches('.hud-ticks, .hud-dot')) watch.writes.push(performance.now());
+      })).observe(hud, { attributes: true, subtree: true, attributeFilter: ['style'] });
+      new MutationObserver(() => {
+        if (!watch.start && !document.documentElement.classList.contains('core-boot')) watch.start = performance.now();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hook);
+    else hook();
+  });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const now = () => page.evaluate(() => performance.now());
+  const writesSince = (from) => page.evaluate((since) => window.__hud.writes.filter((time) => time > since).length, from);
+  const press = async (hold) => {
+    const box = await page.locator('.ch-motion').boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    const down = await now();
+    await page.mouse.down();
+    await page.waitForTimeout(hold);
+    await page.mouse.up();
+    return { down, up: await now() };
+  };
+
+  // Held from 0.5 s: the boot's flourish (1.4 s in) must not be rushed in
+  // during the press, and the pause then skips it.
+  await page.goto('/');
+  await page.waitForFunction(() => window.__hud.start > 0 && performance.now() - window.__hud.start >= 500, null, { polling: 'raf' });
+  const early = await press(400);
+  await expect(page.getByRole('button', { name: 'Resume motion' })).toHaveCount(1);
+  await page.waitForTimeout(2600);
+  expect(await writesSince(early.down), 'no flourish from a pause pressed early in the boot').toBe(0);
+
+  // Pressed while the flourish is running: it freezes where it is.
+  await page.reload();
+  await page.waitForFunction(() => window.__hud.writes.length > 0, null, { polling: 'raf', timeout: 15000 });
+  await page.waitForTimeout(150);
+  const late = await press(90);
+  await expect(page.getByRole('button', { name: 'Resume motion' })).toHaveCount(1);
+  await page.waitForTimeout(2600);
+  expect(await writesSince(late.up + 50), 'the flourish in flight stops with the pause').toBe(0);
+
+  // Resuming carries the instruments on.
+  const resumed = await now();
+  await page.getByRole('button', { name: 'Resume motion' }).click();
+  await page.waitForTimeout(2600);
+  expect(await writesSince(resumed), 'the instruments move again after resuming').toBeGreaterThan(0);
+});
+
+test('a core that fails while resizing stops once and leaves the static page', async ({ page }) => {
+  const errors = [];
+  const stopped = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error' && /Whoff core stopped/.test(message.text())) stopped.push(message.text());
+  });
+  // Measuring the stage fails once the test arms it.
+  await page.addInitScript(() => {
+    const descriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'clientWidth');
+    Object.defineProperty(Element.prototype, 'clientWidth', {
+      configurable: true,
+      get() {
+        if (window.__failCore && this.classList?.contains('ch-canvas')) throw new Error('simulated resize failure');
+        return descriptor.get.call(this);
+      },
+    });
+  });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const layer = page.locator('.ch-layer');
+  await expect(layer).toHaveClass(/is-directed/);
+  await page.evaluate(() => { window.__failCore = true; });
+  for (const [width, height] of [[1400, 900], [1300, 880], [1440, 900]]) {
+    await page.setViewportSize({ width, height });
+    await page.waitForTimeout(400);
+  }
+  await expect(layer).toHaveAttribute('data-scene', 'fallback');
+  await expect(layer).not.toHaveClass(/is-directed/);
+  for (let step = 0; step < 6; step += 1) await page.mouse.wheel(0, 400);
+  await page.waitForTimeout(600);
+  expect(errors, 'page errors').toEqual([]);
+  expect(stopped, 'the core reports stopping once').toHaveLength(1);
 });

@@ -17,6 +17,7 @@ export function createDotField(canvas, { spacing = 26 } = {}) {
   let ratio = 1;
   let frame = 0;
   let pulseAnimation;
+  let pulseFrozen = false;
   const core = { x: -9999, y: -9999, r: 200 };
   const pointer = { x: -9999, y: -9999 };
 
@@ -109,6 +110,17 @@ export function createDotField(canvas, { spacing = 26 } = {}) {
   return {
     setCore,
     pulse,
+    // Pausing freezes a pulse in flight where it is; resuming carries it on.
+    setPaused(value) {
+      if (value) {
+        if (pulseFrozen || !pulseAnimation || pulseAnimation.paused || pulseAnimation.completed) return;
+        pulseFrozen = true;
+        pulseAnimation.pause();
+      } else if (pulseFrozen) {
+        pulseFrozen = false;
+        pulseAnimation.resume();
+      }
+    },
     dispose() {
       observer.disconnect();
       window.removeEventListener('pointermove', onPointer);

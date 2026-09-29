@@ -426,19 +426,15 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     const dt = lastStamp ? Math.min((stamp - lastStamp) / 1000, 0.1) : 1 / 60;
     lastStamp = stamp;
     const animate = !paused && !still;
-    if (animate) {
-      time += dt;
-      adaptQuality(dt);
-    }
     try {
+      if (animate) {
+        time += dt;
+        adaptQuality(dt);
+        if (dead) return;
+      }
       update(dt, animate);
     } catch (error) {
-      // A failure mid-flight stops the core cleanly; the page keeps its
-      // static state instead of throwing on every frame.
-      console.error('Whoff core stopped; showing the static page.', error);
-      teardown();
-      layer.dataset.scene = 'fallback';
-      onStatus?.('fallback');
+      fail(error);
       return;
     }
     if (animate && !document.hidden && layer.dataset.offstage !== 'true') schedule();
@@ -452,12 +448,19 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
   }
 
   function resize() {
-    measure();
-    if (scene) {
-      const pixels = view.width * view.height;
-      const device = window.devicePixelRatio || 1;
-      dpr = Math.min(device, dprCap, Math.sqrt(3200000 / pixels));
-      scene.resize(view.width, view.height, Math.max(0.6, dpr));
+    // Nothing is measured or placed again once the director has stopped.
+    if (dead) return;
+    try {
+      measure();
+      if (scene) {
+        const pixels = view.width * view.height;
+        const device = window.devicePixelRatio || 1;
+        dpr = Math.min(device, dprCap, Math.sqrt(3200000 / pixels));
+        scene.resize(view.width, view.height, Math.max(0.6, dpr));
+      }
+    } catch (error) {
+      fail(error);
+      return;
     }
     initialized = false;
     schedule();
@@ -509,6 +512,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
         return;
       }
       resize();
+      if (dead) return;
       layer.dataset.scene = 'ready';
       onStatus?.('ready');
     } catch {
@@ -537,6 +541,23 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     frames.forEach((frame, element) => ['left', 'top', 'width', 'height', 'transform'].forEach((key) => element.style.removeProperty(key)));
     frozenAt = 0;
     drawn = null;
+    // Back to the first paint: nothing the frames wrote stays behind, so the
+    // core, the rail and the motion control show in their static places.
+    ['--cx', '--cy', '--cr', '--hold', '--local', '--settled', 'opacity'].forEach((name) => layer.style.removeProperty(name));
+    delete layer.dataset.offstage;
+    delete layer.dataset.footer;
+    layer.dataset.chapter = CHAPTER_IDS[0];
+    controls?.querySelector('.ch-motion')?.style.removeProperty('translate');
+  }
+
+  // A failure after start-up stops the core cleanly: the page returns to its
+  // static state instead of throwing on every frame or resize.
+  function fail(error) {
+    if (dead) return;
+    console.error('Whoff core stopped; showing the static page.', error);
+    teardown();
+    layer.dataset.scene = 'fallback';
+    onStatus?.('fallback');
   }
 
   try {
@@ -555,8 +576,7 @@ export function createCoreDirector({ layer, stage, hud, poster, sections, reduce
     get scene() { return scene; },
     get state() { return current; },
     get chapter() { return chapterIndex; },
-    // Nothing is measured or placed again once the director has stopped.
-    refresh() { if (!dead) resize(); },
+    refresh() { resize(); },
     wake() { schedule(); },
     // Run from another frame clock (the smooth-scroll ticker), after it has
     // moved the page, so the core and the copy are placed from the same scroll
