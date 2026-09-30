@@ -708,7 +708,7 @@ export function Company() {
               </div>
               <div>
                 <dt>CAGE</dt>
-                <dd>Pending</dd>
+                <dd className="eng-mono-value">25HT7</dd>
               </div>
               <div>
                 <dt>Contact</dt>

@@ -334,7 +334,7 @@ export default function EngineeringHome() {
             <div><dt>Entity</dt><dd>Virginia LLC</dd></div>
             <div><dt>Ownership</dt><dd>Veteran-owned small business</dd></div>
             <div><dt>UEI</dt><dd>HV62R8JGP7Z8</dd></div>
-            <div><dt>CAGE</dt><dd>Pending</dd></div>
+            <div><dt>CAGE</dt><dd>25HT7</dd></div>
           </dl>
           <div className="ch-actions ch-reveal">
             <Link to="/about" className="ch-textlink">Meet the company <ArrowUpRight size={15} aria-hidden="true" /></Link>

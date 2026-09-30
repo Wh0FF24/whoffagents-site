@@ -778,7 +778,7 @@ test('retained receptionist form keeps preview data local', async ({ page }) => 
 test('public company facts and research maturity stay accurately qualified', async ({ page }) => {
   await page.goto('/about');
   await expect(page.locator('main')).toContainText('Whoff Agents LLC');
-  await expect(page.locator('main')).toContainText('CAGEPending');
+  await expect(page.locator('main')).toContainText('CAGE25HT7');
   await expect(page.locator('main')).toContainText('Bill / CEO');
   await expect(page.locator('main')).not.toContainText('Senior Cyber Engineer');
   await expect(page.locator('main')).toContainText('Pursuing an M.S.');
