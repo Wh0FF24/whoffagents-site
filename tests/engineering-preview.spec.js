@@ -781,7 +781,8 @@ test('public company facts and research maturity stay accurately qualified', asy
   await expect(page.locator('main')).toContainText('CAGE25HT7');
   await expect(page.locator('main')).toContainText('Bill / CEO');
   await expect(page.locator('main')).not.toContainText('Senior Cyber Engineer');
-  await expect(page.locator('main')).toContainText('Pursuing an M.S.');
+  await expect(page.locator('main')).toContainText('Will / President & CTO');
+  await expect(page.locator('main')).toContainText('working toward an M.S.');
   await page.goto('/research/persona-fleet');
   await expect(page.locator('main')).toContainText('In development');
   await expect(page.locator('main')).toContainText('protection effectiveness has not been established');
