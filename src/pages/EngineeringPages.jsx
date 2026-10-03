@@ -699,16 +699,32 @@ export function Company() {
               </p>
             </div>
           </div>
-          <div className="eng-person-card">
-            <span className="eng-monogram is-royal" aria-hidden="true">
+          {/* Monogram holds the portrait slot until Will's photo arrives. */}
+          <div className="eng-person-card is-feature">
+            <span className="eng-monogram is-royal is-portrait-slot" aria-hidden="true">
               <b>W</b>
             </span>
             <div>
               <span className="eng-small-label">Engineering</span>
               <h3>Will / President & CTO</h3>
               <p>
-                Leads technical direction and engineering. Pursuing an M.S. in
-                Electrical and Computer Engineering.
+                Will leads engineering at Whoff Agents and is the technical lead
+                on the company's research into cellular signature management. He
+                is working toward an M.S. in Electrical and Computer Engineering
+                at Brigham Young University and earned his B.S. in Electrical and
+                Computer Engineering from the Virginia Military Institute in 2024.
+              </p>
+              <p>
+                His early career has centered on software-defined radio, RF
+                testing, and machine learning, including building
+                spectrum-analysis software at V2X that works across analyzers from
+                several manufacturers, and internships at Parsons, Black Horse
+                Solutions, and QRC Technologies. Day to day, he builds and runs
+                the company's AI agent systems.
+              </p>
+              <p>
+                Will is a First Lieutenant in the U.S. Army Reserve and previously
+                served as a platoon leader in a Military Intelligence battalion.
               </p>
             </div>
           </div>
