@@ -642,17 +642,60 @@ export function Company() {
           </h2>
         </div>
         <div className="eng-people-grid" data-reveal-group="">
-          <div className="eng-person-card">
-            <span className="eng-monogram" aria-hidden="true">
-              <b>B</b>
-            </span>
+          <div className="eng-person-card is-feature">
+            <img
+              className="eng-portrait"
+              src="/images/team/bill.png"
+              alt="Portrait of Bill, CEO and Managing Member of Whoff Agents"
+              width="601"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
             <div>
               <span className="eng-small-label">Leadership</span>
               <h3>Bill / CEO & Managing Member</h3>
+              <p className="eng-person-rank">LTC (retired)</p>
+              <p className="eng-person-sub">
+                Defense and Intelligence Community Professional
+              </p>
               <p>
-                Forty years of prior defense and intelligence program-management
-                experience, including work with DAWIA and ISO quality
-                requirements. This is individual experience brought to Whoff.
+                Bill is a defense and intelligence community executive with more
+                than 40 years of combined military, government civilian, and
+                industry leadership in program management, technology delivery,
+                and business development.
+              </p>
+              <p>
+                Bill began his career as a U.S. Army Intelligence, Research and
+                Development, and Telecommunications Officer, holding assignments
+                spanning tactical, operational, and strategic levels. His last
+                position in the Army was Chief of the Intelligence Systems and
+                Communications Division for the U.S. European Command
+                Intelligence Directorate, where he managed the intelligence
+                architecture supporting DoD and the Intelligence Community across
+                91 countries.
+              </p>
+              <p>
+                Following his military career, Bill served as a senior civilian
+                with the Defense Intelligence Agency, where he was the JWICS
+                Program Manager and Division Chief for Enterprise Communications.
+                In that role he directed a globally distributed team of more than
+                200 IT and communications professionals and an annual budget
+                exceeding $200 million. His leadership of the JWICS backbone
+                upgrade and network management architecture earned him and his
+                team the ODNI Meritorious Unit Citation.
+              </p>
+              <p>
+                After leaving Government service, Bill built a career in defense
+                contracting, serving as Vice President, CIO, Senior Director, and
+                Director. He holds an M.S. in Computer Science from the Naval
+                Postgraduate School and a B.S. in Chemical Engineering from the
+                University of Tennessee, Knoxville, and is DAWIA Level II
+                certified in Program Management.
+              </p>
+              <p>
+                He currently holds a Top Secret clearance with SCI eligibility
+                and resides in Caret, Virginia.
               </p>
             </div>
           </div>

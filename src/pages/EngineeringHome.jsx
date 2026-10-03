@@ -322,7 +322,7 @@ export default function EngineeringHome() {
             <div className="ch-person ch-reveal" data-core-anchor="">
               <span className="ch-person-role">CEO & Managing Member</span>
               <strong>Bill</strong>
-              <span>Forty years in defense and intelligence program management.</span>
+              <span>More than 40 years of defense and intelligence leadership in program management, technology delivery, and business development.</span>
             </div>
             <div className="ch-person ch-reveal" data-core-anchor="">
               <span className="ch-person-role">President & CTO</span>

@@ -932,6 +932,47 @@
   color: var(--eng-muted);
 }
 
+/* Bill's card: full width above Will's, framed portrait beside a longer bio. */
+.eng-person-card.is-feature {
+  grid-column: 1 / -1;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+}
+
+.eng-portrait {
+  display: block;
+  width: 220px;
+  height: auto;
+  aspect-ratio: 601 / 640;
+  object-fit: contain;
+  object-position: center bottom;
+  border: 1px solid #e2445f66;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #1a0a10, #0a1014 75%);
+  box-shadow:
+    inset 0 0 24px #97092140,
+    0 0 30px #97092126;
+}
+
+.eng-person-card .eng-person-rank {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 580;
+  color: #fff;
+}
+
+.eng-person-card .eng-person-sub {
+  margin: 2px 0 16px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #7ba8ff;
+}
+
+.eng-person-card.is-feature p + p:not(.eng-person-sub) {
+  margin-top: 14px;
+}
+
 /* -------------------------------------------------- company: record */
 
 .eng-plate {
@@ -1093,6 +1134,14 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 22px;
     padding: 26px 22px;
+  }
+
+  .eng-person-card.is-feature {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .eng-portrait {
+    width: min(100%, 240px);
   }
 
   .eng-monogram {
