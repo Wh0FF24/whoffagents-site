@@ -699,11 +699,16 @@ export function Company() {
               </p>
             </div>
           </div>
-          {/* Monogram holds the portrait slot until Will's photo arrives. */}
           <div className="eng-person-card is-feature">
-            <span className="eng-monogram is-royal is-portrait-slot" aria-hidden="true">
-              <b>W</b>
-            </span>
+            <img
+              className="eng-portrait"
+              src="/images/team/will.png"
+              alt="Portrait of Will, President and CTO of Whoff Agents"
+              width="601"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
             <div>
               <span className="eng-small-label">Engineering</span>
               <h3>Will / President & CTO</h3>
