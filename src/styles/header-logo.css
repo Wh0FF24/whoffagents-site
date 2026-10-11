@@ -1,0 +1,33 @@
+.hl-logo { display: block; position: relative; }
+.hl-logo > img { display: block; width: 100%; height: auto; }
+.hl-assembly { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hl-logo[data-playing="true"] > img { visibility: hidden; }
+  .hl-assembly { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .hl-vectors, .hl-vectors svg { display: block; width: 100%; height: 100%; }
+  .hl-vectors svg { overflow: hidden; }
+  .hl-vectors path { transform-box: fill-box; transform-origin: center; }
+  .hl-red { animation: hl-red-in 1.35s cubic-bezier(.2,.7,.2,1) both; }
+  .hl-blue { animation: hl-blue-in 1.55s .15s cubic-bezier(.2,.7,.2,1) both; }
+  .hl-gold { animation: hl-gold-in 1.25s .45s cubic-bezier(.2,.7,.2,1) both; }
+  .hl-silver { animation: hl-silver-in 1.25s .6s cubic-bezier(.2,.7,.2,1) both; }
+  .hl-wordmark { animation: hl-wordmark-in 1s 1.65s ease-out both; }
+  .hl-sweep {
+    position: absolute; inset: 0; opacity: 0;
+    background: linear-gradient(110deg, transparent 40%, #fff9 50%, transparent 60%) -200% 0 / 250% 100% no-repeat;
+    mask: url('/brand/whoff-logo.svg') center / 100% 100% no-repeat;
+    animation: hl-light 1.35s 2.75s ease-in-out both;
+  }
+}
+
+@keyframes hl-red-in { from { opacity: 0; transform: translate(-80px, -28px); } to { opacity: 1; transform: none; } }
+@keyframes hl-blue-in { from { opacity: 0; transform: translate(65px, -35px); } to { opacity: 1; transform: none; } }
+@keyframes hl-gold-in { from { opacity: 0; transform: translate(-30px, 65px); } to { opacity: 1; transform: none; } }
+@keyframes hl-silver-in { from { opacity: 0; transform: translate(30px, 65px); } to { opacity: 1; transform: none; } }
+@keyframes hl-wordmark-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes hl-light {
+  0% { opacity: 0; background-position: 200% 0; }
+  15%, 75% { opacity: 1; }
+  100% { opacity: 0; background-position: -100% 0; }
+}

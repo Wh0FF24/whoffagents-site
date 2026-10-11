@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
+import HeaderLogo from './HeaderLogo';
 
 const primary = [['/capabilities', 'Capabilities'], ['/research', 'Research'], ['/about', 'Company']];
 const services = [['/studio', 'The studio'], ['/web', 'Websites'], ['/agents', 'AI agents'], ['/receptionist', 'AI receptionist'], ['/products', 'Developer tools'], ['/blog', 'Notes & articles']];
@@ -21,7 +22,7 @@ export function EngineeringNav() {
     }}>
       <div className="wf-nav wf-container">
         <Link to="/" aria-label="Whoff Agents home" className="wf-logo" onClick={close}>
-          <img src="/brand/whoff-logo.svg" alt="Whoff Agents LLC" width="1065" height="315" />
+          <HeaderLogo />
         </Link>
         <nav className="wf-desktop-links" aria-label="Main navigation">
           {primary.map(([to, label]) => <Link key={to} to={to} onClick={close} aria-current={pathname === to ? 'page' : undefined}>{label}</Link>)}
