@@ -15,12 +15,13 @@ test('exact vector assembly plays once, holds, and preserves the header across n
   const headerBox = await header.boundingBox();
   const exact = await page.evaluate(async () => {
     const original = new DOMParser().parseFromString(await (await fetch('/brand/whoff-logo.svg')).text(), 'image/svg+xml');
-    const paths = node => [...node.querySelectorAll('path')].map(p => [p.getAttribute('d'), p.getAttribute('fill')]);
+    const paths = node => [...node.querySelectorAll('path')].map(p => [...p.attributes].map(a => [a.name, a.value]));
     return JSON.stringify(paths(original)) === JSON.stringify(paths(document.querySelector('.hl-vectors')));
   });
   expect(exact).toBe(true);
   await page.screenshot({ path: info.outputPath('desktop-assembly.png') });
-  await expect(page.locator('.hl-wordmark')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.hl-vectors #Whoff')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.hl-vectors #Agents')).toHaveCSS('opacity', '1');
   await page.waitForTimeout(1800);
   await page.screenshot({ path: info.outputPath('desktop-hold.png') });
   await expect(logo).toHaveAttribute('data-playing', 'false', { timeout: 8000 });

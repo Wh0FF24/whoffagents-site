@@ -48,7 +48,7 @@ export function EngineeringFooter() {
   return <footer className="wf-footer">
     <div className="wf-container">
       <div className="wf-footer-top">
-        <Link to="/" className="wf-logo" aria-label="Whoff Agents home"><img src="/brand/whoff-logo.svg" alt="Whoff Agents LLC" width="1065" height="315" /></Link>
+        <Link to="/" className="wf-logo" aria-label="Whoff Agents home"><img src="/brand/whoff-logo.svg" alt="Whoff Agents LLC" width="1133" height="351" /></Link>
         <p>Independent minds.<br/>Useful systems.</p>
         <a href="mailto:will@whoffagents.com">will@whoffagents.com <ArrowUpRight size={18}/></a>
       </div>

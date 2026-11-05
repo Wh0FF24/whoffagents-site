@@ -298,7 +298,7 @@ export default function EngineeringHome() {
           <div className="ch-programs">
             <Link to="/research/persona-fleet" className="ch-program ch-reveal" data-core-anchor="">
               <span className="ch-program-meta"><i aria-hidden="true" /> In development · Cellular privacy</span>
-              <strong>Persona Fleet <ArrowUpRight size={15} aria-hidden="true" /></strong>
+              <strong>Eidolon <ArrowUpRight size={15} aria-hidden="true" /></strong>
               <span>Can realistic decoy activity make observed communications less informative? We test our own decoys against our own detectors.</span>
               <span className="ch-program-standard">Protection is measured, not asserted.</span>
             </Link>

@@ -346,13 +346,13 @@ export function Research() {
                 In development
               </span>
             </div>
-            <h2 data-split="">Persona Fleet</h2>
+            <h2 data-split="">Eidolon</h2>
             <p className="eng-program-lede" data-reveal="">
               Making observable communications less informative.
             </p>
             <p data-reveal="">
               A research program in cellular privacy and cyber deception.
-              Persona Fleet explores whether realistic decoy activity can
+              Eidolon explores whether realistic decoy activity can
               introduce useful ambiguity into what an observer can infer.
             </p>
             <TextLink to="/research/persona-fleet">
@@ -406,7 +406,7 @@ export function PersonaFleet() {
     <article className="eng-page eng-persona" ref={root}>
       <PageHero
         index="02.1"
-        label="Persona Fleet / Research program"
+        label="Eidolon / Research program"
         emblem="research"
         title={
           <>
@@ -435,7 +435,7 @@ export function PersonaFleet() {
         }
       >
         <p>
-          Persona Fleet investigates how realistic decoy activity could make
+          Eidolon investigates how realistic decoy activity could make
           observable communications less useful to an adversary.
         </p>
       </PageHero>
@@ -538,7 +538,7 @@ export function PersonaFleet() {
           <div className="eng-research-note">
             <span className="eng-small-label">Current maturity</span>
             <p>
-              Persona Fleet is in development. The outcomes described here are
+              Eidolon is in development. The outcomes described here are
               research objectives; protection effectiveness has not been
               established.
             </p>

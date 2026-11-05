@@ -6,8 +6,8 @@ export function StudioLogo() {
     <img
       className="st-official-logo"
       src="/brand/whoff-logo.svg"
-      width="1065"
-      height="315"
+      width="1133"
+      height="351"
       alt=""
     />
   );

@@ -19,7 +19,7 @@ Define a useful outcome. Build a focused implementation. Inspect the result and 
 
 ## Current research
 
-**Persona Fleet** is an in-development research program in cellular privacy and cyber deception. It investigates whether realistic decoy activity can make observable communications less informative to an adversary. The program challenges its approach with its own detectors. Protection effectiveness has not been established.
+**Eidolon** is an in-development research program in cellular privacy and cyber deception. It investigates whether realistic decoy activity can make observable communications less informative to an adversary. The program challenges its approach with its own detectors. Protection effectiveness has not been established.
 
 ## People and experience
 

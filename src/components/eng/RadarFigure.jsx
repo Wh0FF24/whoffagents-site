@@ -1,4 +1,4 @@
-// Persona Fleet as an illustration: a sweep over four signatures that look
+// Eidolon as an illustration: a sweep over four signatures that look
 // alike. Which one is the source? That is the research question, not a result.
 const BLIPS = [
   { id: '01', x: 62, y: -48 },

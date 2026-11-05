@@ -63,7 +63,11 @@ Blue pairs with silver; red pairs with gold. Do not include Will's last name in 
 
 ## Official logo
 
-Will supplied `updated.svg` as the official company logo. `public/brand/whoff-official-original.svg` preserves that file byte-for-byte. `whoff-logo.svg` and `whoff-mark.svg` retain its original vector paths and colors, with the background removed and the viewBox cropped for placement. The header/footer use the supplied wordmark; the favicon, studio fallback, and 3D sculpture use its symbol. Do not substitute the former invented W.
+`public/brand/whoff-logo.svg` is the approved stacked "Whoff" / "Agents" wordmark for dark backgrounds; `whoff-logo-on-light.svg` is its light-background counterpart. Both preserve the original five mark paths and colors exactly. The words are outlined Oxanium (license: `public/brand/OFL-Oxanium.txt`), with no runtime font dependency. `whoff-official-original.svg` and `whoff-mark.svg` retain the supplied master and standalone symbol.
+
+The header uses a 1.3-second assembly and word reveal once per page load, after the header entrance. Navigation does not replay it. Reduced motion and no JavaScript use the complete static logo. The footer remains static. `node scripts/build-stacked-logos.mjs` regenerates the two standalone animated SVGs from the approved static files without changing any path attributes. The light PNG is also used in the capability statement.
+
+Eidolon is the public research-program name. `/research/persona-fleet` remains its existing URL for link compatibility; its page title, metadata, copy, and capability-statement references use Eidolon. Research maturity and effectiveness qualifiers are unchanged.
 
 ## Layered portfolio comparison
 

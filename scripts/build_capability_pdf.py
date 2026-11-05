@@ -147,7 +147,8 @@ def main() -> None:
         return top - 28
 
     # Brand and introduction.
-    pdf.drawImage(str(LOGO), margin, height - margin - 40, width=139, height=40, mask="auto")
+    logo_height = 139 * 351 / 1133
+    pdf.drawImage(str(LOGO), margin, height - margin - logo_height, width=139, height=logo_height, mask="auto")
     pdf.setFillColor(MUTED)
     pdf.setFont("Courier", 7.4)
     pdf.drawRightString(width - margin, height - margin - 11, "CAPABILITY STATEMENT")

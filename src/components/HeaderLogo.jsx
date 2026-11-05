@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import officialLogo from '../../public/brand/whoff-logo.svg?raw';
+import assembly from '../../public/brand/whoff-agents-stacked-animated-on-dark.svg?raw';
 import '../styles/header-logo.css';
-
-// Use the official paths directly; do not redraw or simplify the brand mark.
-const parts = ['blue', 'blue', 'red', 'silver', 'gold', 'wordmark'];
-let part = 0;
-const assembly = officialLogo.replace(/<path /g, () => `<path class="hl-${parts[part++]}" `);
 
 export default function HeaderLogo() {
   const root = useRef(null);
@@ -32,7 +27,7 @@ export default function HeaderLogo() {
         return;
       }
       setPlaying(true);
-      finish = setTimeout(stop, 6000);
+      finish = setTimeout(stop, 1800);
     };
     const onPreference = () => { if (preference.matches) stop(); };
     preference.addEventListener('change', onPreference);
@@ -46,10 +41,9 @@ export default function HeaderLogo() {
   }, []);
 
   return <span ref={root} className="hl-logo" data-playing={playing ? 'true' : 'false'}>
-    <img src="/brand/whoff-logo.svg" alt="Whoff Agents LLC" width="1065" height="315" />
+    <img src="/brand/whoff-logo.svg" alt="Whoff Agents LLC" width="1133" height="351" />
     {playing && <span className="hl-assembly" aria-hidden="true">
       <span className="hl-vectors" dangerouslySetInnerHTML={{ __html: assembly }} />
-      <span className="hl-sweep" />
     </span>}
   </span>;
 }

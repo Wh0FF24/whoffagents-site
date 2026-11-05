@@ -680,7 +680,7 @@ test('without the 3D module the poster and instruments still carry the page', as
   expect(await poster.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
   await page.locator('#research').evaluate((element) => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY, behavior: 'instant' }));
   await expect(layer).toHaveAttribute('data-chapter', 'research');
-  await expect(page.locator('#research').getByRole('link', { name: /Persona Fleet/ })).toBeVisible();
+  await expect(page.locator('#research').getByRole('link', { name: /Eidolon/ })).toBeVisible();
 });
 
 test('leaving the homepage disposes the scene and returning restores it', async ({ page }) => {

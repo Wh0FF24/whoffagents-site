@@ -1,2 +1,7 @@
 # Preserve the supplied master logo byte-for-byte, including line endings.
 public/brand/whoff-official-original.svg -text
+# Outlined approved artwork must retain its source bytes on every platform.
+public/brand/whoff-logo.svg -text
+public/brand/whoff-logo-on-light.svg -text
+public/brand/whoff-agents-stacked-animated-*.svg -text
+public/downloads/whoff-capabilities.pdf binary

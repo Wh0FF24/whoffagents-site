@@ -127,8 +127,8 @@ export const routeMeta = {
     description: "Our work in autonomy, continuity, cellular privacy and systems engineering. Explore the questions, prototypes and experiments behind Whoff Agents.",
   },
   "/research/persona-fleet": {
-    title: "Persona Fleet | Whoff Agents LLC",
-    description: "Persona Fleet is a cellular privacy and cyber-deception research program in development. Explore the problem, intended outcome and approach to evaluation.",
+    title: "Eidolon | Whoff Agents LLC",
+    description: "Eidolon is a cellular privacy and cyber-deception research program in development. Explore the problem, intended outcome and approach to evaluation.",
   },
   "/contact": {
     title: "Contact | Whoff Agents LLC",
