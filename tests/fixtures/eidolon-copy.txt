@@ -1,6 +1,6 @@
 Whoff Agents Research and development
 Eidolon
-Realistic decoy phone activity around one protected phone, built so the pattern an outside observer can see stops pointing at one person.
+Decoy phone activity around one protected phone, built to look real, so the pattern an outside observer can see stops pointing at one person.
 In development
 Request a pilot conversation
 See what it does
@@ -51,10 +51,10 @@ Resident
 In this model the reticle hunts and cannot settle.
 One stream, many lanes
 Following one identity shows only a fraction.
-Proven in the lab
+Shown in the lab
 The protected phone's traffic fans out across the decoys' lanes. An observer who follows any one identity sees a fraction of the stream. Splitting works in the lab. It has not run on a device yet.
 OBSERVER VIEW
-PROVEN IN THE LAB
+SHOWN IN THE LAB
 DECOY LANES
 PHONE
 FOLLOWING ONE IDENTITY
@@ -67,7 +67,7 @@ Many lanes It fans out across the decoys' lanes.
 A fraction Any one lane carries only part of it.
 They keep up with you
 Move, and every decoy re-plans in its own time.
-The decoy behavior engine re-plans as the device's place, motion and time of day change. Each decoy changes what it is doing at a different moment, so they never move in step.
+The decoy behavior engine re-plans as the device's place, motion and time of day change. Each decoy changes what it is doing at a different moment, so the changes are spread out.
 DEVICE VIEW
 EACH IN ITS OWN TIME
 HOME
@@ -94,7 +94,7 @@ Re-planned as these change
 Place
 Motion
 Time of day
-Each decoy in its own time. They never move in step. In the runs so far the device's movements came from a simulated route, not from its sensors.
+Each decoy in its own time. Their changes do not line up. In the runs so far the device's movements came from a simulated route, not from its sensors.
 A full day, no link
 Plan at the dock. Then 24 hours dark.
 24-hour plans run on a cabled test phone
@@ -137,7 +137,7 @@ Operator console
 Runs in test
 It plans a window, assigns decoys and produces a report afterwards. It runs today against simulated devices and one test phone.
 Traffic splitting
-Proven in the lab
+Shown in the lab
 Splitting a protected phone's traffic across several decoy lanes works in the lab. It has not run on a device.
 Detector challenge
 Before any claim

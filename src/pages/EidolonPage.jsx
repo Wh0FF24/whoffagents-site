@@ -53,7 +53,7 @@ const STATUS = [
   },
   {
     name: "Traffic splitting",
-    state: "Proven in the lab",
+    state: "Shown in the lab",
     tone: "lab",
     detail:
       "Splitting a protected phone's traffic across several decoy lanes works in the lab. It has not run on a device.",
@@ -235,9 +235,9 @@ export default function EidolonPage() {
               Eidolon
             </h1>
             <p className="eid-hero-line">
-              Realistic decoy phone activity around one protected phone, built
-              so the pattern an outside observer can see stops pointing at one
-              person.
+              Decoy phone activity around one protected phone, built to look
+              real, so the pattern an outside observer can see stops pointing
+              at one person.
             </p>
             <p className="eng-status eid-hero-status">
               <span aria-hidden="true" />
@@ -313,7 +313,7 @@ export default function EidolonPage() {
         at={3}
         name="lanes"
         label="One stream, many lanes"
-        proof="Proven in the lab"
+        proof="Shown in the lab"
         title="Following one identity shows only a fraction."
         lede="The protected phone's traffic fans out across the decoys' lanes. An observer who follows any one identity sees a fraction of the stream. Splitting works in the lab. It has not run on a device yet."
         describe="Illustration. The phone's single stream of traffic fans out across several decoy lanes. An observer following one lane sees a fraction of the stream."
@@ -332,7 +332,7 @@ export default function EidolonPage() {
         name="keep"
         label="They keep up with you"
         title="Move, and every decoy re-plans in its own time."
-        lede="The decoy behavior engine re-plans as the device's place, motion and time of day change. Each decoy changes what it is doing at a different moment, so they never move in step."
+        lede="The decoy behavior engine re-plans as the device's place, motion and time of day change. Each decoy changes what it is doing at a different moment, so the changes are spread out."
         describe="Illustration. A device moves from home to work to a store. After each change, each decoy changes what it is doing at a different moment."
         figure={<KeepFigure />}
       >
@@ -343,7 +343,7 @@ export default function EidolonPage() {
           <Chip>Time of day</Chip>
         </ul>
         <p className="eid-aside" data-beat="" data-on="true">
-          Each decoy in its own time. They never move in step. In the runs so
+          Each decoy in its own time. Their changes do not line up. In the runs so
           far the device's movements came from a simulated route, not from its
           sensors.
         </p>

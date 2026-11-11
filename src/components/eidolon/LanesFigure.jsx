@@ -18,7 +18,7 @@ export default function LanesFigure() {
     <svg className="eid-fig eid-fig--lanes" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
       <FrameMarks />
       <text className="eid-tag is-observer" x="30" y="38">OBSERVER VIEW</text>
-      <text className="eid-tag is-quiet" x="370" y="38" textAnchor="end">PROVEN IN THE LAB</text>
+      <text className="eid-tag is-quiet" x="370" y="38" textAnchor="end">SHOWN IN THE LAB</text>
       <text className="eid-tag is-quiet lanes-title" x="289" y="70" textAnchor="middle">DECOY LANES</text>
 
       {/* the phone and its one stream */}

@@ -111,7 +111,7 @@ test('it renders every scene, the status board and the form, with no console err
     await page.waitForTimeout(900);
   }
   await expect(page.locator('.eid-hero-caption')).toHaveText(CAPTION);
-  await expect(page.locator('#lanes .eid-proof')).toHaveText('Proven in the lab');
+  await expect(page.locator('#lanes .eid-proof')).toHaveText('Shown in the lab');
   await page.locator('#status').scrollIntoViewIfNeeded();
   await expect(page.locator('#status .eid-board-row')).toHaveCount(6);
   await expect(page.locator('#status')).toContainText('Protection effectiveness has not been established');
