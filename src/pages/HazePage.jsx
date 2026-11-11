@@ -236,7 +236,11 @@ export default function HazePage() {
           <p>
             Haze is a working name from <a href="/">Whoff Agents</a>.
           </p>
-          <p>This page loads nothing from other companies and sets no cookies. Our web host keeps ordinary server logs.</p>
+          <p>
+            This page loads nothing from other companies and sets no cookies. The hosts that serve this page and take
+            your signup keep ordinary request logs, which include your IP address. Those logs do not hold your email or
+            your answers.
+          </p>
         </div>
       </footer>
     </article>

@@ -95,9 +95,9 @@ $8 a month
 A one-time price, not monthly
 What bothers you most about being tracked? (optional)
 Join the waitlist
-We keep your email and these answers, nothing else. One email when there is news. To leave the list, email hello@whoffagents.com.
+We keep your email, these answers and the day you joined. Nothing else. One email when there is news. To leave the list, email hello@whoffagents.com.
 Haze is a working name from Whoff Agents.
-This page loads nothing from other companies and sets no cookies. Our web host keeps ordinary server logs.
+This page loads nothing from other companies and sets no cookies. The hosts that serve this page and take your signup keep ordinary request logs, which include your IP address. Those logs do not hold your email or your answers.
 (described to screen readers) Illustration. A profile made of points of activity loses its sharp edge as other points drift through it.
 (described to screen readers) Illustration. Scattered points of activity gather into rows across a day, and a profile of routine and interests comes into focus.
 (described to screen readers) Illustration. Decoy activity appears beside the real activity, each row with its own timing, and the profile under it goes soft.
@@ -107,6 +107,6 @@ This page loads nothing from other companies and sets no cookies. Our web host k
 (shown when a choice is missing) Pick one answer for each question.
 (shown after a send in a preview build) Local preview. Nothing was sent.
 (shown after a send) You are on the list. One email when there is news.
-(shown when a send does not go through) That did not go through. Nothing was saved. Try again in a minute.
+(shown when a send does not go through) That did not go through. Try again in a minute.
 (shown in place of the form while the waitlist is closed) The waitlist is not open yet.
 (shown when scripts are off) This form needs JavaScript to send.

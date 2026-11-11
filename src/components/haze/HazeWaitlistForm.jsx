@@ -51,7 +51,7 @@ const PAY = [
 
 const MESSAGES = {
   sent: "You are on the list. One email when there is news.",
-  failed: "That did not go through. Nothing was saved. Try again in a minute.",
+  failed: "That did not go through. Try again in a minute.",
   email: "Enter an email address we can reach you at.",
   choice: "Pick one answer for each question.",
   closed: "The waitlist is not open yet.",
@@ -272,7 +272,8 @@ export default function HazeWaitlistForm() {
         </form>
       )}
       <p className="hz-form-small">
-        We keep your email and these answers, nothing else. One email when there is news. To leave the list, email{" "}
+        We keep your email, these answers and the day you joined. Nothing else. One email when there is news. To leave
+        the list, email{" "}
         <a href={`mailto:${LEAVE_ADDRESS}`}>{LEAVE_ADDRESS}</a>.
       </p>
     </div>
