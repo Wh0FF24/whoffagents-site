@@ -100,7 +100,7 @@ Plan at the dock. Then 24 hours dark.
 24-hour plans run on a test phone
 The operator console plans a window and assigns the decoys. Undocked, the phone agent carries the plan on its own, with no link to the operator. Docked again, the console produces the report.
 DEVICE VIEW
-NO LINK TO THE OPERATOR
+A FULL DAY
 24 HOURS
 PLANNED
 UNDOCKED
