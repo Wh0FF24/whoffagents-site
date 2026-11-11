@@ -35,7 +35,7 @@ const STATUS = [
     state: "Runs today",
     tone: "run",
     detail:
-      "Each decoy keeps its own daily rhythm (commuter, shift worker, traveler, resident) and re-plans on the spot from where the device actually is: place, motion and time of day.",
+      "Each decoy keeps its own daily rhythm (commuter, shift worker, traveler, resident) and re-plans as the device's place, motion and time of day change. In the runs so far those came from a simulated route, not from the device's sensors.",
   },
   {
     name: "Phone agent",
@@ -292,7 +292,7 @@ export default function EidolonPage() {
         name="crowd"
         label="The crowd"
         title="Now give that phone a crowd."
-        lede="Eidolon surrounds the protected phone with realistic decoy phone activity. Each decoy keeps a daily rhythm of its own. It is built so the pattern stops pointing at one person, while that person stays connected."
+        lede="Eidolon is built to surround the protected phone with realistic decoy phone activity. Each decoy keeps a daily rhythm of its own. The aim is a pattern that stops pointing at one person, while that person stays connected."
         describe="Illustration. Decoy phones appear around the protected phone, each with its own daily rhythm, and the reticle moves between them without settling on one."
         figure={<CrowdFigure />}
       >
@@ -332,18 +332,20 @@ export default function EidolonPage() {
         name="keep"
         label="They keep up with you"
         title="Move, and every decoy re-plans in its own time."
-        lede="The decoy behavior engine re-plans on the spot from where the device actually is. Each decoy changes what it is doing at a different moment, so they never move in step."
+        lede="The decoy behavior engine re-plans as the device's place, motion and time of day change. Each decoy changes what it is doing at a different moment, so they never move in step."
         describe="Illustration. A device moves from home to work to a store. After each change, each decoy changes what it is doing at a different moment."
         figure={<KeepFigure />}
       >
-        <p className="eid-chips-title">Re-planned from where the device actually is</p>
+        <p className="eid-chips-title">Re-planned as these change</p>
         <ul className="eid-chips">
           <Chip>Place</Chip>
           <Chip>Motion</Chip>
           <Chip>Time of day</Chip>
         </ul>
         <p className="eid-aside" data-beat="" data-on="true">
-          Each decoy in its own time. They never move in step.
+          Each decoy in its own time. They never move in step. In the runs so
+          far the device's movements came from a simulated route, not from its
+          sensors.
         </p>
       </Scene>
 
@@ -368,10 +370,10 @@ export default function EidolonPage() {
         </ol>
         <p className="eid-aside">
           The phone agent has run full 24-hour plans on a test phone at the
-          bench. It took no instructions once a run started. It stayed cabled
-          the whole time, for power and to carry its test traffic. The console
-          runs today against simulated devices and one test phone. The device
-          hardware is in design.
+          bench. It took no instructions once a run started. It stayed on its
+          cable and on Wi-Fi the whole time. The console runs today against
+          simulated devices and one test phone. The device hardware is in
+          design.
         </p>
       </Scene>
 

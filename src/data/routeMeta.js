@@ -132,7 +132,7 @@ export const routeMeta = {
   },
   "/eidolon": {
     title: "Eidolon: decoy activity around a protected phone | Whoff Agents LLC",
-    description: "Eidolon is in development: a small carry-along device and operator console that surround a protected phone with realistic decoy phone activity. See what it does and ask for a pilot conversation.",
+    description: "Eidolon is in development: a small carry-along device and operator console designed to surround a protected phone with realistic decoy phone activity. See where it stands and ask for a pilot conversation.",
     sitemap: false, // unlisted: reached by direct link only, linked from no other page
     robots: "noindex, nofollow", // kept out of search results in every build
   },
