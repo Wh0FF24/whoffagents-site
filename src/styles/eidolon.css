@@ -1,0 +1,1943 @@
+/* Eidolon: an unlisted page of scroll-driven instrument scenes.
+   Dark field, thin-line instruments, monospace labels, restrained glow.
+   Crimson with gold is the outside observer; royal blue with silver is the
+   protected phone and its decoys. Every figure is complete as drawn here:
+   scripts only replay how it got there. */
+
+.eid-page {
+  --eid-field: #020304;
+  --eid-ink: #eeeae4;
+  --eid-muted: #a4afb4;
+  --eid-dim: #7c8790;
+  --eid-line: #222b31;
+  --eid-crimson: #970921;
+  --eid-crimson-light: #e2445f;
+  --eid-crimson-text: #f08499;
+  --eid-gold: #b78a4f;
+  --eid-gold-light: #d6ad76;
+  --eid-royal: #0442ae;
+  --eid-royal-light: #7ba8ff;
+  --eid-silver: #a9adb3;
+  --eid-header: 83px;
+  /* How many drawing units make one screen pixel inside a figure. The page
+     measures each figure and sets this exactly; until then, a close guess. */
+  --eid-u: 1.1;
+  background: var(--eid-field);
+  overflow-x: clip;
+}
+
+@media (min-width: 760px) {
+  .eid-page {
+    --eid-u: 0.72;
+  }
+}
+
+@media (min-width: 801px) {
+  .eid-page {
+    --eid-header: 91px;
+  }
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.eid-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  min-height: calc(100vh - var(--eid-header));
+  min-height: calc(100svh - var(--eid-header));
+  padding-block: 28px 44px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 58% 70% at 74% 46%, #0442ae1c, #0000 70%),
+    radial-gradient(ellipse 44% 56% at 82% 62%, #97092112, #0000 70%);
+}
+
+/* A faint measurement grid behind everything, fading toward the copy. */
+.eid-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(#ffffff17 1px, #0000 1.3px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 72% 48%, #000 20%, #0000 78%);
+  mask-image: radial-gradient(ellipse 70% 80% at 72% 48%, #000 20%, #0000 78%);
+}
+
+.eid-hero-visual {
+  position: absolute;
+  z-index: -1;
+  top: 20%;
+  right: -46vw;
+  width: 122vw;
+  max-width: 560px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.eid-hero-fig {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.eid-hero-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.eid-hero-ticks line {
+  stroke: var(--eid-silver);
+  stroke-width: 0.6;
+  opacity: 0.42;
+}
+
+.eid-hero-ticks line.is-major {
+  stroke: #e3e5e8;
+  stroke-width: 0.9;
+  opacity: 0.85;
+}
+
+.eid-hero-outline,
+.eid-hero-range {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: 0.6;
+  stroke-dasharray: 1.4 5;
+  opacity: 0.4;
+}
+
+.eid-hero-range {
+  stroke: var(--eid-royal-light);
+  stroke-dasharray: 2 6;
+  opacity: 0.3;
+}
+
+/* The framing marks belong to the instrument standing on its own; behind
+   the copy on a phone they are left out. */
+.eid-hero-cross,
+.eid-hero-corners {
+  display: none;
+  fill: none;
+  stroke: #e6e8ec;
+  stroke-width: 0.8;
+  opacity: 0.7;
+}
+
+.eid-hero-arc {
+  fill: none;
+  stroke-width: 2.4;
+}
+
+.eid-hero-arc.is-thin {
+  stroke-width: 0.9;
+}
+
+.eid-hero-arc.is-crimson {
+  stroke: #c8203f;
+}
+
+.eid-hero-arc.is-gold {
+  stroke: var(--eid-gold);
+  stroke-width: 2.8;
+}
+
+.eid-hero-arc.is-royal {
+  stroke: #2d66e4;
+  stroke-width: 2;
+}
+
+.eid-hero-arc.is-silver {
+  stroke: var(--eid-silver);
+  stroke-width: 0.8;
+  stroke-dasharray: 2.4 3.2;
+  opacity: 0.7;
+}
+
+.eid-hero-sweep-edge {
+  stroke: #7ba8ff;
+  stroke-width: 0.9;
+  opacity: 0.6;
+}
+
+.eid-hero-fig .eid-tether {
+  stroke-width: 0.7;
+}
+
+.eid-hero-fig .eid-phone-body {
+  stroke-width: 1.3;
+}
+
+.eid-hero-fig .eid-phone-ear,
+.eid-hero-fig .eid-wave {
+  stroke-width: 0.8;
+}
+
+.eid-hero-fig .eid-reticle-corners {
+  stroke-width: 1.5;
+}
+
+.eid-hero-fig .eid-reticle-ring,
+.eid-hero-fig .eid-reticle-cross {
+  stroke-width: 0.8;
+}
+
+/* The reticle rests on one decoy; with motion on it keeps moving between
+   them (the positions are set on the layer as --hx / --hy pairs). */
+.eid-hero-hunt {
+  transform: translate(var(--hx0), var(--hy0));
+}
+
+.eid-hero-grid {
+  position: relative;
+  display: grid;
+  gap: 30px;
+  align-content: center;
+}
+
+.eid-page .eid-hero-label {
+  margin-bottom: 18px;
+}
+
+.eid-page .eid-title {
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+  margin: 0;
+  font-size: clamp(62px, 19.5vw, 92px);
+  font-weight: 560;
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+  color: #fff;
+}
+
+/* The name carries its own echoes. The empty alternative text keeps them
+   out of the heading's accessible name where browsers support it. */
+.eid-title::before,
+.eid-title::after {
+  content: attr(data-text);
+  content: attr(data-text) / "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  color: #0000;
+  -webkit-text-stroke: 1px #7ba8ff8c;
+  pointer-events: none;
+  transform: translate(0.05em, -0.035em);
+}
+
+.eid-title::after {
+  -webkit-text-stroke-color: #7ba8ff47;
+  transform: translate(0.1em, -0.07em);
+}
+
+.eid-page .eid-hero-line {
+  max-width: 560px;
+  margin-top: 20px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #c6cdd3;
+}
+
+.eid-page .eid-hero-status {
+  margin-top: 18px;
+  color: var(--eid-ink);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eid-hero-status > span {
+  box-shadow: 0 0 10px #d0203f;
+}
+
+.eid-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.eid-page .eid-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 1px solid #c42545;
+  background: var(--eid-crimson);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 580;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.eid-page .eid-button:hover {
+  background: #b0102d;
+  box-shadow: 0 0 34px #97092166;
+}
+
+.eid-button svg,
+.eid-textlink svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.eid-button:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.eid-page .eid-textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  border-bottom: 1px solid #7ba8ff55;
+  color: #dfe3ea;
+  font-size: 13.5px;
+  font-weight: 520;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.eid-page .eid-textlink:hover {
+  border-color: var(--eid-royal-light);
+  color: #fff;
+}
+
+.eid-textlink svg {
+  color: var(--eid-royal-light);
+}
+
+.eid-textlink:hover svg {
+  transform: translateY(2px);
+}
+
+.eid-hero-facts {
+  display: grid;
+  gap: 16px;
+  max-width: 560px;
+  padding-top: 18px;
+  border-top: 1px solid #ffffff2b;
+}
+
+.eid-hero-facts dt {
+  margin-bottom: 5px;
+  color: var(--eid-muted);
+  font:
+    500 9.5px/1.5 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eid-hero-facts dd {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #dfe3e8;
+}
+
+.eid-page .eid-caption {
+  margin-top: 12px;
+  color: var(--eid-dim);
+  font:
+    500 9.5px/1.5 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.eid-page .eid-hero-caption {
+  position: relative;
+  margin: 26px 24px 0;
+  text-align: left;
+}
+
+/* ---------------------------------------------------------------- scenes */
+
+.eid-page .eid-scene[id] {
+  scroll-margin-top: -95px;
+}
+
+.eid-scene {
+  position: relative;
+  padding-block: 64px 54px;
+  border-top: 1px solid var(--eid-line);
+  background: var(--eid-field);
+}
+
+.eid-scene-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+}
+
+.eid-page .eid-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  color: var(--eid-muted);
+  font:
+    500 10px/1.4 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eid-kicker-scale {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 15px;
+}
+
+.eid-kicker-scale i {
+  width: 2px;
+  height: 8px;
+  background: #3b4850;
+}
+
+.eid-kicker-scale i.is-here {
+  height: 15px;
+  background: var(--eid-crimson-light);
+  box-shadow: 0 0 8px #d0203f;
+}
+
+.eid-scene h2,
+.eid-status h2,
+.eid-request h2 {
+  max-width: 560px;
+  font-size: clamp(30px, 8.2vw, 40px);
+  font-weight: 560;
+  line-height: 1.08;
+  letter-spacing: -0.048em;
+  color: #fff;
+}
+
+.eid-page .eid-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 7px 11px;
+  border: 1px solid #7ba8ff59;
+  color: #d5e0f8;
+  font:
+    500 9.5px/1 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eid-proof::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--eid-royal-light);
+  box-shadow: 0 0 8px #2d66e4;
+}
+
+.eid-page .eid-lede {
+  max-width: 480px;
+  margin-top: 18px;
+  font-size: 15.5px;
+  color: var(--eid-muted);
+}
+
+.eid-page .eid-figure {
+  width: auto;
+  margin: 0 -12px;
+}
+
+.eid-stage {
+  --eid-hair: calc(1px * var(--eid-u));
+  --eid-label: calc(11px * var(--eid-u));
+  position: relative;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 50% 46%, #0c1626 0%, #060a11 46%, #0000 74%);
+}
+
+/* The same measurement grid as the hero, held inside each instrument. */
+.eid-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#ffffff14 1px, #0000 1.3px);
+  background-size: 5% 5%;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 34%, #0000 74%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 34%, #0000 74%);
+  pointer-events: none;
+}
+
+.eid-fig {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.eid-page .eid-chips-title {
+  color: var(--eid-muted);
+  font:
+    500 9.5px/1.5 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eid-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eid-chips li {
+  padding: 8px 12px;
+  border: 1px solid #7ba8ff4d;
+  border-radius: 99px;
+  color: #d5e0f8;
+  font:
+    500 10px/1 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    opacity 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.eid-beats {
+  max-width: 480px;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--eid-line);
+  list-style: none;
+}
+
+.eid-beats li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--eid-line);
+  color: #cdd3d9;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: opacity 0.35s ease;
+}
+
+.eid-beat-name {
+  color: var(--eid-royal-light);
+  font:
+    500 9.5px/2.2 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+[data-eid-scene="signal"] .eid-beat-name {
+  color: var(--eid-crimson-text);
+}
+
+.eid-page .eid-aside {
+  max-width: 480px;
+  margin-top: 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--eid-crimson);
+  color: #cdd3d9;
+  font-size: 14px;
+  transition: opacity 0.35s ease;
+}
+
+.eid-meter {
+  display: none;
+}
+
+/* A beat that has not been reached yet waits, dimmed. */
+.eid-page [data-beat][data-on="false"] {
+  opacity: 0.45;
+}
+
+/* --------------------------------------------------- inside the figures */
+
+.eid-tag {
+  fill: var(--eid-silver);
+  font:
+    500 var(--eid-label) / 1 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+
+.eid-tag.is-observer {
+  fill: var(--eid-crimson-text);
+}
+
+.eid-tag.is-alert {
+  fill: #ff8a9d;
+}
+
+.eid-tag.is-gold {
+  fill: var(--eid-gold-light);
+}
+
+.eid-tag.is-device {
+  fill: var(--eid-royal-light);
+}
+
+.eid-tag.is-quiet {
+  fill: #b3bdcb;
+}
+
+.eid-tag.is-bright {
+  fill: #f1f3f5;
+}
+
+.eid-tag.is-dim {
+  fill: #818c95;
+}
+
+.eid-frame-corners,
+.eid-frame-scale {
+  fill: none;
+  stroke: #e6e8ec;
+  stroke-width: var(--eid-hair);
+  opacity: 0.7;
+}
+
+.eid-frame-scale {
+  stroke: var(--eid-silver);
+  opacity: 0.4;
+}
+
+.eid-phone-body {
+  fill: #05080c;
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 1.3);
+}
+
+.eid-phone-screen {
+  fill: #0442ae47;
+}
+
+.eid-phone-ear {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+}
+
+.eid-phone.is-decoy .eid-phone-body {
+  stroke: #a9c2f5;
+}
+
+.eid-phone.is-echo .eid-phone-body {
+  fill: none;
+  stroke: #a9c2f5;
+  opacity: 0.34;
+}
+
+.eid-phone.is-echo.is-faint .eid-phone-body {
+  opacity: 0.15;
+}
+
+.eid-phone.is-echo .eid-phone-screen,
+.eid-phone.is-echo .eid-phone-ear {
+  display: none;
+}
+
+.eid-ring line {
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 1.25);
+  opacity: 0.85;
+}
+
+.eid-ring.is-phone line {
+  stroke: #d3e1ff;
+}
+
+.eid-wave {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: var(--eid-hair);
+  opacity: 0.24;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.eid-wave:nth-of-type(2) {
+  opacity: 0.15;
+  transform: scale(1.45);
+}
+
+.eid-wave:nth-of-type(3) {
+  opacity: 0.08;
+  transform: scale(1.9);
+}
+
+.eid-tether {
+  stroke: var(--eid-royal-light);
+  stroke-width: var(--eid-hair);
+  stroke-dasharray: 1 4;
+  opacity: 0.36;
+}
+
+.eid-reticle-corners {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: calc(var(--eid-hair) * 1.6);
+}
+
+.eid-reticle-ring {
+  fill: none;
+  stroke: #c21a38;
+  stroke-width: var(--eid-hair);
+  stroke-dasharray: 2 4;
+}
+
+.eid-reticle-cross {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: var(--eid-hair);
+  opacity: 0.8;
+}
+
+.eid-reticle-pip {
+  fill: var(--eid-gold-light);
+}
+
+/* Cross hairs belong to a lock; a reticle still searching has none. */
+.eid-reticle-body.is-searching .eid-reticle-cross {
+  display: none;
+}
+
+/* The "locked" mark: a crimson plate that hugs the word at any size. */
+.eid-lock-text {
+  fill: #fff;
+  stroke: var(--eid-crimson);
+  stroke-width: 0.95em;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  font:
+    600 var(--eid-label) / 1 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+}
+
+.eid-rule {
+  fill: none;
+  stroke: #ffffff21;
+  stroke-width: var(--eid-hair);
+}
+
+.eid-panel {
+  fill: #070b0fd9;
+  stroke: #ffffff26;
+  stroke-width: var(--eid-hair);
+}
+
+.eid-panel-ticks {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: calc(var(--eid-hair) * 1.5);
+}
+
+/* signal */
+
+.eid-bus {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+  stroke-dasharray: 1.5 3.5;
+  opacity: 0.4;
+}
+
+.eid-feed {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: calc(var(--eid-hair) * 1.4);
+}
+
+.eid-lamp {
+  fill: var(--eid-crimson-light);
+}
+
+.eid-grid-dot {
+  fill: #ffffff33;
+}
+
+.eid-stray {
+  fill: var(--eid-silver);
+  opacity: 0;
+}
+
+.eid-track {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: calc(var(--eid-hair) * 1.5);
+  stroke-linejoin: round;
+}
+
+.eid-dwell {
+  fill: var(--eid-crimson-light);
+}
+
+.eid-dwell-ring {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: var(--eid-hair);
+  opacity: 0.5;
+}
+
+.eid-axis {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+  opacity: 0.45;
+}
+
+.eid-bar {
+  fill: var(--eid-crimson-light);
+}
+
+/* crowd */
+
+.eid-trail {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: var(--eid-hair);
+  stroke-dasharray: 3 4;
+  opacity: 0.5;
+}
+
+.crowd-node--far {
+  opacity: 0.62;
+}
+
+.crowd-lock,
+.crowd-status-before,
+.crowd-reticle-before {
+  opacity: 0;
+}
+
+/* lanes */
+
+.eid-stream-glow {
+  fill: none;
+  stroke: var(--eid-royal);
+  stroke-width: calc(var(--eid-hair) * 8);
+  stroke-linecap: round;
+  opacity: 0.38;
+}
+
+.eid-stream,
+.eid-lane-whole {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 2.6);
+  stroke-dasharray: 5 5;
+  --period: 10px;
+  --pace: 0.6s;
+}
+
+.eid-lane-whole {
+  opacity: 0;
+}
+
+.eid-splitter {
+  fill: #05080c;
+  stroke: #e6e8ec;
+  stroke-width: var(--eid-hair);
+}
+
+.eid-lane-base {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+  opacity: 0.24;
+}
+
+.eid-lane-own {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: calc(var(--eid-hair) * 1.8);
+  opacity: 0.5;
+}
+
+.eid-lane-share {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 2.6);
+  stroke-dasharray: 5 45;
+  stroke-dashoffset: var(--o, 0px);
+  --period: 50px;
+  --pace: 3s;
+}
+
+.eid-lane-followed {
+  fill: none;
+  stroke: var(--eid-crimson-light);
+  stroke-width: calc(var(--eid-hair) * 7);
+  stroke-linecap: round;
+  opacity: 0.2;
+}
+
+.eid-gauge-cell {
+  fill: none;
+  stroke: #ffffff4d;
+  stroke-width: var(--eid-hair);
+}
+
+.eid-gauge-fill {
+  fill: var(--eid-crimson-light);
+}
+
+.lanes-cell-fill,
+.lanes-sees-before {
+  opacity: 0;
+}
+
+/* keeping up */
+
+.eid-route {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 2.4);
+}
+
+.eid-route.is-moving {
+  stroke-width: calc(var(--eid-hair) * 1.4);
+  stroke-dasharray: 3 4;
+  opacity: 0.75;
+}
+
+.eid-route-node {
+  fill: #05080c;
+  stroke: #e6e8ec;
+  stroke-width: var(--eid-hair);
+}
+
+.keep-place {
+  fill: #b3bdcb;
+}
+
+.eid-guide {
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+  stroke-dasharray: 1.5 4;
+  opacity: 0.5;
+}
+
+.eid-guide.is-ahead {
+  opacity: 0.2;
+}
+
+.eid-plan {
+  fill: none;
+  stroke: #9fbcf7;
+}
+
+.eid-plan.is-t0 {
+  stroke-width: 7px;
+  opacity: 0.48;
+}
+
+.eid-plan.is-t1 {
+  stroke-width: 7px;
+  stroke-dasharray: 2 3;
+  opacity: 0.9;
+}
+
+.eid-plan.is-t2 {
+  stroke-width: 2.2px;
+  opacity: 0.95;
+}
+
+.eid-plan.is-t3 {
+  stroke-width: 7px;
+  stroke-dasharray: 9 3;
+  opacity: 0.72;
+}
+
+.eid-plan.is-t4 {
+  stroke-width: 4px;
+  stroke-dasharray: 0.1 5.4;
+  stroke-linecap: round;
+  opacity: 0.95;
+}
+
+.eid-replan {
+  fill: #05080c;
+  stroke: #fff;
+  stroke-width: calc(var(--eid-hair) * 1.4);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 1.5, 0.4, 1),
+    opacity 0.2s ease;
+}
+
+.eid-replan.is-ahead {
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+.eid-now {
+  stroke: var(--eid-royal-light);
+  stroke-width: var(--eid-hair);
+  opacity: 0.75;
+}
+
+.eid-now-caret {
+  fill: var(--eid-royal-light);
+}
+
+.keep-value {
+  opacity: 0;
+}
+
+.eid-fig--keep[data-seg="0"] :is(.is-home, .is-still, .is-morning),
+.eid-fig--keep[data-seg="1"] :is(.is-transit, .is-moving, .is-morning),
+.eid-fig--keep[data-seg="2"] :is(.is-work, .is-still, .is-midday),
+.eid-fig--keep[data-seg="3"] :is(.is-transit, .is-moving, .is-evening),
+.eid-fig--keep[data-seg="4"] :is(.is-store, .is-still, .is-evening) {
+  opacity: 1;
+}
+
+.eid-fig--keep[data-seg="0"] .keep-place-0,
+.eid-fig--keep[data-seg="2"] .keep-place-2,
+.eid-fig--keep[data-seg="4"] .keep-place-4 {
+  fill: #fff;
+}
+
+/* a full day */
+
+.eid-tick {
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+  opacity: 0.5;
+}
+
+.eid-tick.is-major {
+  stroke: #e6e8ec;
+  stroke-width: calc(var(--eid-hair) * 1.5);
+  opacity: 0.9;
+}
+
+.eid-day-rim {
+  fill: none;
+  stroke: var(--eid-silver);
+  stroke-width: var(--eid-hair);
+  stroke-dasharray: 1 3.4;
+  opacity: 0.3;
+}
+
+.eid-day-progress {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 1.7);
+}
+
+.eid-day-planned,
+.eid-day-run {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: 5px;
+}
+
+.eid-day-planned {
+  opacity: 0.2;
+}
+
+.eid-day-hand {
+  stroke: #fff;
+  stroke-width: var(--eid-hair);
+  opacity: 0.85;
+}
+
+.eid-day-hand-tip {
+  fill: #fff;
+}
+
+.day-state,
+.day-link-off {
+  opacity: 0;
+}
+
+.eid-fig--day[data-step="1"] .day-state-1,
+.eid-fig--day[data-step="2"] .day-state-2,
+.eid-fig--day[data-step="3"] .day-state-3,
+.eid-fig--day[data-step="4"] .day-state-4,
+.eid-fig--day[data-step="5"] .day-state-5,
+.eid-fig--day:is([data-step="2"], [data-step="3"]) .day-link-off {
+  opacity: 1;
+}
+
+.eid-fig--day:is([data-step="2"], [data-step="3"]) .day-link-on {
+  opacity: 0;
+}
+
+.eid-link {
+  fill: none;
+  stroke: var(--eid-royal-light);
+  stroke-width: calc(var(--eid-hair) * 1.7);
+}
+
+.eid-link-flow {
+  fill: none;
+  stroke: #fff;
+  stroke-width: calc(var(--eid-hair) * 1.7);
+  stroke-dasharray: 2 5;
+  opacity: 0;
+  --period: 7px;
+  --pace: 0.5s;
+}
+
+.eid-console-row {
+  fill: var(--eid-royal-light);
+  opacity: 0.85;
+}
+
+.eid-console-row.is-report {
+  fill: #e6e8ec;
+}
+
+.eid-console-check {
+  fill: none;
+  stroke: #fff;
+  stroke-width: calc(var(--eid-hair) * 1.5);
+}
+
+/* ------------------------------------------------------- where it stands */
+
+.eid-status {
+  padding-block: 72px 76px;
+  border-block: 1px solid var(--eid-line);
+  background: #05080b;
+}
+
+.eid-status-grid,
+.eid-request-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 38px;
+}
+
+.eid-status-note {
+  max-width: 480px;
+}
+
+.eid-board {
+  position: relative;
+  border: 1px solid #ffffff24;
+  background:
+    repeating-linear-gradient(0deg, #0000 0 3px, #ffffff05 3px 4px),
+    #070b0e;
+}
+
+.eid-board::before,
+.eid-board::after,
+.eid-request-form::before,
+.eid-request-form::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--eid-crimson-light);
+  pointer-events: none;
+}
+
+.eid-board::before,
+.eid-request-form::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.eid-board::after,
+.eid-request-form::after {
+  right: -1px;
+  bottom: -1px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+}
+
+.eid-board-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--eid-line);
+  color: var(--eid-crimson-text);
+  font:
+    500 9.5px/1.4 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eid-board ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eid-board-row {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 8px;
+  padding: 18px 18px 19px;
+  border-bottom: 1px solid var(--eid-line);
+}
+
+.eid-board-row:last-child {
+  border-bottom: 0;
+}
+
+.eid-board-lamp {
+  width: 9px;
+  height: 9px;
+  margin-top: 7px;
+  border: 1px solid var(--eid-royal-light);
+}
+
+.eid-board-row.is-run .eid-board-lamp {
+  background: var(--eid-royal-light);
+  box-shadow: 0 0 10px #2d66e4;
+}
+
+.eid-board-row.is-lab .eid-board-lamp {
+  background: linear-gradient(90deg, var(--eid-royal-light) 50%, #0000 50%);
+}
+
+.eid-board-row.is-design .eid-board-lamp {
+  border-color: var(--eid-silver);
+}
+
+.eid-board-row h3 {
+  font-size: 18px;
+  font-weight: 580;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+.eid-page .eid-board-state {
+  grid-column: 2;
+  width: fit-content;
+  padding: 6px 9px;
+  border: 1px solid #7ba8ff59;
+  color: #d5e0f8;
+  font:
+    500 9.5px/1 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eid-page .eid-board-row.is-design .eid-board-state {
+  border-color: #a9adb366;
+  color: #d0d4d9;
+}
+
+.eid-page .eid-board-detail {
+  grid-column: 2;
+  font-size: 14px;
+  color: var(--eid-muted);
+}
+
+/* ---------------------------------------------------------------- request */
+
+.eid-request {
+  padding-block: 72px 88px;
+  background: radial-gradient(ellipse 70% 60% at 88% 18%, #97092117, #0000 66%);
+}
+
+.eid-terms {
+  max-width: 480px;
+  margin: 26px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--eid-line);
+  list-style: none;
+}
+
+.eid-terms li {
+  position: relative;
+  padding: 12px 0 12px 24px;
+  border-bottom: 1px solid var(--eid-line);
+  color: #cdd3d9;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.eid-terms li::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 20px;
+  width: 6px;
+  height: 6px;
+  background: var(--eid-crimson);
+  outline: 1px solid var(--eid-crimson-text);
+}
+
+.eid-request-form {
+  position: relative;
+  padding: 26px 20px 24px;
+  border: 1px solid #ffffff24;
+  background: #070b0e;
+}
+
+/* The site's one inquiry form, dressed for this page. Fields, names and
+   delivery are the form's own; only the surface changes here. */
+.eid-request-form .iq-form {
+  margin-top: 0;
+  color: var(--eid-ink);
+}
+
+.eid-request-form .iq-preview-note {
+  margin: 0 0 22px;
+  border-color: #ffffff38;
+  color: #cdd3d9;
+  font:
+    400 10px/1.6 "JetBrains Mono",
+    monospace;
+}
+
+.eid-request-form .iq-legend,
+.eid-request-form .iq-label {
+  color: #e3e6ea;
+  font-size: 12.5px;
+}
+
+.eid-request-form .iq-radio-label {
+  padding: 12px 15px;
+  border: 1px solid #3d4a52;
+  color: #e3e6ea;
+  font-size: 12.5px;
+}
+
+.eid-request-form .iq-radio-input:checked + .iq-radio-label {
+  border-color: var(--eid-royal-light);
+  background: var(--eid-royal);
+  color: #fff;
+}
+
+.eid-request-form .iq-radio-input:focus-visible + .iq-radio-label {
+  outline: 2px solid #9db8ff;
+  outline-offset: 3px;
+}
+
+.eid-request-form .iq-input,
+.eid-request-form .iq-textarea {
+  min-height: 46px;
+  border: 1px solid #3d4a52;
+  background: #03060a;
+  color: #fff;
+  font:
+    400 16px/1.5 "Archivo",
+    sans-serif;
+}
+
+.eid-request-form .iq-input:focus,
+.eid-request-form .iq-textarea:focus {
+  background: #060b12;
+  outline: 2px solid var(--eid-royal-light);
+  outline-offset: 2px;
+}
+
+.eid-request-form .iq-input::placeholder {
+  color: var(--eid-dim);
+}
+
+.eid-request-form .iq-textarea {
+  min-height: 112px;
+}
+
+.eid-request-form .iq-optional {
+  color: var(--eid-muted);
+}
+
+.eid-request-form .iq-toggle {
+  border: 1px solid #3d4a52;
+}
+
+.eid-request-form .iq-toggle-button {
+  min-height: 44px;
+  color: #e3e6ea;
+  font-size: 12.5px;
+}
+
+.eid-request-form .iq-toggle-button[aria-pressed="true"] {
+  background: #e6e8ec;
+  color: #0a0f14;
+}
+
+.eid-request-form .iq-toggle-button:focus-visible,
+.eid-request-form .iq-submit:focus-visible {
+  outline: 2px solid #9db8ff;
+  outline-offset: 3px;
+}
+
+.eid-request-form .iq-submit {
+  min-height: 54px;
+  border: 1px solid #c42545;
+  background: var(--eid-crimson);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.eid-request-form .iq-submit:hover {
+  background: #b0102d;
+  box-shadow: 0 0 34px #97092166;
+}
+
+.eid-request-form .iq-help {
+  margin: 14px 0 0;
+  color: var(--eid-muted);
+  font-size: 11px;
+}
+
+.eid-request-form .iq-status:not(:empty) {
+  border: 1px solid #7ba8ff80;
+  background: #0a1220;
+  color: #fff;
+}
+
+.eid-request-form .iq-status-error:not(:empty) {
+  border-color: var(--eid-crimson-light);
+  background: #1a0a10;
+}
+
+/* ------------------------------------------------------------------ rail */
+
+.eid-rail {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- tablet */
+
+@media (min-width: 760px) {
+  .eid-hero {
+    padding-block: 44px 56px;
+  }
+
+  .eid-hero-cross,
+  .eid-hero-corners {
+    display: inline;
+  }
+
+  .eid-hero-visual {
+    top: 50%;
+    right: max(24px, calc(50vw - 704px + 40px));
+    width: min(46vw, calc(100vh - var(--eid-header) - 96px), 640px);
+    width: min(46vw, calc(100svh - var(--eid-header) - 96px), 640px);
+    max-width: none;
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+
+  .eid-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1408px;
+  }
+
+  .eid-hero-copy,
+  .eid-hero-facts {
+    max-width: min(44vw, 600px);
+  }
+
+  .eid-page .eid-title {
+    font-size: clamp(84px, 11.4vw, 176px);
+  }
+
+  .eid-page .eid-hero-line {
+    margin-top: 28px;
+    font-size: clamp(16px, 1.4vw, 19px);
+  }
+
+  .eid-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 30px;
+    margin-top: 30px;
+  }
+
+  .eid-hero-facts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .eid-page .eid-hero-caption {
+    position: absolute;
+    right: max(40px, calc(50vw - 704px + 64px));
+    bottom: 18px;
+    margin: 0;
+    text-align: right;
+  }
+
+  .eid-scene {
+    padding-block: 84px 72px;
+  }
+
+  .eid-scene h2,
+  .eid-status h2,
+  .eid-request h2 {
+    font-size: clamp(34px, 3.5vw, 52px);
+  }
+
+  .eid-page .eid-figure {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .eid-board-head,
+  .eid-board-row {
+    padding-inline: 24px;
+  }
+
+  .eid-board-row {
+    grid-template-columns: 16px minmax(0, 1fr) auto;
+  }
+
+  .eid-page .eid-board-state {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+  }
+
+  .eid-page .eid-board-detail {
+    grid-column: 2 / -1;
+    max-width: 560px;
+  }
+
+  .eid-request-form {
+    padding: 34px 34px 30px;
+  }
+
+  .eid-request-form .iq-input,
+  .eid-request-form .iq-textarea {
+    font-size: 15px;
+  }
+}
+
+/* --------------------------------------------------------------- desktop */
+
+@media (min-width: 900px) {
+  .eid-scene {
+    padding-block: 104px;
+  }
+
+  .eid-scene-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-rows: auto auto;
+    column-gap: clamp(40px, 6vw, 96px);
+    row-gap: 30px;
+  }
+
+  .eid-scene-head {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .eid-scene-beats {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  .eid-page .eid-figure {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    justify-self: center;
+    width: min(100%, calc(100vh - 150px), 640px);
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Alternate sides, so the instruments step down the page. */
+  :is([data-eid-scene="crowd"], [data-eid-scene="keep"]) .eid-scene-grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+
+  :is([data-eid-scene="crowd"], [data-eid-scene="keep"]) :is(.eid-scene-head, .eid-scene-beats) {
+    grid-column: 2;
+  }
+
+  .eid-page :is([data-eid-scene="crowd"], [data-eid-scene="keep"]) .eid-figure {
+    grid-column: 1;
+  }
+
+  .eid-status {
+    padding-block: 104px 112px;
+  }
+
+  .eid-status-grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(40px, 6vw, 88px);
+    align-items: start;
+  }
+
+  .eid-request {
+    padding-block: 108px 128px;
+  }
+
+  .eid-request-grid {
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    gap: clamp(40px, 6vw, 88px);
+    align-items: start;
+  }
+}
+
+/* With motion on and room to hold a scene still, each scene is a tall
+   section with its contents held in view while the scroll plays it through.
+   The media query decides this before first paint, so nothing shifts when
+   the script arrives; if the script cannot load, it sets data-eid-static. */
+@media (min-width: 900px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
+  .eid-page:not([data-eid-static]) .eid-scene {
+    height: 230vh;
+    padding-block: 0;
+  }
+
+  .eid-page:not([data-eid-static]) .eid-scene-stick {
+    position: sticky;
+    top: 0;
+    display: grid;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* How far through the held scene the scroll has come. */
+  .eid-page:not([data-eid-static]) .eid-meter {
+    position: absolute;
+    left: max(40px, calc(50% - 640px));
+    right: max(40px, calc(50% - 640px));
+    bottom: 26px;
+    display: block;
+    height: 1px;
+    background: #ffffff1c;
+  }
+
+  .eid-meter i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #7ba8ff40, var(--eid-royal-light));
+    transform: scaleX(var(--eid-progress, 1));
+    transform-origin: 0 50%;
+  }
+}
+
+/* Laptop screens: the held scene has to fit a shorter window. */
+@media (min-width: 900px) and (max-height: 780px) {
+  .eid-scene h2 {
+    font-size: clamp(28px, 2.9vw, 40px);
+  }
+
+  .eid-page .eid-kicker {
+    margin-bottom: 14px;
+  }
+
+  .eid-page .eid-lede {
+    margin-top: 14px;
+    font-size: 14.5px;
+  }
+
+  .eid-scene-grid {
+    row-gap: 20px;
+  }
+
+  .eid-beats li {
+    padding: 8px 0;
+    font-size: 13.5px;
+  }
+
+  .eid-page .eid-aside {
+    margin-top: 14px;
+    font-size: 13.5px;
+  }
+
+  .eid-page .eid-figure {
+    width: min(100%, calc(100vh - 120px), 640px);
+  }
+}
+
+@media (min-width: 1200px) and (min-height: 600px) {
+  .eid-rail {
+    position: fixed;
+    top: 50%;
+    right: 18px;
+    z-index: 30;
+    display: block;
+    transform: translateY(-50%);
+  }
+
+  .eid-rail ol {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .eid-page .eid-rail a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    min-height: 26px;
+    color: #8d949d;
+    font:
+      500 9.5px/1 "JetBrains Mono",
+      monospace;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .eid-rail-name {
+    padding: 5px 7px;
+    background: #020304e6;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translateX(8px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .eid-rail a:hover .eid-rail-name,
+  .eid-rail a:focus-visible .eid-rail-name {
+    opacity: 1;
+    transform: none;
+  }
+
+  .eid-rail-mark {
+    width: 10px;
+    height: 1px;
+    background: currentColor;
+    transition:
+      width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .eid-page .eid-rail a:hover,
+  .eid-page .eid-rail a[aria-current] {
+    color: #fff;
+  }
+
+  .eid-rail a[aria-current] .eid-rail-mark {
+    width: 20px;
+    background: var(--eid-crimson-light);
+    box-shadow: 0 0 8px #d0203f;
+  }
+}
+
+/* ---------------------------------------------------------------- motion */
+
+@keyframes eid-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes eid-wave {
+  from {
+    opacity: 0.55;
+    transform: scale(0.72);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+
+@keyframes eid-flow {
+  from {
+    stroke-dashoffset: var(--o, 0px);
+  }
+
+  to {
+    stroke-dashoffset: calc(var(--o, 0px) - var(--period, 10px));
+  }
+}
+
+@keyframes eid-breathe {
+  50% {
+    opacity: 0.42;
+  }
+}
+
+@keyframes eid-echo {
+  50% {
+    transform: translate(0.085em, -0.06em);
+  }
+}
+
+@keyframes eid-echo-far {
+  50% {
+    transform: translate(0.17em, -0.12em);
+  }
+}
+
+@keyframes eid-hunt {
+  0%,
+  9% {
+    transform: translate(var(--hx0), var(--hy0));
+  }
+
+  16%,
+  25% {
+    transform: translate(var(--hx1), var(--hy1));
+  }
+
+  32%,
+  41% {
+    transform: translate(0, 0);
+  }
+
+  48%,
+  57% {
+    transform: translate(var(--hx2), var(--hy2));
+  }
+
+  64%,
+  73% {
+    transform: translate(var(--hx3), var(--hy3));
+  }
+
+  80%,
+  89% {
+    transform: translate(var(--hx4), var(--hy4));
+  }
+
+  96%,
+  100% {
+    transform: translate(var(--hx0), var(--hy0));
+  }
+}
+
+@keyframes eid-bloom {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* the opening (its caption, often below the fold on a phone, just stands) */
+  .eid-hero-copy > *,
+  .eid-hero-facts {
+    animation: eng-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .eid-hero-copy > :nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  .eid-hero-copy > :nth-child(3) {
+    animation-delay: 0.18s;
+  }
+
+  .eid-hero-copy > :nth-child(4) {
+    animation-delay: 0.26s;
+  }
+
+  .eid-hero-copy > :nth-child(5) {
+    animation-delay: 0.34s;
+  }
+
+  .eid-hero-facts {
+    animation-delay: 0.46s;
+  }
+
+  .eid-hero-fig {
+    animation: eid-bloom 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both;
+  }
+
+  .eid-title::before {
+    animation: eid-echo 7s ease-in-out infinite;
+  }
+
+  .eid-title::after {
+    animation: eid-echo-far 7s ease-in-out infinite;
+  }
+
+  /* the opening instrument turns until it leaves the screen */
+  .eid-hero-turn.is-slow {
+    animation: eid-spin 76s linear infinite;
+  }
+
+  .eid-hero-turn.is-counter {
+    animation: eid-spin 54s linear infinite reverse;
+  }
+
+  .eid-hero-turn.is-sweep {
+    animation: eid-spin 11s linear infinite;
+  }
+
+  .eid-hero-hunt {
+    animation: eid-hunt 15s cubic-bezier(0.65, 0, 0.2, 1) infinite;
+  }
+
+  .eid-ghost {
+    animation: eid-breathe var(--pace, 6s) ease-in-out var(--delay, 0s) infinite;
+  }
+
+  .eid-hero-fig .eid-wave {
+    animation: eid-wave 3.9s ease-out var(--delay, 0s) infinite;
+  }
+
+  .eid-hero[data-live="false"] :is(.eid-hero-turn, .eid-hero-hunt, .eid-ghost, .eid-wave),
+  .eid-hero[data-live="false"] .eid-title::before,
+  .eid-hero[data-live="false"] .eid-title::after {
+    animation-play-state: paused;
+  }
+
+  /* a scene's own loops run only while it is on screen */
+  .eid-figure[data-live="true"] .eid-wave {
+    animation: eid-wave 3.9s ease-out var(--delay, 0s) infinite;
+  }
+
+  .eid-figure[data-live="true"] :is(.eid-stream, .eid-lane-whole, .eid-lane-share, .eid-lane-own) {
+    animation: eid-flow var(--pace, 3s) linear infinite;
+  }
+
+  .eid-figure[data-live="true"] .eid-fig--day[data-flow="plan"] .day-flow-plan,
+  .eid-figure[data-live="true"] .eid-fig--day[data-flow="report"] .day-flow-report {
+    opacity: 0.9;
+    animation: eid-flow var(--pace, 0.5s) linear infinite;
+  }
+}

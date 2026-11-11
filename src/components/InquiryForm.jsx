@@ -66,7 +66,23 @@ function sameOriginPath(value) {
 
 const ENDPOINT = sameOriginPath(RAW_ENDPOINT);
 
-export default function InquiryForm({ initialService = "Website" }) {
+/**
+ * Optional props for a page with its own request types. Defaults leave every
+ * existing use unchanged. The payload keeps the same field names either way:
+ *  - services: the request types offered, as strings or { value, label }. The
+ *    chosen value travels inside the existing "needs" field, as it always has.
+ *  - copy: wording for this page only (legend, businessLabel, businessRequired,
+ *    needsLabel, submitLabel, topic, emailPlaceholder, phonePlaceholder, and
+ *    messages keyed by outcome).
+ */
+export default function InquiryForm({
+  initialService = "Website",
+  services = SERVICES,
+  copy = {},
+}) {
+  const options = services.map((option) =>
+    typeof option === "string" ? { value: option, label: option } : option,
+  );
   const uid = useId();
   const nameId = `${uid}-name`;
   const businessId = `${uid}-business`;
@@ -78,7 +94,9 @@ export default function InquiryForm({ initialService = "Website" }) {
   const statusId = `${uid}-status`;
 
   const [service, setService] = useState(
-    SERVICES.includes(initialService) ? initialService : SERVICES[0],
+    options.some((option) => option.value === initialService)
+      ? initialService
+      : options[0].value,
   );
   const [contactMethod, setContactMethod] = useState("Email");
   const [name, setName] = useState("");
@@ -95,10 +113,12 @@ export default function InquiryForm({ initialService = "Website" }) {
 
   const usePhone = contactMethod === "Phone";
 
-  function finish(next) {
+  // `outcome` names the result, so a page can supply its own wording for it.
+  function finish(next, outcome) {
     sendingRef.current = false;
     setSending(false);
-    setStatus(next);
+    const message = outcome && copy.messages?.[outcome];
+    setStatus(message ? { ...next, message } : next);
   }
 
   async function handleSubmit(event) {
@@ -117,7 +137,7 @@ export default function InquiryForm({ initialService = "Website" }) {
         tone: "error",
         message: `We could not submit this form. Please email ${FALLBACK_EMAIL} and we will pick it up from there.`,
         showMailto: true,
-      });
+      }, "blocked");
       return;
     }
 
@@ -162,7 +182,7 @@ Preferred reply: ${contactMethod}`,
             ? `That request timed out before it went through. Your details are still here. Please email ${FALLBACK_EMAIL} to check before submitting again.`
             : `We could not send that just now — your details are still here, so you can try again. If it keeps failing, email ${FALLBACK_EMAIL}.`,
           showMailto: true,
-        });
+        }, timedOut ? "sendTimeout" : "sendFailed");
         return;
       } finally {
         clearTimeout(timer);
@@ -176,7 +196,7 @@ Preferred reply: ${contactMethod}`,
       finish({
         tone: "success",
         message: `Sent. We reply within one business day — if you do not hear back, email ${FALLBACK_EMAIL}.`,
-      });
+      }, "sent");
       return;
     }
 
@@ -211,7 +231,7 @@ Preferred reply: ${contactMethod}`,
           tone: "error",
           message: `We could not deliver that just now — your details are still here, so you can try again. If it keeps failing, email ${FALLBACK_EMAIL}.`,
           showMailto: true,
-        });
+        }, "notDelivered");
         return;
       }
 
@@ -224,7 +244,7 @@ Preferred reply: ${contactMethod}`,
         tone: "success",
         message:
           "Your inquiry was received. We will reply within one business day.",
-      });
+      }, "received");
     } catch (error) {
       // Nothing the visitor typed is logged here — only the failure shape matters.
       const timedOut = error?.name === "AbortError";
@@ -234,7 +254,7 @@ Preferred reply: ${contactMethod}`,
           ? `We could not confirm receipt before the request timed out. Your details are still here. Please email ${FALLBACK_EMAIL} to check before submitting again.`
           : `We could not confirm receipt. Your details are still here. Please email ${FALLBACK_EMAIL} to check before submitting again.`,
         showMailto: true,
-      });
+      }, timedOut ? "unconfirmedTimeout" : "unconfirmed");
     } finally {
       clearTimeout(timer);
     }
@@ -250,21 +270,23 @@ Preferred reply: ${contactMethod}`,
       )}
 
       <fieldset className="iq-fieldset iq-services">
-        <legend className="iq-legend">What do you need?</legend>
+        <legend className="iq-legend">
+          {copy.legend || "What do you need?"}
+        </legend>
         <div className="iq-radios">
-          {SERVICES.map((option) => (
-            <label className="iq-radio" key={option}>
+          {options.map((option) => (
+            <label className="iq-radio" key={option.value}>
               <input
                 type="radio"
                 name="service"
-                value={option}
+                value={option.value}
                 className="iq-radio-input"
-                checked={service === option}
-                onChange={() => setService(option)}
+                checked={service === option.value}
+                onChange={() => setService(option.value)}
                 disabled={sending}
                 required
               />
-              <span className="iq-radio-label">{option}</span>
+              <span className="iq-radio-label">{option.label}</span>
             </label>
           ))}
         </div>
@@ -290,7 +312,13 @@ Preferred reply: ${contactMethod}`,
 
         <div className="iq-field">
           <label className="iq-label" htmlFor={businessId}>
-            Business <span className="iq-optional">(optional)</span>
+            {copy.businessLabel || "Business"}
+            {!copy.businessRequired && (
+              <>
+                {" "}
+                <span className="iq-optional">(optional)</span>
+              </>
+            )}
           </label>
           <input
             id={businessId}
@@ -301,6 +329,7 @@ Preferred reply: ${contactMethod}`,
             onChange={(e) => setBusiness(e.target.value)}
             autoComplete="organization"
             disabled={sending}
+            required={Boolean(copy.businessRequired)}
           />
         </div>
       </div>
@@ -342,7 +371,7 @@ Preferred reply: ${contactMethod}`,
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             autoComplete="tel"
-            placeholder="(555) 555-0123"
+            placeholder={copy.phonePlaceholder || "(555) 555-0123"}
             disabled={sending}
             required
           />
@@ -360,7 +389,7 @@ Preferred reply: ${contactMethod}`,
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
-            placeholder="you@business.com"
+            placeholder={copy.emailPlaceholder || "you@business.com"}
             disabled={sending}
             required
           />
@@ -369,7 +398,7 @@ Preferred reply: ${contactMethod}`,
 
       <div className="iq-field">
         <label className="iq-label" htmlFor={needsId}>
-          What are you trying to get done?
+          {copy.needsLabel || "What are you trying to get done?"}
         </label>
         <textarea
           id={needsId}
@@ -399,13 +428,14 @@ Preferred reply: ${contactMethod}`,
       </div>
 
       <button type="submit" className="iq-submit" disabled={sending}>
-        {sending ? "Sending…" : "Tell us about your project →"}
+        {sending ? "Sending…" : copy.submitLabel || "Tell us about your project →"}
       </button>
 
       <p className="iq-help" id={helpId}>
         By submitting, you agree to be contacted by phone, text, or email about
-        your project. Message and data rates may apply; reply STOP to opt out of
-        texts at any time. We use these details to respond to your inquiry.{" "}
+        your {copy.topic || "project"}. Message and data rates may apply; reply
+        STOP to opt out of texts at any time. We use these details to respond to
+        your inquiry.{" "}
         <Link className="iq-privacy-link" to="/privacy">
           Privacy
         </Link>

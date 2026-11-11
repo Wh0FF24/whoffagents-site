@@ -5,6 +5,7 @@ import StudioAtmosphere from "./components/StudioAtmosphere";
 import Home from "./pages/Home";
 import EngineeringHome from "./pages/EngineeringHome";
 import { Capabilities, Research, PersonaFleet, Company, Contact } from "./pages/EngineeringPages";
+import EidolonPage from "./pages/EidolonPage";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -60,19 +61,25 @@ function App() {
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical)
       canonical.href = `https://whoffagents.com${location.pathname === "/" ? "" : location.pathname}`;
-    if (import.meta.env.VITE_PRIVATE_PREVIEW === "true") {
-      let robots = document.querySelector('meta[name="robots"]');
+    // A preview build is never indexed. In a live build a route can ask to
+    // stay out of search results (routeMeta `robots`); the tag follows the
+    // route, so it is added on arriving there and removed on leaving.
+    const wanted = import.meta.env.VITE_PRIVATE_PREVIEW === "true" ? "noindex, nofollow" : meta?.robots;
+    let robots = document.querySelector('meta[name="robots"]');
+    if (wanted) {
       if (!robots) {
         robots = document.createElement("meta");
         robots.name = "robots";
         document.head.appendChild(robots);
       }
-      robots.content = "noindex, nofollow";
+      robots.content = wanted;
+    } else if (robots) {
+      robots.remove();
     }
   }, [location.pathname]);
-  const engineeringPage = ["/", "/capabilities", "/research", "/research/persona-fleet", "/about", "/contact"].includes(location.pathname);
+  const engineeringPage = ["/", "/capabilities", "/research", "/research/persona-fleet", "/about", "/contact", "/eidolon"].includes(location.pathname);
   const immersiveHome = location.pathname === "/";
-  const corePage = ["/", "/web", "/agents", "/products", "/about", "/studio", "/studio/about", "/capabilities", "/research", "/research/persona-fleet", "/contact"].includes(
+  const corePage = ["/", "/web", "/agents", "/products", "/about", "/studio", "/studio/about", "/capabilities", "/research", "/research/persona-fleet", "/contact", "/eidolon"].includes(
     location.pathname,
   );
 
@@ -123,6 +130,7 @@ function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/research/persona-fleet" element={<PersonaFleet />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/eidolon" element={<EidolonPage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/crypto-data-mcp" element={<CryptoDataMCP />} />
           <Route path="/products/ai-prompt-pack" element={<AiPromptPack />} />
