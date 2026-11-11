@@ -193,6 +193,14 @@
   transform: translate(var(--hx0), var(--hy0));
 }
 
+/* As a still frame on a phone, where the copy sits over the instrument, the
+   reticle would rest behind the main button. It is left out there. */
+@media (max-width: 759px) and (prefers-reduced-motion: reduce) {
+  .eid-hero-hunt {
+    visibility: hidden;
+  }
+}
+
 .eid-hero-grid {
   position: relative;
   display: grid;
