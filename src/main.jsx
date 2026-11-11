@@ -5,7 +5,13 @@ import "./index.css";
 import App from "./App.jsx";
 import { captureUTMs } from "./utils/utm";
 
-captureUTMs();
+// The page at /haze tells its readers that it stores nothing in the browser
+// and loads nothing from other companies. So when the site is opened there,
+// with or without a trailing slash, neither the campaign capture below nor
+// analytics runs. Every other address behaves as before.
+const quietPage = /^\/+haze(\/+(index\.html)?)?$/i.test(window.location.pathname);
+
+if (!quietPage) captureUTMs();
 
 // /route/ is served the same prerendered page as /route, but routing and page
 // metadata key on the bare path. Drop the slash before React reads the
@@ -21,7 +27,7 @@ if (pathname.length > 1 && (pathname.endsWith("/") || pathname.startsWith("//"))
 }
 
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY;
-if (POSTHOG_KEY && import.meta.env.VITE_PRIVATE_PREVIEW !== "true") {
+if (POSTHOG_KEY && import.meta.env.VITE_PRIVATE_PREVIEW !== "true" && !quietPage) {
   import("posthog-js").then(({ default: posthog }) =>
     posthog.init(POSTHOG_KEY, {
       api_host: "https://us.i.posthog.com",

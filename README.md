@@ -51,6 +51,18 @@ Three.js loads asynchronously only on the five main routes and shares one runtim
 - `scripts/capture-identities.mjs <output-directory>`: desktop/mobile screenshots from the loopback dev preview on port 4173.
 - `scripts/capture-atmosphere.mjs <output-directory>`: below-hero screenshots from the same preview.
 
+## Haze page (unlisted draft)
+
+`/haze` is a waitlist page for an app that is still in design. It is a draft: Will reviews it before it is published or shared.
+
+- It stands on its own. `src/App.jsx` leaves out the site's header, navigation and footer on this route, and the page brings its own top bar and footer. Its only links are in-page anchors, one link to `/`, and one `mailto:`.
+- It is unlisted. `routeMeta` marks the route `sitemap: false` and `robots: "noindex, nofollow"`, the prerender writes that tag into the page's own HTML in every build, and no page links to it. Keep it out of `robots.txt`: a crawler told not to fetch a page never sees its noindex tag, and the file would advertise the address.
+- It keeps the promise printed in its footer. `src/main.jsx` runs neither the campaign capture nor analytics when the site is opened at `/haze`, so in a live build the page asks nothing of any other origin and keeps nothing in the browser. `node scripts/check-haze-privacy.mjs` proves it on a live build with a made-up analytics key, answering every outside request itself so nothing leaves the machine. Run it on its own, not beside the test suite: both build into `dist/`.
+- `src/pages/HazePage.jsx` holds the copy. `src/components/haze/` holds the figures, each drawn finished in the HTML, and `hazeMotion.js`, which holds a scene in place while the scroll plays it on wide screens, plays it once as it comes into view on small ones, and runs nothing for a scene that is off screen. With reduced motion, without JavaScript, or if the motion cannot load, the page keeps the finished frames at normal height. `src/styles/haze.css` is imported as text and rendered into the page's own HTML, so it is not added to the stylesheet every other page loads.
+- `src/components/haze/HazeWaitlistForm.jsx` is the page's own form. It shares nothing with `InquiryForm` or the lead pipeline. A preview build sends nothing. A live build shows the form only when `VITE_HAZE_WAITLIST_ENDPOINT` is set to a path on this same site, and then sends one JSON `POST` holding exactly `email`, `where`, `pay`, `note` and `website`. With no address set it shows one line saying the waitlist is not open.
+- `tests/haze.spec.js` covers the page, including two small live builds it makes and serves from the local machine only. Its wording is pinned to `tests/fixtures/haze-copy.txt`. `node scripts/capture-haze.mjs <url> <screenshot directory> [video directory]` captures every scene, section and still frame, and `node scripts/measure-haze-frames.mjs <url>` times the page's frames with the processor slowed.
+- Before publishing, check the host's rewrite rules. Where the host answers an address that has no file extension from its rules (one per prerendered route, then a catch-all), `/haze` and `/haze/` each need a rule to `/haze/index.html` ahead of the catch-all. Without them the host would answer with the home page's HTML, which carries neither this page's title nor its noindex tag. Signups need one more rule, for wherever they are to land.
+
 ## Production prerequisites
 
 1. Will's design approval and public portfolio permission: given. Island Airporter and The Forge Gym are listed as client work (2026-09-28).

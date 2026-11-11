@@ -1,0 +1,1254 @@
+/* Haze: a waitlist page that stands on its own.
+   The site's dark ground and type, royal blue with silver, and a motif of its
+   own: soft points, depth, sharp things going soft. Silver is the real
+   person. Blue is the decoys. Every figure is complete as drawn here, and
+   scripts only replay how it got there. */
+
+.hz-page {
+  --hz-ground: #030506;
+  --hz-ink: #f1f4f8;
+  --hz-text: #c5ccd4;
+  --hz-muted: #9aa5af;
+  --hz-dim: #808c97;
+  --hz-line: #19222a;
+  --hz-edge: #5f6f7e;
+  --hz-royal: #0442ae;
+  --hz-royal-bright: #2f6be8;
+  --hz-royal-light: #8fb3ff;
+  --hz-silver: #a9adb3;
+  --hz-warn: #ffb1b1;
+  --hz-bar: 52px;
+  --hz-pad: 20px;
+  position: relative;
+  background: var(--hz-ground);
+  color: var(--hz-text);
+  color-scheme: dark;
+  font-family: "Archivo", system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+.hz-page *,
+.hz-page *::before,
+.hz-page *::after {
+  box-sizing: border-box;
+}
+
+.hz-page h1,
+.hz-page h2,
+.hz-page p,
+.hz-page figure,
+.hz-page ul,
+.hz-page fieldset {
+  margin: 0;
+}
+
+.hz-page h1,
+.hz-page h2 {
+  color: var(--hz-ink);
+  font-family: "Archivo", system-ui, sans-serif;
+  font-weight: 520;
+  text-wrap: balance;
+}
+
+.hz-page a {
+  color: inherit;
+}
+
+.hz-page :focus-visible {
+  outline: 2px solid var(--hz-royal-light);
+  outline-offset: 4px;
+}
+
+/* A link to a section lands with the section just under the top bar. The
+   site sets a scroll padding for its own taller header. */
+.hz-page section[id] {
+  scroll-margin-top: calc(var(--hz-bar) - 95px);
+}
+
+.hz-shell {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: var(--hz-pad);
+}
+
+/* --------------------------------------------------------------- top bar */
+
+.hz-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid #ffffff12;
+  background: var(--hz-ground);
+}
+
+.hz-bar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: var(--hz-bar);
+}
+
+.hz-page .hz-bar-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--hz-ink);
+  font-size: 17px;
+  font-weight: 620;
+  letter-spacing: 0.01em;
+}
+
+/* The name's mark: one soft point. */
+.hz-bar-name::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #dbe7ff 0 16%, #6f9bff 42%, #2f6be800 72%);
+}
+
+/* --------------------------------------------------------------- actions */
+
+.hz-page .hz-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 24px;
+  border: 1px solid var(--hz-royal-bright);
+  border-radius: 999px;
+  background: var(--hz-royal);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.hz-page .hz-button:hover {
+  background: #0a50cc;
+  box-shadow:
+    0 0 0 4px #0442ae47,
+    0 14px 44px -14px var(--hz-royal-bright);
+}
+
+.hz-page .hz-button[disabled] {
+  cursor: default;
+  opacity: 0.6;
+  box-shadow: none;
+  background: var(--hz-royal);
+}
+
+.hz-page .hz-button--small {
+  min-height: 36px;
+  padding: 0 16px;
+  font-size: 13.5px;
+}
+
+.hz-page .hz-textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 50px;
+  color: var(--hz-ink);
+  font-size: 15px;
+  font-weight: 560;
+  text-decoration: underline;
+  text-decoration-color: #8fb3ff8c;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.hz-page .hz-textlink:hover {
+  text-decoration-color: var(--hz-royal-light);
+}
+
+.hz-textlink svg {
+  flex: none;
+  color: var(--hz-royal-light);
+  transition: transform 0.25s ease;
+}
+
+.hz-textlink:hover svg {
+  transform: translateY(3px);
+}
+
+/* --------------------------------------------------------------- opening */
+
+.hz-opening {
+  position: relative;
+  isolation: isolate;
+  padding-block: 24px 30px;
+  overflow: hidden;
+}
+
+/* Haze behind everything: two wide, faint blooms of royal blue. */
+.hz-opening::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 62% at 68% 46%, #0442ae4d, #0442ae00 70%),
+    radial-gradient(ellipse 60% 46% at 12% 96%, #0442ae29, #0442ae00 70%);
+}
+
+.hz-opening-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hz-opening-copy {
+  position: relative;
+  max-width: 600px;
+}
+
+.hz-page .hz-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: #c2d0ec;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hz-label::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hz-royal-light);
+  box-shadow: 0 0 10px var(--hz-royal-bright);
+}
+
+.hz-page .hz-title {
+  font-size: clamp(35px, 9.7vw, 46px);
+  letter-spacing: -0.034em;
+  line-height: 1.04;
+  word-spacing: 0.04em;
+}
+
+/* The first word carries the idea: it is a little out of focus. */
+.hz-title-soft {
+  color: #e6eeff;
+  text-shadow:
+    0 0 0.14em #8fb3ffd9,
+    0 0 0.5em #2f6be8b3;
+}
+
+.hz-page .hz-lede {
+  max-width: 520px;
+  margin-top: 16px;
+  color: #d3d9e0;
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.hz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 22px;
+  margin-top: 20px;
+}
+
+.hz-page .hz-caption {
+  margin-top: 12px;
+  color: var(--hz-dim);
+  font-size: 11.5px;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* The opening figure has no frame: it stands in the haze itself. On a
+   phone it follows the copy, so both buttons stay on the first screen. */
+.hz-page .hz-figure.hz-figure--opening {
+  justify-self: center;
+  width: min(94vw, 430px);
+  /* The figure has room of its own above the profile, so it is drawn up
+     toward the buttons. */
+  margin: -30px 0 0;
+  pointer-events: none;
+}
+
+.hz-figure--opening .hz-stage {
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.hz-page .hz-figure--opening .hz-caption {
+  margin-top: 0;
+}
+
+.hz-open-fig {
+  position: relative;
+  aspect-ratio: 1;
+  container-type: inline-size;
+}
+
+.hz-open-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.hz-open-layer svg {
+  display: block;
+  overflow: visible;
+}
+
+.hz-open-sharp {
+  opacity: 0;
+}
+
+.hz-open-sharp circle {
+  fill: #c9d2dd;
+  opacity: 0.82;
+}
+
+.hz-open-sharp circle.is-edge {
+  fill: #f4f7fb;
+  opacity: 1;
+}
+
+/* Each drifting point is placed and sized as a share of the figure, and
+   keeps its own path and pace (set on the point itself). */
+.hz-open-drift i {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: calc(var(--s) * 1cqw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #cfe0ff 0 14%, #6f9bff 40%, #2f6be800 72%);
+  opacity: var(--o);
+}
+
+/* ---------------------------------------------------------------- scenes */
+
+.hz-scene {
+  position: relative;
+  padding-block: 64px 56px;
+  border-top: 1px solid var(--hz-line);
+}
+
+.hz-scene-stick {
+  position: relative;
+  isolation: isolate;
+}
+
+/* A faint bloom behind each figure. */
+.hz-scene-stick::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 70% 46% at 50% 70%, #0442ae24, #0442ae00 72%);
+  pointer-events: none;
+}
+
+.hz-scene-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hz-scene h2,
+.hz-plain h2,
+.hz-waitlist h2 {
+  max-width: 520px;
+  font-size: clamp(29px, 7.8vw, 38px);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.hz-page .hz-text {
+  max-width: 500px;
+  margin-top: 18px;
+  color: var(--hz-text);
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+
+.hz-page .hz-small {
+  max-width: 480px;
+  margin-top: 18px;
+  padding-left: 16px;
+  border-left: 1px solid #8fb3ff66;
+  color: var(--hz-muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.hz-page .hz-figure {
+  margin: 30px -8px 0;
+}
+
+.hz-stage {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 24px;
+  background: radial-gradient(120% 92% at 50% 36%, #0c1c3d 0%, #081120 46%, #05080e 82%);
+  box-shadow:
+    inset 0 0 0 1px #ffffff14,
+    0 44px 90px -50px #0442aea6;
+  overflow: hidden;
+}
+
+.hz-fig {
+  display: block;
+}
+
+/* --------------------------------------------------- inside the figures */
+
+.hz-t {
+  fill: #c3cbd4;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+.hz-t--strong {
+  fill: var(--hz-ink);
+  font-size: 13.5px;
+  font-weight: 640;
+}
+
+.hz-t--dim {
+  fill: #8d99a5;
+}
+
+.hz-row-line {
+  stroke: #fff;
+  stroke-opacity: 0.1;
+  stroke-width: 1;
+}
+
+/* A point of activity, with a faint ring of its own light. */
+.hz-dot {
+  fill: #eceff3;
+  stroke: #eceff3;
+  stroke-opacity: 0.16;
+  stroke-width: 4;
+}
+
+.hz-row--real .hz-row-label {
+  fill: #eceff3;
+}
+
+.hz-row--decoy .hz-dot,
+.hz-dot.hz-dot--mixed {
+  fill: #6f9bff;
+  stroke: #6f9bff;
+  stroke-opacity: 0.2;
+}
+
+.hz-row--decoy .hz-row-label {
+  fill: #a3c0ff;
+}
+
+.hz-legend-you {
+  fill: #eceff3;
+}
+
+.hz-legend-decoy {
+  fill: #6f9bff;
+}
+
+/* The profile, sharp. */
+.hz-card-edge {
+  fill: #fff;
+  fill-opacity: 0.035;
+  stroke: #e6ebf1;
+  stroke-width: 1.2;
+}
+
+.hz-card-state {
+  fill: var(--hz-ink);
+  font-weight: 620;
+}
+
+.hz-rhythm {
+  fill: none;
+  stroke-linejoin: round;
+}
+
+.hz-rhythm--real {
+  stroke: #f4f7fb;
+  stroke-width: 1.9;
+}
+
+.hz-card-routine {
+  fill: var(--hz-ink);
+}
+
+.hz-chip rect {
+  fill: #ffffff17;
+  stroke: #e6ebf1;
+  stroke-opacity: 0.6;
+  stroke-width: 1;
+}
+
+.hz-chip .hz-t {
+  fill: var(--hz-ink);
+  font-size: 11.5px;
+}
+
+/* The profile, gone soft: the edge feathers out, every rhythm lies over the
+   others, and soft shapes stand where the words were. */
+.hz-card-feather rect {
+  fill: none;
+  stroke: #9db4dc;
+  stroke-opacity: 0.13;
+  stroke-width: 4;
+}
+
+.hz-card-feather rect:nth-child(2) {
+  stroke-opacity: 0.07;
+  stroke-width: 10;
+}
+
+.hz-card-feather rect:nth-child(3) {
+  stroke-opacity: 0.04;
+  stroke-width: 18;
+}
+
+.hz-rhythm--decoy {
+  stroke: #7fa6ff;
+  stroke-width: 1.3;
+  opacity: 0.62;
+}
+
+.hz-rhythm--faded {
+  stroke: #c3cfe2;
+  stroke-width: 1.3;
+  opacity: 0.6;
+}
+
+.hz-soft {
+  stroke: #9db4dc;
+  stroke-opacity: 0.12;
+  stroke-width: 5;
+}
+
+.hz-card-state--blurry {
+  fill: #a3c0ff;
+}
+
+.hz-fig--crowd .hz-card-edge {
+  opacity: 0.3;
+}
+
+.hz-fig--crowd .hz-card-state--sharp,
+.hz-fig--crowd .hz-rhythm--real,
+.hz-fig--crowd .hz-card-routine,
+.hz-fig--crowd .hz-chip {
+  opacity: 0;
+}
+
+/* The detector, and the two kinds of decoy that reach it. */
+.hz-gate-line {
+  stroke: #dfe6f0;
+  stroke-opacity: 0.6;
+  stroke-width: 1;
+}
+
+.hz-gate-stop,
+.hz-gate-through {
+  opacity: 0;
+}
+
+.hz-mark rect {
+  fill: none;
+  stroke: #b8c2ce;
+  stroke-width: 1.5;
+}
+
+.hz-mark--caught {
+  opacity: 0.36;
+}
+
+.hz-mark--tested circle {
+  fill: #6f9bff;
+  stroke: #6f9bff;
+  stroke-opacity: 0.22;
+  stroke-width: 5;
+}
+
+.hz-test-out--passes {
+  fill: #a3c0ff;
+}
+
+/* The sample screen. */
+.hz-screen {
+  fill: #060a11;
+  stroke: #dfe6f0;
+  stroke-opacity: 0.24;
+  stroke-width: 1.2;
+}
+
+.hz-screen-name {
+  font-size: 15px;
+}
+
+.hz-screen-rule {
+  stroke: #fff;
+  stroke-opacity: 0.1;
+}
+
+.hz-lens {
+  stroke: #8fb3ff;
+  stroke-opacity: 0.28;
+  stroke-width: 1;
+}
+
+.hz-lens-dot {
+  fill: #6f9bff;
+}
+
+.hz-gauge-glow {
+  fill: #8fb3ff;
+  opacity: 0.22;
+}
+
+.hz-gauge-knob {
+  fill: #fff;
+  stroke: #060a11;
+  stroke-width: 2;
+}
+
+.hz-notice {
+  fill: var(--hz-warn);
+}
+
+/* ---------------------------------------------------- the plain sections */
+
+.hz-plain,
+.hz-waitlist {
+  padding-block: 72px;
+  border-top: 1px solid var(--hz-line);
+}
+
+.hz-plain-grid,
+.hz-waitlist-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+}
+
+.hz-list {
+  display: grid;
+  padding: 0;
+  list-style: none;
+}
+
+.hz-list li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 16px;
+  padding: 19px 0;
+  border-top: 1px solid var(--hz-line);
+  color: #dce1e7;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.hz-list li:last-child {
+  border-bottom: 1px solid var(--hz-line);
+}
+
+.hz-list svg {
+  margin-top: 4px;
+  color: var(--hz-royal-light);
+}
+
+.hz-plain--limits .hz-list svg {
+  color: var(--hz-silver);
+}
+
+/* -------------------------------------------------------------- waitlist */
+
+.hz-waitlist {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: 88px;
+}
+
+.hz-waitlist::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 70% 60% at 76% 40%, #0442ae33, #0442ae00 70%);
+  pointer-events: none;
+}
+
+.hz-waitlist-form {
+  padding: 24px 20px 22px;
+  border: 1px solid #1f2a35;
+  border-radius: 22px;
+  background: #070c13;
+}
+
+.hz-page .hz-form-closed,
+.hz-page .hz-form-ending {
+  color: var(--hz-ink);
+  font-size: 19px;
+  line-height: 1.45;
+}
+
+.hz-form {
+  display: grid;
+  gap: 24px;
+}
+
+.hz-field {
+  display: grid;
+  gap: 9px;
+}
+
+.hz-field label,
+.hz-choices legend {
+  color: var(--hz-ink);
+  font-size: 15px;
+  font-weight: 580;
+  line-height: 1.4;
+}
+
+.hz-optional {
+  color: var(--hz-muted);
+  font-weight: 400;
+}
+
+.hz-field input {
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--hz-edge);
+  border-radius: 12px;
+  background: #04070b;
+  color: var(--hz-ink);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.hz-field input:hover {
+  border-color: #8795a2;
+}
+
+.hz-page .hz-field input:focus-visible {
+  border-color: var(--hz-royal-light);
+  outline-offset: 2px;
+}
+
+.hz-field[data-missing] input {
+  border-color: var(--hz-warn);
+}
+
+.hz-choices {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.hz-choices legend {
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.hz-choice-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.hz-choice {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid #33414d;
+  border-radius: 12px;
+  background: #04070b;
+  color: #dce1e7;
+  font-size: 15px;
+  line-height: 1.35;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.hz-choice:hover {
+  border-color: var(--hz-edge);
+}
+
+.hz-choice input {
+  display: grid;
+  flex: none;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid #8795a2;
+  border-radius: 50%;
+  background: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.hz-choice input::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hz-royal-light);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.hz-choice input:checked {
+  border-color: var(--hz-royal-light);
+}
+
+.hz-choice input:checked::before {
+  transform: scale(1);
+}
+
+.hz-choice:has(input:checked) {
+  border-color: #4f83f5;
+  background: #0442ae33;
+  color: #fff;
+}
+
+.hz-choices[data-missing] .hz-choice {
+  border-color: #b98787;
+}
+
+/* A field for scripts only. People never see it or reach it. */
+.hz-form-extra {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.hz-form-end {
+  display: grid;
+  justify-items: start;
+}
+
+.hz-form-problems p {
+  margin-bottom: 14px;
+  color: var(--hz-warn);
+  font-size: 14.5px;
+  font-weight: 520;
+  line-height: 1.45;
+}
+
+.hz-page .hz-form-noscript {
+  margin-top: 12px;
+  color: var(--hz-muted);
+  font-size: 14px;
+}
+
+.hz-page .hz-form-small {
+  margin-top: 24px;
+  color: var(--hz-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.hz-form-small a {
+  color: #d5e0f6;
+  text-decoration: underline;
+  text-decoration-color: #8fb3ff8c;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.hz-footer {
+  padding-block: 34px 40px;
+  border-top: 1px solid var(--hz-line);
+  color: var(--hz-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.hz-footer p + p {
+  margin-top: 6px;
+}
+
+.hz-footer a {
+  color: #d5e0f6;
+  text-decoration: underline;
+  text-decoration-color: #8fb3ff8c;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- tablet */
+
+@media (min-width: 520px) {
+  .hz-choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hz-choice.is-wide {
+    grid-column: 1 / -1;
+  }
+
+  /* Three short answers of unequal length: give the long one more room. */
+  .hz-choice-grid[data-count="3"] {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 0.72fr);
+  }
+}
+
+@media (min-width: 760px) {
+  .hz-page {
+    --hz-bar: 58px;
+    --hz-pad: 40px;
+  }
+
+  .hz-opening {
+    padding-block: 48px 44px;
+  }
+
+  .hz-page .hz-title {
+    font-size: clamp(52px, 6.4vw, 70px);
+  }
+
+  .hz-page .hz-lede {
+    margin-top: 22px;
+    font-size: 18px;
+  }
+
+  .hz-actions {
+    margin-top: 28px;
+  }
+
+  .hz-scene {
+    padding-block: 88px 76px;
+  }
+
+  .hz-scene h2,
+  .hz-plain h2,
+  .hz-waitlist h2 {
+    font-size: clamp(34px, 3.5vw, 50px);
+  }
+
+  .hz-page .hz-text {
+    font-size: 17.5px;
+  }
+
+  .hz-page .hz-figure {
+    max-width: 540px;
+    margin: 40px auto 0;
+  }
+
+  .hz-page .hz-figure.hz-figure--opening {
+    width: min(70vw, 520px);
+    margin-top: -8px;
+  }
+
+  .hz-plain,
+  .hz-waitlist {
+    padding-block: 96px;
+  }
+
+  .hz-list li {
+    font-size: 18.5px;
+  }
+
+  .hz-waitlist-form {
+    padding: 34px 34px 30px;
+  }
+}
+
+/* --------------------------------------------------------------- desktop */
+
+@media (min-width: 900px) {
+  .hz-opening {
+    display: grid;
+    align-items: center;
+    min-height: calc(100vh - var(--hz-bar));
+    min-height: calc(100svh - var(--hz-bar));
+    padding-block: 40px 56px;
+  }
+
+  .hz-opening-grid {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(32px, 5vw, 84px);
+  }
+
+  .hz-page .hz-figure.hz-figure--opening {
+    width: min(44vw, calc(100vh - var(--hz-bar) - 170px), 600px);
+    max-width: none;
+    margin: 0;
+  }
+
+  .hz-page .hz-figure--opening .hz-caption {
+    margin-top: 6px;
+  }
+
+  .hz-scene {
+    padding-block: 110px;
+  }
+
+  .hz-scene-stick::before {
+    background: radial-gradient(ellipse 44% 56% at 74% 50%, #0442ae2b, #0442ae00 72%);
+  }
+
+  .hz-scene-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    column-gap: clamp(40px, 6vw, 96px);
+  }
+
+  .hz-page .hz-figure {
+    justify-self: center;
+    width: min(42vw, calc(100vh - var(--hz-bar) - 150px), 560px);
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Alternate sides, so the figures step down the page. */
+  :is([data-hz-scene="crowd"], [data-hz-scene="score"]) .hz-scene-grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+
+  :is([data-hz-scene="crowd"], [data-hz-scene="score"]) .hz-scene-copy {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  :is([data-hz-scene="crowd"], [data-hz-scene="score"]) .hz-figure {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  :is([data-hz-scene="crowd"], [data-hz-scene="score"]) .hz-scene-stick::before {
+    background: radial-gradient(ellipse 44% 56% at 26% 50%, #0442ae2b, #0442ae00 72%);
+  }
+
+  .hz-plain,
+  .hz-waitlist {
+    padding-block: 120px;
+  }
+
+  .hz-waitlist {
+    padding-bottom: 132px;
+  }
+
+  /* The few lines beside the form stay in view while the form scrolls. */
+  .hz-waitlist-copy {
+    position: sticky;
+    top: calc(var(--hz-bar) + 56px);
+  }
+
+  .hz-plain-grid,
+  .hz-waitlist-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+    column-gap: clamp(40px, 6vw, 96px);
+  }
+}
+
+@media (min-width: 1100px) {
+  .hz-page {
+    --hz-pad: 56px;
+  }
+
+  .hz-page .hz-title {
+    font-size: clamp(64px, 5.6vw, 84px);
+  }
+}
+
+/* With motion on and room to hold a scene still, each scene is a tall
+   section with its contents held in view while the scroll plays it through.
+   The media query decides this before first paint, so nothing shifts when
+   the script arrives. If the script cannot load, it sets data-hz-static. */
+@media (min-width: 900px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
+  .hz-page:not([data-hz-static]) .hz-scene {
+    height: 250vh;
+    padding-block: 0;
+  }
+
+  .hz-page:not([data-hz-static]) .hz-scene-stick {
+    position: sticky;
+    top: var(--hz-bar);
+    display: grid;
+    align-items: center;
+    height: calc(100vh - var(--hz-bar));
+  }
+}
+
+/* Laptop screens: a held scene has to fit a shorter window. */
+@media (min-width: 900px) and (max-height: 760px) {
+  .hz-scene h2 {
+    font-size: clamp(28px, 2.9vw, 40px);
+  }
+
+  .hz-page .hz-scene .hz-text {
+    margin-top: 14px;
+    font-size: 15.5px;
+  }
+
+  .hz-page .hz-small {
+    margin-top: 14px;
+    font-size: 13.5px;
+  }
+
+  .hz-page .hz-figure:not(.hz-figure--opening) {
+    width: min(42vw, calc(100vh - var(--hz-bar) - 118px), 560px);
+  }
+}
+
+/* ---------------------------------------------------------------- motion */
+
+/* The opening loop: the profile comes into focus, holds, then loses its edge
+   as the decoys drift through, and rests soft. It begins and ends on the
+   soft frame, which is also the still frame. */
+@keyframes hz-focus {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  9%,
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  64%,
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes hz-soften {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  9%,
+  30% {
+    opacity: 0.1;
+    transform: scale(0.965);
+  }
+
+  64%,
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hz-far {
+  from {
+    transform: translate(-2.5%, 1.5%) rotate(-2deg);
+  }
+
+  to {
+    transform: translate(2.5%, -1.5%) rotate(2deg);
+  }
+}
+
+@keyframes hz-drift {
+  0% {
+    opacity: 0;
+    transform: translate(calc(var(--dx) * -0.5cqw), calc(var(--dy) * -0.5cqw));
+  }
+
+  20%,
+  80% {
+    opacity: var(--o);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(calc(var(--dx) * 0.5cqw), calc(var(--dy) * 0.5cqw));
+  }
+}
+
+@keyframes hz-pulse {
+  50% {
+    opacity: 0.62;
+  }
+}
+
+@keyframes hz-glimmer {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes hz-sway {
+  25% {
+    transform: translateX(2.6px);
+  }
+
+  75% {
+    transform: translateX(-2.6px);
+  }
+}
+
+/* These loops run only once the script has started them (data-hz-on), and
+   only for a figure that is on screen (data-live). */
+@media (prefers-reduced-motion: no-preference) {
+  .hz-page[data-hz-on] .hz-open-sharp {
+    animation: hz-focus 16s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  }
+
+  .hz-page[data-hz-on] .hz-open-soft {
+    animation: hz-soften 16s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  }
+
+  .hz-page[data-hz-on] .hz-open-far {
+    animation: hz-far 28s ease-in-out infinite alternate;
+  }
+
+  .hz-page[data-hz-on] .hz-open-drift i {
+    animation: hz-drift var(--pace) linear var(--delay) infinite;
+  }
+
+  .hz-page[data-hz-on] .hz-figure[data-live="false"] :is(.hz-open-sharp, .hz-open-soft, .hz-open-far, .hz-open-drift i) {
+    animation-play-state: paused;
+  }
+
+  /* each decoy keeps a slow pulse of its own, none in step */
+  .hz-page[data-hz-on] .hz-figure[data-live="true"] .hz-row--decoy .hz-row-dots {
+    animation: hz-pulse var(--pace, 4s) ease-in-out infinite;
+  }
+
+  .hz-page[data-hz-on] .hz-figure[data-live="true"] .hz-gate-glow {
+    animation: hz-glimmer 3.8s ease-in-out infinite;
+  }
+
+  .hz-page[data-hz-on] .hz-figure[data-live="true"] .hz-gauge-sway {
+    animation: hz-sway 6s ease-in-out infinite;
+  }
+}

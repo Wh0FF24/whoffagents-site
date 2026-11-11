@@ -27,6 +27,7 @@ import TradingSignalsMCP from "./pages/TradingSignalsMCP";
 import ProductsArchive from "./pages/ProductsArchive";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import HazePage from "./pages/HazePage";
 import ScrollToTop from "./components/ScrollToTop";
 import "./styles/studio.css";
 import "./styles/studio-showcase.css";
@@ -39,6 +40,9 @@ import { routeMeta } from "./data/routeMeta";
 
 function App() {
   const location = useLocation();
+  // A standalone page brings its own top bar and footer, and takes none of
+  // the site's page frame.
+  const standalonePage = location.pathname === "/haze";
 
   useEffect(() => {
     const meta = routeMeta[location.pathname];
@@ -60,14 +64,20 @@ function App() {
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical)
       canonical.href = `https://whoffagents.com${location.pathname === "/" ? "" : location.pathname}`;
-    if (import.meta.env.VITE_PRIVATE_PREVIEW === "true") {
-      let robots = document.querySelector('meta[name="robots"]');
+    // A preview build is never indexed. In a live build a route can ask to
+    // stay out of search results (routeMeta `robots`); the tag follows the
+    // route, so it is added on arriving there and removed on leaving.
+    const wanted = import.meta.env.VITE_PRIVATE_PREVIEW === "true" ? "noindex, nofollow" : meta?.robots;
+    let robots = document.querySelector('meta[name="robots"]');
+    if (wanted) {
       if (!robots) {
         robots = document.createElement("meta");
         robots.name = "robots";
         document.head.appendChild(robots);
       }
-      robots.content = "noindex, nofollow";
+      robots.content = wanted;
+    } else if (robots) {
+      robots.remove();
     }
   }, [location.pathname]);
   const engineeringPage = ["/", "/capabilities", "/research", "/research/persona-fleet", "/about", "/contact"].includes(location.pathname);
@@ -77,13 +87,13 @@ function App() {
   );
 
   return (
-    <div className={`${engineeringPage ? "studio-app wf-app wf-front-dark" : "studio-app wf-legacy wf-front-dark"}${immersiveHome ? " wf-corehome-app" : ""}`}>
-      {!engineeringPage && <StudioAtmosphere />}
+    <div className={`${engineeringPage || standalonePage ? "studio-app wf-app wf-front-dark" : "studio-app wf-legacy wf-front-dark"}${immersiveHome ? " wf-corehome-app" : ""}`}>
+      {!engineeringPage && !standalonePage && <StudioAtmosphere />}
       <ScrollToTop />
-      <Nav />
+      {!standalonePage && <Nav />}
       <main
         id="main-content"
-        className={corePage ? "" : "legacy-page dp-support-page"}
+        className={corePage || standalonePage ? "" : "legacy-page dp-support-page"}
         data-page-family={
           location.pathname.startsWith("/products") ||
           ["/free-skill", "/learn-more", "/thank-you"].includes(
@@ -93,7 +103,7 @@ function App() {
             : "studio"
         }
       >
-        {!corePage && (
+        {!corePage && !standalonePage && (
           <div className="dp-page-rail">
             <a
               href={
@@ -157,6 +167,7 @@ function App() {
           <Route path="/products/archive" element={<ProductsArchive />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/haze" caseSensitive element={<HazePage />} />
           <Route
             path="*"
             element={
@@ -170,7 +181,7 @@ function App() {
           />
         </Routes>
       </main>
-      <Footer />
+      {!standalonePage && <Footer />}
       {import.meta.env.VITE_PRIVATE_PREVIEW === "true" && (
         <div className="wf-preview-label">
           DESIGN PREVIEW · FORMS DO NOT SEND

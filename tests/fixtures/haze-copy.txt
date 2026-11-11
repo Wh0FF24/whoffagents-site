@@ -1,0 +1,112 @@
+(page title) Haze | Blur the profile they build on you
+(description for search and link previews) Haze is a privacy app in design. It adds decoy activity that behaves like real people, tests it against a detector, and shows you the result. Join the waitlist.
+Haze
+Join the waitlist
+In design. Not available yet.
+Blur the profile they build on you.
+Every search, visit and tap adds to a profile of you. Haze adds decoy activity that behaves like real people, so that profile says less about the real one.
+Join the waitlist
+See how it works
+Illustrative model. Not measured performance.
+Your activity makes a pattern.
+When you are online. What you look at. How much, and how often. Put together, it is enough to guess your routine, your interests and a good deal more.
+A VPN hides your traffic from your internet provider. A blocker stops some trackers. Neither changes the pattern you leave with the sites and apps you actually use.
+You
+Cycling
+Cooking
+Music
+Morning
+Midday
+Evening
+Night
+Profile
+Sharp
+Routine
+Up early, online late
+Interests
+Cycling
+Cooking
+Music
+Illustrative model. Not measured performance.
+Haze gives them a crowd.
+Haze will run decoys beside you. Each one has its own interests and its own daily rhythm, and none of them moves in step with you. A profile built on the mix is a blurrier picture of the real you.
+You
+Decoys
+Gardening
+Painting
+Baking
+Guitar
+Cycling
+Cooking
+Music
+Morning
+Midday
+Evening
+Night
+Profile
+Sharp
+Blurry
+Routine
+Up early, online late
+Interests
+Cycling
+Cooking
+Music
+Illustrative model. Not measured performance.
+Decoys that are tested, not random.
+Random noise can be told apart from real behavior and thrown away. So the plan is to test every kind of decoy against a detector built to catch fakes, and to keep only what passes.
+Random
+Tested
+Caught
+Passes
+Detector
+Illustrative model. Not measured performance.
+You see the result.
+Haze will show a score: how easily a detector can pick your real activity out of the mix. If the blur is not working, you will know.
+Haze
+Sample screen
+Score
+Easy to pick out
+Hard to pick out
+The blur is not working.
+Illustrative model. Not measured performance.
+Ground rules.
+It will run on your device. Your real activity stays there.
+No fake ad clicks. That costs other people money.
+Decoys stick to ordinary, safe content.
+You set the limits: data, battery and hours.
+What it will not do.
+It will not make you anonymous.
+It does not change what a service learns while you are signed in to it.
+It is not a VPN or an ad blocker. It works beside them.
+We do not know yet how much it helps. Finding out is the point of building it, and we will publish what we measure.
+Should we build it?
+Haze is not built yet. The decoy engine and the detector exist in our lab. The app does not. Join the list and tell us two things. If enough people want it, we build it, and you hear first.
+Email
+Where would you use it?
+Browser extension
+Android app
+Both
+What would you pay?
+Nothing, I would only use a free version
+$3 a month
+$5 a month
+$8 a month
+A one-time price, not monthly
+What bothers you most about being tracked? (optional)
+Join the waitlist
+We keep your email and these answers, nothing else. One email when there is news. To leave the list, email hello@whoffagents.com.
+Haze is a working name from Whoff Agents.
+This page loads nothing from other companies and sets no cookies. Our web host keeps ordinary server logs.
+(described to screen readers) Illustration. A profile made of points of activity loses its sharp edge as other points drift through it.
+(described to screen readers) Illustration. Scattered points of activity gather into rows across a day, and a profile of routine and interests comes into focus.
+(described to screen readers) Illustration. Decoy activity appears beside the real activity, each row with its own timing, and the profile under it goes soft.
+(described to screen readers) Illustration. Random decoys are caught at a detector and dropped. Tested decoys pass through it.
+(described to screen readers) Illustration of a sample screen. A marker on a gauge moves between easy to pick out and hard to pick out.
+(shown when the email is missing or not valid) Enter an email address we can reach you at.
+(shown when a choice is missing) Pick one answer for each question.
+(shown after a send in a preview build) Local preview. Nothing was sent.
+(shown after a send) You are on the list. One email when there is news.
+(shown when a send does not go through) That did not go through. Nothing was saved. Try again in a minute.
+(shown in place of the form while the waitlist is closed) The waitlist is not open yet.
+(shown when scripts are off) This form needs JavaScript to send.

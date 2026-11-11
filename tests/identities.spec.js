@@ -198,7 +198,8 @@ test("supporting routes retain readable chapter frames at mobile and desktop wid
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of Object.keys(routeMeta).filter(
-      (r) => !core.includes(r),
+      // /haze is a standalone page with a frame of its own.
+      (r) => !core.includes(r) && r !== "/haze",
     )) {
       await page.goto(route);
       await page.keyboard.press("Shift");

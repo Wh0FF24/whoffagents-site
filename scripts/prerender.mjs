@@ -85,6 +85,9 @@ await build({
   build: {
     ssr: path.join(rootDir, 'src/entry-server.jsx'),
     outDir: serverOutDir,
+    // A page may carry its own styles as text (a `?inline` import) and
+    // render them into its HTML. Minify that text, as the browser build does.
+    cssMinify: true,
     rollupOptions: {
       output: { format: 'esm' },
     },
@@ -115,7 +118,17 @@ for (const route of routes) {
     const description = escapeAttribute(meta.description)
     const canonical = route === '/' ? SITE : `${SITE}${route}`
 
-    const html = template
+    // A route can ask to stay out of search results (routeMeta `robots`).
+    // Its page carries the tag in the HTML itself, so a crawler that runs no
+    // script still sees it. A preview build already marks every page.
+    const robotsTag = meta.robots ? `<meta name="robots" content="${escapeAttribute(meta.robots)}" />` : ''
+    const withRobots = !robotsTag
+      ? template
+      : /<meta name="robots"[^>]*>/.test(template)
+        ? template.replace(/<meta name="robots"[^>]*>/, robotsTag)
+        : template.replace('</head>', `  ${robotsTag}\n  </head>`)
+
+    const html = withRobots
       .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
       .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
       .replace(
