@@ -96,6 +96,18 @@ const top = (page, selector) =>
     window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - bar, behavior: 'instant' });
   });
 
+// A picture of one whole part of the page, however tall. The top bar stays
+// at the top of the screen, so it is left out of these: it would otherwise
+// be drawn across the part wherever the capture happened to catch it.
+async function whole(page, selector, file) {
+  const bar = page.locator('.hz-bar');
+  await bar.evaluate((element) => {
+    element.style.visibility = 'hidden';
+  });
+  await page.locator(selector).screenshot({ path: file });
+  await bar.evaluate((element) => element.style.removeProperty('visibility'));
+}
+
 // Hold the opening loop at one point of its length.
 const holdLoop = (page, share) =>
   page.evaluate((at) => {
@@ -125,7 +137,7 @@ for (const size of out === 'none' ? [] : SIZES) {
     if (!size.openingOnly) {
       // Where the opening is taller than the screen, the whole of it as well.
       if (await page.locator('.hz-opening').evaluate((section) => section.offsetHeight > window.innerHeight)) {
-        await page.locator('.hz-opening').screenshot({ path: path.join(dir, '01-opening-whole.png') });
+        await whole(page, '.hz-opening', path.join(dir, '01-opening-whole.png'));
       }
       const held = (await page.locator('#pattern').getAttribute('data-hz-to')) !== null;
       for (const [number, id] of SCENES) {
@@ -161,13 +173,13 @@ for (const size of out === 'none' ? [] : SIZES) {
         await top(page, `#${id}`);
         await page.waitForTimeout(900);
         await shot(page, `${number}-${id}`);
-        await page.locator(`#${id}`).screenshot({ path: path.join(dir, `${number}-${id}-whole.png`) });
+        await whole(page, `#${id}`, path.join(dir, `${number}-${id}-whole.png`));
       }
       // The form after a send with nothing filled in, and after a preview send.
       const form = page.locator('#waitlist form');
       await form.getByRole('button', { name: 'Join the waitlist' }).click();
       await page.waitForTimeout(500);
-      await page.locator('#waitlist .hz-waitlist-form').screenshot({ path: path.join(dir, '08-waitlist-nothing-filled-in.png') });
+      await whole(page, '#waitlist .hz-waitlist-form', path.join(dir, '08-waitlist-nothing-filled-in.png'));
       await form.getByLabel('Email', { exact: true }).fill('preview@example.com');
       await form.getByText('Both', { exact: true }).click();
       await form.getByText('$3 a month', { exact: true }).click();
@@ -188,9 +200,9 @@ for (const size of out === 'none' ? [] : SIZES) {
   if (!size.openingOnly) {
     const { context, page } = await open(size, { reducedMotion: 'reduce' });
     await page.waitForTimeout(800);
-    await page.locator('.hz-opening').screenshot({ path: path.join(dir, 'still-01-opening.png') });
+    await whole(page, '.hz-opening', path.join(dir, 'still-01-opening.png'));
     for (const [number, id] of [...SCENES, ...PLAIN]) {
-      await page.locator(`#${id}`).screenshot({ path: path.join(dir, `still-${number}-${id}.png`) });
+      await whole(page, `#${id}`, path.join(dir, `still-${number}-${id}.png`));
     }
     console.log(
       JSON.stringify({
