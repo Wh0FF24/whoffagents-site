@@ -12,8 +12,8 @@
  *  3. Live build with VITE_HAZE_WAITLIST_ENDPOINT set to a path on this same
  *     site: one POST of JSON holding exactly email, where, pay, note and
  *     website. A 2xx answer is "sent". A 400 means the far end will not take
- *     the address, and the page says so. A 503 means the list is full, and
- *     the page says that. Anything else is "failed".
+ *     the address, and the page says so. A 503 whose answer says the list
+ *     is full shows that in place of the form. Anything else is "failed".
  *
  * It keeps nothing in the browser, sends no cookies, and reports nothing to
  * analytics on any path.
@@ -192,9 +192,14 @@ export default function HazeWaitlistForm() {
       // The far end answers 400 only when it will not take what was sent.
       // The two choices come from fixed lists, so that means the address.
       else if (response.status === 400) next = "email";
-      // 503 is the far end saying the list has reached its size limit.
-      // Trying again would not help, so the page says what will.
-      else if (response.status === 503) next = "full";
+      // A 503 whose answer says "full" is the far end saying the list has
+      // reached its size limit. Trying again would not help, so the page says
+      // what will. A host can also answer 503 for its own reasons, such as an
+      // outage. That is an ordinary failure, and trying again is right.
+      else if (response.status === 503) {
+        const answer = await response.json().catch(() => null);
+        if (answer && answer.full === true) next = "full";
+      }
     } catch {
       // A request that could not be made, or took too long, is a failure.
     }

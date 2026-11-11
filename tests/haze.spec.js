@@ -272,7 +272,7 @@ test('the wording is the reviewed wording: nothing added, no figures but the pri
   // And when the far end answers that the list is full.
   await other.reload();
   await fill(other.locator('#waitlist form'));
-  await other.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false}' }));
+  await other.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false,"full":true}' }));
   await other.locator('#waitlist form').getByRole('button', { name: 'Join the waitlist' }).click();
   await expect(other.locator('.hz-form-ending')).toBeVisible();
   said.push(`${NOTES.full} ${await other.locator('.hz-form-ending').textContent()}`);
@@ -993,11 +993,19 @@ test('in a live build with a waitlist address the form sends one POST with exact
   await page.waitForTimeout(500);
   expect(arrived()).toHaveLength(2);
 
-  // A full list: the page says so in place of the form, and says what to do.
-  // "Try again in a minute" would never work.
+  // A 503 that does not say the list is full is an outage, not a full list:
+  // the plain failed message, with the form kept so the person can try again.
   await page.reload();
   await fill(form, 'late@example.com');
-  await page.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false}' }));
+  await page.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'text/html', body: 'Service Unavailable' }));
+  await form.getByRole('button', { name: 'Join the waitlist' }).click();
+  await expect(form.getByRole('alert').locator('p')).toHaveText([line(NOTES.failed)]);
+  await expect(form).toHaveCount(1);
+  await page.unroute(`**${ENDPOINT}`);
+
+  // A full list: the far end says so, and the page says so in place of the
+  // form, with what to do. "Try again in a minute" would never work.
+  await page.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false,"full":true}' }));
   await form.getByRole('button', { name: 'Join the waitlist' }).click();
   await expect(section.getByRole('status')).toHaveText(line(NOTES.full));
   await expect(form).toHaveCount(0);
