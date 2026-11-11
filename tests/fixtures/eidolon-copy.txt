@@ -119,7 +119,7 @@ Undock
 24 hours dark
 Dock again
 Read the report
-The phone agent has run full 24-hour plans on a test phone with no link to the operator. The console runs today against simulated devices and one test phone. The device hardware is in design.
+The phone agent has run full 24-hour plans on a test phone at the bench. It took no instructions once a run started, and it stayed cabled for power and measurement. The console runs today against simulated devices and one test phone. The device hardware is in design.
 Where it stands
 What runs today, and what does not yet.
 Eidolon is in development. This is each part as it stands, in plain terms.
@@ -132,7 +132,7 @@ Runs today
 Each decoy keeps its own daily rhythm (commuter, shift worker, traveler, resident) and re-plans on the spot from where the device actually is: place, motion and time of day.
 Phone agent
 Run on a test phone
-It has run full 24-hour plans on a test phone with no link to the operator.
+It has run full 24-hour plans on a test phone at the bench, taking no instructions once a run started.
 Operator console
 Runs in test
 It plans a window, assigns decoys and produces a report afterwards. It runs today against simulated devices and one test phone.

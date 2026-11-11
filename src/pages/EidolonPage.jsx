@@ -42,7 +42,7 @@ const STATUS = [
     state: "Run on a test phone",
     tone: "run",
     detail:
-      "It has run full 24-hour plans on a test phone with no link to the operator.",
+      "It has run full 24-hour plans on a test phone at the bench, taking no instructions once a run started.",
   },
   {
     name: "Operator console",
@@ -367,9 +367,11 @@ export default function EidolonPage() {
           <Chip>Read the report</Chip>
         </ol>
         <p className="eid-aside">
-          The phone agent has run full 24-hour plans on a test phone with no
-          link to the operator. The console runs today against simulated
-          devices and one test phone. The device hardware is in design.
+          The phone agent has run full 24-hour plans on a test phone at the
+          bench. It took no instructions once a run started, and it stayed
+          cabled for power and measurement. The console runs today against
+          simulated devices and one test phone. The device hardware is in
+          design.
         </p>
       </Scene>
 
