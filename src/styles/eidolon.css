@@ -73,7 +73,7 @@
   right: -46vw;
   width: 122vw;
   max-width: 560px;
-  opacity: 0.4;
+  opacity: 0.3;
   pointer-events: none;
 }
 
@@ -198,6 +198,20 @@
   display: grid;
   gap: 30px;
   align-content: center;
+}
+
+/* On a phone the instrument sits behind the copy, so the copy keeps a dark
+   edge of its own. */
+.eid-hero-copy,
+.eid-hero-facts,
+.eid-hero-caption {
+  text-shadow:
+    0 0 14px #000,
+    0 0 3px #000;
+}
+
+.eid-hero .eid-button {
+  text-shadow: none;
 }
 
 .eid-page .eid-hero-label {
@@ -1450,6 +1464,12 @@
   .eid-hero-cross,
   .eid-hero-corners {
     display: inline;
+  }
+
+  .eid-hero-copy,
+  .eid-hero-facts,
+  .eid-hero-caption {
+    text-shadow: none;
   }
 
   .eid-hero-visual {

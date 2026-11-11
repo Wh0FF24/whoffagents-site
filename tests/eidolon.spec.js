@@ -22,6 +22,8 @@ const REVIEWED_COPY = path.join(path.dirname(fileURLToPath(import.meta.url)), 'f
 const WORDLIST = process.env.EIDOLON_WORDLIST;
 // Marks the page never uses: long dashes, and the signs that go with figures.
 const MARKS = new RegExp(`[${String.fromCharCode(0x2013, 0x2014)}%$]`);
+// Counts written out as words. The page gives no figure but 24.
+const COUNTS = /\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|dozens?|hundreds?|thousands?|millions?|twice|double|half|halves|thirds?|quarters?)\b/i;
 
 test.beforeEach(async ({ context }) => {
   // Fail any write closed, even if a preview guard regresses.
@@ -158,6 +160,7 @@ test('the wording is the reviewed wording: nothing added, no number but 24', asy
   expect(text).toContain('In development');
   expect(text.match(MARKS)?.[0] ?? null, 'a mark the page does not use').toBeNull();
   expect([...new Set(text.match(/\d+/g) || [])], 'numbers on the page').toEqual(['24']);
+  expect(text.match(COUNTS)?.[0] ?? null, 'a count written out as a word').toBeNull();
   if (WORDLIST) {
     const patterns = fs.readFileSync(WORDLIST, 'utf8').split(/\r?\n/).map((line) => line.trim()).filter((line) => line && !line.startsWith('#'));
     expect(patterns.length, 'patterns in the list').toBeGreaterThan(0);

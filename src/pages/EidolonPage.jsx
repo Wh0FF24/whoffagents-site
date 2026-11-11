@@ -316,7 +316,7 @@ export default function EidolonPage() {
         proof="Proven in the lab"
         title="Following one identity shows only a fraction."
         lede="The protected phone's traffic fans out across the decoys' lanes. An observer who follows any one identity sees a fraction of the stream. Splitting works in the lab. It has not run on a device yet."
-        describe="Illustration. The phone's single stream of traffic fans out across five decoy lanes. An observer following one lane sees a fraction of the stream."
+        describe="Illustration. The phone's single stream of traffic fans out across several decoy lanes. An observer following one lane sees a fraction of the stream."
         figure={<LanesFigure />}
       >
         <ul className="eid-beats">
@@ -333,7 +333,7 @@ export default function EidolonPage() {
         label="They keep up with you"
         title="Move, and every decoy re-plans in its own time."
         lede="The decoy behavior engine re-plans on the spot from where the device actually is. Each decoy changes what it is doing at a different moment, so they never move in step."
-        describe="Illustration. A device moves from home to work to a store. After each change, four decoys each change what they are doing at a different moment."
+        describe="Illustration. A device moves from home to work to a store. After each change, each decoy changes what it is doing at a different moment."
         figure={<KeepFigure />}
       >
         <p className="eid-chips-title">Re-planned from where the device actually is</p>
@@ -352,7 +352,7 @@ export default function EidolonPage() {
         at={5}
         name="day"
         label="A full day, no link"
-        proof="Run on a test phone"
+        proof="24-hour plans run on a test phone"
         title="Plan at the dock. Then 24 hours dark."
         lede="The operator console plans a window and assigns the decoys. Undocked, the phone agent carries the plan on its own, with no link to the operator. Docked again, the console produces the report."
         describe="Illustration. A plan is loaded at the dock, the device undocks and runs for 24 hours with no link, then docks again and the operator console shows a report."
@@ -368,7 +368,8 @@ export default function EidolonPage() {
         </ol>
         <p className="eid-aside">
           The phone agent has run full 24-hour plans on a test phone with no
-          link to the operator. The device hardware is in design.
+          link to the operator. The console runs today against simulated
+          devices and one test phone. The device hardware is in design.
         </p>
       </Scene>
 

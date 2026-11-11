@@ -51,7 +51,7 @@ export default function DayFigure() {
       </defs>
       <FrameMarks />
       <text className="eid-tag is-device" x="30" y="38">DEVICE VIEW</text>
-      <text className="eid-tag is-quiet" x="370" y="38" textAnchor="end">RUN ON A TEST PHONE</text>
+      <text className="eid-tag is-quiet" x="370" y="38" textAnchor="end">NO LINK TO THE OPERATOR</text>
 
       {/* the day */}
       <g className="day-dial">
