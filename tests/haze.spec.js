@@ -321,6 +321,13 @@ test('the wording is the reviewed wording: nothing added, no figures but the pri
   }
 });
 
+// The list is private, so a run without it cannot check it. This shows as
+// skipped in that case, so such a run is never mistaken for a full pass.
+test('the private word list was supplied for this run', () => {
+  test.skip(!WORDLIST, 'HAZE_WORDLIST is not set: the private word list was not checked');
+  expect(fs.existsSync(WORDLIST), 'the word list file').toBe(true);
+});
+
 /* ------------------------------------------------------------ the shell */
 
 test('the page stands on its own: no site header, navigation or footer here, and both still on the home page', async ({ page }) => {

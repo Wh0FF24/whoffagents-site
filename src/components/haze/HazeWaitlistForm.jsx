@@ -272,8 +272,8 @@ export default function HazeWaitlistForm() {
         </form>
       )}
       <p className="hz-form-small">
-        We keep your email, these answers and the day you joined. Nothing else. One email when there is news. To leave
-        the list, email{" "}
+        The list holds your email, these answers and the day you joined. Nothing else. One email when there is news. To
+        leave the list, email{" "}
         <a href={`mailto:${LEAVE_ADDRESS}`}>{LEAVE_ADDRESS}</a>.
       </p>
     </div>

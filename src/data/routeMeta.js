@@ -144,7 +144,7 @@ export const routeMeta = {
   },
   "/haze": {
     title: "Haze | Blur the profile they build on you",
-    description: "Haze is a privacy app in design. It adds decoy activity that behaves like real people, tests it against a detector, and shows you the result. Join the waitlist.",
+    description: "Haze is a privacy app in design. It will add decoy activity built to behave like real people, test it against a detector, and show you the result. Join the waitlist.",
     sitemap: false, // unlisted: opened by direct link only, and no other page links to it
     robots: "noindex, nofollow", // kept out of search results in every build
   },

@@ -20,7 +20,7 @@ const CAPTION = "Illustrative model. Not measured performance.";
 const RULES = [
   "It will run on your device. Your real activity stays there.",
   "No fake ad clicks. That costs other people money.",
-  "Decoys stick to ordinary, safe content.",
+  "Decoys stick to ordinary, everyday content.",
   "You set the limits: data, battery and hours.",
 ];
 
@@ -110,8 +110,8 @@ export default function HazePage() {
               <span className="hz-title-soft">Blur</span> the profile they build on you.
             </h1>
             <p className="hz-lede">
-              Every search, visit and tap adds to a profile of you. Haze adds decoy activity that behaves like real people, so that profile says less about the
-              real one.
+              Every search, visit and tap adds to a profile of you. Haze will add decoy activity built to behave like real people, so that profile says less
+              about the real one.
             </p>
             <div className="hz-actions">
               <a className="hz-button" href="#waitlist">
@@ -155,7 +155,7 @@ export default function HazePage() {
       >
         <p className="hz-text">
           Haze will run decoys beside you. Each one has its own interests and its own daily rhythm, and none of them moves in step with you. A profile built
-          on the mix is a blurrier picture of the real you.
+          on the mix is meant to be a blurrier picture of the real you.
         </p>
       </Scene>
 
@@ -180,7 +180,7 @@ export default function HazePage() {
         figure={<ScoreFigure />}
       >
         <p className="hz-text">
-          Haze will show a score: how easily a detector can pick your real activity out of the mix. If the blur is not working, you will know.
+          Haze will show a score: how easily a detector can pick your real activity out of the mix. If it can still pick you out, you will see that.
         </p>
       </Scene>
 

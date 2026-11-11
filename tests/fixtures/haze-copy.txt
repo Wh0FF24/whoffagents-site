@@ -1,10 +1,10 @@
 (page title) Haze | Blur the profile they build on you
-(description for search and link previews) Haze is a privacy app in design. It adds decoy activity that behaves like real people, tests it against a detector, and shows you the result. Join the waitlist.
+(description for search and link previews) Haze is a privacy app in design. It will add decoy activity built to behave like real people, test it against a detector, and show you the result. Join the waitlist.
 Haze
 Join the waitlist
 In design. Not available yet.
 Blur the profile they build on you.
-Every search, visit and tap adds to a profile of you. Haze adds decoy activity that behaves like real people, so that profile says less about the real one.
+Every search, visit and tap adds to a profile of you. Haze will add decoy activity built to behave like real people, so that profile says less about the real one.
 Join the waitlist
 See how it works
 Illustrative model. Not measured performance.
@@ -29,7 +29,7 @@ Cooking
 Music
 Illustrative model. Not measured performance.
 Haze gives them a crowd.
-Haze will run decoys beside you. Each one has its own interests and its own daily rhythm, and none of them moves in step with you. A profile built on the mix is a blurrier picture of the real you.
+Haze will run decoys beside you. Each one has its own interests and its own daily rhythm, and none of them moves in step with you. A profile built on the mix is meant to be a blurrier picture of the real you.
 You
 Decoys
 Gardening
@@ -62,7 +62,7 @@ Passes
 Detector
 Illustrative model. Not measured performance.
 You see the result.
-Haze will show a score: how easily a detector can pick your real activity out of the mix. If the blur is not working, you will know.
+Haze will show a score: how easily a detector can pick your real activity out of the mix. If it can still pick you out, you will see that.
 Haze
 Sample screen
 Score
@@ -73,7 +73,7 @@ Illustrative model. Not measured performance.
 Ground rules.
 It will run on your device. Your real activity stays there.
 No fake ad clicks. That costs other people money.
-Decoys stick to ordinary, safe content.
+Decoys stick to ordinary, everyday content.
 You set the limits: data, battery and hours.
 What it will not do.
 It will not make you anonymous.
@@ -95,7 +95,7 @@ $8 a month
 A one-time price, not monthly
 What bothers you most about being tracked? (optional)
 Join the waitlist
-We keep your email, these answers and the day you joined. Nothing else. One email when there is news. To leave the list, email hello@whoffagents.com.
+The list holds your email, these answers and the day you joined. Nothing else. One email when there is news. To leave the list, email hello@whoffagents.com.
 Haze is a working name from Whoff Agents.
 This page loads nothing from other companies and sets no cookies. The hosts that serve this page and take your signup keep ordinary request logs, which include your IP address. Those logs do not hold your email or your answers.
 (described to screen readers) Illustration. A profile made of points of activity loses its sharp edge as other points drift through it.
