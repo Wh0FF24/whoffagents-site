@@ -28,7 +28,7 @@ Cycling
 Cooking
 Music
 Illustrative model. Not measured performance.
-Haze gives them a crowd.
+Haze would give them a crowd.
 Haze will run decoys beside you. Each one has its own interests and its own daily rhythm, and none of them moves in step with you. A profile built on the mix is meant to be a blurrier picture of the real you.
 You
 Decoys
@@ -53,7 +53,7 @@ Cycling
 Cooking
 Music
 Illustrative model. Not measured performance.
-Decoys that are tested, not random.
+Tested decoys, not random noise.
 Random noise can be told apart from real behavior and thrown away. So the plan is to test every kind of decoy against a detector built to catch fakes, and to keep only what passes.
 Random
 Tested
@@ -61,7 +61,7 @@ Caught
 Passes
 Detector
 Illustrative model. Not measured performance.
-You see the result.
+You would see the result.
 Haze will show a score: how easily a detector can pick your real activity out of the mix. If it can still pick you out, you will see that.
 Haze
 Sample screen
@@ -71,15 +71,15 @@ Hard to pick out
 The blur is not working.
 Illustrative model. Not measured performance.
 Ground rules.
-It will run on your device. Your real activity stays there.
+It will run on your device. Your real activity will stay there.
 No fake ad clicks. That costs other people money.
-Decoys stick to ordinary, everyday content.
-You set the limits: data, battery and hours.
+Decoys will stick to ordinary, everyday content.
+You will set the limits: data, battery and hours.
 What it will not do.
 It will not make you anonymous.
-It does not change what a service learns while you are signed in to it.
-It is not a VPN or an ad blocker. It works beside them.
-We do not know yet how much it helps. Finding out is the point of building it, and we will publish what we measure.
+It will not change what a service learns while you are signed in to it.
+It is not a VPN or an ad blocker. It will work beside them.
+We do not know yet how much it will help. Finding out is the point of building it, and we will publish what we measure.
 Should we build it?
 Haze is not built yet. The decoy engine and the detector exist in our lab. The app does not. Join the list and tell us two things. If enough people want it, we build it, and you hear first.
 Email

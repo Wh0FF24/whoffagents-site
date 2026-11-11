@@ -18,17 +18,17 @@ import pageStyles from "../styles/haze.css?inline";
 const CAPTION = "Illustrative model. Not measured performance.";
 
 const RULES = [
-  "It will run on your device. Your real activity stays there.",
+  "It will run on your device. Your real activity will stay there.",
   "No fake ad clicks. That costs other people money.",
-  "Decoys stick to ordinary, everyday content.",
-  "You set the limits: data, battery and hours.",
+  "Decoys will stick to ordinary, everyday content.",
+  "You will set the limits: data, battery and hours.",
 ];
 
 const LIMITS = [
   "It will not make you anonymous.",
-  "It does not change what a service learns while you are signed in to it.",
-  "It is not a VPN or an ad blocker. It works beside them.",
-  "We do not know yet how much it helps. Finding out is the point of building it, and we will publish what we measure.",
+  "It will not change what a service learns while you are signed in to it.",
+  "It is not a VPN or an ad blocker. It will work beside them.",
+  "We do not know yet how much it will help. Finding out is the point of building it, and we will publish what we measure.",
 ];
 
 // The motion is loaded after first paint. If it cannot load, the page drops
@@ -149,7 +149,7 @@ export default function HazePage() {
       <Scene
         id="crowd"
         name="crowd"
-        title="Haze gives them a crowd."
+        title="Haze would give them a crowd."
         describe="Illustration. Decoy activity appears beside the real activity, each row with its own timing, and the profile under it goes soft."
         figure={<CrowdFigure />}
       >
@@ -162,7 +162,7 @@ export default function HazePage() {
       <Scene
         id="tested"
         name="tested"
-        title="Decoys that are tested, not random."
+        title="Tested decoys, not random noise."
         describe="Illustration. Random decoys are caught at a detector and dropped. Tested decoys pass through it."
         figure={<TestedFigure />}
       >
@@ -175,7 +175,7 @@ export default function HazePage() {
       <Scene
         id="score"
         name="score"
-        title="You see the result."
+        title="You would see the result."
         describe="Illustration of a sample screen. A marker on a gauge moves between easy to pick out and hard to pick out."
         figure={<ScoreFigure />}
       >

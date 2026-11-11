@@ -940,6 +940,24 @@ test('in a live build with a waitlist address the form sends one POST with exact
   await page.unroute(`**${ENDPOINT}`);
   expect(arrived()).toHaveLength(1);
 
+  // An address the far end would never take is caught here, before anything
+  // is sent. The browser's own check lets this one through. The page's does not.
+  await form.getByLabel('Email', { exact: true }).fill('live@example');
+  await form.getByRole('button', { name: 'Join the waitlist' }).click();
+  await expect(form.getByRole('alert').locator('p')).toHaveText([line(NOTES.email)]);
+  await expect(form.getByLabel('Email', { exact: true })).toBeFocused();
+  expect(arrived()).toHaveLength(1);
+  // If the far end still turns an address away, the page says so. "Try again
+  // in a minute" would never work for that person.
+  await form.getByLabel('Email', { exact: true }).fill('live@example.com');
+  await page.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 400, contentType: 'application/json', body: '{"ok":false}' }));
+  await form.getByRole('button', { name: 'Join the waitlist' }).click();
+  await expect(form.getByRole('alert').locator('p')).toHaveText([line(NOTES.email)]);
+  await expect(form.getByLabel('Email', { exact: true })).toBeFocused();
+  await expect(form.locator('input[name="pay"][value="3"]')).toBeChecked();
+  await page.unroute(`**${ENDPOINT}`);
+  expect(arrived()).toHaveLength(1);
+
   // A success: the sent message takes the form's place.
   live.open.state.fail = false;
   await form.getByRole('button', { name: 'Join the waitlist' }).click();

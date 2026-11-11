@@ -34,6 +34,12 @@ const IS_OPEN = IS_PREVIEW || ENDPOINT !== null;
 const LEAVE_ADDRESS = "hello@whoffagents.com";
 const TIMEOUT_MS = 12000;
 const NOTE_LENGTH = 200;
+// The same rule the far end applies: plain letters, digits and signs, no
+// spaces, something on each side of one "@", and a dot in the last part.
+// Checking it here means an address the far end would turn away is caught
+// before anything is sent.
+const EMAIL_RULE = /^[\x21-\x3f\x41-\x7e]{1,64}@[\x21-\x3f\x41-\x7e]{1,190}\.[\x21-\x3f\x41-\x7e]{2,}$/;
+const EMAIL_LENGTH = 254;
 
 const WHERE = [
   { value: "extension", label: "Browser extension" },
@@ -135,8 +141,9 @@ export default function HazeWaitlistForm() {
     if (busy.current) return;
 
     const field = emailField.current;
+    const typed = field.value.trim().toLowerCase();
     const missing = {
-      email: field.value.trim() === "" || !field.checkValidity(),
+      email: typed === "" || !field.checkValidity() || typed.length > EMAIL_LENGTH || !EMAIL_RULE.test(typed),
       where: where === "",
       pay: pay === "",
     };
@@ -179,12 +186,22 @@ export default function HazeWaitlistForm() {
         signal: controller.signal,
       });
       if (response.ok) next = "sent";
+      // The far end answers 400 only when it will not take what was sent.
+      // The two choices come from fixed lists, so that means the address.
+      else if (response.status === 400) next = "email";
     } catch {
       // A request that could not be made, or took too long, is a failure.
     }
     window.clearTimeout(timer);
     busy.current = false;
     setSending(false);
+    if (next === "email") {
+      // Trying again would never work. Say what is wrong instead.
+      setOutcome(null);
+      setProblems({ email: true, where: false, pay: false });
+      field.focus();
+      return;
+    }
     setOutcome(next);
   }
 
