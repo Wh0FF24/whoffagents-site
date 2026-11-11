@@ -38,6 +38,7 @@ const NOTES = {
   preview: '(shown after a send in a preview build)',
   sent: '(shown after a send)',
   failed: '(shown when a send does not go through)',
+  full: '(shown in place of the form when the list is full)',
   closed: '(shown in place of the form while the waitlist is closed)',
   noscript: '(shown when scripts are off)',
 };
@@ -268,6 +269,14 @@ test('the wording is the reviewed wording: nothing added, no figures but the pri
   await other.locator('#waitlist form').getByRole('button', { name: 'Join the waitlist' }).click();
   await expect(other.locator('.hz-form-ending')).toBeVisible();
   said.push(`${NOTES.sent} ${await other.locator('.hz-form-ending').textContent()}`, `${NOTES.failed} ${failed}`);
+  // And when the far end answers that the list is full.
+  await other.reload();
+  await fill(other.locator('#waitlist form'));
+  await other.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false}' }));
+  await other.locator('#waitlist form').getByRole('button', { name: 'Join the waitlist' }).click();
+  await expect(other.locator('.hz-form-ending')).toBeVisible();
+  said.push(`${NOTES.full} ${await other.locator('.hz-form-ending').textContent()}`);
+  await other.unroute(`**${ENDPOINT}`);
   await other.goto(`${live.closed.origin}${ROUTE}`);
   said.push(`${NOTES.closed} ${await other.locator('.hz-form-closed').textContent()}`);
   await context.close();
@@ -982,6 +991,17 @@ test('in a live build with a waitlist address the form sends one POST with exact
   await form.getByRole('button', { name: 'Join the waitlist' }).click();
   await expect(section.getByRole('status')).toHaveText(line(NOTES.sent));
   await page.waitForTimeout(500);
+  expect(arrived()).toHaveLength(2);
+
+  // A full list: the page says so in place of the form, and says what to do.
+  // "Try again in a minute" would never work.
+  await page.reload();
+  await fill(form, 'late@example.com');
+  await page.route(`**${ENDPOINT}`, (route) => route.fulfill({ status: 503, contentType: 'application/json', body: '{"ok":false}' }));
+  await form.getByRole('button', { name: 'Join the waitlist' }).click();
+  await expect(section.getByRole('status')).toHaveText(line(NOTES.full));
+  await expect(form).toHaveCount(0);
+  await page.unroute(`**${ENDPOINT}`);
   expect(arrived()).toHaveLength(2);
   await context.close();
 });

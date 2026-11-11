@@ -11,7 +11,9 @@
  *     or to any other form.
  *  3. Live build with VITE_HAZE_WAITLIST_ENDPOINT set to a path on this same
  *     site: one POST of JSON holding exactly email, where, pay, note and
- *     website. A 2xx answer is "sent". Anything else is "failed".
+ *     website. A 2xx answer is "sent". A 400 means the far end will not take
+ *     the address, and the page says so. A 503 means the list is full, and
+ *     the page says that. Anything else is "failed".
  *
  * It keeps nothing in the browser, sends no cookies, and reports nothing to
  * analytics on any path.
@@ -58,6 +60,7 @@ const PAY = [
 const MESSAGES = {
   sent: "You are on the list. One email when there is news.",
   failed: "That did not go through. Try again in a minute.",
+  full: "The waitlist is full for now. Email hello@whoffagents.com and we will add you.",
   email: "Enter an email address we can reach you at.",
   choice: "Pick one answer for each question.",
   closed: "The waitlist is not open yet.",
@@ -113,14 +116,14 @@ export default function HazeWaitlistForm() {
   const [website, setWebsite] = useState("");
   const [problems, setProblems] = useState(null);
   const [sending, setSending] = useState(false);
-  // null, "failed", or one of the two endings: "sent" and "preview".
+  // null, "failed", or one of the endings: "sent", "preview" and "full".
   const [outcome, setOutcome] = useState(null);
 
   const form = useRef(null);
   const emailField = useRef(null);
   const ending = useRef(null);
   const busy = useRef(false);
-  const finished = outcome === "sent" || outcome === "preview";
+  const finished = outcome === "sent" || outcome === "preview" || outcome === "full";
 
   // The ending takes the form's place. Focus moves to it, so a keyboard or
   // screen reader user lands on the answer and hears it.
@@ -189,6 +192,9 @@ export default function HazeWaitlistForm() {
       // The far end answers 400 only when it will not take what was sent.
       // The two choices come from fixed lists, so that means the address.
       else if (response.status === 400) next = "email";
+      // 503 is the far end saying the list has reached its size limit.
+      // Trying again would not help, so the page says what will.
+      else if (response.status === 503) next = "full";
     } catch {
       // A request that could not be made, or took too long, is a failure.
     }

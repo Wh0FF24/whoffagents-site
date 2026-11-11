@@ -81,7 +81,7 @@ It will not change what a service learns while you are signed in to it.
 It is not a VPN or an ad blocker. It will work beside them.
 We do not know yet how much it will help. Finding out is the point of building it, and we will publish what we measure.
 Should we build it?
-Haze is not built yet. The decoy engine and the detector exist in our lab. The app does not. Join the list and tell us two things. If enough people want it, we build it, and you hear first.
+Haze is not built yet. We have a decoy engine and detectors running in our lab for related work. The app does not exist. Join the list and tell us two things. If enough people want it, we build it, and you hear first.
 Email
 Where would you use it?
 Browser extension
@@ -108,5 +108,6 @@ This page loads nothing from other companies and sets no cookies. The hosts that
 (shown after a send in a preview build) Local preview. Nothing was sent.
 (shown after a send) You are on the list. One email when there is news.
 (shown when a send does not go through) That did not go through. Try again in a minute.
+(shown in place of the form when the list is full) The waitlist is full for now. Email hello@whoffagents.com and we will add you.
 (shown in place of the form while the waitlist is closed) The waitlist is not open yet.
 (shown when scripts are off) This form needs JavaScript to send.

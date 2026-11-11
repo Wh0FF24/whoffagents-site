@@ -221,8 +221,8 @@ export default function HazePage() {
           <div className="hz-waitlist-copy" data-hz-rise="">
             <h2 id="waitlist-title">Should we build it?</h2>
             <p className="hz-text">
-              Haze is not built yet. The decoy engine and the detector exist in our lab. The app does not. Join the list and tell us two things. If enough
-              people want it, we build it, and you hear first.
+              Haze is not built yet. We have a decoy engine and detectors running in our lab for related work. The app does not exist. Join the list and
+              tell us two things. If enough people want it, we build it, and you hear first.
             </p>
           </div>
           <div className="hz-waitlist-form" data-hz-rise="">
