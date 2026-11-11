@@ -29,7 +29,7 @@ How much The shape of its traffic.
 Lock Put together, the pattern points at one person.
 The crowd
 Now give that phone a crowd.
-Eidolon is built to surround the protected phone with realistic decoy phone activity. Each decoy keeps a daily rhythm of its own. The aim is a pattern that stops pointing at one person, while that person stays connected.
+Eidolon is designed to surround the protected phone with decoy phone activity built to look real. Each decoy keeps a daily rhythm of its own. The aim is a pattern that stops pointing at one person, while that person stays connected.
 OBSERVER VIEW
 LOCKED
 SEARCHING

@@ -292,7 +292,7 @@ export default function EidolonPage() {
         name="crowd"
         label="The crowd"
         title="Now give that phone a crowd."
-        lede="Eidolon is built to surround the protected phone with realistic decoy phone activity. Each decoy keeps a daily rhythm of its own. The aim is a pattern that stops pointing at one person, while that person stays connected."
+        lede="Eidolon is designed to surround the protected phone with decoy phone activity built to look real. Each decoy keeps a daily rhythm of its own. The aim is a pattern that stops pointing at one person, while that person stays connected."
         describe="Illustration. Decoy phones appear around the protected phone, each with its own daily rhythm, and the reticle moves between them without settling on one."
         figure={<CrowdFigure />}
       >
