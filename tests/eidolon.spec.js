@@ -168,6 +168,13 @@ test('the wording is the reviewed wording: nothing added, no number but 24', asy
   }
 });
 
+// The list is private, so a run without it cannot check it. This shows as
+// skipped in that case, so such a run is never mistaken for a full pass.
+test('the private word list was supplied for this run', () => {
+  test.skip(!WORDLIST, 'EIDOLON_WORDLIST is not set: the private word list was not checked');
+  expect(fs.existsSync(WORDLIST), 'the word list file').toBe(true);
+});
+
 test('the request form offers the two request types, requires an organization, and sends nothing in preview', async ({ page }) => {
   const posts = [];
   page.on('request', (request) => { if (request.method() === 'POST') posts.push(request.url()); });

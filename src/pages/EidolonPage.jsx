@@ -352,10 +352,10 @@ export default function EidolonPage() {
         at={5}
         name="day"
         label="A full day, no link"
-        proof="24-hour plans run on a test phone"
+        proof="24-hour plans run on a cabled test phone"
         title="Plan at the dock. Then 24 hours dark."
-        lede="The operator console plans a window and assigns the decoys. Undocked, the phone agent carries the plan on its own, with no link to the operator. Docked again, the console produces the report."
-        describe="Illustration. A plan is loaded at the dock, the device undocks and runs for 24 hours with no link, then docks again and the operator console shows a report."
+        lede="The operator console plans a window and assigns the decoys. Undocked, the phone agent is built to carry the plan on its own, with no link to the operator. Docked again, the console produces the report."
+        describe="Illustration. The designed routine: a plan is loaded at the dock, the device undocks and is meant to run for 24 hours with no link, then docks again and the operator console shows a report."
         figure={<DayFigure />}
       >
         <p className="eid-chips-title">One day, start to finish</p>
@@ -368,10 +368,10 @@ export default function EidolonPage() {
         </ol>
         <p className="eid-aside">
           The phone agent has run full 24-hour plans on a test phone at the
-          bench. It took no instructions once a run started, and it stayed
-          cabled for power and measurement. The console runs today against
-          simulated devices and one test phone. The device hardware is in
-          design.
+          bench. It took no instructions once a run started. It stayed cabled
+          the whole time, for power and to carry its test traffic. The console
+          runs today against simulated devices and one test phone. The device
+          hardware is in design.
         </p>
       </Scene>
 
