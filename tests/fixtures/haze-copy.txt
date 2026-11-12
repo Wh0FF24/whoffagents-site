@@ -85,7 +85,7 @@ Haze is not built yet. We have a decoy engine and detectors running in our lab f
 Email
 Where would you use it?
 Browser extension
-Android app
+Phone app
 Both
 What would you pay?
 Nothing, I would only use a free version

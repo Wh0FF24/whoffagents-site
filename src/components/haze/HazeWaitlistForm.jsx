@@ -45,7 +45,7 @@ const EMAIL_LENGTH = 254;
 
 const WHERE = [
   { value: "extension", label: "Browser extension" },
-  { value: "android", label: "Android app" },
+  { value: "android", label: "Phone app" },
   { value: "both", label: "Both" },
 ];
 

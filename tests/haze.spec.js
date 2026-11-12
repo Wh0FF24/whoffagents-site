@@ -850,7 +850,7 @@ test('in a preview build the form works on screen, names what is missing, and se
   // One choice missing: the choice message only, and focus on that question.
   await page.reload();
   await form.getByLabel('Email', { exact: true }).fill('test@example.com');
-  await form.getByText('Android app', { exact: true }).click();
+  await form.getByText('Phone app', { exact: true }).click();
   await form.getByRole('button', { name: 'Join the waitlist' }).click();
   await expect(alert.locator('p')).toHaveText([line(NOTES.choice)]);
   await expect(form.locator('input[name="pay"]').first()).toBeFocused();

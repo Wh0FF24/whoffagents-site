@@ -106,7 +106,7 @@ async function scrollThrough(page) {
 async function fillForm(page, email) {
   const form = page.locator('#waitlist form');
   await form.getByLabel('Email', { exact: true }).fill(email);
-  await form.getByText('Android app', { exact: true }).click();
+  await form.getByText('Phone app', { exact: true }).click();
   await form.getByText('$5 a month', { exact: true }).click();
   await form.getByLabel(/What bothers you most/).fill('Local check. Not a real signup.');
   return form;
