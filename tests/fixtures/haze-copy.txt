@@ -1,9 +1,9 @@
-(page title) Haze | Blur the profile they build on you
+(page title) Haze | Stay online. Stay out of focus.
 (description for search and link previews) Haze is a privacy app in design. It will add decoy activity built to behave like real people, test it against a detector, and show you the result. Join the waitlist.
 Haze
 Join the waitlist
 In design. Not available yet.
-Blur the profile they build on you.
+Stay online. Stay out of focus.
 Every search, visit and tap adds to a profile of you. Haze will add decoy activity built to behave like real people, so that profile says less about the real one.
 Join the waitlist
 See how it works

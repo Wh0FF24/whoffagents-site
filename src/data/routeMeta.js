@@ -149,7 +149,7 @@ export const routeMeta = {
     description: "Human direction and agent execution. The studio approach behind Whoff Agents' websites, AI services and developer tools.",
   },
   "/haze": {
-    title: "Haze | Blur the profile they build on you",
+    title: "Haze | Stay online. Stay out of focus.",
     description: "Haze is a privacy app in design. It will add decoy activity built to behave like real people, test it against a detector, and show you the result. Join the waitlist.",
     image: "/og-haze.png", // its own link-preview picture, drawn by scripts/make-haze-card.mjs
     sitemap: false, // unlisted: opened by direct link only, and no other page links to it

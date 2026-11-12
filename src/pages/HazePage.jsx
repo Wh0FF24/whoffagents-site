@@ -107,7 +107,7 @@ export default function HazePage() {
           <div className="hz-opening-copy">
             <p className="hz-label">In design. Not available yet.</p>
             <h1 className="hz-title" id="top-title">
-              <span className="hz-title-soft">Blur</span> the profile they build on you.
+              Stay online. Stay <span className="hz-title-soft">out of focus</span>.
             </h1>
             <p className="hz-lede">
               Every search, visit and tap adds to a profile of you. Haze will add decoy activity built to behave like real people, so that profile says less

@@ -10,7 +10,7 @@ export const CARD = { width: 1200, height: 630 };
 export const WORDS = {
   name: 'Haze',
   label: 'In design. Not available yet.',
-  headline: [{ text: 'Blur', soft: true }, { text: ' the profile they build on you.' }],
+  headline: [{ text: 'Stay online.' + String.fromCharCode(10) + 'Stay ' }, { text: 'out of focus', soft: true }, { text: '.' }],
   button: 'Join the waitlist',
 };
 

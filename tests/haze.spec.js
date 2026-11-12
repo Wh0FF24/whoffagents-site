@@ -179,7 +179,7 @@ for (const [width, height] of [[320, 568], [390, 664], [768, 1024], [1440, 900]]
     await page.goto(ROUTE);
     await page.evaluate(() => document.fonts.ready);
     await expect(page).toHaveTitle(routeMeta[ROUTE].title);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveAccessibleName('Blur the profile they build on you.');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveAccessibleName('Stay online. Stay out of focus.');
     await expect(page.locator('h1')).toHaveCount(1);
     // Real headings, in order: one first-level heading, then one for each section.
     expect(await page.locator('#main-content').locator('h1, h2, h3, h4').evaluateAll((headings) => headings.map((heading) => heading.tagName))).toEqual(['H1', ...Array(7).fill('H2')]);
