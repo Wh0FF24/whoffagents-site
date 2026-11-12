@@ -5,8 +5,8 @@
 export const CARD = { width: 1200, height: 630 };
 
 // The headline is a list of parts. A part marked soft is drawn a little out
-// of focus, as the first word of the page's own headline is. "\n" inside a
-// part starts a new line.
+// of focus, as the same words are in the page's own headline. A line feed
+// inside a part starts a new line.
 export const WORDS = {
   name: 'Haze',
   label: 'In design. Not available yet.',
