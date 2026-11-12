@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import AxeBuilder from '@axe-core/playwright';
 import { routeMeta } from '../src/data/routeMeta.js';
 import { buildSite, serveSite } from '../scripts/haze-local.mjs';
+import { CARD, WORDS, headlineText } from '../scripts/haze-card-words.mjs';
 
 // The Haze page: a waitlist page that stands on its own, with scroll-driven
 // scenes and a form of its own. Most checks run against the suite's preview
@@ -396,6 +397,36 @@ test('the page is unlisted: marked noindex, absent from the sitemap, and linked 
     const links = await page.locator('a[href]').evaluateAll((anchors) => anchors.map((anchor) => anchor.getAttribute('href')).filter((href) => /^\/?haze(\/|#|\?|$)/i.test(href.replace(/^https?:\/\/[^/]+/, ''))));
     expect(links, `links to the page from ${route}`).toEqual([]);
   }
+});
+
+test('a shared link shows the page\'s own picture, and the picture says only what the page says', async ({ page, request }) => {
+  const picture = 'https://whoffagents.com/og-haze.png';
+  expect(routeMeta[ROUTE].image).toBe('/og-haze.png');
+  // In the HTML itself, where a link preview reads it without running any script.
+  const html = await (await request.get(ROUTE)).text();
+  expect(html.match(/<meta property="og:image" content="[^"]*"/g)).toEqual([`<meta property="og:image" content="${picture}"`]);
+  expect(html.match(/<meta name="twitter:image" content="[^"]*"/g)).toEqual([`<meta name="twitter:image" content="${picture}"`]);
+  // Every other page keeps the site's picture.
+  const home = await (await request.get('/')).text();
+  expect(home).toContain('<meta property="og:image" content="https://whoffagents.com/og-engineering.png"');
+  expect(home).not.toContain('og-haze');
+  // The file is there: a PNG of the size link previews expect.
+  const file = await request.get('/og-haze.png');
+  expect(file.status()).toBe(200);
+  expect(file.headers()['content-type']).toContain('image/png');
+  const bytes = await file.body();
+  expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual([CARD.width, CARD.height]);
+  // Each thing drawn on it is on the page, so the picture cannot say more than the page does.
+  await page.goto(ROUTE);
+  const shown = (await page.locator('.hz-page').innerText()).replace(/\s+/g, ' ').toLowerCase();
+  for (const words of [WORDS.name, WORDS.label, headlineText(), WORDS.button]) {
+    expect(shown, `"${words}" is on the picture but not on the page`).toContain(words.toLowerCase());
+  }
+  // Once the app is running the tags still name this page's picture, and the home page's name the site's.
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', picture);
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', picture);
+  await page.goto('/');
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://whoffagents.com/og-engineering.png');
 });
 
 test('it serves useful HTML without JavaScript, at normal height, with a form that cannot be sent', async ({ browser }) => {

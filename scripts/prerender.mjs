@@ -154,11 +154,24 @@ for (const route of routes) {
         `<link rel="canonical" href="${canonical}"`
       )
 
+    // A route can bring its own link-preview picture (routeMeta `image`, a
+    // file in public/). Every other route keeps the site's picture.
+    let page = html
+    if (meta.image) {
+      if (!fs.existsSync(path.join(rootDir, 'dist', meta.image))) {
+        throw new Error(`its link-preview picture ${meta.image} is not in the build`)
+      }
+      const picture = escapeAttribute(`${SITE}${meta.image}`)
+      page = html
+        .replace(/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${picture}"`)
+        .replace(/<meta name="twitter:image" content="[^"]*"/, `<meta name="twitter:image" content="${picture}"`)
+    }
+
     const outDir =
       route === '/' ? path.join(rootDir, 'dist') : path.join(rootDir, 'dist', route)
 
     fs.mkdirSync(outDir, { recursive: true })
-    fs.writeFileSync(path.join(outDir, 'index.html'), html)
+    fs.writeFileSync(path.join(outDir, 'index.html'), page)
 
     console.log(`  ✓ dist${route === '/' ? '/index.html' : route + '/index.html'}`)
     ok++

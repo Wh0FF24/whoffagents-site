@@ -39,6 +39,9 @@ import "./styles/whoff-engineering.css";
 import "./styles/whoff-night.css";
 import { routeMeta } from "./data/routeMeta";
 
+// The link-preview picture every route shares unless it brings its own.
+const SITE_PICTURE = "/og-engineering.png";
+
 function App() {
   const location = useLocation();
   // A standalone page brings its own top bar and footer, and takes none of
@@ -57,6 +60,9 @@ function App() {
         'meta[property="og:url"]': `https://whoffagents.com${location.pathname === "/" ? "" : location.pathname}`,
         'meta[name="twitter:title"]': meta.title,
         'meta[name="twitter:description"]': meta.description,
+        // A route can bring its own link-preview picture; the rest share the site's.
+        'meta[property="og:image"]': `https://whoffagents.com${meta.image || SITE_PICTURE}`,
+        'meta[name="twitter:image"]': `https://whoffagents.com${meta.image || SITE_PICTURE}`,
       })) {
         const tag = document.querySelector(selector);
         if (tag) tag.content = value;
