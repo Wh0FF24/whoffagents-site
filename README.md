@@ -94,3 +94,13 @@ The current local design uses the cube on `/` and the layered portfolio by defau
 ## Approved page direction: pyramid Home, layered Websites
 
 Will selected a pyramid for the home screen and layered panels for Websites. `/` now uses StudioPyramid with an original Three.js three-sided pyramid, separating faces, paired metal finishes, pause/reduced-motion handling, and a static SVG fallback. `/web` retains StudioLayers. The cube remains available only with `?concept=cube`. This supersedes the earlier Home/cube description; production approval is still separate. Focused pyramid tests cover rendered opening, navigation, mobile accessibility, and context loss.
+
+## Eidolon page (unlisted draft)
+
+`/eidolon` shows what Eidolon does in scroll-driven instrument scenes and ends with the site's inquiry form. It is a draft: Will reviews it before it is published or shared.
+
+- Unlisted. `routeMeta` marks the route `sitemap: false` and `robots: "noindex, nofollow"`. The prerender writes that tag into the page's own HTML in every build, and no page, navigation or footer links to it. Keep it out of `robots.txt`: a crawler told not to fetch a page never sees its noindex tag, and the file would advertise the address.
+- `src/pages/EidolonPage.jsx` holds the copy. `src/components/eidolon/` holds the figures, each drawn finished in the HTML, and `eidolonMotion.js`, which plays each scene with the scroll and runs its loops only while that scene is on screen. With reduced motion, without JavaScript, or if the motion cannot load, the page keeps the finished frames at normal height. `src/styles/eidolon.css` styles it. The page imports that file as text and renders it into its own HTML, so it is not added to the stylesheet every other page loads.
+- The form is `InquiryForm` with two request types. The type travels inside the existing `needs` field as `[Eidolon pilot]` or `[Eidolon updates]`. The field names the lead pipeline reads are unchanged. `node scripts/check-eidolon-request.mjs <local preview url>` shows what a live build would send without sending it.
+- `tests/eidolon.spec.js` covers the page. `node scripts/capture-eidolon.mjs <url> <output-directory>` captures every scene at 1440x900 and 390x664, the opening at 375x548, and the reduced-motion still frames.
+- Publishing needs two hosting rewrites, `/eidolon` and `/eidolon/` to `/eidolon/index.html`, placed before the catch-all rule. Without them the host answers with the home page's HTML, which carries neither this page's title nor its noindex tag.

@@ -130,6 +130,12 @@ export const routeMeta = {
     title: "Eidolon | Whoff Agents LLC",
     description: "Eidolon is a cellular privacy and cyber-deception research program in development. Explore the problem, intended outcome and approach to evaluation.",
   },
+  "/eidolon": {
+    title: "Eidolon: decoy activity around a protected phone | Whoff Agents LLC",
+    description: "Eidolon is in development: a small carry-along device and operator console designed to surround a protected phone with decoy phone activity built to look real. See where it stands and ask for a pilot conversation.",
+    sitemap: false, // unlisted: reached by direct link only, linked from no other page
+    robots: "noindex, nofollow", // kept out of search results in every build
+  },
   "/contact": {
     title: "Contact | Whoff Agents LLC",
     description: "Talk with Will about an engineering problem, research collaboration or project. Contact Whoff Agents LLC at will@whoffagents.com.",

@@ -194,7 +194,7 @@ test("new hero content is prerendered without JavaScript", async ({
 test("supporting routes retain readable chapter frames at mobile and desktop widths", async ({
   page,
 }) => {
-  const core = ["/", "/web", "/agents", "/products", "/about", "/studio", "/studio/about", "/capabilities", "/research", "/research/persona-fleet", "/contact"];
+  const core = ["/", "/web", "/agents", "/products", "/about", "/studio", "/studio/about", "/capabilities", "/research", "/research/persona-fleet", "/contact", "/eidolon"];
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of Object.keys(routeMeta).filter(

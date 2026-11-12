@@ -1,0 +1,168 @@
+Whoff Agents Research and development
+Eidolon
+Decoy phone activity around one protected phone, built to look real, so the pattern an outside observer can see stops pointing at one person.
+In development
+Request a pilot conversation
+See what it does
+What it is
+A small carry-along device plus an operator console.
+Where it stands
+In development. The device hardware is in design and nothing has shipped.
+Illustrative model, not measured traffic or performance.
+The signal
+Encryption hides the content. It does not hide the pattern.
+A phone going about its day gives an outside observer plenty to read, without opening a single message.
+OBSERVER VIEW
+CONTENT · HIDDEN
+PATTERN · EXPOSED
+WHERE
+PLACES
+WHEN
+24 HOURS
+HOW MUCH
+TRAFFIC
+LOCKED
+Illustrative model, not measured traffic or performance.
+Where The places it returns to.
+When Its daily rhythm, across 24 hours.
+How much The shape of its traffic.
+Lock Put together, the pattern points at one person.
+The crowd
+Now give that phone a crowd.
+Eidolon is designed to surround the protected phone with decoy phone activity built to look real. Each decoy keeps a daily rhythm of its own. The aim is a pattern that stops pointing at one person, while that person stays connected.
+OBSERVER VIEW
+LOCKED
+SEARCHING
+CONTENT · HIDDEN
+PATTERN · EXPOSED
+PATTERN · ONE OF MANY
+COMMUTER
+SHIFT WORKER
+TRAVELER
+RESIDENT
+CENTER · PROTECTED PHONE
+LOCKED
+Illustrative model, not measured traffic or performance.
+Each decoy keeps a rhythm of its own
+Commuter
+Shift worker
+Traveler
+Resident
+In this model the reticle hunts and cannot settle.
+One stream, many lanes
+Following one identity shows only a fraction.
+Shown in the lab
+The protected phone's traffic fans out across the decoys' lanes. An observer who follows any one identity sees a fraction of the stream. Splitting works in the lab. It has not run on a device yet.
+OBSERVER VIEW
+SHOWN IN THE LAB
+DECOY LANES
+PHONE
+FOLLOWING ONE IDENTITY
+SEES THE WHOLE STREAM
+SEES A FRACTION
+STREAM SEEN
+Illustrative model, not measured traffic or performance.
+One stream It leaves the phone as a single flow.
+Many lanes It fans out across the decoys' lanes.
+A fraction Any one lane carries only part of it.
+They keep up with you
+Move, and every decoy re-plans in its own time.
+The decoy behavior engine re-plans as the device's place, motion and time of day change. Each decoy changes what it is doing at a different moment, so the changes are spread out.
+DEVICE VIEW
+EACH IN ITS OWN TIME
+HOME
+WORK
+STORE
+COMMUTER
+SHIFT WORKER
+TRAVELER
+RESIDENT
+PLACE
+MOTION
+TIME OF DAY
+HOME
+IN TRANSIT
+WORK
+STORE
+STILL
+MOVING
+MORNING
+MIDDAY
+EVENING
+Illustrative model, not measured traffic or performance.
+Re-planned as these change
+Place
+Motion
+Time of day
+Each decoy in its own time. Their changes do not line up. In the runs so far the device's movements came from a simulated route, not from its sensors.
+A full day, no link
+Plan at the dock. Then 24 hours dark.
+24-hour plans run on a cabled test phone
+The operator console plans a window and assigns the decoys. Undocked, the phone agent is built to carry the plan on its own, with no link to the operator. Docked again, the console produces the report.
+DEVICE VIEW
+A FULL DAY
+24 HOURS
+PLANNED
+UNDOCKED
+NO LINK
+DOCKED
+REPORT
+LINK
+NO LINK
+OPERATOR CONSOLE
+PLAN
+REPORT
+Illustrative model, not measured traffic or performance.
+One day, start to finish
+Plan at the dock
+Undock
+24 hours dark
+Dock again
+Read the report
+The phone agent has run full 24-hour plans on a test phone at the bench. It took no instructions once a run started. It stayed on its cable and on Wi-Fi the whole time. The console runs today against simulated devices and one test phone. The device hardware is in design.
+Where it stands
+What runs today, and what does not yet.
+Eidolon is in development. This is each part as it stands, in plain terms.
+Current maturity
+Protection effectiveness has not been established. The scenes on this page are an illustrative model, not measured traffic or performance.
+Status board
+In development
+Decoy behavior engine
+Runs today
+Each decoy keeps its own daily rhythm (commuter, shift worker, traveler, resident) and re-plans as the device's place, motion and time of day change. In the runs so far those came from a simulated route, not from the device's sensors.
+Phone agent
+Run on a test phone
+It has run full 24-hour plans on a test phone at the bench, taking no instructions once a run started.
+Operator console
+Runs in test
+It plans a window, assigns decoys and produces a report afterwards. It runs today against simulated devices and one test phone.
+Traffic splitting
+Shown in the lab
+Splitting a protected phone's traffic across several decoy lanes works in the lab. It has not run on a device.
+Detector challenge
+Before any claim
+Decoys are challenged with our own detectors before any protection claim is made.
+Device hardware
+In design
+The device hardware is in design. Nothing has shipped.
+Request
+Ask for a pilot conversation.
+Tell us who you are and what you would want Eidolon to do. If you would rather follow along for now, ask for progress updates instead.
+Organizations only.
+United States only for now.
+Requests are reviewed before any reply.
+Eidolon is in development, and nothing here is a performance guarantee.
+Eidolon
+The signal
+The crowd
+Many lanes
+Keeping up
+A full day
+Where it stands
+Request
+(described as) Illustration. One phone's activity resolves into a clear pattern of where, when and how much, and a reticle locks onto the phone.
+(described as) Illustration. Decoy phones appear around the protected phone, each with its own daily rhythm, and the reticle moves between them without settling on one.
+(described as) Illustration. The phone's single stream of traffic fans out across several decoy lanes. An observer following one lane sees a fraction of the stream.
+(described as) Illustration. A device moves from home to work to a store. After each change, each decoy changes what it is doing at a different moment.
+(described as) Illustration. The designed routine: a plan is loaded at the dock, the device undocks and is meant to run for 24 hours with no link, then docks again and the operator console shows a report.
+(described as) On this page
